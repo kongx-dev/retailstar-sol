@@ -1,4 +1,61 @@
 {
+  "flash": [
+    {
+      "name": "jpegdealer.sol",
+      "price": "8 SOL",
+      "originalPrice": "12 SOL",
+      "description": "NFT resale terminal. Meme-ready.",
+      "keywords": ["NFT", "resale", "meme", "terminal", "Solana"],
+      "creator": "Kong X",
+      "sns": null,
+      "endTime": "2024-12-31T23:59:59Z",
+      "discount": "33% OFF"
+    },
+    {
+      "name": "fudscience.sol",
+      "price": "6 SOL",
+      "originalPrice": "10 SOL",
+      "description": "FOMO culture satire.",
+      "keywords": ["satire", "FOMO", "alpha", "web3", "Solana"],
+      "creator": "Kong X",
+      "sns": null,
+      "endTime": "2024-12-31T23:59:59Z",
+      "discount": "40% OFF"
+    },
+    {
+      "name": "jumpsetradio.sol",
+      "price": "5 SOL",
+      "originalPrice": "9 SOL",
+      "description": "Gamer x streetwear sonic kiosk.",
+      "keywords": ["radio", "gaming", "vibes", "fashion", "Solana"],
+      "creator": "Kong X",
+      "sns": null,
+      "endTime": "2024-12-31T23:59:59Z",
+      "discount": "44% OFF"
+    },
+    {
+      "name": "copevendor.sol",
+      "price": "2 SOL",
+      "originalPrice": "3.5 SOL",
+      "description": "Meme economy shop.",
+      "keywords": ["cope", "meme", "vendor", "shop", "Solana"],
+      "creator": "Kong X",
+      "sns": null,
+      "endTime": "2024-12-31T23:59:59Z",
+      "discount": "43% OFF"
+    },
+    {
+      "name": "commandhub.sol",
+      "price": "2 SOL",
+      "originalPrice": "3.5 SOL",
+      "description": "Infra + AI dashboard.",
+      "keywords": ["infrastructure", "AI", "dashboard", "Solana"],
+      "creator": "Kong X",
+      "sns": null,
+      "endTime": "2024-12-31T23:59:59Z",
+      "discount": "43% OFF"
+    }
+  ],
   "premium": [
     {
       "name": "jpegdealer.sol",

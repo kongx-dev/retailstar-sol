@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import rsLogo from '../assets/rs-logo.png';
 import retailstarBody from '../assets/retailstar-body.png';
 import TipJar from '../components/TipJar';
+import FlashSaleRotator from '../components/FlashSaleRotator';
 
 const HomePage = () => {
   const domainCategories = [
@@ -86,6 +87,11 @@ const HomePage = () => {
               Every .sol is a node in the Retailverse. Take one. Deploy your own.
             </p>
           </div>
+        </section>
+
+        {/* Flash Sale Rotator */}
+        <section className="py-16 px-4">
+          <FlashSaleRotator />
         </section>
 
         {/* Domain Categories */}

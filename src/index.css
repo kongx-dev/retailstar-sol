@@ -28,6 +28,22 @@ body {
   color: #181b20 !important;
 }
 
+/* Neon red glow for flash sales */
+.neon-red {
+  box-shadow: 0 0 8px #ff4444, 0 0 16px #ff4444, 0 0 32px #ff444444;
+}
+
+.neon-red-hover:hover, .neon-red-hover:focus {
+  box-shadow: 0 0 16px #ff4444, 0 0 32px #ff4444, 0 0 64px #ff444488;
+  background-color: #ff4444 !important;
+  color: #ffffff !important;
+}
+
+/* Red glow for flash sale elements */
+.glow-red {
+  box-shadow: 0 0 8px #ff4444, 0 0 16px #ff444444;
+}
+
 /* Blue/purple glow for highlights and active states */
 .glow-blue {
   box-shadow: 0 0 8px #6f4aff, 0 0 16px #00aaff44;

@@ -1,0 +1,80 @@
+{
+  "premium": [
+    {
+      "name": "jpegdealer.sol",
+      "price": "12 SOL",
+      "description": "NFT resale terminal. Meme-ready.",
+      "keywords": ["NFT", "resale", "meme", "terminal", "Solana"],
+      "creator": "Kong X",
+      "sns": null
+    },
+    {
+      "name": "fudscience.sol",
+      "price": "10 SOL",
+      "description": "FOMO culture satire.",
+      "keywords": ["satire", "FOMO", "alpha", "web3", "Solana"],
+      "creator": "Kong X",
+      "sns": null
+    },
+    {
+      "name": "jumpsetradio.sol",
+      "price": "9 SOL",
+      "description": "Gamer x streetwear sonic kiosk.",
+      "keywords": ["radio", "gaming", "vibes", "fashion", "Solana"],
+      "creator": "Kong X",
+      "sns": null
+    }
+  ],
+  "mid": [
+    {
+      "name": "copevendor.sol",
+      "price": "3.5 SOL",
+      "description": "Meme economy shop.",
+      "keywords": ["cope", "meme", "vendor", "shop", "Solana"],
+      "creator": "Kong X",
+      "sns": null
+    },
+    {
+      "name": "commandhub.sol",
+      "price": "3.5 SOL",
+      "description": "Infra + AI dashboard.",
+      "keywords": ["infrastructure", "AI", "dashboard", "Solana"],
+      "creator": "Kong X",
+      "sns": null
+    },
+    {
+      "name": "lurkerlife.sol",
+      "price": "3 SOL",
+      "description": "For the quiet sniper.",
+      "keywords": ["lurker", "memes", "sniper", "culture", "Solana"],
+      "creator": "Kong X",
+      "sns": null
+    }
+  ],
+  "quickSnags": [
+    {
+      "name": "rigbuilder.sol",
+      "price": "1 SOL",
+      "description": "Builder-ready shell.",
+      "keywords": ["builder", "infra", "terminal", "Solana"],
+      "creator": "Kong X",
+      "sns": "https://www.sns.id/search/single?search=rigbuilder"
+    },
+    {
+      "name": "bidgremlin.sol",
+      "price": "0.89 SOL",
+      "description": "Auction monster.",
+      "keywords": ["auction", "gremlin", "bidding", "memecoin", "Solana"],
+      "creator": "Kong X",
+      "sns": "https://sns.domains/name/bidgremlin.sol"
+    },
+    {
+      "name": "deploydeck.sol",
+      "price": "2 SOL",
+      "description": "Launchpad-ready.",
+      "keywords": ["launchpad", "tooling", "build", "Solana"],
+      "creator": "Kong X",
+      "sns": "https://sns.domains/name/deploydeck.sol"
+    }
+  ]
+} 

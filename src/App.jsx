@@ -1,18 +1,52 @@
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import rsLogo from './assets/rs-logo.png';
 import retailstarBody from './assets/retailstar-body.png';
-import Preloader from './components/Preloader';
+import jpegdealerImage from './assets/jpegdealer.png';
+import fudscientistImage from './assets/fudscientist.png';
+import jumpsetradioImage from './assets/jumpsetradio.png';
+import copevendorImage from './assets/copevendor.png';
+import lurkerlifeImage from './assets/lurkerlife.png';
+import commandhubImage from './assets/commandhub.png';
+import deploydeckImage from './assets/deploydeck.png';
+import rigbuilderImage from './assets/rigbuilder.png';
+import bidgremlinImage from './assets/bidgremlin.png';
+import DomainsPage from './pages/DomainsPage';
+import DomainPage from './pages/DomainPage';
+import VaultPage from './pages/VaultPage';
 
 function App() {
   const domainCategories = [
     {
-      name: "Live Domains",
+      name: "Vaulted Drops",
       domains: [
-        { name: "pistola.sol", status: "For Sale", price: "2.22 SOL", image: "🔫" },
-        { name: "copevendor.sol", status: "For Sale", price: "1.69 SOL", image: "💊" },
-        { name: "jpegdealer.sol", status: "For Sale", price: "10 SOL", image: "🖼️" },
-        { name: "fudscience.sol", status: "For Sale", price: "12 SOL", image: "🧪" },
-        { name: "commandhub.sol", status: "For Sale", price: "1.88 SOL", image: "🔧" },
-        { name: "deploydeck.sol", status: "For Sale", price: "2.00 SOL", image: "🚀" }
+        { name: "jpegdealer.sol", status: "For Sale", price: "12 SOL", image: "🖼️", description: "The Meta: Instantly clear NFT resale theme, clean layout, viral meme potential" },
+        { name: "fudscience.sol", status: "For Sale", price: "10 SOL", image: "🧪", description: "The Meta: Satirical alpha reports / mockery of FOMO culture" },
+        { name: "jumpsetradio.sol", status: "For Sale", price: "9 SOL", image: "🎮", description: "The Meta: Gamer x streetwear aesthetic, tons of creative upside" }
+      ]
+    },
+    {
+      name: "Shelf Stocked",
+      domains: [
+        { name: "copevendor.sol", status: "For Sale", price: "3.5 SOL", image: "💊", description: "Rebuild it into something with more absurdity and clean flow" },
+        { name: "lurkerlife.sol", status: "For Sale", price: "3 SOL", image: "👁️", description: "Funny but weak build. Add visual humor + better framing" },
+        { name: "commandhub.sol", status: "For Sale", price: "3.5 SOL", image: "🔧", description: "Solid dev tool angle, could go 2+ SOL" }
+      ]
+    },
+    {
+      name: "Quick Snags",
+      domains: [
+        { name: "rigbuilder.sol", status: "For Sale", price: "1 SOL", image: "⚡", description: "Fastest to sell for SOL rotation" },
+        { name: "bidgremlin.sol", status: "For Sale", price: "0.89 SOL", image: "👹", description: "Fastest to sell for SOL rotation" },
+        { name: "deploydeck.sol", status: "For Sale", price: "2 SOL", image: "🚀", description: "Solid dev tool angle, could go 2+ SOL" }
+      ]
+    },
+    {
+      name: "Flash Rack",
+      domains: [
+        { name: "urnotthatguysl.sol", status: "For Sale", price: "0.3 SOL", image: "💀", description: "Unfiltered and unhinged. No site, no promises — just vibes" },
+        { name: "yournotthatguy.sol", status: "For Sale", price: "0.4 SOL", image: "💀", description: "Unfiltered and unhinged. No site, no promises — just vibes" },
+        { name: "inpregneable.sol", status: "For Sale", price: "0.5 SOL", image: "💀", description: "Unfiltered and unhinged. No site, no promises — just vibes" }
       ]
     },
     {
@@ -47,164 +81,703 @@ function App() {
     }
   };
 
-  return (
-    <>
-      <Preloader />
-      <div className="min-h-screen text-white relative overflow-hidden">
-        {/* Background image at 50% opacity */}
-        <img 
-          src={retailstarBody} 
-          alt="RetailStar Background" 
-          className="pointer-events-none select-none fixed inset-0 w-full h-full object-cover opacity-50 z-0" 
-          aria-hidden="true"
-        />
+  const HomePage = () => (
+    <div className="min-h-screen text-white relative overflow-hidden">
+      {/* Background image at 50% opacity */}
+      <img 
+        src={retailstarBody} 
+        alt="RetailStar Background" 
+        className="pointer-events-none select-none fixed inset-0 w-full h-full object-cover opacity-50 z-0" 
+        aria-hidden="true"
+      />
 
-        {/* Main content (z-10) */}
-        <div className="relative z-10">
-          {/* Hero Section */}
-          <section className="relative pt-20 pb-16 px-4">
-            <div className="max-w-6xl mx-auto text-center">
-              {/* Hero Image */}
-              <div className="mb-8 flex justify-center">
-                <div className="relative">
-                  <img 
-                    src={rsLogo} 
-                    alt="RetailStar Logo" 
-                    className="w-32 h-32 md:w-48 md:h-48 object-contain rounded-lg shadow-2xl shadow-blue-500/20 border border-blue-500/30 flicker-solana"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-green-400/20 rounded-lg"></div>
-                </div>
+      {/* Main content (z-10) */}
+      <div className="relative z-10">
+        {/* Hero Section */}
+        <section className="relative pt-20 pb-16 px-4">
+          <div className="max-w-6xl mx-auto text-center">
+            {/* Hero Image */}
+            <div className="mb-8 flex justify-center">
+              <div className="relative">
+                <img 
+                  src={rsLogo} 
+                  alt="RetailStar Logo" 
+                  className="w-32 h-32 md:w-48 md:h-48 object-contain rounded-lg shadow-2xl shadow-blue-500/20 border border-blue-500/30 flicker-solana"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-green-400/20 rounded-lg"></div>
               </div>
-              
-              {/* Title */}
-              <h1 className="text-5xl md:text-7xl font-black mb-6 neon-pulse solana-gradient flicker-solana">
-                Welcome to RetailStar.sol
-              </h1>
-              
-              {/* Subtitle */}
-              <p className="text-xl md:text-2xl text-gray-300 mb-8 flicker max-w-3xl mx-auto leading-relaxed glow-blue">
-                Every .sol is a node in the Retailverse. Take one. Deploy your own.
-              </p>
             </div>
-          </section>
+            
+            {/* Title */}
+            <h1 className="text-5xl md:text-7xl font-black mb-6 neon-pulse solana-gradient flicker-solana">
+              Welcome to RetailStar.sol
+            </h1>
+            
+            {/* Subtitle */}
+            <p className="text-xl md:text-2xl text-gray-300 mb-8 flicker max-w-3xl mx-auto leading-relaxed glow-blue">
+              Every .sol is a node in the Retailverse. Take one. Deploy your own.
+            </p>
+          </div>
+        </section>
 
-          {/* Domain Categories */}
-          <section className="px-4 pb-20">
-            <div className="max-w-7xl mx-auto">
-              {domainCategories.map((category, categoryIndex) => (
-                <div key={categoryIndex} className="mb-16">
-                  {/* Category Title */}
-                  <h2 className="text-3xl font-bold mb-8 text-center solana-gradient flicker-solana">
-                    <span className="text-pink-400">[</span> {category.name} <span className="text-pink-400">]</span>
-                  </h2>
-                  
-                  {/* Domain Grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {category.domains.map((domain, domainIndex) => (
-                      <div 
-                        key={domainIndex}
-                        className="steel-surface card-hover-glow rounded-lg p-6 transition-all duration-300 group"
+        {/* Domain Categories */}
+        <section className="px-4 pb-20">
+          <div className="max-w-7xl mx-auto">
+            {/* Vaulted Drops */}
+            <div className="mb-16">
+              <h2 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-center solana-gradient flicker-solana">
+                <span className="text-pink-400">[</span> 💎 Vaulted Drops <span className="text-pink-400">]</span>
+              </h2>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 justify-items-center max-w-6xl mx-auto">
+                {domainCategories[0].domains.map((domain, domainIndex) => (
+                  <div 
+                    key={domainIndex}
+                    className="steel-surface card-hover-glow rounded-lg p-4 sm:p-6 transition-all duration-300 group w-full max-w-sm mx-auto"
+                  >
+                    {/* Domain Image */}
+                    <div className="text-3xl sm:text-4xl text-center mb-4">
+                      {domain.name === "jpegdealer.sol" ? (
+                        <img 
+                          src={jpegdealerImage} 
+                          alt="jpegdealer.sol" 
+                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
+                        />
+                      ) : domain.name === "fudscience.sol" ? (
+                        <img 
+                          src={fudscientistImage} 
+                          alt="fudscience.sol" 
+                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
+                        />
+                      ) : domain.name === "jumpsetradio.sol" ? (
+                        <img 
+                          src={jumpsetradioImage} 
+                          alt="jumpsetradio.sol" 
+                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
+                        />
+                      ) : domain.name === "copevendor.sol" ? (
+                        <img 
+                          src={copevendorImage} 
+                          alt="copevendor.sol" 
+                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
+                        />
+                      ) : domain.name === "lurkerlife.sol" ? (
+                        <img 
+                          src={lurkerlifeImage} 
+                          alt="lurkerlife.sol" 
+                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
+                        />
+                      ) : domain.name === "commandhub.sol" ? (
+                        <img 
+                          src={commandhubImage} 
+                          alt="commandhub.sol" 
+                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
+                        />
+                      ) : domain.name === "deploydeck.sol" ? (
+                        <img 
+                          src={deploydeckImage} 
+                          alt="deploydeck.sol" 
+                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
+                        />
+                      ) : domain.name === "rigbuilder.sol" ? (
+                        <img 
+                          src={rigbuilderImage} 
+                          alt="rigbuilder.sol" 
+                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
+                        />
+                      ) : domain.name === "bidgremlin.sol" ? (
+                        <img 
+                          src={bidgremlinImage} 
+                          alt="bidgremlin.sol" 
+                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
+                        />
+                      ) : (
+                        domain.image
+                      )}
+                    </div>
+                    
+                    {/* Domain Name */}
+                    <h3 className="text-lg font-bold solana-gradient mb-3 group-hover:glow-blue transition-colors text-center">
+                      <a 
+                        href={`/domains/${domain.name.replace('.sol', '')}`}
+                        className="hover:underline"
                       >
-                        {/* Domain Image */}
-                        <div className="text-4xl text-center mb-4">
-                          {domain.image}
-                        </div>
-                        
-                        {/* Domain Name */}
-                        <h3 className="text-lg font-bold solana-gradient mb-3 group-hover:glow-blue transition-colors text-center">
-                          {domain.name}
-                        </h3>
-                        
-                        {/* Status Badge */}
-                        <div className="flex justify-center mb-4">
-                          <span className={`px-3 py-1 rounded-full text-xs font-semibold ${getStatusColor(domain.status)}`}>
-                            {domain.status}
-                          </span>
-                        </div>
-                        
-                        {/* Price */}
-                        <div className="text-center mb-4">
-                          <span className="text-lg font-bold flicker-solana solana-gradient">
-                            {domain.price}
-                          </span>
-                        </div>
-                        
-                        {/* Action Button */}
-                        <div className="flex justify-center">
-                          {domain.status === "For Sale" ? (
-                            <a 
-                              href="https://twitter.com/messages/compose?recipient_id=KongX"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="neon-cyan neon-cyan-hover text-center py-2 px-4 rounded text-sm font-semibold transition-colors duration-200"
-                            >
-                              DM to Buy
-                            </a>
-                          ) : domain.status === "Sold" ? (
-                            <span className="bg-gray-600 text-white text-center py-2 px-4 rounded text-sm font-semibold">
-                              Sold
-                            </span>
-                          ) : (
-                            <span className="bg-yellow-600 text-black text-center py-2 px-4 rounded text-sm font-semibold glow-purple">
-                              Coming Soon
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
+                        {domain.name}
+                      </a>
+                    </h3>
+                    
+                    {/* Status Badge */}
+                    <div className="flex justify-center mb-4">
+                      <span className={`px-3 py-1 rounded-full text-xs font-semibold ${getStatusColor(domain.status)}`}>
+                        {domain.status}
+                      </span>
+                    </div>
+                    
+                    {/* Price */}
+                    <div className="text-center mb-4">
+                      <span className="text-lg font-bold flicker-solana solana-gradient">
+                        {domain.price}
+                      </span>
+                    </div>
 
-          {/* Footer */}
-          <footer className="border-t border-gray-800 bg-black/40 backdrop-blur-sm py-12 px-4">
-            <div className="max-w-6xl mx-auto text-center">
-              {/* Lore */}
-              <div className="mb-8">
-                <p className="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed glow-blue">
-                  RetailStar is a broadcast from Solana's underlayer — every domain is a node waiting to go live.
+                    {/* Description */}
+                    {domain.description && (
+                      <div className="text-center mb-4">
+                        <p className="text-xs text-gray-400 leading-relaxed">
+                          {domain.description}
+                        </p>
+                      </div>
+                    )}
+                    
+                    {/* Action Button */}
+                    <div className="flex justify-center">
+                      {domain.status === "For Sale" ? (
+                        <a 
+                          href="https://twitter.com/messages/compose?recipient_id=KongX"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="neon-cyan neon-cyan-hover text-center py-2 px-4 rounded text-sm font-semibold transition-colors duration-200"
+                        >
+                          DM to Buy
+                        </a>
+                      ) : domain.status === "Sold" ? (
+                        <span className="bg-gray-600 text-white text-center py-2 px-4 rounded text-sm font-semibold">
+                          Sold
+                        </span>
+                      ) : (
+                        <span className="bg-yellow-600 text-black text-center py-2 px-4 rounded text-sm font-semibold glow-purple">
+                          Coming Soon
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Shelf Stocked */}
+            <div className="mb-16">
+              <h2 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-center solana-gradient flicker-solana">
+                <span className="text-pink-400">[</span> 🧱 Shelf Stocked <span className="text-pink-400">]</span>
+              </h2>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 justify-items-center max-w-6xl mx-auto">
+                {domainCategories[1].domains.map((domain, domainIndex) => (
+                  <div 
+                    key={domainIndex}
+                    className="steel-surface card-hover-glow rounded-lg p-4 sm:p-6 transition-all duration-300 group w-full max-w-sm mx-auto"
+                  >
+                    {/* Domain Image */}
+                    <div className="text-3xl sm:text-4xl text-center mb-4">
+                      {domain.name === "jpegdealer.sol" ? (
+                        <img 
+                          src={jpegdealerImage} 
+                          alt="jpegdealer.sol" 
+                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
+                        />
+                      ) : domain.name === "fudscience.sol" ? (
+                        <img 
+                          src={fudscientistImage} 
+                          alt="fudscience.sol" 
+                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
+                        />
+                      ) : domain.name === "jumpsetradio.sol" ? (
+                        <img 
+                          src={jumpsetradioImage} 
+                          alt="jumpsetradio.sol" 
+                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
+                        />
+                      ) : domain.name === "copevendor.sol" ? (
+                        <img 
+                          src={copevendorImage} 
+                          alt="copevendor.sol" 
+                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
+                        />
+                      ) : domain.name === "lurkerlife.sol" ? (
+                        <img 
+                          src={lurkerlifeImage} 
+                          alt="lurkerlife.sol" 
+                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
+                        />
+                      ) : domain.name === "commandhub.sol" ? (
+                        <img 
+                          src={commandhubImage} 
+                          alt="commandhub.sol" 
+                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
+                        />
+                      ) : domain.name === "deploydeck.sol" ? (
+                        <img 
+                          src={deploydeckImage} 
+                          alt="deploydeck.sol" 
+                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
+                        />
+                      ) : domain.name === "rigbuilder.sol" ? (
+                        <img 
+                          src={rigbuilderImage} 
+                          alt="rigbuilder.sol" 
+                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
+                        />
+                      ) : domain.name === "bidgremlin.sol" ? (
+                        <img 
+                          src={bidgremlinImage} 
+                          alt="bidgremlin.sol" 
+                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
+                        />
+                      ) : (
+                        domain.image
+                      )}
+                    </div>
+                    
+                    {/* Domain Name */}
+                    <h3 className="text-lg font-bold solana-gradient mb-3 group-hover:glow-blue transition-colors text-center">
+                      <a 
+                        href={`/domains/${domain.name.replace('.sol', '')}`}
+                        className="hover:underline"
+                      >
+                        {domain.name}
+                      </a>
+                    </h3>
+                    
+                    {/* Status Badge */}
+                    <div className="flex justify-center mb-4">
+                      <span className={`px-3 py-1 rounded-full text-xs font-semibold ${getStatusColor(domain.status)}`}>
+                        {domain.status}
+                      </span>
+                    </div>
+                    
+                    {/* Price */}
+                    <div className="text-center mb-4">
+                      <span className="text-lg font-bold flicker-solana solana-gradient">
+                        {domain.price}
+                      </span>
+                    </div>
+
+                    {/* Description */}
+                    {domain.description && (
+                      <div className="text-center mb-4">
+                        <p className="text-xs text-gray-400 leading-relaxed">
+                          {domain.description}
+                        </p>
+                      </div>
+                    )}
+                    
+                    {/* Action Button */}
+                    <div className="flex justify-center">
+                      {domain.status === "For Sale" ? (
+                        <a 
+                          href="https://twitter.com/messages/compose?recipient_id=KongX"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="neon-cyan neon-cyan-hover text-center py-2 px-4 rounded text-sm font-semibold transition-colors duration-200"
+                        >
+                          DM to Buy
+                        </a>
+                      ) : domain.status === "Sold" ? (
+                        <span className="bg-gray-600 text-white text-center py-2 px-4 rounded text-sm font-semibold">
+                          Sold
+                        </span>
+                      ) : (
+                        <span className="bg-yellow-600 text-black text-center py-2 px-4 rounded text-sm font-semibold glow-purple">
+                          Coming Soon
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+
+
+            {/* Quick Snags */}
+            <div className="mb-16">
+              <h2 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-center solana-gradient flicker-solana">
+                <span className="text-pink-400">[</span> ⚡ Quick Snags <span className="text-pink-400">]</span>
+              </h2>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 justify-items-center max-w-6xl mx-auto">
+                {domainCategories[2].domains.map((domain, domainIndex) => (
+                  <div 
+                    key={domainIndex}
+                    className="steel-surface card-hover-glow rounded-lg p-4 sm:p-6 transition-all duration-300 group w-full max-w-sm mx-auto"
+                  >
+                    {/* Domain Image */}
+                    <div className="text-3xl sm:text-4xl text-center mb-4">
+                      {domain.name === "jpegdealer.sol" ? (
+                        <img 
+                          src={jpegdealerImage} 
+                          alt="jpegdealer.sol" 
+                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
+                        />
+                      ) : domain.name === "fudscience.sol" ? (
+                        <img 
+                          src={fudscientistImage} 
+                          alt="fudscience.sol" 
+                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
+                        />
+                      ) : domain.name === "jumpsetradio.sol" ? (
+                        <img 
+                          src={jumpsetradioImage} 
+                          alt="jumpsetradio.sol" 
+                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
+                        />
+                      ) : domain.name === "copevendor.sol" ? (
+                        <img 
+                          src={copevendorImage} 
+                          alt="copevendor.sol" 
+                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
+                        />
+                      ) : domain.name === "lurkerlife.sol" ? (
+                        <img 
+                          src={lurkerlifeImage} 
+                          alt="lurkerlife.sol" 
+                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
+                        />
+                      ) : domain.name === "commandhub.sol" ? (
+                        <img 
+                          src={commandhubImage} 
+                          alt="commandhub.sol" 
+                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
+                        />
+                      ) : domain.name === "deploydeck.sol" ? (
+                        <img 
+                          src={deploydeckImage} 
+                          alt="deploydeck.sol" 
+                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
+                        />
+                      ) : domain.name === "rigbuilder.sol" ? (
+                        <img 
+                          src={rigbuilderImage} 
+                          alt="rigbuilder.sol" 
+                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
+                        />
+                      ) : domain.name === "bidgremlin.sol" ? (
+                        <img 
+                          src={bidgremlinImage} 
+                          alt="bidgremlin.sol" 
+                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
+                        />
+                      ) : (
+                        domain.image
+                      )}
+                    </div>
+                    
+                    {/* Domain Name */}
+                    <h3 className="text-lg font-bold solana-gradient mb-3 group-hover:glow-blue transition-colors text-center">
+                      <a 
+                        href={`/domains/${domain.name.replace('.sol', '')}`}
+                        className="hover:underline"
+                      >
+                        {domain.name}
+                      </a>
+                    </h3>
+                    
+                    {/* Status Badge */}
+                    <div className="flex justify-center mb-4">
+                      <span className={`px-3 py-1 rounded-full text-xs font-semibold ${getStatusColor(domain.status)}`}>
+                        {domain.status}
+                      </span>
+                    </div>
+                    
+                    {/* Price */}
+                    <div className="text-center mb-4">
+                      <span className="text-lg font-bold flicker-solana solana-gradient">
+                        {domain.price}
+                      </span>
+                    </div>
+
+                    {/* Description */}
+                    {domain.description && (
+                      <div className="text-center mb-4">
+                        <p className="text-xs text-gray-400 leading-relaxed">
+                          {domain.description}
+                        </p>
+                      </div>
+                    )}
+                    
+                    {/* Action Button */}
+                    <div className="flex justify-center">
+                      {domain.status === "For Sale" ? (
+                        domain.name === "rigbuilder.sol" ? (
+                          <a 
+                            href="https://www.sns.id/search/single?search=rigbuilder"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="neon-cyan neon-cyan-hover text-center py-2 px-4 rounded text-sm font-semibold transition-colors duration-200"
+                          >
+                            🛒 Buy Now
+                          </a>
+                        ) : (
+                          <a 
+                            href={`https://app.sns.id/domain/${domain.name.replace('.sol', '')}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="neon-cyan neon-cyan-hover text-center py-2 px-4 rounded text-sm font-semibold transition-colors duration-200"
+                          >
+                            🛒 Buy Now
+                          </a>
+                        )
+                      ) : domain.status === "Sold" ? (
+                        <span className="bg-gray-600 text-white text-center py-2 px-4 rounded text-sm font-semibold">
+                          Sold
+                        </span>
+                      ) : (
+                        <span className="bg-yellow-600 text-black text-center py-2 px-4 rounded text-sm font-semibold glow-purple">
+                          Coming Soon
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Flash Rack */}
+            <div className="mb-16">
+              <h2 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-center solana-gradient flicker-solana">
+                <span className="text-pink-400">[</span> 💀 Flash Rack <span className="text-pink-400">]</span>
+              </h2>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 justify-items-center max-w-6xl mx-auto">
+                {domainCategories[3].domains.map((domain, domainIndex) => (
+                  <div 
+                    key={domainIndex}
+                    className="steel-surface card-hover-glow rounded-lg p-4 sm:p-6 transition-all duration-300 group w-full max-w-sm mx-auto"
+                  >
+                    {/* Domain Image */}
+                    <div className="text-3xl sm:text-4xl text-center mb-4">
+                      {domain.name === "jpegdealer.sol" ? (
+                        <img 
+                          src={jpegdealerImage} 
+                          alt="jpegdealer.sol" 
+                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
+                        />
+                      ) : domain.name === "fudscience.sol" ? (
+                        <img 
+                          src={fudscientistImage} 
+                          alt="fudscience.sol" 
+                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
+                        />
+                      ) : domain.name === "jumpsetradio.sol" ? (
+                        <img 
+                          src={jumpsetradioImage} 
+                          alt="jumpsetradio.sol" 
+                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
+                        />
+                      ) : domain.name === "copevendor.sol" ? (
+                        <img 
+                          src={copevendorImage} 
+                          alt="copevendor.sol" 
+                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
+                        />
+                      ) : domain.name === "lurkerlife.sol" ? (
+                        <img 
+                          src={lurkerlifeImage} 
+                          alt="lurkerlife.sol" 
+                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
+                        />
+                      ) : domain.name === "commandhub.sol" ? (
+                        <img 
+                          src={commandhubImage} 
+                          alt="commandhub.sol" 
+                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
+                        />
+                      ) : domain.name === "deploydeck.sol" ? (
+                        <img 
+                          src={deploydeckImage} 
+                          alt="deploydeck.sol" 
+                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
+                        />
+                      ) : domain.name === "rigbuilder.sol" ? (
+                        <img 
+                          src={rigbuilderImage} 
+                          alt="rigbuilder.sol" 
+                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
+                        />
+                      ) : domain.name === "bidgremlin.sol" ? (
+                        <img 
+                          src={bidgremlinImage} 
+                          alt="bidgremlin.sol" 
+                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
+                        />
+                      ) : (
+                        domain.image
+                      )}
+                    </div>
+                    
+                    {/* Domain Name */}
+                    <h3 className="text-lg font-bold solana-gradient mb-3 group-hover:glow-blue transition-colors text-center">
+                      <a 
+                        href={`/domains/${domain.name.replace('.sol', '')}`}
+                        className="hover:underline"
+                      >
+                        {domain.name}
+                      </a>
+                    </h3>
+                    
+                    {/* Status Badge */}
+                    <div className="flex justify-center mb-4">
+                      <span className={`px-3 py-1 rounded-full text-xs font-semibold ${getStatusColor(domain.status)}`}>
+                        {domain.status}
+                      </span>
+                    </div>
+                    
+                    {/* Price */}
+                    <div className="text-center mb-4">
+                      <span className="text-lg font-bold flicker-solana solana-gradient">
+                        {domain.price}
+                      </span>
+                    </div>
+
+                    {/* Description */}
+                    {domain.description && (
+                      <div className="text-center mb-4">
+                        <p className="text-xs text-gray-400 leading-relaxed">
+                          {domain.description}
+                        </p>
+                      </div>
+                    )}
+                    
+                    {/* Action Button */}
+                    <div className="flex justify-center">
+                      {domain.status === "For Sale" ? (
+                        <a 
+                          href={`https://app.sns.id/domain/${domain.name.replace('.sol', '')}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="neon-cyan neon-cyan-hover text-center py-2 px-4 rounded text-sm font-semibold transition-colors duration-200"
+                        >
+                          🛒 Buy Now
+                        </a>
+                      ) : domain.status === "Sold" ? (
+                        <span className="bg-gray-600 text-white text-center py-2 px-4 rounded text-sm font-semibold">
+                          Sold
+                        </span>
+                      ) : (
+                        <span className="bg-yellow-600 text-black text-center py-2 px-4 rounded text-sm font-semibold glow-purple">
+                          Coming Soon
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Tip Jar Section */}
+        <section className="px-4 py-16 relative">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-black mb-8 text-center solana-gradient flicker-solana">
+              <span className="text-pink-400">[</span> Tip the Mall Rats 🛒 <span className="text-pink-400">]</span>
+            </h2>
+
+            <div className="steel-surface rounded-lg p-8 border border-blue-500/30">
+              <div className="text-center">
+                <h3 className="text-2xl font-bold mb-6 solana-gradient">
+                  Solana Domain Address
+                </h3>
+                
+                <div className="bg-black/40 rounded-lg p-6 mb-6 border border-gray-700 max-w-md mx-auto">
+                  <p className="text-2xl font-mono text-cyan-400 mb-3">
+                    paymyinterns.sol
+                  </p>
+                  <p className="text-sm text-gray-400">
+                    Send SOL to support the Retailverse
+                  </p>
+                </div>
+
+                <button 
+                  onClick={() => {
+                    navigator.clipboard.writeText('paymyinterns.sol');
+                  }}
+                  className="neon-cyan neon-cyan-hover py-3 px-6 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center mx-auto"
+                >
+                  <span className="mr-2">📋</span>
+                  Copy Address
+                </button>
+              </div>
+
+              <div className="mt-8 pt-6 border-t border-gray-700">
+                <p className="text-center text-lg text-gray-300 leading-relaxed glow-blue">
+                  "Every tip keeps the Retailverse alive. From the neon-lit corridors of Solana's underlayer, 
+                  we salute you, fellow mall rat. Your SOL fuels the next deployment. 🚀"
+                </p>
+                <p className="text-center text-sm text-gray-500 mt-4">
+                  — The RetailStar Collective
                 </p>
               </div>
-              
-              {/* Links */}
-              <div className="flex justify-center space-x-8 text-sm mb-6">
-                <a 
-                  href="https://github.com/KongX" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-gray-300 transition-colors"
-                >
-                  GitHub
-                </a>
-                <a 
-                  href="https://twitter.com/KongX" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="solana-gradient flicker-solana hover:glow-blue transition-colors"
-                >
-                  Twitter
-                </a>
-                <a 
-                  href="https://twitter.com/messages/compose?recipient_id=KongX" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="solana-gradient flicker-solana hover:glow-blue transition-colors"
-                >
-                  Contact
-                </a>
-              </div>
-              
-              {/* Copyright */}
-              <div className="text-xs text-gray-500">
-                <p>© 2024 retailstar.sol - Nodes in the Retailverse</p>
-              </div>
             </div>
-          </footer>
-        </div>
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer className="border-t border-gray-800 bg-black/40 backdrop-blur-sm py-12 px-4">
+          <div className="max-w-6xl mx-auto text-center">
+            <div className="mb-8">
+              <p className="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed glow-blue">
+                RetailStar is a broadcast from Solana's underlayer — every domain is a node waiting to go live.
+              </p>
+            </div>
+            
+            <div className="flex justify-center space-x-8 text-sm mb-6">
+              <a 
+                href="https://github.com/KongX" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-gray-300 transition-colors"
+              >
+                GitHub
+              </a>
+              <a 
+                href="https://twitter.com/KongX" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="solana-gradient flicker-solana hover:glow-blue transition-colors"
+              >
+                Twitter
+              </a>
+              <a 
+                href="https://twitter.com/messages/compose?recipient_id=KongX" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="solana-gradient flicker-solana hover:glow-blue transition-colors"
+              >
+                Contact
+              </a>
+              <a 
+                href="/domains" 
+                className="solana-gradient flicker-solana hover:glow-blue transition-colors"
+              >
+                Domains
+              </a>
+              <a 
+                href="/merch" 
+                className="solana-gradient flicker-solana hover:glow-blue transition-colors"
+              >
+                Merch
+              </a>
+            </div>
+            
+            <div className="text-xs text-gray-500">
+              <p>© 2024 retailstar.sol - Nodes in the Retailverse</p>
+            </div>
+          </div>
+        </footer>
       </div>
-    </>
+    </div>
+  );
+
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/domains" element={<DomainsPage />} />
+        <Route path="/domains/:slug" element={<DomainPage />} />
+        <Route path="/vault" element={<VaultPage />} />
+      </Routes>
+    </Router>
   );
 }
 

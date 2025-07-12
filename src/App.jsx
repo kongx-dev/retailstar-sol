@@ -32,7 +32,7 @@ function App() {
       domains: [
         { name: "copevendor.sol", status: "For Sale", price: "3.5 SOL", image: "💊", description: "Rebuild it into something with more absurdity and clean flow" },
         { name: "lurkerlife.sol", status: "For Sale", price: "3 SOL", image: "👁️", description: "Funny but weak build. Add visual humor + better framing" },
-        { name: "commandhub.sol", status: "For Sale", price: "3.5 SOL", image: "🔧", description: "Solid dev tool angle, could go 2+ SOL" }
+        { name: "commandhub.sol", status: "For Sale", price: "5.5 SOL", image: "🔧", description: "Solid dev tool angle, could go 2+ SOL" }
       ]
     },
     {
@@ -119,6 +119,30 @@ function App() {
             <p className="text-xl md:text-2xl text-gray-300 mb-8 flicker max-w-3xl mx-auto leading-relaxed glow-blue">
               Every .sol is a node in the Retailverse. Take one. Deploy your own.
             </p>
+            
+            {/* Legend/Disclaimer */}
+            <div className="mb-8 max-w-2xl mx-auto">
+              <div className="bg-gray-800/50 border border-gray-700/50 rounded-lg p-4 backdrop-blur-sm">
+                <div className="flex items-center justify-center space-x-4 text-sm">
+                  <div className="flex items-center space-x-2">
+                    <div className="w-8 h-8 bg-blue-500/20 border border-blue-500/30 rounded flex items-center justify-center">
+                      <img 
+                        src={rigbuilderImage} 
+                        alt="rigbuilder.sol" 
+                        className="w-6 h-6 rounded object-cover"
+                      />
+                    </div>
+                    <span className="text-gray-300">Tiles with pictures = Have websites</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-8 h-8 bg-gray-500/20 border border-gray-500/30 rounded flex items-center justify-center">
+                      <span className="text-xs">🎯</span>
+                    </div>
+                    <span className="text-gray-300">Emoji tiles = Domain only</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 

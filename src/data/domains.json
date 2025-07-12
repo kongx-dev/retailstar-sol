@@ -88,7 +88,8 @@
       "featured": false,
       "status": "available",
       "price": "3 SOL",
-      "category": "flash",
+      "quickSnagPrice": "0.89 SOL",
+      "category": "mid",
       "hasWebsite": true
     },
     {
@@ -140,7 +141,7 @@
       "image": "🔧",
       "featured": false,
       "status": "available",
-      "price": "4 SOL",
+      "price": "5.5 SOL",
       "category": "mid",
       "hasLore": true,
       "hasWebsite": true
@@ -205,7 +206,8 @@
       "featured": false,
       "status": "available",
       "price": "5 SOL",
-      "category": "flash",
+      "quickSnagPrice": "1.29 SOL",
+      "category": "mid",
       "hasWebsite": true
     },
     {
@@ -824,6 +826,7 @@
       "featured": false,
       "status": "available",
       "price": "2 SOL",
+      "quickSnagPrice": "0.69 SOL",
       "category": "mid",
       "hasWebsite": true
     },

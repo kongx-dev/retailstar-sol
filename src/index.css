@@ -51,6 +51,9 @@ body {
 .glow-purple {
   box-shadow: 0 0 8px #a259ff, 0 0 16px #6f4aff44;
 }
+.glow-orange {
+  box-shadow: 0 0 8px #ff8c00, 0 0 16px #ff660044;
+}
 
 /* Flicker animation for Solana references and price widgets */
 @keyframes soft-flicker {

@@ -5,38 +5,48 @@ import retailstarBody from '../assets/retailstar-body.png';
 import TipJar from '../components/TipJar';
 import FlashSaleRotator from '../components/FlashSaleRotator';
 import RotationStatus from '../components/RotationStatus';
+import domainsData from '../data/domains.json';
 
 const HomePage = () => {
+  // Filter domains for Flash Rack (domains without websites)
+  const flashRackDomains = domainsData.domains.filter(domain => 
+    domain.status === "available" && 
+    !domain.hasWebsite && 
+    domain.category === "flash"
+  ).slice(0, 4);
+
+  // Filter domains for Quick Snags (only specific 3 domains, mid-tier only)
+  const quickSnagDomains = domainsData.domains.filter(domain => 
+    domain.status === "available" && 
+    domain.hasWebsite && 
+    domain.quickSnagPrice &&
+    domain.category === "mid" &&
+    ["rigbuilder", "bidgremlin", "deploydeck"].includes(domain.name)
+  ).slice(0, 3);
+
   const domainCategories = [
     {
       name: "Flash Rack",
-      description: "24h rotation cycle",
-      domains: [
-        { name: "jpegdealer.sol", status: "For Sale", price: "10 SOL", image: "🖼️", category: "flash" },
-        { name: "copevendor.sol", status: "For Sale", price: "1.69 SOL", image: "💊", category: "flash" },
-        { name: "deploydeck.sol", status: "For Sale", price: "2.00 SOL", image: "🚀", category: "flash" },
-        { name: "bidgremlin.sol", status: "For Sale", price: "3.00 SOL", image: "👹", category: "flash" }
-      ]
+      description: "24h rotation cycle - Domains without websites",
+      domains: flashRackDomains.map(domain => ({
+        name: `${domain.name}.sol`,
+        status: "For Sale",
+        price: domain.price,
+        image: domain.image,
+        category: domain.category
+      }))
     },
     {
-      name: "Mid Tier",
-      description: "72h rotation cycle",
-      domains: [
-        { name: "jumpsetradio.sol", status: "For Sale", price: "8 SOL", image: "📻", category: "mid" },
-        { name: "lurkerlife.sol", status: "For Sale", price: "6 SOL", image: "👁️", category: "mid" },
-        { name: "commandhub.sol", status: "For Sale", price: "1.88 SOL", image: "🔧", category: "mid" },
-        { name: "rigbuilder.sol", status: "For Sale", price: "2.00 SOL", image: "⚡", category: "mid" }
-      ]
-    },
-    {
-      name: "Premium Wing",
-      description: "7d rotation cycle",
-      domains: [
-        { name: "fudscience.sol", status: "For Sale", price: "12 SOL", image: "🧪", category: "premium" },
-        { name: "biggestofbrains.sol", status: "For Sale", price: "15 SOL", image: "🧠", category: "premium" },
-        { name: "retailverse.sol", status: "Not For Sale", price: "N/A", image: "🌌", category: "lore" },
-        { name: "retailrunner.sol", status: "Not For Sale", price: "N/A", image: "🏃", category: "lore" }
-      ]
+      name: "Quick Snags",
+      description: "Featured domains with built-out websites",
+      domains: quickSnagDomains.map(domain => ({
+        name: `${domain.name}.sol`,
+        status: "Quick Snag",
+        price: domain.quickSnagPrice,
+        originalPrice: domain.price,
+        image: domain.image,
+        category: domain.category
+      }))
     }
   ];
 
@@ -44,6 +54,8 @@ const HomePage = () => {
     switch (status) {
       case "For Sale":
         return "bg-green-600 text-white glow-blue";
+      case "Quick Snag":
+        return "bg-orange-500 text-white glow-orange";
       case "Sold":
         return "bg-red-600 text-white";
       case "Coming Soon":
@@ -152,9 +164,20 @@ const HomePage = () => {
                       
                       {/* Price */}
                       <div className="text-center mb-4">
-                        <span className="text-lg font-bold flicker-solana solana-gradient">
-                          {domain.price}
-                        </span>
+                        {domain.status === "Quick Snag" ? (
+                          <div>
+                            <span className="text-lg font-bold flicker-solana solana-gradient">
+                              {domain.price}
+                            </span>
+                            <div className="text-xs text-gray-400 line-through">
+                              {domain.originalPrice}
+                            </div>
+                          </div>
+                        ) : (
+                          <span className="text-lg font-bold flicker-solana solana-gradient">
+                            {domain.price}
+                          </span>
+                        )}
                       </div>
                       
                       {/* Action Button */}
@@ -167,6 +190,15 @@ const HomePage = () => {
                             className="neon-cyan neon-cyan-hover text-center py-2 px-4 rounded text-sm font-semibold transition-colors duration-200"
                           >
                             DM to Buy
+                          </a>
+                        ) : domain.status === "Quick Snag" ? (
+                          <a 
+                            href="https://twitter.com/messages/compose?recipient_id=retailstarsol"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="bg-orange-500 hover:bg-orange-600 text-white text-center py-2 px-4 rounded text-sm font-semibold transition-colors duration-200"
+                          >
+                            Quick Snag
                           </a>
                         ) : domain.status === "Sold" ? (
                           <span className="bg-gray-600 text-white text-center py-2 px-4 rounded text-sm font-semibold">

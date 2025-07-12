@@ -53,6 +53,8 @@ const DomainCard = ({ domain }) => {
         return "bg-gray-600 text-white";
       case "vaulted":
         return "bg-purple-600 text-white glow-purple";
+      case "quick_snag":
+        return "bg-orange-500 text-white glow-orange";
       default:
         return "bg-gray-600 text-white";
     }
@@ -102,9 +104,9 @@ const DomainCard = ({ domain }) => {
   };
 
   const rotationInfo = getRotationInfo(domain.category);
-  const isHomepageDomain = domain.hasWebsite;
-  const displayStatus = isHomepageDomain ? domain.status : "vaulted";
-  const displayPrice = isHomepageDomain ? domain.price : "N/A";
+  const isQuickSnag = domain.hasWebsite && domain.quickSnagPrice && domain.category === "mid" && ["rigbuilder", "bidgremlin", "deploydeck"].includes(domain.name);
+  const displayStatus = isQuickSnag ? "quick_snag" : (domain.hasWebsite ? domain.status : "vaulted");
+  const displayPrice = isQuickSnag ? domain.quickSnagPrice : (domain.hasWebsite ? domain.price : "N/A");
 
   return (
     <div className="steel-surface card-hover-glow rounded-lg p-4 sm:p-6 transition-all duration-300 group w-full max-w-sm mx-auto">
@@ -132,6 +134,15 @@ const DomainCard = ({ domain }) => {
           <span className="text-base sm:text-lg font-bold text-gray-500">
             {displayStatus === 'vaulted' ? 'Vaulted' : 'Not For Sale'}
           </span>
+        ) : displayStatus === 'quick_snag' ? (
+          <div>
+            <span className="text-base sm:text-lg font-bold flicker-solana solana-gradient">
+              {displayPrice}
+            </span>
+            <div className="text-xs text-gray-400 line-through">
+              {domain.price}
+            </div>
+          </div>
         ) : (
           <span className="text-base sm:text-lg font-bold flicker-solana solana-gradient">
             {displayPrice}
@@ -139,7 +150,7 @@ const DomainCard = ({ domain }) => {
         )}
         <div className="flex items-center justify-center mt-2">
           <span className={`text-xs ${getCategoryColor(domain.category)}`}>
-            {getCategoryLabel(domain.category)}
+            {displayStatus === 'quick_snag' ? 'Quick Snag' : getCategoryLabel(domain.category)}
           </span>
           {domain.category !== 'lore' && (
             <span className={`text-xs ml-2 ${rotationInfo.color}`}>
@@ -170,6 +181,16 @@ const DomainCard = ({ domain }) => {
         >
           {domain.hasLore ? '📖 Wiki' : 'View Details'}
         </Link>
+        {displayStatus === 'quick_snag' && (
+          <a 
+            href="https://twitter.com/messages/compose?recipient_id=retailstarsol"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-orange-500 hover:bg-orange-600 text-white text-center py-2 px-4 rounded text-sm font-semibold transition-colors duration-200"
+          >
+            Quick Snag
+          </a>
+        )}
         {displayStatus === 'not_for_sale' && (
           <span className="bg-gray-600 text-white text-center py-2 px-4 rounded text-sm font-semibold">
             Lore Only
@@ -189,17 +210,25 @@ const DomainsPage = () => {
   const [filter, setFilter] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
 
-  // Get homepage domains (domains with websites)
-  const homepageDomains = domainsData.domains.filter(d => d.hasWebsite);
-  const nonHomepageDomains = domainsData.domains.filter(d => !d.hasWebsite);
+  // Get Quick Snags (only specific 3 domains, mid-tier only)
+  const quickSnagDomains = domainsData.domains.filter(d => 
+    d.status === "available" && 
+    d.hasWebsite && 
+    d.quickSnagPrice &&
+    d.category === "mid" &&
+    ["rigbuilder", "bidgremlin", "deploydeck"].includes(d.name)
+  );
+  const nonQuickSnagDomains = domainsData.domains.filter(d => 
+    !quickSnagDomains.some(qs => qs.name === d.name)
+  );
 
   const filteredDomains = domainsData.domains.filter(domain => {
     let matchesFilter = true;
     
     if (filter === 'with_websites') {
-      matchesFilter = domain.hasWebsite;
+      matchesFilter = quickSnagDomains.some(qs => qs.name === domain.name);
     } else if (filter === 'without_websites') {
-      matchesFilter = !domain.hasWebsite;
+      matchesFilter = !quickSnagDomains.some(qs => qs.name === domain.name);
     } else if (filter === 'for_sale') {
       matchesFilter = domain.status === 'available';
     } else if (filter !== 'all') {
@@ -214,8 +243,8 @@ const DomainsPage = () => {
 
   const categories = [
     { key: 'all', label: 'All Domains', count: domainsData.domains.length },
-    { key: 'with_websites', label: 'With Websites', count: homepageDomains.length },
-    { key: 'without_websites', label: 'Without Websites', count: nonHomepageDomains.length },
+    { key: 'with_websites', label: 'Quick Snags', count: quickSnagDomains.length },
+    { key: 'without_websites', label: 'Without Websites', count: nonQuickSnagDomains.length },
     { key: 'for_sale', label: 'For Sale', count: domainsData.domains.filter(d => d.status === 'available').length },
     { key: 'premium', label: 'Premium Wing', count: domainsData.domains.filter(d => d.category === 'premium').length },
     { key: 'mid', label: 'Mid Tier', count: domainsData.domains.filter(d => d.category === 'mid').length },

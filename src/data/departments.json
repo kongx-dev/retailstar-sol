@@ -1,0 +1,75 @@
+{
+  "B1_Underbelly": {
+    "name": "The Underbelly",
+    "description": "Where memes mutate and chaos thrives. Tactical degeneracy lives here.",
+    "domains": [
+      "grindprotocol.sol",
+      "exitprotocol.sol",
+      "copevendor.sol",
+      "fudscience.sol",
+      "yapenomics.sol",
+      "lurkerlife.sol"
+    ]
+  },
+  "1F_Mainfloor": {
+    "name": "Main Mallfloor",
+    "description": "Retail core, loud brands, influencer bait, and everything in between.",
+    "wings": {
+      "Flash_Rack": {
+        "name": "Flash Rack",
+        "description": "24hr rotation cycle. High-turnover domains that move fast.",
+        "domains": [
+          "jpegdealer.sol",
+          "copevendor.sol",
+          "deploydeck.sol",
+          "bidgremlin.sol",
+          "urnotthatguy.sol"
+        ]
+      },
+      "Mid_Tier": {
+        "name": "Mid Tier",
+        "description": "72hr rotation cycle. Balanced domains with steady movement.",
+        "domains": [
+          "jumpsetradio.sol",
+          "lurkerlife.sol",
+          "commandhub.sol",
+          "rigbuilder.sol",
+          "coinbureaus.sol"
+        ]
+      },
+      "Premium_Wing": {
+        "name": "Premium Wing",
+        "description": "7-day rotation cycle. Long-term holdings and premium positioning.",
+        "domains": [
+          "fudscience.sol",
+          "biggestofbrains.sol",
+          "retailverse.sol",
+          "retailrunner.sol",
+          "dripdealer.sol"
+        ]
+      }
+    }
+  },
+  "2F_TechSector": {
+    "name": "Tech Sector",
+    "description": "Infra, ops tools, and command nodes for builders.",
+    "domains": [
+      "commandhub.sol",
+      "deploydock.sol",
+      "controldock.sol",
+      "uplinknode.sol",
+      "batchdeploy.sol"
+    ]
+  },
+  "3F_LoungeLore": {
+    "name": "Lounge & Lore",
+    "description": "Chill aesthetic, hidden wisdom, and narrative worlds above the chaos.",
+    "domains": [
+      "loungeprotocol.sol",
+      "blissnwellness.sol",
+      "dreadprotocol.sol",
+      "nodehunter.sol",
+      "vaultdegen.sol"
+    ]
+  }
+} 

@@ -4,35 +4,38 @@ import rsLogo from '../assets/rs-logo.png';
 import retailstarBody from '../assets/retailstar-body.png';
 import TipJar from '../components/TipJar';
 import FlashSaleRotator from '../components/FlashSaleRotator';
+import RotationStatus from '../components/RotationStatus';
 
 const HomePage = () => {
   const domainCategories = [
     {
-      name: "Live Domains",
+      name: "Flash Rack",
+      description: "24h rotation cycle",
       domains: [
-        { name: "pistola.sol", status: "For Sale", price: "2.22 SOL", image: "🔫" },
-        { name: "copevendor.sol", status: "For Sale", price: "1.69 SOL", image: "💊" },
-        { name: "jpegdealer.sol", status: "For Sale", price: "10 SOL", image: "🖼️" },
-        { name: "fudscience.sol", status: "For Sale", price: "12 SOL", image: "🧪" },
-        { name: "commandhub.sol", status: "For Sale", price: "1.88 SOL", image: "🔧" },
-        { name: "deploydeck.sol", status: "For Sale", price: "2.00 SOL", image: "🚀" }
+        { name: "jpegdealer.sol", status: "For Sale", price: "10 SOL", image: "🖼️", category: "flash" },
+        { name: "copevendor.sol", status: "For Sale", price: "1.69 SOL", image: "💊", category: "flash" },
+        { name: "deploydeck.sol", status: "For Sale", price: "2.00 SOL", image: "🚀", category: "flash" },
+        { name: "bidgremlin.sol", status: "For Sale", price: "3.00 SOL", image: "👹", category: "flash" }
       ]
     },
     {
-      name: "Coming Soon",
+      name: "Mid Tier",
+      description: "72h rotation cycle",
       domains: [
-        { name: "deploydock.sol", status: "Coming Soon", price: "TBA", image: "⚓" },
-        { name: "controlcenter.sol", status: "Coming Soon", price: "TBA", image: "🎮" },
-        { name: "kombat.sol", status: "Coming Soon", price: "TBA", image: "🥊" },
-        { name: "urnotthatguy.sol", status: "Coming Soon", price: "TBA", image: "😎" },
-        { name: "gg2ez.sol", status: "Coming Soon", price: "TBA", image: "🏆" },
-        { name: "trackalpha.sol", status: "Coming Soon", price: "TBA", image: "📊" },
-        { name: "alphastalker.sol", status: "Coming Soon", price: "TBA", image: "🕵️" },
-        { name: "mindflow.sol", status: "Coming Soon", price: "TBA", image: "🧠" },
-        { name: "marksmanhub.sol", status: "Coming Soon", price: "TBA", image: "🎯" },
-        { name: "maidenless.sol", status: "Coming Soon", price: "TBA", image: "💔" },
-        { name: "ghostrunner.sol", status: "Coming Soon", price: "TBA", image: "👻" },
-        { name: "dojoquest.sol", status: "Coming Soon", price: "TBA", image: "🏯" }
+        { name: "jumpsetradio.sol", status: "For Sale", price: "8 SOL", image: "📻", category: "mid" },
+        { name: "lurkerlife.sol", status: "For Sale", price: "6 SOL", image: "👁️", category: "mid" },
+        { name: "commandhub.sol", status: "For Sale", price: "1.88 SOL", image: "🔧", category: "mid" },
+        { name: "rigbuilder.sol", status: "For Sale", price: "2.00 SOL", image: "⚡", category: "mid" }
+      ]
+    },
+    {
+      name: "Premium Wing",
+      description: "7d rotation cycle",
+      domains: [
+        { name: "fudscience.sol", status: "For Sale", price: "12 SOL", image: "🧪", category: "premium" },
+        { name: "biggestofbrains.sol", status: "For Sale", price: "15 SOL", image: "🧠", category: "premium" },
+        { name: "retailverse.sol", status: "Not For Sale", price: "N/A", image: "🌌", category: "lore" },
+        { name: "retailrunner.sol", status: "Not For Sale", price: "N/A", image: "🏃", category: "lore" }
       ]
     }
   ];
@@ -89,6 +92,13 @@ const HomePage = () => {
           </div>
         </section>
 
+        {/* Rotation Status Widget */}
+        <section className="py-8 px-4">
+          <div className="max-w-4xl mx-auto">
+            <RotationStatus compact={true} />
+          </div>
+        </section>
+
         {/* Flash Sale Rotator */}
         <section className="py-16 px-4">
           <FlashSaleRotator />
@@ -100,9 +110,16 @@ const HomePage = () => {
             {domainCategories.map((category, categoryIndex) => (
               <div key={categoryIndex} className="mb-16">
                 {/* Category Title */}
-                <h2 className="text-3xl font-bold mb-8 text-center solana-gradient flicker-solana">
-                  <span className="text-pink-400">[</span> {category.name} <span className="text-pink-400">]</span>
-                </h2>
+                <div className="text-center mb-8">
+                  <h2 className="text-3xl font-bold solana-gradient flicker-solana mb-2">
+                    <span className="text-pink-400">[</span> {category.name} <span className="text-pink-400">]</span>
+                  </h2>
+                  {category.description && (
+                    <p className="text-sm text-gray-400">
+                      ⏰ {category.description}
+                    </p>
+                  )}
+                </div>
                 
                 {/* Domain Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -118,7 +135,12 @@ const HomePage = () => {
                       
                       {/* Domain Name */}
                       <h3 className="text-lg font-bold solana-gradient mb-3 group-hover:glow-blue transition-colors text-center">
-                        {domain.name}
+                        <Link 
+                          to={`/wiki/${domain.name.replace('.sol', '')}`}
+                          className="hover:underline cursor-pointer"
+                        >
+                          {domain.name}
+                        </Link>
                       </h3>
                       
                       {/* Status Badge */}
@@ -139,7 +161,7 @@ const HomePage = () => {
                       <div className="flex justify-center">
                         {domain.status === "For Sale" ? (
                           <a 
-                            href="https://twitter.com/messages/compose?recipient_id=KongX"
+                            href="https://twitter.com/messages/compose?recipient_id=retailstarsol"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="neon-cyan neon-cyan-hover text-center py-2 px-4 rounded text-sm font-semibold transition-colors duration-200"
@@ -188,7 +210,7 @@ const HomePage = () => {
                 GitHub
               </a>
               <a 
-                href="https://twitter.com/KongX" 
+                href="https://x.com/retailstarsol" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="solana-gradient flicker-solana hover:glow-blue transition-colors"
@@ -196,7 +218,7 @@ const HomePage = () => {
                 Twitter
               </a>
               <a 
-                href="https://twitter.com/messages/compose?recipient_id=KongX" 
+                href="https://twitter.com/messages/compose?recipient_id=retailstarsol" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="solana-gradient flicker-solana hover:glow-blue transition-colors"
@@ -204,16 +226,17 @@ const HomePage = () => {
                 Contact
               </a>
               <Link 
-                to="/merch" 
+                to="/directory" 
                 className="solana-gradient flicker-solana hover:glow-blue transition-colors"
               >
-                Merch
+                Directory
               </Link>
+
             </div>
             
             {/* Copyright */}
             <div className="text-xs text-gray-500">
-              <p>© 2024 retailstar.sol - Nodes in the Retailverse</p>
+              <p>© 2025 retailstar.sol - Nodes in the Retailverse</p>
             </div>
           </div>
         </footer>

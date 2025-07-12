@@ -22,7 +22,7 @@ const fullInventory = {
     { name: "rigbuilder.sol", status: "Listed Now", price: "1 SOL", image: "⚡", description: "Fastest to sell for SOL rotation" },
     { name: "bidgremlin.sol", status: "Listed Now", price: "0.89 SOL", image: "👹", description: "Fastest to sell for SOL rotation" },
     { name: "exitprotocol.sol", status: "Vaulted", price: "0.99 SOL", image: "🚪", description: "Fallback memescape" },
-    { name: "urnotthatguysl.sol", status: "Sold", price: "0.3 SOL", image: "💀", description: "Unfiltered and unhinged. No site, no promises — just vibes" },
+            { name: "urnotthatguy.sol", status: "Sold", price: "0.3 SOL", image: "💀", description: "Unfiltered and unhinged. No site, no promises — just vibes" },
     { name: "yournotthatguy.sol", status: "Sold", price: "0.4 SOL", image: "💀", description: "Unfiltered and unhinged. No site, no promises — just vibes" },
     { name: "inpregneable.sol", status: "Sold", price: "0.5 SOL", image: "💀", description: "Unfiltered and unhinged. No site, no promises — just vibes" }
   ],

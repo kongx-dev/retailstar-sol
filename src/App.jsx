@@ -14,6 +14,8 @@ import bidgremlinImage from './assets/bidgremlin.png';
 import DomainsPage from './pages/DomainsPage';
 import DomainPage from './pages/DomainPage';
 import VaultPage from './pages/VaultPage';
+import WikiPage from './pages/WikiPage';
+import MallDirectoryPage from './pages/MallDirectoryPage';
 
 function App() {
   const domainCategories = [
@@ -44,7 +46,7 @@ function App() {
     {
       name: "Flash Rack",
       domains: [
-        { name: "urnotthatguysl.sol", status: "For Sale", price: "0.3 SOL", image: "💀", description: "Unfiltered and unhinged. No site, no promises — just vibes" },
+        { name: "urnotthatguy.sol", status: "For Sale", price: "0.3 SOL", image: "💀", description: "Unfiltered and unhinged. No site, no promises — just vibes" },
         { name: "yournotthatguy.sol", status: "For Sale", price: "0.4 SOL", image: "💀", description: "Unfiltered and unhinged. No site, no promises — just vibes" },
         { name: "inpregneable.sol", status: "For Sale", price: "0.5 SOL", image: "💀", description: "Unfiltered and unhinged. No site, no promises — just vibes" }
       ]
@@ -774,7 +776,9 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/domains" element={<DomainsPage />} />
-        <Route path="/domains/:slug" element={<DomainPage />} />
+        <Route path="/domains/:slug" element={<WikiPage />} />
+        <Route path="/wiki/:slug" element={<WikiPage />} />
+        <Route path="/directory" element={<MallDirectoryPage />} />
         <Route path="/vault" element={<VaultPage />} />
       </Routes>
     </Router>

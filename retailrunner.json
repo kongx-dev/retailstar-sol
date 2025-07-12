@@ -1,0 +1,108 @@
+{
+  "domain": "retailrunner",
+  "avatar": "https://i.imgur.com/YOURWIFHOODIE.png",
+  "description": "Mall automation unit assigned to Retailstar Interchange. Handles lore sync, metadata rotation, and domain reclassification.",
+  "category": "ops",
+  "website": "https://retailstar.sol",
+  "x": "@retailrunner",
+  "email": "retailrunner@proton.me",
+  "loreTasks": [
+    "Update domain avatars and descriptions via SNS",
+    "Reclassify domains into Flash Rack, Mid Tier, or Premium Wing",
+    "Push metadata changes to @retailstarsol via webhook or quote tweet",
+    "Run SNS scripts securely on dev PC using local keypair",
+    "Announce lore shifts (e.g. 'jpegdealer.sol moved from Flash Rack to Mid Tier')",
+    "Execute automated rotation timers based on domain categories"
+  ],
+  "status": "active",
+  "handler": "dev-pc-local",
+  "lastUpdated": "2025-07-11",
+  "rotationTimers": {
+    "flash": 86400000,
+    "mid": 259200000,
+    "premium": 604800000
+  },
+  "domains": [
+    {
+      "name": "jpegdealer",
+      "avatar": "https://i.imgur.com/jpegdealer.png",
+      "description": "The JPEG Dealer's Code - Middleman of JPEG euphoria. Always has 'just one more' rare in stock.",
+      "category": "flash",
+      "status": "active",
+      "lastRotated": "2025-01-11T00:00:00.000Z",
+      "lore": "Once a lowkey plug, now a full-blown middleman of JPEG euphoria. This shop emerged during peak mint season when liquidity was loose and everyone knew a guy."
+    },
+    {
+      "name": "fudscience",
+      "avatar": "https://i.imgur.com/fudscience.png",
+      "description": "The FUD Science Manifesto - Satirical alpha report you read ironically until it hits.",
+      "category": "premium",
+      "status": "active",
+      "lastRotated": "2025-01-04T00:00:00.000Z",
+      "lore": "Born in the FOMO labs of Crypto Twitter, fudscience.sol is the satirical alpha report you read ironically—until it hits."
+    },
+    {
+      "name": "jumpsetradio",
+      "avatar": "https://i.imgur.com/jumpsetradio.png",
+      "description": "The Sonic Kiosk Manifesto - Broadcasting from the neon alleys of Retailstar Mall.",
+      "category": "mid",
+      "status": "active",
+      "lastRotated": "2025-01-08T00:00:00.000Z",
+      "lore": "Broadcasting from the neon alleys of Retailstar Mall, Jumpset Radio is a relic of 90s underground rhythm, wrapped in Solana static."
+    },
+    {
+      "name": "copevendor",
+      "avatar": "https://i.imgur.com/copevendor.png",
+      "description": "The Cope Vendor's Pharmacy - Stocked with hopium pills and false hope like hotcakes.",
+      "category": "flash",
+      "status": "active",
+      "lastRotated": "2025-01-10T00:00:00.000Z",
+      "lore": "In the ruins of high-entry bags, copevendor.sol set up shop. Stocked with hopium pills, Hopeless Opium™ candles, and 'GM will fix it' posters."
+    },
+    {
+      "name": "commandhub",
+      "avatar": "https://i.imgur.com/commandhub.png",
+      "description": "The Command Hub Protocol - Mainframe for deployment, control, and cold precision.",
+      "category": "premium",
+      "status": "active",
+      "lastRotated": "2025-01-04T00:00:00.000Z",
+      "lore": "Deep inside the Retailstar grid, a terminal flickers. The devs who know, know. commandhub.sol isn't just a site—it's the mainframe for deployment."
+    },
+    {
+      "name": "bidgremlin",
+      "avatar": "https://i.imgur.com/bidgremlin.png",
+      "description": "The Bid Gremlin's Den - Where every bid is a gamble and every auction is a story.",
+      "category": "mid",
+      "status": "active",
+      "lastRotated": "2025-01-08T00:00:00.000Z",
+      "lore": "In the shadowy corners of the Retailverse, the Bid Gremlin lurks, waiting for the perfect moment to strike."
+    },
+    {
+      "name": "deploydeck",
+      "avatar": "https://i.imgur.com/deploydeck.png",
+      "description": "The Deploy Deck - Where launches become legends and deployments become destiny.",
+      "category": "flash",
+      "status": "active",
+      "lastRotated": "2025-01-11T00:00:00.000Z",
+      "lore": "Every deployment is a roll of the dice, every launch a leap of faith. The Deploy Deck is where legends are born."
+    },
+    {
+      "name": "rigbuilder",
+      "avatar": "https://i.imgur.com/rigbuilder.png",
+      "description": "The Rig Builder's Workshop - Crafting the tools that power the Retailverse.",
+      "category": "premium",
+      "status": "active",
+      "lastRotated": "2025-01-04T00:00:00.000Z",
+      "lore": "In the depths of the digital forge, the Rig Builder crafts the tools that power the Retailverse."
+    },
+    {
+      "name": "lurkerlife",
+      "avatar": "https://i.imgur.com/lurkerlife.png",
+      "description": "The Lurker Life - Where observation becomes art and patience becomes power.",
+      "category": "mid",
+      "status": "active",
+      "lastRotated": "2025-01-08T00:00:00.000Z",
+      "lore": "Sometimes the best strategy is to watch, wait, and strike when the moment is perfect."
+    }
+  ]
+} 

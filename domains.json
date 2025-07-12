@@ -1,0 +1,73 @@
+{
+  "lastUpdated": "2025-01-11T00:00:00.000Z",
+  "domains": [
+    {
+      "name": "jpegdealer",
+      "category": "flash",
+      "lastRotated": "2025-01-11T00:00:00.000Z",
+      "status": "active"
+    },
+    {
+      "name": "fudscience",
+      "category": "premium",
+      "lastRotated": "2025-01-04T00:00:00.000Z",
+      "status": "active"
+    },
+    {
+      "name": "jumpsetradio",
+      "category": "mid",
+      "lastRotated": "2025-01-08T00:00:00.000Z",
+      "status": "active"
+    },
+    {
+      "name": "copevendor",
+      "category": "flash",
+      "lastRotated": "2025-01-10T00:00:00.000Z",
+      "status": "active"
+    },
+    {
+      "name": "commandhub",
+      "category": "premium",
+      "lastRotated": "2025-01-04T00:00:00.000Z",
+      "status": "active"
+    },
+    {
+      "name": "bidgremlin",
+      "category": "mid",
+      "lastRotated": "2025-01-08T00:00:00.000Z",
+      "status": "active"
+    },
+    {
+      "name": "deploydeck",
+      "category": "flash",
+      "lastRotated": "2025-01-11T00:00:00.000Z",
+      "status": "active"
+    },
+    {
+      "name": "rigbuilder",
+      "category": "premium",
+      "lastRotated": "2025-01-04T00:00:00.000Z",
+      "status": "active"
+    },
+    {
+      "name": "lurkerlife",
+      "category": "mid",
+      "lastRotated": "2025-01-08T00:00:00.000Z",
+      "status": "active"
+    }
+  ],
+  "rotationSchedule": {
+    "flash": {
+      "interval": 86400000,
+      "description": "24 hours"
+    },
+    "mid": {
+      "interval": 259200000,
+      "description": "72 hours"
+    },
+    "premium": {
+      "interval": 604800000,
+      "description": "7 days"
+    }
+  }
+} 

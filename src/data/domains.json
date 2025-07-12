@@ -1,137 +1,1141 @@
 {
-  "flash": [
+  "domains": [
     {
-      "name": "jpegdealer.sol",
+      "name": "retailstar",
+      "slug": "retailstar",
+      "description": "The main Retailstar domain - headquarters of the Retailverse",
+      "image": "🏢",
+      "featured": true,
+      "status": "not_for_sale",
+      "price": "N/A",
+      "category": "headquarters"
+    },
+    {
+      "name": "afterhourslab",
+      "slug": "afterhourslab",
+      "description": "Late night coding sessions and experimental builds",
+      "image": "🌙",
+      "featured": false,
+      "status": "available",
       "price": "8 SOL",
-      "originalPrice": "12 SOL",
-      "description": "NFT resale terminal. Meme-ready.",
-      "keywords": ["NFT", "resale", "meme", "terminal", "Solana"],
-      "creator": "Kong X",
-      "sns": null,
-      "endTime": "2024-12-31T23:59:59Z",
-      "discount": "33% OFF"
+      "category": "mid"
     },
     {
-      "name": "fudscience.sol",
-      "price": "6 SOL",
-      "originalPrice": "10 SOL",
-      "description": "FOMO culture satire.",
-      "keywords": ["satire", "FOMO", "alpha", "web3", "Solana"],
-      "creator": "Kong X",
-      "sns": null,
-      "endTime": "2024-12-31T23:59:59Z",
-      "discount": "40% OFF"
-    },
-    {
-      "name": "jumpsetradio.sol",
+      "name": "aimtraining",
+      "slug": "aimtraining",
+      "description": "Sharpen your skills in the digital arena",
+      "image": "🎯",
+      "featured": false,
+      "status": "available",
       "price": "5 SOL",
-      "originalPrice": "9 SOL",
-      "description": "Gamer x streetwear sonic kiosk.",
-      "keywords": ["radio", "gaming", "vibes", "fashion", "Solana"],
-      "creator": "Kong X",
-      "sns": null,
-      "endTime": "2024-12-31T23:59:59Z",
-      "discount": "44% OFF"
+      "category": "mid"
     },
     {
-      "name": "copevendor.sol",
-      "price": "2 SOL",
-      "originalPrice": "3.5 SOL",
-      "description": "Meme economy shop.",
-      "keywords": ["cope", "meme", "vendor", "shop", "Solana"],
-      "creator": "Kong X",
-      "sns": null,
-      "endTime": "2024-12-31T23:59:59Z",
-      "discount": "43% OFF"
-    },
-    {
-      "name": "commandhub.sol",
-      "price": "2 SOL",
-      "originalPrice": "3.5 SOL",
-      "description": "Infra + AI dashboard.",
-      "keywords": ["infrastructure", "AI", "dashboard", "Solana"],
-      "creator": "Kong X",
-      "sns": null,
-      "endTime": "2024-12-31T23:59:59Z",
-      "discount": "43% OFF"
-    }
-  ],
-  "premium": [
-    {
-      "name": "jpegdealer.sol",
+      "name": "alphastalker",
+      "slug": "alphastalker",
+      "description": "Hunt for the next big alpha leak",
+      "image": "🕵️",
+      "featured": false,
+      "status": "available",
       "price": "12 SOL",
-      "description": "NFT resale terminal. Meme-ready.",
-      "keywords": ["NFT", "resale", "meme", "terminal", "Solana"],
-      "creator": "Kong X",
-      "sns": null
+      "category": "premium"
     },
     {
-      "name": "fudscience.sol",
+      "name": "alphatracker",
+      "slug": "alphatracker",
+      "description": "Track and analyze alpha movements",
+      "image": "📊",
+      "featured": false,
+      "status": "available",
       "price": "10 SOL",
-      "description": "FOMO culture satire.",
-      "keywords": ["satire", "FOMO", "alpha", "web3", "Solana"],
-      "creator": "Kong X",
-      "sns": null
+      "category": "premium"
     },
     {
-      "name": "jumpsetradio.sol",
+      "name": "bagcultist",
+      "slug": "bagcultist",
+      "description": "For those who hold through the darkest times",
+      "image": "💼",
+      "featured": false,
+      "status": "available",
+      "price": "6 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "bagholderfund",
+      "slug": "bagholderfund",
+      "description": "Support group for the strongest hands",
+      "image": "💎",
+      "featured": false,
+      "status": "available",
+      "price": "7 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "battlehub",
+      "slug": "battlehub",
+      "description": "Where warriors gather to test their mettle",
+      "image": "⚔️",
+      "featured": false,
+      "status": "available",
       "price": "9 SOL",
-      "description": "Gamer x streetwear sonic kiosk.",
-      "keywords": ["radio", "gaming", "vibes", "fashion", "Solana"],
-      "creator": "Kong X",
-      "sns": null
-    }
-  ],
-  "mid": [
-    {
-      "name": "copevendor.sol",
-      "price": "3.5 SOL",
-      "description": "Meme economy shop.",
-      "keywords": ["cope", "meme", "vendor", "shop", "Solana"],
-      "creator": "Kong X",
-      "sns": null
+      "category": "premium"
     },
     {
-      "name": "commandhub.sol",
-      "price": "3.5 SOL",
-      "description": "Infra + AI dashboard.",
-      "keywords": ["infrastructure", "AI", "dashboard", "Solana"],
-      "creator": "Kong X",
-      "sns": null
-    },
-    {
-      "name": "lurkerlife.sol",
+      "name": "bidgremlin",
+      "slug": "bidgremlin",
+      "description": "Auction monster lurking in the shadows",
+      "image": "👹",
+      "featured": false,
+      "status": "available",
       "price": "3 SOL",
-      "description": "For the quiet sniper.",
-      "keywords": ["lurker", "memes", "sniper", "culture", "Solana"],
-      "creator": "Kong X",
-      "sns": null
-    }
-  ],
-  "quickSnags": [
-    {
-      "name": "rigbuilder.sol",
-      "price": "1 SOL",
-      "description": "Builder-ready shell.",
-      "keywords": ["builder", "infra", "terminal", "Solana"],
-      "creator": "Kong X",
-      "sns": "https://www.sns.id/search/single?search=rigbuilder"
+      "category": "flash",
+      "hasWebsite": true
     },
     {
-      "name": "bidgremlin.sol",
-      "price": "0.89 SOL",
-      "description": "Auction monster.",
-      "keywords": ["auction", "gremlin", "bidding", "memecoin", "Solana"],
-      "creator": "Kong X",
-      "sns": "https://sns.domains/name/bidgremlin.sol"
+      "name": "biggestofbrains",
+      "slug": "biggestofbrains",
+      "description": "For the galaxy brain plays",
+      "image": "🧠",
+      "featured": false,
+      "status": "available",
+      "price": "15 SOL",
+      "category": "premium",
+      "hasLore": true,
+      "hasWebsite": true
     },
     {
-      "name": "deploydeck.sol",
+      "name": "clicktopump",
+      "slug": "clicktopump",
+      "description": "One click away from the moon",
+      "image": "🚀",
+      "featured": false,
+      "status": "available",
+      "price": "8 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "cloutfarming",
+      "slug": "cloutfarming",
+      "description": "Grow your influence in the digital fields",
+      "image": "🌾",
+      "featured": false,
+      "status": "available",
+      "price": "6 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "codepastdark",
+      "slug": "codepastdark",
+      "description": "Coding sessions that never end",
+      "image": "🌃",
+      "featured": false,
+      "status": "available",
+      "price": "7 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "commandhub",
+      "slug": "commandhub",
+      "description": "Infrastructure and AI dashboard",
+      "image": "🔧",
+      "featured": false,
+      "status": "available",
+      "price": "4 SOL",
+      "category": "mid",
+      "hasLore": true,
+      "hasWebsite": true
+    },
+    {
+      "name": "commandvault",
+      "slug": "commandvault",
+      "description": "Secure storage for your digital assets",
+      "image": "🗄️",
+      "featured": false,
+      "status": "available",
+      "price": "11 SOL",
+      "category": "premium"
+    },
+    {
+      "name": "configportal",
+      "slug": "configportal",
+      "description": "Gateway to infinite configurations",
+      "image": "⚙️",
+      "featured": false,
+      "status": "available",
+      "price": "9 SOL",
+      "category": "premium"
+    },
+    {
+      "name": "controlcenter",
+      "slug": "controlcenter",
+      "description": "Central command for your operations",
+      "image": "🎮",
+      "featured": false,
+      "status": "available",
+      "price": "12 SOL",
+      "category": "premium"
+    },
+    {
+      "name": "controldock",
+      "slug": "controldock",
+      "description": "Docking station for control systems",
+      "image": "🛸",
+      "featured": false,
+      "status": "available",
+      "price": "8 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "copevendor",
+      "slug": "copevendor",
+      "description": "Meme economy shop for the masses",
+      "image": "💊",
+      "featured": false,
+      "status": "available",
+      "price": "3 SOL",
+      "category": "flash",
+      "hasLore": true,
+      "hasWebsite": true
+    },
+    {
+      "name": "deploydeck",
+      "slug": "deploydeck",
+      "description": "Launchpad-ready deployment platform",
+      "image": "🚀",
+      "featured": false,
+      "status": "available",
+      "price": "5 SOL",
+      "category": "flash",
+      "hasWebsite": true
+    },
+    {
+      "name": "deploydock",
+      "slug": "deploydock",
+      "description": "Docking station for deployments",
+      "image": "⚓",
+      "featured": false,
+      "status": "available",
+      "price": "6 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "dojoquest",
+      "slug": "dojoquest",
+      "description": "Master the art of digital combat",
+      "image": "🏯",
+      "featured": false,
+      "status": "available",
+      "price": "7 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "dreadprotocol",
+      "slug": "dreadprotocol",
+      "description": "Fear-based consensus mechanism",
+      "image": "😱",
+      "featured": false,
+      "status": "available",
+      "price": "10 SOL",
+      "category": "premium"
+    },
+    {
+      "name": "dripdealer",
+      "slug": "dripdealer",
+      "description": "Fashion-forward digital marketplace",
+      "image": "👕",
+      "featured": false,
+      "status": "available",
+      "price": "8 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "dripprovider",
+      "slug": "dripprovider",
+      "description": "Supply chain for digital drip",
+      "image": "💧",
+      "featured": false,
+      "status": "available",
+      "price": "9 SOL",
+      "category": "premium"
+    },
+    {
+      "name": "exitprotocol",
+      "slug": "exitprotocol",
+      "description": "Graceful exit strategies for projects",
+      "image": "🚪",
+      "featured": false,
+      "status": "available",
+      "price": "11 SOL",
+      "category": "premium"
+    },
+    {
+      "name": "fudscience",
+      "slug": "fudscience",
+      "description": "FOMO culture satire and research",
+      "image": "🧪",
+      "featured": false,
+      "status": "available",
+      "price": "10 SOL",
+      "category": "premium",
+      "hasLore": true,
+      "hasWebsite": true
+    },
+    {
+      "name": "getgoodkid",
+      "slug": "getgoodkid",
+      "description": "Improvement through digital mastery",
+      "image": "📈",
+      "featured": false,
+      "status": "available",
+      "price": "6 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "gg2ez",
+      "slug": "gg2ez",
+      "description": "Good game, too easy - victory lap",
+      "image": "🏆",
+      "featured": false,
+      "status": "available",
+      "price": "5 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "ghostrunner",
+      "slug": "ghostrunner",
+      "description": "Stealth operations in the digital realm",
+      "image": "👻",
+      "featured": false,
+      "status": "available",
+      "price": "8 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "ghostshift",
+      "slug": "ghostshift",
+      "description": "Phantom-like transitions and movements",
+      "image": "👻",
+      "featured": false,
+      "status": "available",
+      "price": "7 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "gorillatech",
+      "slug": "gorillatech",
+      "description": "Primate-powered technology solutions",
+      "image": "🦍",
+      "featured": false,
+      "status": "not_for_sale",
+      "price": "N/A",
+      "category": "lore"
+    },
+    {
+      "name": "grindprotocol",
+      "slug": "grindprotocol",
+      "description": "Consensus through relentless effort",
+      "image": "⚙️",
+      "featured": false,
+      "status": "available",
+      "price": "8 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "headempty",
+      "slug": "headempty",
+      "description": "No thoughts, just vibes",
+      "image": "🤯",
+      "featured": false,
+      "status": "available",
+      "price": "4 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "holdtheline",
+      "slug": "holdtheline",
+      "description": "Defensive position against market forces",
+      "image": "🛡️",
+      "featured": false,
+      "status": "available",
+      "price": "6 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "hoodiedrip",
+      "slug": "hoodiedrip",
+      "description": "Streetwear meets digital culture",
+      "image": "🧥",
+      "featured": false,
+      "status": "available",
+      "price": "7 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "hoodiehq",
+      "slug": "hoodiehq",
+      "description": "Headquarters for hoodie culture",
+      "image": "🏢",
+      "featured": false,
+      "status": "available",
+      "price": "8 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "hoodieverse",
+      "slug": "hoodieverse",
+      "description": "Entire universe of hoodie culture",
+      "image": "🌌",
+      "featured": false,
+      "status": "available",
+      "price": "12 SOL",
+      "category": "premium"
+    },
+    {
+      "name": "imagecraft",
+      "slug": "imagecraft",
+      "description": "Crafting digital imagery and art",
+      "image": "🎨",
+      "featured": false,
+      "status": "available",
+      "price": "9 SOL",
+      "category": "premium"
+    },
+    {
+      "name": "imaginacion",
+      "slug": "imaginacion",
+      "description": "Spanish imagination and creativity",
+      "image": "💭",
+      "featured": false,
+      "status": "available",
+      "price": "6 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "inpregneable",
+      "slug": "inpregneable",
+      "description": "Impenetrable digital fortress",
+      "image": "🛡️",
+      "featured": false,
+      "status": "available",
+      "price": "10 SOL",
+      "category": "premium"
+    },
+    {
+      "name": "internetkarma",
+      "slug": "internetkarma",
+      "description": "Digital karma and reputation system",
+      "image": "☯️",
+      "featured": false,
+      "status": "available",
+      "price": "8 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "itsgone",
+      "slug": "itsgone",
+      "description": "Acceptance of digital loss",
+      "image": "💨",
+      "featured": false,
+      "status": "available",
+      "price": "5 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "jetsetradio",
+      "slug": "jetsetradio",
+      "description": "Broadcasting vibes from the loudest corner",
+      "image": "🎮",
+      "featured": false,
+      "status": "available",
+      "price": "9 SOL",
+      "category": "premium"
+    },
+    {
+      "name": "johnnysilverhand",
+      "slug": "johnnysilverhand",
+      "description": "Cyberpunk legend and digital rebel",
+      "image": "🤘",
+      "featured": false,
+      "status": "available",
+      "price": "15 SOL",
+      "category": "premium"
+    },
+    {
+      "name": "jpegdealer",
+      "slug": "jpegdealer",
+      "description": "NFT resale terminal for flippers",
+      "image": "🖼️",
+      "featured": false,
+      "status": "available",
+      "price": "12 SOL",
+      "category": "flash",
+      "hasLore": true,
+      "hasWebsite": true
+    },
+    {
+      "name": "jumpsetradio",
+      "slug": "jumpsetradio",
+      "description": "Gamer x streetwear sonic kiosk",
+      "image": "🎮",
+      "featured": false,
+      "status": "available",
+      "price": "9 SOL",
+      "category": "mid",
+      "hasLore": true,
+      "hasWebsite": true
+    },
+    {
+      "name": "kombat",
+      "slug": "kombat",
+      "description": "Digital combat arena",
+      "image": "🥊",
+      "featured": false,
+      "status": "available",
+      "price": "8 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "latenightdev",
+      "slug": "latenightdev",
+      "description": "Development sessions under moonlight",
+      "image": "🌙",
+      "featured": false,
+      "status": "available",
+      "price": "7 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "loungeprotocol",
+      "slug": "loungeprotocol",
+      "description": "Relaxed consensus in comfortable settings",
+      "image": "🛋️",
+      "featured": false,
+      "status": "available",
+      "price": "6 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "lurkerlife",
+      "slug": "lurkerlife",
+      "description": "For the quiet sniper in the shadows",
+      "image": "👁️",
+      "featured": false,
+      "status": "available",
+      "price": "3 SOL",
+      "category": "mid",
+      "hasWebsite": true
+    },
+    {
+      "name": "maidenless",
+      "slug": "maidenless",
+      "description": "Solo journey through digital realms",
+      "image": "💔",
+      "featured": false,
+      "status": "available",
+      "price": "5 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "mallprotocol",
+      "slug": "mallprotocol",
+      "description": "Shopping center consensus mechanism",
+      "image": "🏬",
+      "featured": false,
+      "status": "not_for_sale",
+      "price": "N/A",
+      "category": "lore"
+    },
+    {
+      "name": "marksmanhub",
+      "slug": "marksmanhub",
+      "description": "Precision targeting and accuracy training",
+      "image": "🎯",
+      "featured": false,
+      "status": "available",
+      "price": "8 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "midnightcoder",
+      "slug": "midnightcoder",
+      "description": "Coding in the darkest hours",
+      "image": "🌃",
+      "featured": false,
+      "status": "available",
+      "price": "7 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "midnighthustle",
+      "slug": "midnighthustle",
+      "description": "Late night grind and hustle",
+      "image": "💪",
+      "featured": false,
+      "status": "available",
+      "price": "6 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "mindflow",
+      "slug": "mindflow",
+      "description": "Stream of consciousness and ideas",
+      "image": "🧠",
+      "featured": false,
+      "status": "available",
+      "price": "8 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "momentoftruth",
+      "slug": "momentoftruth",
+      "description": "Revelation and decisive moments",
+      "image": "⚡",
+      "featured": false,
+      "status": "available",
+      "price": "10 SOL",
+      "category": "premium"
+    },
+    {
+      "name": "neverhooded",
+      "slug": "neverhooded",
+      "description": "Always exposed, never hidden",
+      "image": "👤",
+      "featured": false,
+      "status": "available",
+      "price": "5 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "nightprotocol",
+      "slug": "nightprotocol",
+      "description": "Consensus under cover of darkness",
+      "image": "🌙",
+      "featured": false,
+      "status": "available",
+      "price": "8 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "nightterminal",
+      "slug": "nightterminal",
+      "description": "Command line interface for the night",
+      "image": "💻",
+      "featured": false,
+      "status": "available",
+      "price": "7 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "ninjachain",
+      "slug": "ninjachain",
+      "description": "Stealth blockchain operations",
+      "image": "🥷",
+      "featured": false,
+      "status": "available",
+      "price": "9 SOL",
+      "category": "premium"
+    },
+    {
+      "name": "noaura",
+      "slug": "noaura",
+      "description": "Pure essence without external influence",
+      "image": "✨",
+      "featured": false,
+      "status": "available",
+      "price": "6 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "nocturnalcodes",
+      "slug": "nocturnalcodes",
+      "description": "Programming in the night hours",
+      "image": "🌙",
+      "featured": false,
+      "status": "available",
+      "price": "7 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "nodefinder",
+      "slug": "nodefinder",
+      "description": "Discovery and location of network nodes",
+      "image": "🔍",
+      "featured": false,
+      "status": "available",
+      "price": "8 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "nodehunter",
+      "slug": "nodehunter",
+      "description": "Tracking and hunting network nodes",
+      "image": "🏹",
+      "featured": false,
+      "status": "available",
+      "price": "9 SOL",
+      "category": "premium"
+    },
+    {
+      "name": "noloot",
+      "slug": "noloot",
+      "description": "Empty-handed adventures",
+      "image": "💀",
+      "featured": false,
+      "status": "available",
+      "price": "4 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "nosauce",
+      "slug": "nosauce",
+      "description": "Plain and simple, no extras",
+      "image": "🍝",
+      "featured": false,
+      "status": "available",
+      "price": "3 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "noskill",
+      "slug": "noskill",
+      "description": "Embracing the unskilled journey",
+      "image": "🤷",
+      "featured": false,
+      "status": "available",
+      "price": "4 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "notalpha",
+      "slug": "notalpha",
+      "description": "Rejecting the alpha mindset",
+      "image": "🚫",
+      "featured": false,
+      "status": "available",
+      "price": "5 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "paymyinterns",
+      "slug": "paymyinterns",
+      "description": "Fair compensation for digital labor",
+      "image": "💰",
+      "featured": false,
+      "status": "not_for_sale",
+      "price": "N/A",
+      "category": "lore"
+    },
+    {
+      "name": "pingstation",
+      "slug": "pingstation",
+      "description": "Network connectivity monitoring hub",
+      "image": "📡",
+      "featured": false,
+      "status": "not_for_sale",
+      "price": "N/A",
+      "category": "lore"
+    },
+    {
+      "name": "pistola",
+      "slug": "pistola",
+      "description": "Mexican cowboy-themed meme site",
+      "image": "🔫",
+      "featured": false,
+      "status": "available",
+      "price": "8 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "pushsignal",
+      "slug": "pushsignal",
+      "description": "Broadcasting urgent messages",
+      "image": "📢",
+      "featured": false,
+      "status": "available",
+      "price": "6 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "raidprotocol",
+      "slug": "raidprotocol",
+      "description": "Coordinated attack consensus",
+      "image": "⚔️",
+      "featured": false,
+      "status": "not_for_sale",
+      "price": "N/A",
+      "category": "lore"
+    },
+    {
+      "name": "rektlog",
+      "slug": "rektlog",
+      "description": "Documentation of digital destruction",
+      "image": "📝",
+      "featured": false,
+      "status": "not_for_sale",
+      "price": "N/A",
+      "category": "lore"
+    },
+    {
+      "name": "rektworthy",
+      "slug": "rektworthy",
+      "description": "Deserving of digital destruction",
+      "image": "💥",
+      "featured": false,
+      "status": "available",
+      "price": "6 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "remixed",
+      "slug": "remixed",
+      "description": "Reimagined and reconstructed content",
+      "image": "🎵",
+      "featured": false,
+      "status": "available",
+      "price": "7 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "retailrunner",
+      "slug": "retailrunner",
+      "description": "Fast-paced retail operations",
+      "image": "🏃",
+      "featured": false,
+      "status": "not_for_sale",
+      "price": "N/A",
+      "category": "lore"
+    },
+    {
+      "name": "retailverse",
+      "slug": "retailverse",
+      "description": "Entire universe of retail operations",
+      "image": "🌌",
+      "featured": false,
+      "status": "not_for_sale",
+      "price": "N/A",
+      "category": "lore",
+      "hasLore": true
+    },
+    {
+      "name": "rigbuilder",
+      "slug": "rigbuilder",
+      "description": "Builder-ready shell for custom builds",
+      "image": "⚡",
+      "featured": false,
+      "status": "available",
       "price": "2 SOL",
-      "description": "Launchpad-ready.",
-      "keywords": ["launchpad", "tooling", "build", "Solana"],
-      "creator": "Kong X",
-      "sns": "https://sns.domains/name/deploydeck.sol"
+      "category": "mid",
+      "hasWebsite": true
+    },
+    {
+      "name": "scrollmage",
+      "slug": "scrollmage",
+      "description": "Magical scroll and document handling",
+      "image": "📜",
+      "featured": false,
+      "status": "available",
+      "price": "8 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "signalcontrol",
+      "slug": "signalcontrol",
+      "description": "Master control for all signals",
+      "image": "🎛️",
+      "featured": false,
+      "status": "available",
+      "price": "10 SOL",
+      "category": "premium"
+    },
+    {
+      "name": "sk8culture",
+      "slug": "sk8culture",
+      "description": "Skateboarding culture and community",
+      "image": "🛹",
+      "featured": false,
+      "status": "available",
+      "price": "7 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "smoothestbrain",
+      "slug": "smoothestbrain",
+      "description": "Ultra-smooth cognitive operations",
+      "image": "🧠",
+      "featured": false,
+      "status": "available",
+      "price": "9 SOL",
+      "category": "premium"
+    },
+    {
+      "name": "sniperguru",
+      "slug": "sniperguru",
+      "description": "Master of precision targeting",
+      "image": "🎯",
+      "featured": false,
+      "status": "available",
+      "price": "8 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "stayfud",
+      "slug": "stayfud",
+      "description": "Maintaining fear, uncertainty, and doubt",
+      "image": "😰",
+      "featured": false,
+      "status": "available",
+      "price": "5 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "tdbagchaser",
+      "slug": "tdbagchaser",
+      "description": "Chasing the biggest bags",
+      "image": "💼",
+      "featured": false,
+      "status": "available",
+      "price": "6 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "thisaintit",
+      "slug": "thisaintit",
+      "description": "Rejection of current state",
+      "image": "❌",
+      "featured": false,
+      "status": "available",
+      "price": "4 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "trackalpha",
+      "slug": "trackalpha",
+      "description": "Tracking alpha movements and signals",
+      "image": "📊",
+      "featured": false,
+      "status": "available",
+      "price": "11 SOL",
+      "category": "premium"
+    },
+    {
+      "name": "traitlocked",
+      "slug": "traitlocked",
+      "description": "Locked traits and characteristics",
+      "image": "🔒",
+      "featured": false,
+      "status": "available",
+      "price": "7 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "unrelenting",
+      "slug": "unrelenting",
+      "description": "Never giving up, never surrendering",
+      "image": "💪",
+      "featured": false,
+      "status": "available",
+      "price": "8 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "uplinknode",
+      "slug": "uplinknode",
+      "description": "Connection point for uplink operations",
+      "image": "🔗",
+      "featured": false,
+      "status": "not_for_sale",
+      "price": "N/A",
+      "category": "lore"
+    },
+    {
+      "name": "uploadstation",
+      "slug": "uploadstation",
+      "description": "Central hub for data uploads",
+      "image": "📤",
+      "featured": false,
+      "status": "available",
+      "price": "8 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "urnotthatguy",
+      "slug": "urnotthatguy",
+      "description": "You're not that guy, pal",
+      "image": "😎",
+      "featured": false,
+      "status": "available",
+      "price": "5 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "beckerprotocol",
+      "slug": "beckerprotocol",
+      "description": "Protocol for the early adopters and alpha seekers",
+      "image": "🔬",
+      "featured": false,
+      "status": "available",
+      "price": "8 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "broimearly",
+      "slug": "broimearly",
+      "description": "For those who get in before the crowd",
+      "image": "⚡",
+      "featured": false,
+      "status": "available",
+      "price": "6 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "coinbureaus",
+      "slug": "coinbureaus",
+      "description": "Bureau of coin investigations and analysis",
+      "image": "🏛️",
+      "featured": false,
+      "status": "available",
+      "price": "9 SOL",
+      "category": "premium"
+    },
+    {
+      "name": "copthisbro",
+      "slug": "copthisbro",
+      "description": "Bro, you need to cop this immediately",
+      "image": "🔥",
+      "featured": false,
+      "status": "available",
+      "price": "4 SOL",
+      "category": "flash"
+    },
+    {
+      "name": "gonnabuildsoon",
+      "slug": "gonnabuildsoon",
+      "description": "Development promises and future projects",
+      "image": "🚧",
+      "featured": false,
+      "status": "available",
+      "price": "5 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "imstillcoping",
+      "slug": "imstillcoping",
+      "description": "The eternal state of coping with losses",
+      "image": "😅",
+      "featured": false,
+      "status": "available",
+      "price": "3 SOL",
+      "category": "flash"
+    },
+    {
+      "name": "itspremiumbro",
+      "slug": "itspremiumbro",
+      "description": "Premium quality, bro - nothing but the best",
+      "image": "💎",
+      "featured": false,
+      "status": "available",
+      "price": "12 SOL",
+      "category": "premium"
+    },
+    {
+      "name": "justmissed",
+      "slug": "justmissed",
+      "description": "The story of every missed opportunity",
+      "image": "😔",
+      "featured": false,
+      "status": "available",
+      "price": "4 SOL",
+      "category": "flash"
+    },
+    {
+      "name": "lowballking",
+      "slug": "lowballking",
+      "description": "Master of the lowball offer game",
+      "image": "👑",
+      "featured": false,
+      "status": "available",
+      "price": "7 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "metablessed",
+      "slug": "metablessed",
+      "description": "Blessed by the meta, favored by the algorithm",
+      "image": "🙏",
+      "featured": false,
+      "status": "available",
+      "price": "10 SOL",
+      "category": "premium"
+    },
+    {
+      "name": "missedpricedaf",
+      "slug": "missedpricedaf",
+      "description": "When you miss the perfect price entry",
+      "image": "💸",
+      "featured": false,
+      "status": "available",
+      "price": "5 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "registrygrifter",
+      "slug": "registrygrifter",
+      "description": "The art of registry manipulation and grifting",
+      "image": "🎭",
+      "featured": false,
+      "status": "available",
+      "price": "8 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "soldfortaxes",
+      "slug": "soldfortaxes",
+      "description": "The classic tax season sell-off story",
+      "image": "💰",
+      "featured": false,
+      "status": "available",
+      "price": "6 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "trustthemeta",
+      "slug": "trustthemeta",
+      "description": "Trust in the meta, believe in the process",
+      "image": "🤝",
+      "featured": false,
+      "status": "available",
+      "price": "9 SOL",
+      "category": "premium"
+    },
+    {
+      "name": "verifiedsoon",
+      "slug": "verifiedsoon",
+      "description": "Verification status coming soon to a profile near you",
+      "image": "✅",
+      "featured": false,
+      "status": "available",
+      "price": "7 SOL",
+      "category": "mid"
+    },
+    {
+      "name": "whogaveyouthat",
+      "slug": "whogaveyouthat",
+      "description": "Questioning the source of your information",
+      "image": "🤔",
+      "featured": false,
+      "status": "available",
+      "price": "4 SOL",
+      "category": "flash"
+    },
+    {
+      "name": "wordisbond",
+      "slug": "wordisbond",
+      "description": "Your word is your bond in the digital realm",
+      "image": "🤙",
+      "featured": false,
+      "status": "available",
+      "price": "8 SOL",
+      "category": "mid"
     }
   ]
 } 

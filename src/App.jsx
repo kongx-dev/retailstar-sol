@@ -4,6 +4,13 @@ import rsLogo from './assets/rs-logo.png';
 import retailstarBody from './assets/retailstar-body.png';
 import jpegdealerImage from './assets/jpegdealer.png';
 import fudscientistImage from './assets/fudscientist.png';
+import jumpsetradioImage from './assets/jumpsetradio.png';
+import copevendorImage from './assets/copevendor.png';
+import lurkerlifeImage from './assets/lurkerlife.png';
+import commandhubImage from './assets/commandhub.png';
+import rigbuilderImage from './assets/rigbuilder.png';
+import bidgremlinImage from './assets/bidgremlin.png';
+import deploydeckImage from './assets/deploydeck.png';
 import DomainsPage from './pages/DomainsPage';
 import DomainPage from './pages/DomainPage';
 import VaultPage from './pages/VaultPage';
@@ -91,6 +98,62 @@ function App() {
         <img 
           src={fudscientistImage} 
           alt="fudscience.sol" 
+          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
+        />
+      );
+    } else if (domainName === "jumpsetradio.sol") {
+      return (
+        <img 
+          src={jumpsetradioImage} 
+          alt="jumpsetradio.sol" 
+          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
+        />
+      );
+    } else if (domainName === "copevendor.sol") {
+      return (
+        <img 
+          src={copevendorImage} 
+          alt="copevendor.sol" 
+          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
+        />
+      );
+    } else if (domainName === "lurkerlife.sol") {
+      return (
+        <img 
+          src={lurkerlifeImage} 
+          alt="lurkerlife.sol" 
+          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
+        />
+      );
+    } else if (domainName === "commandhub.sol") {
+      return (
+        <img 
+          src={commandhubImage} 
+          alt="commandhub.sol" 
+          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
+        />
+      );
+    } else if (domainName === "rigbuilder.sol") {
+      return (
+        <img 
+          src={rigbuilderImage} 
+          alt="rigbuilder.sol" 
+          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
+        />
+      );
+    } else if (domainName === "bidgremlin.sol") {
+      return (
+        <img 
+          src={bidgremlinImage} 
+          alt="bidgremlin.sol" 
+          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
+        />
+      );
+    } else if (domainName === "deploydeck.sol") {
+      return (
+        <img 
+          src={deploydeckImage} 
+          alt="deploydeck.sol" 
           className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
         />
       );

@@ -4,13 +4,6 @@ import rsLogo from './assets/rs-logo.png';
 import retailstarBody from './assets/retailstar-body.png';
 import jpegdealerImage from './assets/jpegdealer.png';
 import fudscientistImage from './assets/fudscientist.png';
-import jumpsetradioImage from './assets/jumpsetradio.png';
-import copevendorImage from './assets/copevendor.png';
-import lurkerlifeImage from './assets/lurkerlife.png';
-import commandhubImage from './assets/commandhub.png';
-import deploydeckImage from './assets/deploydeck.png';
-import rigbuilderImage from './assets/rigbuilder.png';
-import bidgremlinImage from './assets/bidgremlin.png';
 import DomainsPage from './pages/DomainsPage';
 import DomainPage from './pages/DomainPage';
 import VaultPage from './pages/VaultPage';
@@ -83,6 +76,29 @@ function App() {
     }
   };
 
+  // Helper function to render domain image
+  const renderDomainImage = (domainName, fallbackEmoji) => {
+    if (domainName === "jpegdealer.sol") {
+      return (
+        <img 
+          src={jpegdealerImage} 
+          alt="jpegdealer.sol" 
+          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
+        />
+      );
+    } else if (domainName === "fudscience.sol") {
+      return (
+        <img 
+          src={fudscientistImage} 
+          alt="fudscience.sol" 
+          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
+        />
+      );
+    } else {
+      return <span className="text-4xl">{fallbackEmoji}</span>;
+    }
+  };
+
   const HomePage = () => (
     <div className="min-h-screen text-white relative overflow-hidden">
       {/* Background image at 50% opacity */}
@@ -127,8 +143,8 @@ function App() {
                   <div className="flex items-center space-x-2">
                     <div className="w-8 h-8 bg-blue-500/20 border border-blue-500/30 rounded flex items-center justify-center">
                       <img 
-                        src={rigbuilderImage} 
-                        alt="rigbuilder.sol" 
+                        src={jpegdealerImage} 
+                        alt="jpegdealer.sol" 
                         className="w-6 h-6 rounded object-cover"
                       />
                     </div>
@@ -163,63 +179,7 @@ function App() {
                   >
                     {/* Domain Image */}
                     <div className="text-3xl sm:text-4xl text-center mb-4">
-                      {domain.name === "jpegdealer.sol" ? (
-                        <img 
-                          src={jpegdealerImage} 
-                          alt="jpegdealer.sol" 
-                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
-                        />
-                      ) : domain.name === "fudscience.sol" ? (
-                        <img 
-                          src={fudscientistImage} 
-                          alt="fudscience.sol" 
-                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
-                        />
-                      ) : domain.name === "jumpsetradio.sol" ? (
-                        <img 
-                          src={jumpsetradioImage} 
-                          alt="jumpsetradio.sol" 
-                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
-                        />
-                      ) : domain.name === "copevendor.sol" ? (
-                        <img 
-                          src={copevendorImage} 
-                          alt="copevendor.sol" 
-                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
-                        />
-                      ) : domain.name === "lurkerlife.sol" ? (
-                        <img 
-                          src={lurkerlifeImage} 
-                          alt="lurkerlife.sol" 
-                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
-                        />
-                      ) : domain.name === "commandhub.sol" ? (
-                        <img 
-                          src={commandhubImage} 
-                          alt="commandhub.sol" 
-                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
-                        />
-                      ) : domain.name === "deploydeck.sol" ? (
-                        <img 
-                          src={deploydeckImage} 
-                          alt="deploydeck.sol" 
-                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
-                        />
-                      ) : domain.name === "rigbuilder.sol" ? (
-                        <img 
-                          src={rigbuilderImage} 
-                          alt="rigbuilder.sol" 
-                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
-                        />
-                      ) : domain.name === "bidgremlin.sol" ? (
-                        <img 
-                          src={bidgremlinImage} 
-                          alt="bidgremlin.sol" 
-                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
-                        />
-                      ) : (
-                        domain.image
-                      )}
+                      {renderDomainImage(domain.name, domain.image)}
                     </div>
                     
                     {/* Domain Name */}
@@ -315,63 +275,7 @@ function App() {
                   >
                     {/* Domain Image */}
                     <div className="text-3xl sm:text-4xl text-center mb-4">
-                      {domain.name === "jpegdealer.sol" ? (
-                        <img 
-                          src={jpegdealerImage} 
-                          alt="jpegdealer.sol" 
-                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
-                        />
-                      ) : domain.name === "fudscience.sol" ? (
-                        <img 
-                          src={fudscientistImage} 
-                          alt="fudscience.sol" 
-                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
-                        />
-                      ) : domain.name === "jumpsetradio.sol" ? (
-                        <img 
-                          src={jumpsetradioImage} 
-                          alt="jumpsetradio.sol" 
-                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
-                        />
-                      ) : domain.name === "copevendor.sol" ? (
-                        <img 
-                          src={copevendorImage} 
-                          alt="copevendor.sol" 
-                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
-                        />
-                      ) : domain.name === "lurkerlife.sol" ? (
-                        <img 
-                          src={lurkerlifeImage} 
-                          alt="lurkerlife.sol" 
-                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
-                        />
-                      ) : domain.name === "commandhub.sol" ? (
-                        <img 
-                          src={commandhubImage} 
-                          alt="commandhub.sol" 
-                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
-                        />
-                      ) : domain.name === "deploydeck.sol" ? (
-                        <img 
-                          src={deploydeckImage} 
-                          alt="deploydeck.sol" 
-                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
-                        />
-                      ) : domain.name === "rigbuilder.sol" ? (
-                        <img 
-                          src={rigbuilderImage} 
-                          alt="rigbuilder.sol" 
-                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
-                        />
-                      ) : domain.name === "bidgremlin.sol" ? (
-                        <img 
-                          src={bidgremlinImage} 
-                          alt="bidgremlin.sol" 
-                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
-                        />
-                      ) : (
-                        domain.image
-                      )}
+                      {renderDomainImage(domain.name, domain.image)}
                     </div>
                     
                     {/* Domain Name */}
@@ -453,8 +357,6 @@ function App() {
               </div>
             </div>
 
-
-
             {/* Quick Snags */}
             <div className="mb-16">
               <h2 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-center solana-gradient flicker-solana">
@@ -469,63 +371,7 @@ function App() {
                   >
                     {/* Domain Image */}
                     <div className="text-3xl sm:text-4xl text-center mb-4">
-                      {domain.name === "jpegdealer.sol" ? (
-                        <img 
-                          src={jpegdealerImage} 
-                          alt="jpegdealer.sol" 
-                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
-                        />
-                      ) : domain.name === "fudscience.sol" ? (
-                        <img 
-                          src={fudscientistImage} 
-                          alt="fudscience.sol" 
-                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
-                        />
-                      ) : domain.name === "jumpsetradio.sol" ? (
-                        <img 
-                          src={jumpsetradioImage} 
-                          alt="jumpsetradio.sol" 
-                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
-                        />
-                      ) : domain.name === "copevendor.sol" ? (
-                        <img 
-                          src={copevendorImage} 
-                          alt="copevendor.sol" 
-                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
-                        />
-                      ) : domain.name === "lurkerlife.sol" ? (
-                        <img 
-                          src={lurkerlifeImage} 
-                          alt="lurkerlife.sol" 
-                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
-                        />
-                      ) : domain.name === "commandhub.sol" ? (
-                        <img 
-                          src={commandhubImage} 
-                          alt="commandhub.sol" 
-                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
-                        />
-                      ) : domain.name === "deploydeck.sol" ? (
-                        <img 
-                          src={deploydeckImage} 
-                          alt="deploydeck.sol" 
-                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
-                        />
-                      ) : domain.name === "rigbuilder.sol" ? (
-                        <img 
-                          src={rigbuilderImage} 
-                          alt="rigbuilder.sol" 
-                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
-                        />
-                      ) : domain.name === "bidgremlin.sol" ? (
-                        <img 
-                          src={bidgremlinImage} 
-                          alt="bidgremlin.sol" 
-                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
-                        />
-                      ) : (
-                        domain.image
-                      )}
+                      {renderDomainImage(domain.name, domain.image)}
                     </div>
                     
                     {/* Domain Name */}
@@ -632,63 +478,7 @@ function App() {
                   >
                     {/* Domain Image */}
                     <div className="text-3xl sm:text-4xl text-center mb-4">
-                      {domain.name === "jpegdealer.sol" ? (
-                        <img 
-                          src={jpegdealerImage} 
-                          alt="jpegdealer.sol" 
-                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
-                        />
-                      ) : domain.name === "fudscience.sol" ? (
-                        <img 
-                          src={fudscientistImage} 
-                          alt="fudscience.sol" 
-                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
-                        />
-                      ) : domain.name === "jumpsetradio.sol" ? (
-                        <img 
-                          src={jumpsetradioImage} 
-                          alt="jumpsetradio.sol" 
-                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
-                        />
-                      ) : domain.name === "copevendor.sol" ? (
-                        <img 
-                          src={copevendorImage} 
-                          alt="copevendor.sol" 
-                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
-                        />
-                      ) : domain.name === "lurkerlife.sol" ? (
-                        <img 
-                          src={lurkerlifeImage} 
-                          alt="lurkerlife.sol" 
-                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
-                        />
-                      ) : domain.name === "commandhub.sol" ? (
-                        <img 
-                          src={commandhubImage} 
-                          alt="commandhub.sol" 
-                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
-                        />
-                      ) : domain.name === "deploydeck.sol" ? (
-                        <img 
-                          src={deploydeckImage} 
-                          alt="deploydeck.sol" 
-                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
-                        />
-                      ) : domain.name === "rigbuilder.sol" ? (
-                        <img 
-                          src={rigbuilderImage} 
-                          alt="rigbuilder.sol" 
-                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
-                        />
-                      ) : domain.name === "bidgremlin.sol" ? (
-                        <img 
-                          src={bidgremlinImage} 
-                          alt="bidgremlin.sol" 
-                          className="w-16 h-16 mx-auto rounded-lg object-cover border border-blue-500/30"
-                        />
-                      ) : (
-                        domain.image
-                      )}
+                      {renderDomainImage(domain.name, domain.image)}
                     </div>
                     
                     {/* Domain Name */}
@@ -764,6 +554,51 @@ function App() {
                           🌐 Website
                         </a>
                       )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Coming Soon */}
+            <div className="mb-16">
+              <h2 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-center solana-gradient flicker-solana">
+                <span className="text-pink-400">[</span> 🔮 Coming Soon <span className="text-pink-400">]</span>
+              </h2>
+              
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 sm:gap-6 justify-items-center max-w-6xl mx-auto">
+                {domainCategories[4].domains.map((domain, domainIndex) => (
+                  <div 
+                    key={domainIndex}
+                    className="steel-surface card-hover-glow rounded-lg p-3 sm:p-4 transition-all duration-300 group w-full max-w-xs mx-auto"
+                  >
+                    {/* Domain Image */}
+                    <div className="text-2xl sm:text-3xl text-center mb-3">
+                      {renderDomainImage(domain.name, domain.image)}
+                    </div>
+                    
+                    {/* Domain Name */}
+                    <h3 className="text-sm font-bold solana-gradient mb-2 group-hover:glow-blue transition-colors text-center">
+                      <a 
+                        href={`/domains/${domain.name.replace('.sol', '')}`}
+                        className="hover:underline"
+                      >
+                        {domain.name}
+                      </a>
+                    </h3>
+                    
+                    {/* Status Badge */}
+                    <div className="flex justify-center mb-2">
+                      <span className={`px-2 py-1 rounded-full text-xs font-semibold ${getStatusColor(domain.status)}`}>
+                        {domain.status}
+                      </span>
+                    </div>
+                    
+                    {/* Price */}
+                    <div className="text-center">
+                      <span className="text-sm font-bold flicker-solana solana-gradient">
+                        {domain.price}
+                      </span>
                     </div>
                   </div>
                 ))}

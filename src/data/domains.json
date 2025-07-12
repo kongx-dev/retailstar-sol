@@ -280,7 +280,8 @@
       "price": "10 SOL",
       "category": "premium",
       "hasLore": true,
-      "hasWebsite": true
+      "hasWebsite": true,
+      "website": "https://fudscience.netlify.app/"
     },
     {
       "name": "getgoodkid",
@@ -472,7 +473,8 @@
       "price": "12 SOL",
       "category": "flash",
       "hasLore": true,
-      "hasWebsite": true
+      "hasWebsite": true,
+      "website": "https://jpegdealer.netlify.app/"
     },
     {
       "name": "jumpsetradio",

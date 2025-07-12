@@ -263,16 +263,27 @@ The Retailverse is alive with potential—every domain is a blank canvas waiting
               {/* Demo Link */}
               <div className="text-center">
                 <h3 className="text-lg font-semibold mb-4 text-cyan-400">Live Demo</h3>
-                <a
-                  href={`https://${domain.name}.sol`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="neon-cyan neon-cyan-hover py-3 px-6 rounded-lg font-semibold transition-all duration-200 inline-block"
-                >
-                  🚀 Visit Demo Site
-                </a>
+                {domain.website ? (
+                  <a
+                    href={domain.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="neon-cyan neon-cyan-hover py-3 px-6 rounded-lg font-semibold transition-all duration-200 inline-block"
+                  >
+                    🚀 Visit Demo Site
+                  </a>
+                ) : (
+                  <a
+                    href={`https://${domain.name}.sol`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="neon-cyan neon-cyan-hover py-3 px-6 rounded-lg font-semibold transition-all duration-200 inline-block"
+                  >
+                    🚀 Visit Demo Site
+                  </a>
+                )}
                 <p className="text-sm text-gray-400 mt-2">
-                  See this domain in action
+                  {domain.website ? 'Visit the live website' : 'See this domain in action'}
                 </p>
               </div>
 

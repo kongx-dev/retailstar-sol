@@ -174,13 +174,23 @@ const DomainCard = ({ domain }) => {
         </div>
       )}
       
-      <div className="flex justify-center space-x-2">
+      <div className="flex justify-center space-x-2 flex-wrap">
         <Link 
           to={`/wiki/${domain.slug}`}
           className="neon-cyan neon-cyan-hover text-center py-2 px-4 rounded text-sm font-semibold transition-colors duration-200"
         >
           {domain.hasLore ? '📖 Wiki' : 'View Details'}
         </Link>
+        {domain.website && (
+          <a 
+            href={domain.website}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-green-600 hover:bg-green-700 text-white text-center py-2 px-4 rounded text-sm font-semibold transition-colors duration-200"
+          >
+            🌐 Website
+          </a>
+        )}
         {displayStatus === 'quick_snag' && (
           <a 
             href="https://twitter.com/messages/compose?recipient_id=retailstarsol"

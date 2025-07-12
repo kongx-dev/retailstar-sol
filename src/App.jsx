@@ -256,7 +256,7 @@ function App() {
                     )}
                     
                     {/* Action Button */}
-                    <div className="flex justify-center">
+                    <div className="flex justify-center space-x-2 flex-wrap">
                       {domain.status === "For Sale" ? (
                         <a 
                           href="https://twitter.com/messages/compose?recipient_id=KongX"
@@ -274,6 +274,26 @@ function App() {
                         <span className="bg-yellow-600 text-black text-center py-2 px-4 rounded text-sm font-semibold glow-purple">
                           Coming Soon
                         </span>
+                      )}
+                      {domain.name === "jpegdealer.sol" && (
+                        <a 
+                          href="https://jpegdealer.netlify.app/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="bg-green-600 hover:bg-green-700 text-white text-center py-2 px-4 rounded text-sm font-semibold transition-colors duration-200"
+                        >
+                          🌐 Website
+                        </a>
+                      )}
+                      {domain.name === "fudscience.sol" && (
+                        <a 
+                          href="https://fudscience.netlify.app/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="bg-green-600 hover:bg-green-700 text-white text-center py-2 px-4 rounded text-sm font-semibold transition-colors duration-200"
+                        >
+                          🌐 Website
+                        </a>
                       )}
                     </div>
                   </div>
@@ -388,7 +408,7 @@ function App() {
                     )}
                     
                     {/* Action Button */}
-                    <div className="flex justify-center">
+                    <div className="flex justify-center space-x-2 flex-wrap">
                       {domain.status === "For Sale" ? (
                         <a 
                           href="https://twitter.com/messages/compose?recipient_id=KongX"
@@ -406,6 +426,26 @@ function App() {
                         <span className="bg-yellow-600 text-black text-center py-2 px-4 rounded text-sm font-semibold glow-purple">
                           Coming Soon
                         </span>
+                      )}
+                      {domain.name === "jpegdealer.sol" && (
+                        <a 
+                          href="https://jpegdealer.netlify.app/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="bg-green-600 hover:bg-green-700 text-white text-center py-2 px-4 rounded text-sm font-semibold transition-colors duration-200"
+                        >
+                          🌐 Website
+                        </a>
+                      )}
+                      {domain.name === "fudscience.sol" && (
+                        <a 
+                          href="https://fudscience.netlify.app/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="bg-green-600 hover:bg-green-700 text-white text-center py-2 px-4 rounded text-sm font-semibold transition-colors duration-200"
+                        >
+                          🌐 Website
+                        </a>
                       )}
                     </div>
                   </div>
@@ -522,7 +562,7 @@ function App() {
                     )}
                     
                     {/* Action Button */}
-                    <div className="flex justify-center">
+                    <div className="flex justify-center space-x-2 flex-wrap">
                       {domain.status === "For Sale" ? (
                         domain.name === "rigbuilder.sol" ? (
                           <a 
@@ -551,6 +591,26 @@ function App() {
                         <span className="bg-yellow-600 text-black text-center py-2 px-4 rounded text-sm font-semibold glow-purple">
                           Coming Soon
                         </span>
+                      )}
+                      {domain.name === "jpegdealer.sol" && (
+                        <a 
+                          href="https://jpegdealer.netlify.app/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="bg-green-600 hover:bg-green-700 text-white text-center py-2 px-4 rounded text-sm font-semibold transition-colors duration-200"
+                        >
+                          🌐 Website
+                        </a>
+                      )}
+                      {domain.name === "fudscience.sol" && (
+                        <a 
+                          href="https://fudscience.netlify.app/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="bg-green-600 hover:bg-green-700 text-white text-center py-2 px-4 rounded text-sm font-semibold transition-colors duration-200"
+                        >
+                          🌐 Website
+                        </a>
                       )}
                     </div>
                   </div>
@@ -665,7 +725,7 @@ function App() {
                     )}
                     
                     {/* Action Button */}
-                    <div className="flex justify-center">
+                    <div className="flex justify-center space-x-2 flex-wrap">
                       {domain.status === "For Sale" ? (
                         <a 
                           href={`https://app.sns.id/domain/${domain.name.replace('.sol', '')}`}
@@ -683,6 +743,26 @@ function App() {
                         <span className="bg-yellow-600 text-black text-center py-2 px-4 rounded text-sm font-semibold glow-purple">
                           Coming Soon
                         </span>
+                      )}
+                      {domain.name === "jpegdealer.sol" && (
+                        <a 
+                          href="https://jpegdealer.netlify.app/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="bg-green-600 hover:bg-green-700 text-white text-center py-2 px-4 rounded text-sm font-semibold transition-colors duration-200"
+                        >
+                          🌐 Website
+                        </a>
+                      )}
+                      {domain.name === "fudscience.sol" && (
+                        <a 
+                          href="https://fudscience.netlify.app/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="bg-green-600 hover:bg-green-700 text-white text-center py-2 px-4 rounded text-sm font-semibold transition-colors duration-200"
+                        >
+                          🌐 Website
+                        </a>
                       )}
                     </div>
                   </div>

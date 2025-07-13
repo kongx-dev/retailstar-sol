@@ -24,15 +24,15 @@ function App() {
       domains: [
         { name: "jpegdealer.sol", status: "For Sale", price: "12 SOL", image: "🖼️", description: "The Meta: Instantly clear NFT resale theme, clean layout, viral meme potential" },
         { name: "fudscience.sol", status: "For Sale", price: "10 SOL", image: "🧪", description: "The Meta: Satirical alpha reports / mockery of FOMO culture" },
-        { name: "jumpsetradio.sol", status: "For Sale", price: "9 SOL", image: "🎮", description: "The Meta: Gamer x streetwear aesthetic, tons of creative upside" }
+        { name: "lurkerlife.sol", status: "For Sale", price: "12 SOL", image: "👁️", description: "Cyberpunk surveillance den - watching, waiting, plotting plays" }
       ]
     },
     {
       name: "Shelf Stocked",
       domains: [
-        { name: "copevendor.sol", status: "For Sale", price: "3.5 SOL", image: "💊", description: "Rebuild it into something with more absurdity and clean flow" },
-        { name: "lurkerlife.sol", status: "For Sale", price: "3 SOL", image: "👁️", description: "Funny but weak build. Add visual humor + better framing" },
-        { name: "commandhub.sol", status: "For Sale", price: "5.5 SOL", image: "🔧", description: "Solid dev tool angle, could go 2+ SOL" }
+        { name: "copevendor.sol", status: "For Sale", price: "5.5 SOL", image: "💊", description: "Rebuild it into something with more absurdity and clean flow" },
+        { name: "commandhub.sol", status: "For Sale", price: "8.5 SOL", image: "🔧", description: "Solid dev tool angle, could go 2+ SOL" },
+        { name: "jumpsetradio.sol", status: "For Sale", price: "5.5 SOL", image: "🎮", description: "The Meta: Gamer x streetwear aesthetic, tons of creative upside" }
       ]
     },
     {
@@ -46,9 +46,9 @@ function App() {
     {
       name: "Flash Rack",
       domains: [
-        { name: "urnotthatguy.sol", status: "For Sale", price: "0.3 SOL", image: "💀", description: "Unfiltered and unhinged. No site, no promises — just vibes" },
-        { name: "yournotthatguy.sol", status: "For Sale", price: "0.4 SOL", image: "💀", description: "Unfiltered and unhinged. No site, no promises — just vibes" },
-        { name: "inpregneable.sol", status: "For Sale", price: "0.5 SOL", image: "💀", description: "Unfiltered and unhinged. No site, no promises — just vibes" }
+        { name: "bagcultist.sol", status: "For Sale", price: "0.3 SOL", image: "💀", description: "Unfiltered and unhinged. No site, no promises — just vibes" },
+        { name: "itspremiumbro.sol", status: "For Sale", price: "0.4 SOL", image: "💀", description: "Unfiltered and unhinged. No site, no promises — just vibes" },
+        { name: "420noscopegg.sol", status: "For Sale", price: "0.5 SOL", image: "💀", description: "Unfiltered and unhinged. No site, no promises — just vibes" }
       ]
     },
     {
@@ -78,6 +78,8 @@ function App() {
         return "bg-red-600 text-white";
       case "Coming Soon":
         return "bg-yellow-600 text-black glow-purple";
+      case "Vaulted":
+        return "bg-purple-600 text-white glow-purple";
       default:
         return "bg-gray-600 text-white";
     }
@@ -318,6 +320,16 @@ function App() {
                           🌐 Website
                         </a>
                       )}
+                      {domain.name === "lurkerlife.sol" && (
+                        <a 
+                          href="https://lurkerlife.netlify.app/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="bg-green-600 hover:bg-green-700 text-white text-center py-2 px-4 rounded text-sm font-semibold transition-colors duration-200"
+                        >
+                          🌐 Website
+                        </a>
+                      )}
                     </div>
                   </div>
                 ))}
@@ -407,6 +419,26 @@ function App() {
                       {domain.name === "fudscience.sol" && (
                         <a 
                           href="https://fudscience.netlify.app/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="bg-green-600 hover:bg-green-700 text-white text-center py-2 px-4 rounded text-sm font-semibold transition-colors duration-200"
+                        >
+                          🌐 Website
+                        </a>
+                      )}
+                      {domain.name === "jumpsetradio.sol" && (
+                        <a 
+                          href="https://jumpsetradio.netlify.app/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="bg-green-600 hover:bg-green-700 text-white text-center py-2 px-4 rounded text-sm font-semibold transition-colors duration-200"
+                        >
+                          🌐 Website
+                        </a>
+                      )}
+                      {domain.name === "copevendor.sol" && (
+                        <a 
+                          href="https://copevendor.netlify.app/"
                           target="_blank"
                           rel="noopener noreferrer"
                           className="bg-green-600 hover:bg-green-700 text-white text-center py-2 px-4 rounded text-sm font-semibold transition-colors duration-200"

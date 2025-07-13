@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
-import QRCode from 'qrcode.react';
 
 const TipJar = () => {
   const [copied, setCopied] = useState(false);
   const solanaAddress = 'paymyinterns.sol';
 
-  const handleCopy = () => {
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(solanaAddress);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
   };
 
   return (
@@ -20,50 +23,36 @@ const TipJar = () => {
         </h2>
 
         <div className="steel-surface rounded-lg p-8 border border-blue-500/30">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-            {/* Left side - Address and copy button */}
-            <div className="text-center md:text-left">
-              <h3 className="text-2xl font-bold mb-4 solana-gradient">
-                Solana Domain Address
-              </h3>
-              
-              <div className="bg-black/40 rounded-lg p-4 mb-6 border border-gray-700">
-                <p className="text-xl font-mono text-cyan-400 mb-2">
-                  {solanaAddress}
-                </p>
-                <p className="text-sm text-gray-400">
-                  Send SOL to support the Retailverse
-                </p>
-              </div>
-
-              <CopyToClipboard text={solanaAddress} onCopy={handleCopy}>
-                <button className="neon-cyan neon-cyan-hover py-3 px-6 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center mx-auto md:mx-0">
-                  {copied ? (
-                    <>
-                      <span className="mr-2">✓</span>
-                      Copied!
-                    </>
-                  ) : (
-                    <>
-                      <span className="mr-2">📋</span>
-                      Copy Address
-                    </>
-                  )}
-                </button>
-              </CopyToClipboard>
+          <div className="text-center">
+            <h3 className="text-2xl font-bold mb-6 solana-gradient">
+              Solana Domain Address
+            </h3>
+            
+            <div className="bg-black/40 rounded-lg p-6 mb-6 border border-gray-700 max-w-md mx-auto">
+              <p className="text-2xl font-mono text-cyan-400 mb-3">
+                {solanaAddress}
+              </p>
+              <p className="text-sm text-gray-400">
+                Send SOL to support the Retailverse
+              </p>
             </div>
 
-            {/* Right side - QR Code */}
-            <div className="flex justify-center">
-              <div className="bg-white p-4 rounded-lg">
-                <QRCode 
-                  value={solanaAddress}
-                  size={200}
-                  level="M"
-                  includeMargin={true}
-                />
-              </div>
-            </div>
+            <button 
+              onClick={handleCopy}
+              className="neon-cyan neon-cyan-hover py-3 px-6 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center mx-auto"
+            >
+              {copied ? (
+                <>
+                  <span className="mr-2">✓</span>
+                  Copied!
+                </>
+              ) : (
+                <>
+                  <span className="mr-2">📋</span>
+                  Copy Address
+                </>
+              )}
+            </button>
           </div>
 
           {/* Thank you message */}

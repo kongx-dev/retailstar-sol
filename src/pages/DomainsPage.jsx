@@ -136,11 +136,11 @@ const DomainCard = ({ domain }) => {
           </span>
         ) : displayStatus === 'quick_snag' ? (
           <div>
-            <span className="text-base sm:text-lg font-bold flicker-solana solana-gradient">
+        <span className="text-base sm:text-lg font-bold flicker-solana solana-gradient">
               {displayPrice}
             </span>
             <div className="text-xs text-gray-400 line-through">
-              {domain.price}
+          {domain.price}
             </div>
           </div>
         ) : (
@@ -151,11 +151,11 @@ const DomainCard = ({ domain }) => {
         <div className="flex items-center justify-center mt-2">
           <span className={`text-xs ${getCategoryColor(domain.category)}`}>
             {displayStatus === 'quick_snag' ? 'Quick Snag' : getCategoryLabel(domain.category)}
-          </span>
+        </span>
           {domain.category !== 'lore' && (
             <span className={`text-xs ml-2 ${rotationInfo.color}`}>
               ⏰ {rotationInfo.interval}
-            </span>
+        </span>
           )}
         </div>
       </div>
@@ -219,6 +219,15 @@ const DomainCard = ({ domain }) => {
 const DomainsPage = () => {
   const [filter, setFilter] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
+
+  // Update page title and meta description
+  React.useEffect(() => {
+    document.title = 'Domain Inventory - RetailStar.sol | Premium .sol Domains';
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Browse premium .sol domains in the Retailverse. Find your perfect domain with our curated collection of premium, mid-tier, and flash deal domains.');
+    }
+  }, []);
 
   // Get Quick Snags (only specific 3 domains, mid-tier only)
   const quickSnagDomains = domainsData.domains.filter(d => 
@@ -306,6 +315,19 @@ const DomainsPage = () => {
             <p className="text-xl md:text-2xl text-gray-300 mb-8 flicker max-w-3xl mx-auto leading-relaxed glow-blue">
               {domainsData.domains.length} nodes in the Retailverse. Find your perfect .sol domain.
             </p>
+            
+            <div className="mb-6 text-sm text-gray-400 max-w-2xl mx-auto">
+              <p>Premium domains, mid-tier builds, and flash deals. Every .sol domain is a gateway to the Retailverse.</p>
+            </div>
+            
+            <div className="flex justify-center mb-8">
+              <Link 
+                to="/catalog"
+                className="neon-cyan neon-cyan-hover py-3 px-6 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2"
+              >
+                🔧 Fixer's Catalog
+              </Link>
+            </div>
 
             {/* Rotation Info */}
             <div className="mb-8 p-4 bg-gray-800/30 rounded-lg border border-gray-700/50">
@@ -372,6 +394,66 @@ const DomainsPage = () => {
             )}
           </div>
         </section>
+
+        {/* Footer */}
+        <footer className="border-t border-gray-800 bg-black/40 backdrop-blur-sm py-12 px-4">
+          <div className="max-w-6xl mx-auto text-center">
+            <div className="mb-8">
+              <p className="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed glow-blue">
+                Every domain is a node in the Retailverse — find your perfect .sol and join the network.
+              </p>
+            </div>
+            
+            <div className="flex justify-center space-x-8 text-sm mb-6">
+              <a 
+                href="https://github.com/KongX" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-gray-300 transition-colors"
+              >
+                GitHub
+              </a>
+              <a 
+                href="https://twitter.com/retailstarsol" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="solana-gradient flicker-solana hover:glow-blue transition-colors"
+              >
+                Twitter
+              </a>
+              <a 
+                href="https://twitter.com/messages/compose?recipient_id=KongX" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="solana-gradient flicker-solana hover:glow-blue transition-colors"
+              >
+                Contact
+              </a>
+              <a 
+                href="/catalog" 
+                className="solana-gradient flicker-solana hover:glow-blue transition-colors"
+              >
+                Catalog
+              </a>
+              <a 
+                href="/vault" 
+                className="solana-gradient flicker-solana hover:glow-blue transition-colors"
+              >
+                Vault
+              </a>
+              <a 
+                href="/" 
+                className="solana-gradient flicker-solana hover:glow-blue transition-colors"
+              >
+                Home
+              </a>
+            </div>
+            
+            <div className="text-xs text-gray-500">
+              <p>© 2025 retailstar.sol - Nodes in the Retailverse</p>
+            </div>
+          </div>
+        </footer>
       </div>
     </div>
   );

@@ -524,10 +524,11 @@
       "description": "For the quiet sniper in the shadows",
       "image": "👁️",
       "featured": false,
-      "status": "available",
-      "price": "3 SOL",
-      "category": "mid",
-      "hasWebsite": true
+      "status": "vaulted",
+      "price": "12 SOL",
+      "category": "premium",
+      "hasWebsite": true,
+      "website": "https://lurkerlife.netlify.app/"
     },
     {
       "name": "maidenless",

@@ -7,24 +7,24 @@ const fullInventory = {
   premium: [
     { name: "jpegdealer.sol", status: "Listed Now", price: "12 SOL", image: "🖼️", description: "The Meta: Instantly clear NFT resale theme, clean layout, viral meme potential" },
     { name: "fudscience.sol", status: "Listed Now", price: "10 SOL", image: "🧪", description: "The Meta: Satirical alpha reports / mockery of FOMO culture" },
-    { name: "jumpsetradio.sol", status: "Listed Now", price: "9 SOL", image: "🎮", description: "The Meta: Gamer x streetwear aesthetic, tons of creative upside" },
+    { name: "lurkerlife.sol", status: "Listed Now", price: "12 SOL", image: "👁️", description: "Funny but weak build. Add visual humor + better framing" },
     { name: "yapenomics.sol", status: "Vaulted", price: "8 SOL", image: "💬", description: "The Meta: Inside Web3 culture humor — mimics degen Twitter perfectly" },
     { name: "pistola.sol", status: "Vaulted", price: "8 SOL", image: "🔫", description: "The Meta: Spanish word + SNS boost + unique aesthetic" }
   ],
   mid: [
-    { name: "copevendor.sol", status: "Listed Now", price: "3.5 SOL", image: "💊", description: "Rebuild it into something with more absurdity and clean flow" },
-    { name: "lurkerlife.sol", status: "Listed Now", price: "3 SOL", image: "👁️", description: "Funny but weak build. Add visual humor + better framing" },
-    { name: "commandhub.sol", status: "Listed Now", price: "3.5 SOL", image: "🔧", description: "Solid dev tool angle, could go 2+ SOL" },
+    { name: "copevendor.sol", status: "Listed Now", price: "5.5 SOL", image: "💊", description: "Rebuild it into something with more absurdity and clean flow" },
+    { name: "commandhub.sol", status: "Listed Now", price: "8.5 SOL", image: "🔧", description: "Solid dev tool angle, could go 2+ SOL" },
+    { name: "jumpsetradio.sol", status: "Listed Now", price: "5.5 SOL", image: "🎮", description: "The Meta: Gamer x streetwear aesthetic, tons of creative upside" },
+    { name: "rigbuilder.sol", status: "Listed Now", price: "5.5 SOL", image: "⚡", description: "Fastest to sell for SOL rotation" },
     { name: "deploydeck.sol", status: "Vaulted", price: "2 SOL", image: "🚀", description: "Solid dev tool angle, could go 2+ SOL" },
     { name: "grindprotocol.sol", status: "Vaulted", price: "2.5 SOL", image: "💪", description: "Over-the-top hustle meme" }
   ],
   memeables: [
-    { name: "rigbuilder.sol", status: "Listed Now", price: "1 SOL", image: "⚡", description: "Fastest to sell for SOL rotation" },
     { name: "bidgremlin.sol", status: "Listed Now", price: "0.89 SOL", image: "👹", description: "Fastest to sell for SOL rotation" },
     { name: "exitprotocol.sol", status: "Vaulted", price: "0.99 SOL", image: "🚪", description: "Fallback memescape" },
-            { name: "urnotthatguy.sol", status: "Sold", price: "0.3 SOL", image: "💀", description: "Unfiltered and unhinged. No site, no promises — just vibes" },
-    { name: "yournotthatguy.sol", status: "Sold", price: "0.4 SOL", image: "💀", description: "Unfiltered and unhinged. No site, no promises — just vibes" },
-    { name: "inpregneable.sol", status: "Sold", price: "0.5 SOL", image: "💀", description: "Unfiltered and unhinged. No site, no promises — just vibes" }
+            { name: "urnotthatguy.sol", status: "Vaulted", price: "0.3 SOL", image: "💀", description: "Unfiltered and unhinged. No site, no promises — just vibes" },
+    { name: "yournotthatguy.sol", status: "Vaulted", price: "0.4 SOL", image: "💀", description: "Unfiltered and unhinged. No site, no promises — just vibes" },
+    { name: "inpregneable.sol", status: "Vaulted", price: "0.5 SOL", image: "💀", description: "Unfiltered and unhinged. No site, no promises — just vibes" }
   ],
   experimental: [
     { name: "deploydock.sol", status: "Vaulted", price: "TBA", image: "⚓", description: "Experimental deployment platform" },
@@ -89,9 +89,15 @@ const DomainCard = ({ domain }) => (
     </div>
     
     <div className="text-center mb-4">
-      <span className="text-base sm:text-lg font-bold flicker-solana solana-gradient">
-        {domain.price}
-      </span>
+      {domain.status === "Listed Now" ? (
+        <span className="text-base sm:text-lg font-bold flicker-solana solana-gradient">
+          {domain.price}
+        </span>
+      ) : (
+        <span className="text-base sm:text-lg font-bold text-gray-500">
+          {domain.status === "Vaulted" ? "Vaulted" : domain.status}
+        </span>
+      )}
     </div>
     
     <div className="text-center mb-4">
@@ -137,12 +143,18 @@ const VaultPage = () => {
               Complete domain collection. Every node in the Retailverse.
             </p>
             
-            <div className="flex justify-center">
+            <div className="flex justify-center space-x-4">
               <a 
                 href="/domains"
                 className="neon-cyan neon-cyan-hover py-3 px-6 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2"
               >
                 ← Active Listings
+              </a>
+              <a 
+                href="/catalog"
+                className="neon-cyan neon-cyan-hover py-3 px-6 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2"
+              >
+                🔧 Fixer's Catalog
               </a>
             </div>
           </div>
@@ -251,7 +263,7 @@ const VaultPage = () => {
             </div>
             
             <div className="text-xs text-gray-500">
-              <p>© 2024 retailstar.sol - Nodes in the Retailverse</p>
+              <p>© 2025 retailstar.sol - Nodes in the Retailverse</p>
             </div>
           </div>
         </footer>

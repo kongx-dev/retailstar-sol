@@ -1,92 +1,73 @@
-import React from 'react';
+import React from "react";
+import "./domain-card.css";
 
-const DomainCard = ({ domain, tier }) => {
-  const { name, price, desc, sns } = domain;
-
-  const handleRequestToBuy = () => {
-    alert(`Request to buy ${name} for ${price}\n\nContact: https://twitter.com/messages/compose?recipient_id=KongX`);
+const DomainCard = ({
+  domain,
+  price,
+  rarity,         // 'epic' | 'rare' | 'base'
+  tag,            // 'Premium' | 'Mid Tier' | 'Quick Snag'
+  hasSite,        // boolean
+  vaulted,        // boolean
+  forSale,        // boolean
+  flashRack,      // boolean
+  lore            // boolean
+}) => {
+  const rarityClass = `rarity-${rarity}`;
+  
+  // Label tag mapping based on main tag
+  const tagMap = {
+    "Premium": "tag-premium",
+    "Mid Tier": "tag-mid",
+    "Quick Snag": "tag-base"
   };
-
-  const handleBuyNow = () => {
-    if (sns) {
-      window.open(sns, '_blank');
-    } else {
-      alert(`Buy ${name} on SNS Marketplace`);
-    }
-  };
-
-  const getTierStyles = () => {
-    switch (tier) {
-      case 'premium':
-        return {
-          border: 'border-purple-500/50',
-          glow: 'hover:shadow-purple-500/30',
-          badge: 'bg-purple-600 text-white',
-          button: 'bg-purple-600 hover:bg-purple-500 text-white'
-        };
-      case 'mid':
-        return {
-          border: 'border-blue-500/50',
-          glow: 'hover:shadow-blue-500/30',
-          badge: 'bg-blue-600 text-white',
-          button: 'bg-blue-600 hover:bg-blue-500 text-white'
-        };
-      case 'quick':
-        return {
-          border: 'border-orange-500/50',
-          glow: 'hover:shadow-orange-500/30',
-          badge: 'bg-orange-600 text-white',
-          button: 'bg-orange-600 hover:bg-orange-500 text-white'
-        };
-      default:
-        return {
-          border: 'border-gray-500/50',
-          glow: 'hover:shadow-gray-500/30',
-          badge: 'bg-gray-600 text-white',
-          button: 'bg-gray-600 hover:bg-gray-500 text-white'
-        };
-    }
-  };
-
-  const styles = getTierStyles();
 
   return (
-    <div className={`steel-surface card-hover-glow rounded-lg p-6 transition-all duration-300 group border ${styles.border} ${styles.glow}`}>
-      {/* Domain Name */}
-      <h3 className="text-xl font-bold solana-gradient mb-3 group-hover:glow-blue transition-colors text-center">
-        {name}
+    <div className={`domain-card ${rarityClass}`} style={{position: 'relative'}}>
+      {/* Tag label (top left corner) */}
+      <div className={`tag ${tagMap[tag] || "tag-base"}`} style={{position: 'absolute', top: 10, left: 10}}>
+        {tag}
+      </div>
+      {/* Vaulted/Unvaulted tag (top right corner) */}
+      <div className={`tag ${vaulted ? "tag-vaulted" : "tag-unvaulted"}`} style={{position: 'absolute', top: 10, right: 10, display: 'flex', alignItems: 'center', gap: '2px'}}>
+        {vaulted ? '🔒 Vaulted' : '✅ Unvaulted'}
+      </div>
+      {/* Domain name */}
+      <h3 style={{ fontWeight: 600, fontSize: "16px", marginTop: "32px" }}>
+        {domain}
       </h3>
-      
-      {/* Description */}
-      <p className="text-gray-400 text-sm text-center mb-4 leading-relaxed">
-        {desc}
-      </p>
-      
-      {/* Price */}
-      <div className="text-center mb-4">
-        <span className="text-2xl font-bold flicker-solana solana-gradient">
-          {price}
+      {/* Rarity Tags / Meta Grid (no vaulted/unvaulted here) */}
+      <div style={{
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "center",
+        gap: "4px",
+        marginTop: "6px"
+      }}>
+        <span className={`tag ${hasSite ? "tag-website" : "tag-nowebsite"}`}>
+          {hasSite ? "Website" : "No Website"}
         </span>
+        <span className={`tag ${forSale ? "tag-sale" : "tag-unavailable"}`}>
+          {forSale ? "For Sale" : "Unavailable"}
+        </span>
+        {flashRack && <span className="tag tag-flash">⚡ Flash Rack</span>}
+        {lore && <span className="tag tag-lore">✨ Lore Domain</span>}
       </div>
-      
-      {/* Action Button */}
-      <div className="flex justify-center">
-        {sns ? (
-          <button
-            onClick={handleBuyNow}
-            className={`${styles.button} text-center py-2 px-4 rounded text-sm font-semibold transition-colors duration-200`}
+      {/* Price & CTA */}
+      {forSale && (
+        <>
+          <div className="price" style={{ marginTop: "10px" }}>
+            {price} SOL
+          </div>
+          <a
+            href={`https://x.com/messages/compose?recipient_id=1689270192859781120`}
+            className="buy-button"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            🔗 Buy Now
-          </button>
-        ) : (
-          <button
-            onClick={handleRequestToBuy}
-            className={`${styles.button} text-center py-2 px-4 rounded text-sm font-semibold transition-colors duration-200`}
-          >
-            💬 Request to Buy
-          </button>
-        )}
-      </div>
+            DM to Buy
+          </a>
+        </>
+      )}
     </div>
   );
 };

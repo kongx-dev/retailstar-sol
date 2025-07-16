@@ -13,11 +13,11 @@ const RotationStatus = ({ compact = false }) => {
 
   const rotationData = [
     {
-      name: "Flash Rack",
-      interval: 24 * 60 * 60 * 1000, // 24 hours in milliseconds
-      color: "green",
-      domains: ["jpegdealer", "copevendor", "deploydeck", "bidgremlin"],
-      description: "High-turnover domains"
+      name: "Premium Wing",
+      interval: 7 * 24 * 60 * 60 * 1000, // 7 days in milliseconds
+      color: "purple", 
+      domains: ["fudscience", "biggestofbrains", "retailverse", "retailrunner"],
+      description: "Long-term holdings"
     },
     {
       name: "Mid Tier", 
@@ -27,11 +27,11 @@ const RotationStatus = ({ compact = false }) => {
       description: "Balanced movement"
     },
     {
-      name: "Premium Wing",
-      interval: 7 * 24 * 60 * 60 * 1000, // 7 days in milliseconds
-      color: "purple", 
-      domains: ["fudscience", "biggestofbrains", "retailverse", "retailrunner"],
-      description: "Long-term holdings"
+      name: "Flash Rack",
+      interval: 24 * 60 * 60 * 1000, // 24 hours in milliseconds
+      color: "green",
+      domains: ["jpegdealer", "copevendor", "deploydeck", "bidgremlin"],
+      description: "High-turnover domains"
     }
   ];
 

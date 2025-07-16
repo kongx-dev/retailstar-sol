@@ -429,12 +429,12 @@ const DomainsPage = () => {
               >
                 Contact
               </a>
-              <a 
-                href="/catalog" 
+              <Link 
+                to="/catalog" 
                 className="solana-gradient flicker-solana hover:glow-blue transition-colors"
               >
                 Catalog
-              </a>
+              </Link>
               <a 
                 href="/vault" 
                 className="solana-gradient flicker-solana hover:glow-blue transition-colors"

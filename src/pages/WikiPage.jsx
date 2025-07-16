@@ -4,6 +4,7 @@ import domainsData from '../data/domains.json';
 import rsLogo from '../assets/rs-logo.png';
 import retailstarBody from '../assets/retailstar-body.png';
 import jpegdealerImage from '../assets/jpegdealer.png';
+import bidgremlinImage from '../assets/bidgremlin.png';
 
 const WikiPage = () => {
   const { slug } = useParams();
@@ -187,6 +188,14 @@ The Retailverse is alive with potential—every domain is a blank canvas waiting
                   className="w-32 h-32 mx-auto rounded-lg border-2 border-cyan-500/50 shadow-lg shadow-cyan-500/25"
                 />
               </div>
+            ) : domain.slug === 'bidgremlin' ? (
+              <div className="mb-6">
+                <img 
+                  src={bidgremlinImage} 
+                  alt="Bid Gremlin" 
+                  className="w-32 h-32 mx-auto rounded-lg border-2 border-cyan-500/50 shadow-lg shadow-cyan-500/25"
+                />
+              </div>
             ) : (
               <div className="text-6xl mb-6">{domain.image}</div>
             )}
@@ -203,10 +212,10 @@ The Retailverse is alive with potential—every domain is a blank canvas waiting
                 {domain.status === 'available' ? 'Available' : domain.status}
               </span>
               <span className="px-4 py-2 rounded-full text-sm font-semibold bg-blue-600 text-white">
-                {domain.price}
+                {domain.quickSnagPrice ? domain.quickSnagPrice : domain.price}
               </span>
               <span className="px-4 py-2 rounded-full text-sm font-semibold bg-purple-600 text-white">
-                {domain.category}
+                {domain.quickSnagPrice ? 'Quick Snag' : domain.category}
               </span>
             </div>
           </div>
@@ -297,7 +306,7 @@ The Retailverse is alive with potential—every domain is a blank canvas waiting
                      rel="noopener noreferrer"
                      className="bg-green-600 hover:bg-green-700 text-white py-3 px-6 rounded-lg font-semibold transition-all duration-200 inline-block"
                    >
-                     🛒 Buy Now - {domain.price}
+                     🛒 Buy Now - {domain.quickSnagPrice ? domain.quickSnagPrice : domain.price}
                    </a>
                  ) : domain.status === 'not_for_sale' ? (
                    <span className="bg-orange-600 text-white py-3 px-6 rounded-lg font-semibold inline-block">

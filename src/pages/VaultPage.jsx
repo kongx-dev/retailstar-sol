@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import rsLogo from '../assets/rs-logo.png';
 import retailstarBody from '../assets/retailstar-body.png';
 
@@ -144,18 +145,18 @@ const VaultPage = () => {
             </p>
             
             <div className="flex justify-center space-x-4">
-              <a 
-                href="/domains"
+              <Link 
+                to="/domains"
                 className="neon-cyan neon-cyan-hover py-3 px-6 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2"
               >
                 ← Active Listings
-              </a>
-              <a 
-                href="/catalog"
+              </Link>
+              <Link 
+                to="/catalog"
                 className="neon-cyan neon-cyan-hover py-3 px-6 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2"
               >
                 🔧 Fixer's Catalog
-              </a>
+              </Link>
             </div>
           </div>
         </section>
@@ -213,6 +214,49 @@ const VaultPage = () => {
             </section>
           </div>
         </div>
+
+        {/* Upgrade & Vote CTAs */}
+        <section className="px-4 py-16">
+          <div className="max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Upgrade CTA */}
+              <div className="steel-surface rounded-lg p-6 border border-cyan-500/30">
+                <h3 className="text-xl font-bold solana-gradient mb-4 text-center">
+                  <span className="text-pink-400">[</span> Unlock Vault Domain <span className="text-pink-400">]</span>
+                </h3>
+                <p className="text-gray-300 text-center mb-4">
+                  Ready to unlock a premium vault domain? Get a custom build from the Fixer.
+                </p>
+                <div className="flex justify-center">
+                  <Link 
+                    to="/upgrade"
+                    className="neon-cyan neon-cyan-hover py-3 px-6 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center gap-2"
+                  >
+                    🔓 Vault Unlock
+                  </Link>
+                </div>
+              </div>
+
+              {/* Vote CTA */}
+              <div className="steel-surface rounded-lg p-6 border border-purple-500/30">
+                <h3 className="text-xl font-bold solana-gradient mb-4 text-center">
+                  <span className="text-pink-400">[</span> Community Vote <span className="text-pink-400">]</span>
+                </h3>
+                <p className="text-gray-300 text-center mb-4">
+                  Help decide which vault domains get unlocked next. Your vote matters.
+                </p>
+                <div className="flex justify-center">
+                  <Link 
+                    to="/vote"
+                    className="bg-purple-600 hover:bg-purple-700 text-white py-3 px-6 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center gap-2 border border-purple-500/30"
+                  >
+                    🗳️ Cast Your Vote
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* Footer */}
         <footer className="border-t border-gray-800 bg-black/40 backdrop-blur-sm py-12 px-4">

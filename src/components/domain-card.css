@@ -1,0 +1,168 @@
+/* Base Card Layout */
+.domain-card {
+  background: #0e0e0e;
+  border-radius: 12px;
+  padding: 16px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.2s ease;
+  box-shadow: 0 0 8px rgba(0, 255, 150, 0.05);
+  position: relative;
+}
+
+/* Hover lift */
+.domain-card:hover {
+  transform: translateY(-4px);
+}
+
+/* ========== Rarity Styles ========== */
+.rarity-epic {
+  border: 2px solid #C084FC;
+  animation: pulseGlow 2.5s infinite;
+  background: linear-gradient(145deg, #1e0c2a 0%, #0e0e0e 100%);
+}
+
+.rarity-rare {
+  border: 2px solid #60A5FA;
+  animation: flickerBorder 3s infinite;
+  background: linear-gradient(145deg, #0c1c2a 0%, #0e0e0e 100%);
+}
+
+.rarity-base {
+  border: 1px solid #34D399;
+  background: #0e0e0e;
+}
+
+/* ========== Keyframe Animations ========== */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 8px #C084FC, 0 0 16px #C084FC55;
+  }
+  50% {
+    box-shadow: 0 0 12px #C084FC, 0 0 24px #C084FC99;
+  }
+}
+
+@keyframes flickerBorder {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    border-color: #60A5FA;
+  }
+  20%, 22%, 55% {
+    border-color: #1f2937;
+  }
+}
+
+/* ========== Tag Labels ========== */
+.tag {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 6px;
+  text-transform: uppercase;
+}
+
+.tag-premium {
+  background: #C084FC22;
+  color: #C084FC;
+  border: 1px solid #C084FC88;
+}
+
+.tag-mid {
+  background: #60A5FA22;
+  color: #60A5FA;
+  border: 1px solid #60A5FA88;
+}
+
+.tag-base {
+  background: #34D39922;
+  color: #34D399;
+  border: 1px solid #34D39988;
+}
+
+.tag-flash {
+  background: #facc15;
+  color: #0e0e0e;
+  font-weight: bold;
+  border-radius: 4px;
+  padding: 2px 6px;
+  animation: flashPulse 1.5s infinite;
+}
+
+@keyframes flashPulse {
+  0%, 100% {
+    box-shadow: 0 0 6px #facc15;
+  }
+  50% {
+    box-shadow: 0 0 12px #facc15;
+  }
+}
+
+.tag-website,
+.tag-vaulted,
+.tag-sale,
+.tag-lore {
+  font-size: 10px;
+  padding: 1px 6px;
+  background: #1f2937;
+  color: #9ca3af;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+/* Positive & Negative Tags */
+.tag-website {
+  background: #10b98122;
+  color: #10b981;
+}
+.tag-nowebsite {
+  background: #ef444422;
+  color: #ef4444;
+}
+.tag-vaulted {
+  background: #6b21a822;
+  color: #c084fc;
+}
+.tag-unvaulted {
+  background: #374151;
+  color: #9ca3af;
+}
+.tag-sale {
+  background: #22c55e33;
+  color: #22c55e;
+}
+.tag-unavailable {
+  background: #7f1d1d33;
+  color: #f87171;
+}
+.tag-lore {
+  background: #fcd34d33;
+  color: #fcd34d;
+}
+
+/* ========== Price & Button ========== */
+.price {
+  font-size: 16px;
+  font-weight: bold;
+  color: #67e8f9;
+}
+
+.buy-button {
+  background: linear-gradient(to right, #0ea5e9, #38bdf8);
+  color: black;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 12px;
+  margin-top: 4px;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 6px #0ea5e9aa;
+}
+
+.buy-button:hover {
+  background: #22d3ee;
+  box-shadow: 0 0 12px #67e8f9;
+} 

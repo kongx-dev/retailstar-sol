@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import SEOHead from '../components/SEOHead';
 import rsLogo from '../assets/rs-logo.png';
 import retailstarBody from '../assets/retailstar-body.png';
+import domainsData from '../data/domains.json';
 
 // Fixer's Catalog data with gritty, insider tone
 const fixerTiers = {
@@ -38,19 +41,6 @@ const fixerTiers = {
     examples: [
       { name: "bidgremlin.sol", status: "Available", price: "0.89 SOL", image: "👹", description: "Fastest to sell for SOL rotation" },
       { name: "deploydeck.sol", status: "Available", price: "2 SOL", image: "🚀", description: "Solid dev tool angle" }
-    ]
-  },
-
-  flashRack: {
-    title: "🔥 Tier: Flash Rack",
-    cost: "💰 0.2–0.5 SOL",
-    specs: "📉 Meme-level domains, ASCII splashes, troll quotes",
-    addons: "🎭 Pure chaos, no promises",
-    description: "Meme-tier domains. ASCII art. Troll quotes. Pure chaos. No promises.",
-    examples: [
-      { name: "bagcultist.sol", status: "Available", price: "0.3 SOL", image: "💀", description: "Unfiltered and unhinged. No site, no promises" },
-      { name: "itspremiumbro.sol", status: "Available", price: "0.4 SOL", image: "💀", description: "Unfiltered and unhinged. No site, no promises" },
-      { name: "420noscopegg.sol", status: "Available", price: "0.5 SOL", image: "💀", description: "Unfiltered and unhinged. No site, no promises" }
     ]
   },
   blacklistFriday: {
@@ -141,9 +131,28 @@ const TierCard = ({ tier, data }) => (
 
 const FixersCatalogPage = () => {
   const [selectedTier, setSelectedTier] = useState(null);
+  const [premiumDomains, setPremiumDomains] = useState([]);
+
+  useEffect(() => {
+    // Filter premium domains (with websites, higher tier)
+    const premiumDomainsList = domainsData.domains.filter(domain => 
+      domain.hasWebsite && 
+      domain.status === 'available' &&
+      (domain.category === 'premium' || domain.category === 'mid' || parseFloat(domain.price.split(' ')[0]) >= 5)
+    );
+    setPremiumDomains(premiumDomainsList);
+  }, []);
 
   return (
     <div className="min-h-screen text-white relative overflow-hidden">
+      <SEOHead 
+        target="retailstar.sol"
+        pageType="premium-catalog"
+        customTitle="Premium Catalog | Retailstar.sol - High-End Domains with Sites"
+        customDescription="Premium Solana domains with built websites. Multi-layered builds with actual utility. Site included, built & branded, quick snag opportunities."
+        customKeywords="solana domains, premium domains, built websites, domain marketplace, retailstar"
+      />
+      
       {/* Background image at 50% opacity */}
       <img 
         src={retailstarBody} 
@@ -169,28 +178,136 @@ const FixersCatalogPage = () => {
             </div>
             
             <h1 className="text-5xl md:text-7xl font-black mb-6 neon-pulse solana-gradient flicker-solana">
-              Fixer's Catalog
+              Premium Catalog
             </h1>
             
             <p className="text-xl md:text-2xl text-gray-300 mb-8 flicker max-w-3xl mx-auto leading-relaxed glow-blue">
-              Classified access to the domain + site tier system. Not a price list — this is the black market vendor section.
+              High-end domains with built websites. Multi-layered builds with actual utility.
             </p>
             
-            <div className="flex justify-center">
-              <a 
-                href="/domains"
-                className="neon-cyan neon-cyan-hover py-3 px-6 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2"
+            {/* Navigation to Acquisition Levels */}
+            <div className="flex justify-center space-x-4 mb-8">
+              <span className="px-6 py-3 rounded-lg bg-cyan-600/50 text-cyan-300 border border-cyan-500/50">
+                Premium Catalog
+              </span>
+              <Link 
+                to="/acquisition-levels"
+                className="px-6 py-3 rounded-lg bg-gray-800/50 text-gray-300 hover:text-white transition-colors border border-gray-700 hover:border-cyan-400/50"
               >
-                ← Active Listings
-              </a>
+                🎯 Flash Rack
+              </Link>
             </div>
+          </div>
+        </section>
+
+        {/* Premium Domains Grid */}
+        <section className="px-4 pb-8">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl font-bold text-center solana-gradient flicker-solana mb-8">
+              <span className="text-pink-400">[</span> Featured Premium Domains <span className="text-pink-400">]</span>
+            </h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {premiumDomains.map((domain) => (
+                <div 
+                  key={domain.slug} 
+                  className="steel-surface card-hover-glow rounded-lg p-6 border border-gray-700 hover:border-cyan-500/50 transition-all duration-200"
+                >
+                  {/* Domain Image */}
+                  <div className="text-center mb-4">
+                    <div className="text-4xl mb-2">{domain.image}</div>
+                  </div>
+                  
+                  {/* Domain Info */}
+                  <h3 className="text-xl font-bold solana-gradient mb-2 text-center">
+                    {domain.name}.sol
+                  </h3>
+                  <p className="text-gray-300 text-sm mb-4 text-center">
+                    {domain.description}
+                  </p>
+                  
+                  {/* Price and Status */}
+                  <div className="space-y-2 mb-4">
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-gray-400">Price:</span>
+                      <span className="font-semibold text-cyan-400">
+                        {domain.quickSnagPrice ? domain.quickSnagPrice : domain.price}
+                      </span>
+                    </div>
+                    
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-gray-400">Category:</span>
+                      <span className={`px-2 py-1 rounded text-xs font-semibold ${
+                        domain.quickSnagPrice ? 'bg-orange-600 text-white' : 
+                        domain.category === 'premium' ? 'bg-purple-600 text-white' : 
+                        'bg-blue-600 text-white'
+                      }`}>
+                        {domain.quickSnagPrice ? 'Quick Snag' : domain.category}
+                      </span>
+                    </div>
+                    
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-gray-400">Status:</span>
+                      <span className="px-2 py-1 rounded text-xs font-semibold bg-green-600 text-white">
+                        Site Included
+                      </span>
+                    </div>
+                  </div>
+                  
+                  {/* Action Buttons */}
+                  <div className="space-y-2">
+                    <Link 
+                      to={`/domains/${domain.slug}`}
+                      className="block w-full text-center py-2 px-4 bg-gray-800 hover:bg-gray-700 text-white rounded transition-colors"
+                    >
+                      View Details
+                    </Link>
+                    
+                    {domain.status === 'available' && (
+                      <a
+                        href={`https://app.sns.id/domain/${domain.name}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block w-full text-center py-2 px-4 bg-cyan-600 hover:bg-cyan-700 text-white rounded font-semibold transition-colors"
+                      >
+                        🛒 Buy Now
+                      </a>
+                    )}
+                  </div>
+                  
+                  {/* Quick Snag Badge */}
+                  {domain.quickSnagPrice && (
+                    <div className="absolute top-2 right-2">
+                      <span className="bg-orange-600 text-white px-2 py-1 rounded text-xs font-bold animate-pulse">
+                        🔥 Quick Snag
+                      </span>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+            
+            {/* Empty State */}
+            {premiumDomains.length === 0 && (
+              <div className="text-center py-12">
+                <div className="text-6xl mb-4">🏢</div>
+                <h3 className="text-2xl font-bold mb-2">No Premium Domains Available</h3>
+                <p className="text-gray-400 mb-6">Check back soon for new premium listings.</p>
+                <Link 
+                  to="/acquisition-levels"
+                  className="neon-cyan neon-cyan-hover py-2 px-4 rounded-lg"
+                >
+                  View Flash Rack
+                </Link>
+              </div>
+            )}
           </div>
         </section>
 
         {/* Tier Navigation */}
         <section className="px-4 pb-8">
           <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {Object.entries(fixerTiers).map(([key, data]) => (
                 <button
                   key={key}
@@ -212,42 +329,6 @@ const FixersCatalogPage = () => {
           <section className="px-4 pb-8">
             <div className="max-w-6xl mx-auto">
               <TierCard tier={selectedTier} data={fixerTiers[selectedTier]} />
-              {selectedTier === 'flashRack' && (
-                <div className="mt-8">
-                  <h3 className="text-2xl font-bold solana-gradient mb-2 group-hover:glow-blue transition-colors">
-                    {snsUpgrade.title}
-                  </h3>
-                  <div className="space-y-2 text-sm text-gray-300">
-                    <p className="font-semibold text-cyan-400">{snsUpgrade.cost}</p>
-                    <p className="text-yellow-400">{snsUpgrade.specs}</p>
-                    <p className="text-purple-400">{snsUpgrade.addons}</p>
-                  </div>
-                  <p className="text-gray-400 mt-4 italic">"{snsUpgrade.description}"</p>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
-                    {snsUpgrade.examples.map((example, index) => (
-                      <div key={index} className="bg-black/40 rounded-lg p-4 border border-gray-600">
-                        <div className="text-2xl text-center mb-2">{example.image}</div>
-                        <h4 className="text-sm font-bold solana-gradient mb-2 text-center">
-                          {example.name}
-                        </h4>
-                        <div className="flex justify-center mb-2">
-                          <span className={`px-2 py-1 rounded-full text-xs font-semibold ${getStatusColor(example.status)}`}>
-                            {example.status}
-                          </span>
-                        </div>
-                        <div className="text-center mb-2">
-                          <span className="text-sm font-bold flicker-solana solana-gradient">
-                            {example.price}
-                          </span>
-                        </div>
-                        <p className="text-xs text-gray-400 text-center">
-                          {example.description}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
             </div>
           </section>
         )}
@@ -260,45 +341,9 @@ const FixersCatalogPage = () => {
             </h2>
             
             {Object.entries(fixerTiers).map(([key, data]) => (
-              <React.Fragment key={key}>
+              <div key={key}>
                 <TierCard tier={key} data={data} />
-                {key === 'flashRack' && (
-                  <div className="mt-8">
-                    <h3 className="text-2xl font-bold solana-gradient mb-2 group-hover:glow-blue transition-colors">
-                      {snsUpgrade.title}
-                    </h3>
-                    <div className="space-y-2 text-sm text-gray-300">
-                      <p className="font-semibold text-cyan-400">{snsUpgrade.cost}</p>
-                      <p className="text-yellow-400">{snsUpgrade.specs}</p>
-                      <p className="text-purple-400">{snsUpgrade.addons}</p>
-                    </div>
-                    <p className="text-gray-400 mt-4 italic">"{snsUpgrade.description}"</p>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
-                      {snsUpgrade.examples.map((example, index) => (
-                        <div key={index} className="bg-black/40 rounded-lg p-4 border border-gray-600">
-                          <div className="text-2xl text-center mb-2">{example.image}</div>
-                          <h4 className="text-sm font-bold solana-gradient mb-2 text-center">
-                            {example.name}
-                          </h4>
-                          <div className="flex justify-center mb-2">
-                            <span className={`px-2 py-1 rounded-full text-xs font-semibold ${getStatusColor(example.status)}`}>
-                              {example.status}
-                            </span>
-                          </div>
-                          <div className="text-center mb-2">
-                            <span className="text-sm font-bold flicker-solana solana-gradient">
-                              {example.price}
-                            </span>
-                          </div>
-                          <p className="text-xs text-gray-400 text-center">
-                            {example.description}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </React.Fragment>
+              </div>
             ))}
           </div>
         </section>
@@ -307,7 +352,7 @@ const FixersCatalogPage = () => {
         <footer className="border-t border-gray-800 bg-black/40 backdrop-blur-sm py-12 px-4">
           <div className="max-w-6xl mx-auto text-center">
             <div className="mb-8">
-              <p className="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed glow-blue">
+              <p className="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed glow-blue font-mono">
                 "This ain't your grandma's domain marketplace. This is the underlayer where real deals happen."
               </p>
             </div>
@@ -322,7 +367,7 @@ const FixersCatalogPage = () => {
                 GitHub
               </a>
               <a 
-                href="https://twitter.com/KongX" 
+                href="https://twitter.com/retailstarsol" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="solana-gradient flicker-solana hover:glow-blue transition-colors"
@@ -343,6 +388,12 @@ const FixersCatalogPage = () => {
               >
                 Domains
               </a>
+              <Link 
+                to="/acquisition-levels" 
+                className="solana-gradient flicker-solana hover:glow-blue transition-colors"
+              >
+                Flash Rack
+              </Link>
               <a 
                 href="/vault" 
                 className="solana-gradient flicker-solana hover:glow-blue transition-colors"

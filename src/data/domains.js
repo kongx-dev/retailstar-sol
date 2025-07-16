@@ -104,4 +104,14 @@ export const domainLore = {
     price: "8 SOL",
     status: "For Sale"
   }
-}; 
+};
+
+export const allDomains = [
+  { name: "vaultdegen.sol", escrow: true, vaulted: false, listed: true, tier: "Epic", price: 3.2, hasWebsite: true },
+  { name: "clicktopump.sol", escrow: true, vaulted: false, listed: true, tier: "Quick Snag", price: 0.8, hasWebsite: false },
+  { name: "jpegdealer.sol", escrow: false, vaulted: true, listed: false, tier: "Rare", price: 1.1, hasWebsite: true },
+  { name: "fudscience.sol", escrow: true, vaulted: false, listed: true, tier: "Rare", price: 1.4, hasWebsite: false },
+  { name: "dripdealer.sol", escrow: true, vaulted: false, listed: true, tier: "Rare", price: 2.1, hasWebsite: true },
+  { name: "glitchagent.sol", escrow: true, vaulted: false, listed: true, tier: "Epic", price: 3.0, hasWebsite: false },
+  { name: "copevendor.sol", escrow: true, vaulted: false, listed: true, tier: "Quick Snag", price: 0.5, hasWebsite: false },
+] 

@@ -197,3 +197,156 @@ body {
   border-color: #00ffe3 !important;
   box-shadow: 0 0 12px rgba(0, 255, 227, 0.3) !important;
 }
+
+/* Mobile App Landing Page Animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.8s ease-out forwards;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(168, 85, 247, 0.6), 0 0 40px rgba(168, 85, 247, 0.3);
+  }
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+@keyframes cyberpunk-scan {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.cyberpunk-scan {
+  background: linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.2), transparent);
+  background-size: 200% 100%;
+  animation: cyberpunk-scan 2s linear infinite;
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 640px) {
+  .mobile-optimized {
+    padding: 1rem;
+    font-size: 0.875rem;
+  }
+  
+  .mobile-card {
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+  }
+}
+
+/* Neon panel glow effect */
+.neon-panel::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  bottom: -4px;
+  left: -4px;
+  right: -4px;
+  z-index: -1;
+  border-radius: 1rem;
+  background: radial-gradient(circle, rgba(0,255,255,0.3) 0%, rgba(0,255,255,0.1) 40%, transparent 70%);
+  animation: pulseBorder 3s ease-in-out infinite;
+  pointer-events: none;
+  filter: blur(4px);
+}
+
+@keyframes pulseBorder {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.02);
+  }
+}
+
+/* Side panel glow effect */
+.side-glow::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100px;
+  background: linear-gradient(to right, rgba(0,255,255,0.15) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.side-glow::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 100px;
+  background: linear-gradient(to left, rgba(0,255,255,0.15) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Firefly container */
+.firefly-container {
+  overflow: hidden;
+}
+
+.firefly {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: rgba(255, 255, 200, 0.6);
+  border-radius: 50%;
+  animation: fly 10s infinite ease-in-out;
+  top: calc(100% * var(--random-y));
+  left: calc(100% * var(--random-x));
+}
+
+@keyframes fly {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0;
+  }
+  50% {
+    transform: translate(50px, -50px) scale(1.5);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translate(100px, -100px) scale(1);
+    opacity: 0;
+  }
+}

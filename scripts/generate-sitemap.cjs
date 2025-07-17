@@ -2,7 +2,14 @@ const fs = require("fs");
 const path = require("path");
 
 // Import your domain data (assumes default export)
-const domains = require("../src/data/domains").default;
+const domainModule = require("../src/data/domains");
+const domains = domainModule.default || domainModule;
+
+// Validate the import:
+if (!Array.isArray(domains)) {
+  console.error("❌ 'domains' is not an array. Value:", domains);
+  process.exit(1);
+}
 
 const baseUrl = "https://retailstar.xyz";
 

@@ -156,7 +156,7 @@ const HomePage = () => {
                   </div>
                   <h3 className="text-2xl font-bold solana-gradient flicker-solana mb-2">{node.name}</h3>
                   <p className="text-lg text-gray-300 mb-4">{node.description}</p>
-                  <p className="text-sm text-gray-400">Price: {node.price}</p>
+                  {/* <p className="text-sm text-gray-400">Price: {node.price}</p> */}
                   <p className="text-sm text-gray-400">Persona: {node.persona}</p>
                 </Link>
               ))}

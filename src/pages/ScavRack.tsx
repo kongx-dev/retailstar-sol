@@ -4,6 +4,7 @@ import ScavDomainCard from '../components/ScavDomainCard';
 import { Link } from 'react-router-dom';
 // @ts-ignore: PNG import for Vite
 import vendingBg from '../assets/rsvendingmachine.png';
+import SEOHead from '../components/SEOHead';
 
 function ScavRack() {
   const gridRef = useRef(null);
@@ -14,6 +15,17 @@ function ScavRack() {
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col relative overflow-hidden">
+      <SEOHead
+        target="retailstar.sol"
+        pageType="scavrack"
+        customTitle="Scav Rack | Retailstar.sol - Meme Tier Domains & PNG Drops"
+        customDescription="Discover low-effort, high-vibe .sol domains with upgraded PNGs. Ideal for profile flex or future upgrades."
+        customKeywords="meme domains, scav rack, .sol NFTs, profile PNG, SNS upgrade"
+      />
+      {/* LLM summary for ScavRack */}
+      {/*
+      <meta name="llm-summary" content="The Scav Rack contains meme-worthy .sol domains with only PNG visuals. Users can collect, flex, or upgrade to full builds.">
+      */}
       {/* Background image */}
       <img
         src={vendingBg}

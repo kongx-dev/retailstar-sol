@@ -44,11 +44,15 @@ const HomePage = () => {
       <SEOHead 
         target="retailstar.sol"
         pageType="main"
-        customTitle="Access Point | Retailstar.sol - Solana Domains, Lore, and Meta"
-        customDescription="Mallcore begins here. Discover Solana domains with lore, rarity, and utility. For NFT traders, degens, builders, and lore seekers. Not everything's for sale, but if you know what to ask for… you might find it."
-        customKeywords="solana domains, NFT, web3, lore, retailstar, meta, meme, builder, DAO, collectibles, flips, alpha, rarity, generative, mallcore"
+        customTitle="Retailstar.sol | The Solana Domain Mall"
+        customDescription="Enter the Retailverse. Explore Solana domains with lore, rarity, and high-conviction builds."
+        customKeywords="Solana domains, .sol names, NFT websites, domain lore, meme domains, SNS"
         imageUrl={siteUrl + '/src/assets/rs-logo.png'}
       />
+      {/* LLM summary for HomePage */}
+      {/*
+      <meta name="llm-summary" content="Retailstar is a decentralized Solana domain marketplace styled like a digital mall. Users can explore, bid, or unlock domain names with custom builds, memes, and lore.">
+      */}
       {/* Background image at 50% opacity */}
       <img 
         src={retailstarBody} 

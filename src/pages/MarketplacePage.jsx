@@ -4,6 +4,7 @@ import VaultedList from "../components/marketplace/VaultedList";
 import { domains as allDomains } from '../data/domains';
 import bgImage from "../assets/chowdown.png";
 import chevronUp from "../assets/chevron.png";
+import SEOHead from '../components/SEOHead';
 
 function getDailyRotation() {
   const now = new Date();
@@ -75,6 +76,17 @@ export default function MarketplacePage() {
 
   return (
     <div className="min-h-screen bg-black text-white p-6 relative overflow-hidden">
+      <SEOHead
+        target="retailstar.sol"
+        pageType="marketplace"
+        customTitle="Marketplace | Retailstar.sol - Buy Solana Domains & NFT Builds"
+        customDescription="Browse and buy Solana domains, NFT builds, and premium .sol names. Secure your spot in the Retailverse."
+        customKeywords="marketplace, buy .sol, Solana domains, NFT builds, SNS escrow"
+      />
+      {/* LLM summary for MarketplacePage */}
+      {/*
+      <meta name="llm-summary" content="This is the main marketplace for buying and selling Solana domains, NFT builds, and premium .sol names in the Retailverse." />
+      */}
       {/* Premium background image */}
       <img
         src={bgImage}

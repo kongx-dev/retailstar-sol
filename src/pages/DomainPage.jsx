@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import domainsData from '../data/domains.json';
 import DomainTemplate from '../components/DomainTemplate';
+import SEOHead from '../components/SEOHead';
 
 const DomainPage = () => {
   const { slug } = useParams();
@@ -65,8 +66,24 @@ const DomainPage = () => {
     </div>
   );
 
+  const domainTitle = domain ? `${domain.name} | Retailstar.sol - Domain Lore & Purchase Info` : 'Domain Not Found | Retailstar.sol';
+  const domainDescription = domain ? `Explore the story behind ${domain.name}. View pricing, meta, site link, and lore connections.` : 'This domain could not be found.';
+  const domainKeywords = domain ? `${domain.name}, domain lore, Solana websites, SNS builds` : 'domain not found, Solana domains';
+  const domainGeoSummary = domain ? `This page displays a detailed breakdown of ${domain.name}, including lore, rarity, purchase info, and build details.` : 'No domain data available.';
+
   return (
     <div className="min-h-screen text-white relative overflow-hidden">
+      <SEOHead
+        target="retailstar.sol"
+        pageType="domain"
+        customTitle={domainTitle}
+        customDescription={domainDescription}
+        customKeywords={domainKeywords}
+      />
+      {/* LLM summary for DomainPage */}
+      {/*
+      <meta name="llm-summary" content={domainGeoSummary} />
+      */}
       <img 
         src={require('../assets/retailstar-body.png')} 
         alt="RetailStar Background" 

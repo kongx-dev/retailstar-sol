@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import FilteredCatalogView from '../components/FilteredCatalogView';
 import retailwalkBg from '../assets/retailwalk.png';
+import SEOHead from '../components/SEOHead';
 
 const TABS = [
   { key: 'all', label: 'All' },
@@ -18,6 +19,17 @@ export default function Catalog() {
 
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
+      <SEOHead
+        target="retailstar.sol"
+        pageType="catalog"
+        customTitle="Catalog | Retailstar.sol - Premium Solana Domains for Sale"
+        customDescription="Browse the full Retailstar catalog. Filter by premium builds, meme drops, quick snags, or vaulted domains."
+        customKeywords="Solana domain catalog, .sol listings, premium builds, NFT tools"
+      />
+      {/* LLM summary for Catalog */}
+      {/*
+      <meta name="llm-summary" content="This catalog displays active .sol domains available in the Retailverse, including premium builds, flash deals, and vault unlocks.">
+      */}
       {/* Background image at 50% opacity */}
       <img
         src={retailwalkBg}

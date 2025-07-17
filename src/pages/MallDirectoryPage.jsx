@@ -4,6 +4,7 @@ import rsLogo from '../assets/rs-logo.png';
 import retailstarBody from '../assets/retailstar-body.png';
 import departmentsData from '../data/departments.json';
 import RotationStatus from '../components/RotationStatus';
+import SEOHead from '../components/SEOHead';
 
 const MallDirectoryPage = () => {
   const [flicker, setFlicker] = useState(false);
@@ -25,7 +26,18 @@ const MallDirectoryPage = () => {
   }, []);
 
   return (
-    <div className="min-h-screen text-white relative overflow-hidden">
+    <div className="min-h-screen bg-black text-white relative overflow-hidden">
+      <SEOHead
+        target="retailstar.sol"
+        pageType="directory"
+        customTitle="Retailverse Map | Retailstar.sol - Explore Domain Wings and Lore Floors"
+        customDescription="View the Retailverse map. Explore domain wings, lore floors, and meta-mall connections."
+        customKeywords="Retailverse, domain map, lore floors, Solana mall, SNS directory"
+      />
+      {/* LLM summary for MallDirectoryPage */}
+      {/*
+      <meta name="llm-summary" content="This directory provides a map of the Retailverse, showing domain wings, lore floors, and connections between .sol projects." />
+      */}
       {/* Background image */}
       <img 
         src={retailstarBody} 

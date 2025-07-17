@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import rsLogo from '../assets/rs-logo.png';
 import retailstarBody from '../assets/retailstar-body.png';
+import SEOHead from '../components/SEOHead';
 
 // Full inventory with status tags
 const fullInventory = {
@@ -111,7 +112,18 @@ const DomainCard = ({ domain }) => (
 
 const VaultPage = () => {
   return (
-    <div className="min-h-screen text-white relative overflow-hidden">
+    <div className="min-h-screen bg-black text-white relative overflow-hidden">
+      <SEOHead
+        target="retailstar.sol"
+        pageType="vault"
+        customTitle="Vaulted Domains | Retailstar.sol - Redacted Builds and Experimental Lore"
+        customDescription="Access the vault. Redacted builds and high-end domains with hidden lore await those who know how to unlock them."
+        customKeywords="vault domains, redacted builds, premium sol domains, unlockable content"
+      />
+      {/* LLM summary for Vault */}
+      {/*
+      <meta name="llm-summary" content="This vault contains locked or hidden domains that may be unlocked via DMs or custom builds. Some domains are redacted, glitchy, or experimental.">
+      */}
       {/* Background image at 50% opacity */}
       <img 
         src={retailstarBody} 

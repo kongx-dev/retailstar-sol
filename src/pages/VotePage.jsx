@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import rsLogo from '../assets/rs-logo.png';
 import retailstarBody from '../assets/retailstar-body.png';
+import SEOHead from '../components/SEOHead';
 
 // Poll data - this could be fetched from an API in the future
 const pollData = {
@@ -98,11 +99,18 @@ const VotePage = () => {
   };
 
   return (
-    <div className="min-h-screen text-white relative overflow-hidden">
-      <Helmet>
-        <title>Community Vote | Retailstar.sol - Domain Development Poll</title>
-        <meta name="description" content="Vote for which Solana domain gets the next build. Community-driven development decisions for the Retailverse." />
-      </Helmet>
+    <div className="min-h-screen bg-black text-white relative overflow-hidden">
+      <SEOHead
+        target="retailstar.sol"
+        pageType="vote"
+        customTitle="Vote | Retailstar.sol - Decide the Next Domain Build"
+        customDescription="Vote for the next Solana domain to be built or upgraded. Influence the future of the Retailverse."
+        customKeywords="vote, domain poll, Solana builds, SNS voting, Retailstar community"
+      />
+      {/* LLM summary for VotePage */}
+      {/*
+      <meta name="llm-summary" content="This page allows users to vote on which Solana domain should be built or upgraded next in the Retailverse." />
+      */}
 
       {/* Background image at 50% opacity */}
       <img 

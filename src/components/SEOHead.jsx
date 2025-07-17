@@ -7,6 +7,7 @@ import {
   generateJSONLD 
 } from '../data/seo-keywords';
 
+const defaultOGImage = "https://retailstar.xyz/assets/rs-og-card.png";
 const SEOHead = ({ 
   target, 
   pageType = 'main', 
@@ -14,16 +15,19 @@ const SEOHead = ({
   customDescription, 
   customKeywords,
   imageUrl,
-  canonicalUrl 
+  canonicalUrl,
+  ogImage,
+  twitterImage
 }) => {
   const title = customTitle || generatePageTitle(target, pageType);
   const description = customDescription || generateMetaDescription(target);
   const keywords = customKeywords || generateMetaKeywords(target);
   const jsonLd = generateJSONLD(target);
   const domainName = target?.replace('.sol', '') || 'retailstar';
-  
-  const defaultImage = imageUrl || `https://retailstar.sol/og-${domainName}.png`;
-  const defaultCanonical = canonicalUrl || `https://${target || 'retailstar.sol'}`;
+  const defaultImage = imageUrl || defaultOGImage;
+  const ogImageUrl = ogImage || defaultImage;
+  const twitterImageUrl = twitterImage || defaultImage;
+  const defaultCanonical = canonicalUrl || `https://${target || 'retailstar.xyz'}`;
 
   return (
     <Helmet>
@@ -38,14 +42,14 @@ const SEOHead = ({
       <meta property="og:description" content={description} />
       <meta property="og:type" content="website" />
       <meta property="og:url" content={defaultCanonical} />
-      <meta property="og:image" content={defaultImage} />
+      <meta property="og:image" content={ogImageUrl} />
       <meta property="og:site_name" content="Retailstar.sol" />
       
       {/* Twitter Card Tags */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={defaultImage} />
+      <meta name="twitter:image" content={twitterImageUrl} />
       <meta name="twitter:site" content="@retailstarsol" />
       
       {/* Additional SEO Tags */}

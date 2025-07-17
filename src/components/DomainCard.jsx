@@ -76,7 +76,7 @@ function DomainCard({
       {forSale && (
         <>
           <div className="price" style={{ marginTop: "10px" }}>
-            {price} SOL
+            {vaulted ? '? SOL' : price.replace(/\s*SOL\s*$/i, '') + ' SOL'}
           </div>
           <a
             href={`https://x.com/messages/compose?recipient_id=1689270192859781120`}
@@ -84,7 +84,7 @@ function DomainCard({
             target="_blank"
             rel="noopener noreferrer"
           >
-            DM to Buy
+            {vaulted ? 'DM to Inquire' : 'DM to Buy'}
           </a>
         </>
       )}

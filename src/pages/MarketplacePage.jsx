@@ -74,6 +74,13 @@ export default function MarketplacePage() {
   // Dynamically import all PNGs from assets
   const images = import.meta.glob('../assets/*.png', { eager: true, import: 'default' });
 
+  // Add blinking animation for chevrons
+  const chevronBlink = {
+    animation: 'chevron-blink 1.2s infinite',
+  };
+  // Add keyframes to the page (if not in global CSS)
+  const style = `@keyframes chevron-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }`;
+
   return (
     <div className="min-h-screen bg-black text-white p-6 relative overflow-hidden">
       <SEOHead
@@ -134,11 +141,14 @@ export default function MarketplacePage() {
                   >
                     Visit Site
                   </a>
+                  {/* Buy button: same effects as Visit Site, but green */}
                   <a
-                    href={`/domains/${d.slug}`}
-                    className="neon-purple neon-purple-hover py-2 px-4 rounded font-semibold text-sm"
+                    href="https://twitter.com/messages/compose?recipient_id=retailstarsol"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="neon-green neon-green-hover py-2 px-4 rounded font-semibold text-sm transition-all duration-200 shadow-lg animate-pulse focus:outline-none focus:ring-2 focus:ring-green-400/50 hover:bg-green-600 hover:text-white"
                   >
-                    View Wiki
+                    Buy
                   </a>
                 </div>
               </div>
@@ -176,19 +186,15 @@ export default function MarketplacePage() {
           onPurchase={handlePurchase}
         />
       </div>
-      {/* Animated chevron up arrows at the bottom using custom image */}
-      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center z-20 pointer-events-none">
-        <img src={chevronUp} alt="Chevron Up" className="w-12 h-12 animate-bounce" style={{animationDelay: '0s'}} />
-        <img src={chevronUp} alt="Chevron Up" className="w-10 h-10 animate-bounce" style={{animationDelay: '0.2s'}} />
-        <img src={chevronUp} alt="Chevron Up" className="w-9 h-9 animate-bounce" style={{animationDelay: '0.4s'}} />
-      </div>
       {/* Footer */}
       <footer className="border-t border-gray-800 bg-black/40 backdrop-blur-sm py-12 px-4 mt-16">
         <div className="max-w-6xl mx-auto text-center">
-          <div className="mb-8">
+          <div className="mb-8 flex items-center justify-center gap-6">
+            <img src={chevronUp} alt="Chevron Left" className="w-10 h-10" style={{ ...chevronBlink, transform: 'rotate(-90deg)' }} />
             <p className="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed glow-blue">
               RetailStar is a broadcast from Solana's underlayer — every domain is a node waiting to go live.
             </p>
+            <img src={chevronUp} alt="Chevron Right" className="w-10 h-10" style={{ ...chevronBlink, transform: 'rotate(90deg)' }} />
           </div>
           <div className="flex justify-center space-x-8 text-sm mb-6">
             <a 
@@ -251,6 +257,7 @@ export default function MarketplacePage() {
           </div>
         </div>
       </footer>
+      <style>{style}</style>
     </div>
   );
 } 

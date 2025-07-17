@@ -6,6 +6,7 @@ import retailstarBody from '../assets/retailstar-body.png';
 import jpegdealerImage from '../assets/jpegdealer.png';
 import bidgremlinImage from '../assets/bidgremlin.png';
 import fudscientistImage from '../assets/fudscientist.png';
+import jumpsetradioImage from '../assets/jumpsetradio.png';
 
 const WikiPage = () => {
   const { slug } = useParams();
@@ -167,6 +168,9 @@ The Retailverse is alive with potential—every domain is a blank canvas waiting
               <span className="text-xl font-bold solana-gradient">RetailStar</span>
             </Link>
             <nav className="flex space-x-6">
+              <Link to="/how-it-works" className="text-cyan-300 hover:text-white font-semibold transition-colors">
+                📖 How to Navigate
+              </Link>
               <Link to="/domains" className="text-gray-300 hover:text-white transition-colors">
                 Domains
               </Link>
@@ -201,7 +205,15 @@ The Retailverse is alive with potential—every domain is a blank canvas waiting
               <div className="mb-6">
                 <img 
                   src={fudscientistImage} 
-                  alt="FUD Science" 
+                  alt="FUD Scientist" 
+                  className="w-32 h-32 mx-auto rounded-lg border-2 border-cyan-500/50 shadow-lg shadow-cyan-500/25"
+                />
+              </div>
+            ) : domain.slug === 'jumpsetradio' ? (
+              <div className="mb-6">
+                <img 
+                  src={jumpsetradioImage} 
+                  alt="Jumpset Radio" 
                   className="w-32 h-32 mx-auto rounded-lg border-2 border-cyan-500/50 shadow-lg shadow-cyan-500/25"
                 />
               </div>
@@ -308,7 +320,16 @@ The Retailverse is alive with potential—every domain is a blank canvas waiting
                              {/* Purchase CTA */}
                <div className="text-center">
                  <h3 className="text-lg font-semibold mb-4 text-cyan-400">Domain Status</h3>
-                 {domain.status === 'available' ? (
+                 {['fudscience', 'jpegdealer', 'jumpsetradio'].includes(domain.slug) ? (
+                   <a
+                     href="https://twitter.com/messages/compose?recipient_id=retailstarsol"
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     className="bg-green-600 hover:bg-green-700 text-white py-3 px-6 rounded-lg font-bold transition-all duration-200 inline-block animate-pulse focus:outline-none focus:ring-2 focus:ring-green-400/50"
+                   >
+                     🛒 Buy Now
+                   </a>
+                 ) : domain.status === 'available' ? (
                    <a
                      href={`https://app.sns.id/domain/${domain.name}`}
                      target="_blank"

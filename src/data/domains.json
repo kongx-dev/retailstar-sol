@@ -8,7 +8,8 @@
       "featured": true,
       "status": "not_for_sale",
       "price": "N/A",
-      "category": "headquarters"
+      "category": "headquarters",
+      "vaulted": true
     },
     {
       "name": "afterhourslab",
@@ -18,7 +19,8 @@
       "featured": false,
       "status": "available",
       "price": "8 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "aimtraining",
@@ -28,7 +30,8 @@
       "featured": false,
       "status": "available",
       "price": "5 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "alphastalker",
@@ -38,7 +41,8 @@
       "featured": false,
       "status": "available",
       "price": "12 SOL",
-      "category": "premium"
+      "category": "premium",
+      "vaulted": true
     },
     {
       "name": "alphatracker",
@@ -48,7 +52,8 @@
       "featured": false,
       "status": "available",
       "price": "10 SOL",
-      "category": "premium"
+      "category": "premium",
+      "vaulted": true
     },
     {
       "name": "bagcultist",
@@ -58,7 +63,8 @@
       "featured": false,
       "status": "available",
       "price": "6 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "bagholderfund",
@@ -68,7 +74,8 @@
       "featured": false,
       "status": "available",
       "price": "7 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "battlehub",
@@ -78,7 +85,8 @@
       "featured": false,
       "status": "available",
       "price": "9 SOL",
-      "category": "premium"
+      "category": "premium",
+      "vaulted": true
     },
     {
       "name": "bidgremlin",
@@ -91,7 +99,8 @@
       "quickSnagPrice": "0.89 SOL",
       "category": "mid",
       "hasWebsite": true,
-      "website": "https://bidgremlin.netlify.app/"
+      "website": "https://bidgremlin.netlify.app/",
+      "vaulted": true
     },
     {
       "name": "biggestofbrains",
@@ -104,7 +113,8 @@
       "category": "premium",
       "hasLore": true,
       "hasWebsite": true,
-      "website": "https://biggestofbrains.netlify.app/"
+      "website": "https://biggestofbrains.netlify.app/",
+      "vaulted": true
     },
     {
       "name": "clicktopump",
@@ -114,7 +124,8 @@
       "featured": false,
       "status": "available",
       "price": "8 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "cloutfarming",
@@ -124,7 +135,8 @@
       "featured": false,
       "status": "available",
       "price": "6 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "codepastdark",
@@ -134,7 +146,8 @@
       "featured": false,
       "status": "available",
       "price": "7 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "commandhub",
@@ -146,7 +159,8 @@
       "price": "8.5 SOL",
       "category": "mid",
       "hasWebsite": true,
-      "website": "https://commandhub.netlify.app/"
+      "website": "https://commandhub.netlify.app/",
+      "vaulted": true
     },
     {
       "name": "commandvault",
@@ -156,7 +170,8 @@
       "featured": false,
       "status": "available",
       "price": "11 SOL",
-      "category": "premium"
+      "category": "premium",
+      "vaulted": true
     },
     {
       "name": "configportal",
@@ -166,7 +181,8 @@
       "featured": false,
       "status": "available",
       "price": "9 SOL",
-      "category": "premium"
+      "category": "premium",
+      "vaulted": true
     },
     {
       "name": "controlcenter",
@@ -176,7 +192,8 @@
       "featured": false,
       "status": "available",
       "price": "12 SOL",
-      "category": "premium"
+      "category": "premium",
+      "vaulted": true
     },
     {
       "name": "controldock",
@@ -186,7 +203,8 @@
       "featured": false,
       "status": "available",
       "price": "8 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "copevendor",
@@ -198,7 +216,8 @@
       "price": "6.9 SOL",
       "category": "mid",
       "hasWebsite": true,
-      "website": "https://copevendor.netlify.app/"
+      "website": "https://copevendor.netlify.app/",
+      "vaulted": true
     },
     {
       "name": "deploydeck",
@@ -211,7 +230,8 @@
       "quickSnagPrice": "2.5 SOL",
       "category": "mid",
       "hasWebsite": true,
-      "website": "https://deploydeck.netlify.app/"
+      "website": "https://deploydeck.netlify.app/",
+      "vaulted": true
     },
     {
       "name": "deploydock",
@@ -221,7 +241,8 @@
       "featured": false,
       "status": "available",
       "price": "6 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "dojoquest",
@@ -231,7 +252,8 @@
       "featured": false,
       "status": "available",
       "price": "7 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "dreadprotocol",
@@ -241,7 +263,8 @@
       "featured": false,
       "status": "available",
       "price": "10 SOL",
-      "category": "premium"
+      "category": "premium",
+      "vaulted": true
     },
     {
       "name": "dripdealer",
@@ -251,7 +274,8 @@
       "featured": false,
       "status": "available",
       "price": "8 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "dripprovider",
@@ -261,7 +285,8 @@
       "featured": false,
       "status": "available",
       "price": "9 SOL",
-      "category": "premium"
+      "category": "premium",
+      "vaulted": true
     },
     {
       "name": "exitprotocol",
@@ -271,19 +296,8 @@
       "featured": false,
       "status": "available",
       "price": "11 SOL",
-      "category": "premium"
-    },
-    {
-      "name": "fudscientist",
-      "slug": "fudscientist",
-      "description": "FOMO culture satire and research",
-      "image": "fudscientist.png",
-      "featured": false,
-      "status": "vaulted",
-      "price": "10 SOL",
       "category": "premium",
-      "hasWebsite": true,
-      "website": "https://fudscientist.netlify.app/"
+      "vaulted": true
     },
     {
       "name": "fudscience",
@@ -291,11 +305,12 @@
       "description": "FOMO culture satire and research",
       "image": "fudscientist.png",
       "featured": false,
-      "status": "vaulted",
+      "status": "available",
       "price": "10 SOL",
       "category": "premium",
       "hasWebsite": true,
-      "website": "https://fudscience.netlify.app/"
+      "website": "https://fudscience.netlify.app/",
+      "vaulted": false
     },
     {
       "name": "getgoodkid",
@@ -305,7 +320,8 @@
       "featured": false,
       "status": "available",
       "price": "6 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "gg2ez",
@@ -315,7 +331,8 @@
       "featured": false,
       "status": "available",
       "price": "5 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "ghostrunner",
@@ -325,7 +342,8 @@
       "featured": false,
       "status": "available",
       "price": "8 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "ghostshift",
@@ -335,7 +353,8 @@
       "featured": false,
       "status": "available",
       "price": "7 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "gorillatech",
@@ -345,7 +364,8 @@
       "featured": false,
       "status": "not_for_sale",
       "price": "N/A",
-      "category": "lore"
+      "category": "lore",
+      "vaulted": true
     },
     {
       "name": "grindprotocol",
@@ -355,7 +375,8 @@
       "featured": false,
       "status": "available",
       "price": "8 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "headempty",
@@ -365,7 +386,8 @@
       "featured": false,
       "status": "available",
       "price": "4 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "holdtheline",
@@ -375,7 +397,8 @@
       "featured": false,
       "status": "available",
       "price": "6 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "hoodiedrip",
@@ -385,7 +408,8 @@
       "featured": false,
       "status": "available",
       "price": "7 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "hoodiehq",
@@ -395,7 +419,8 @@
       "featured": false,
       "status": "available",
       "price": "8 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "hoodieverse",
@@ -405,7 +430,8 @@
       "featured": false,
       "status": "available",
       "price": "12 SOL",
-      "category": "premium"
+      "category": "premium",
+      "vaulted": true
     },
     {
       "name": "imagecraft",
@@ -415,7 +441,8 @@
       "featured": false,
       "status": "available",
       "price": "9 SOL",
-      "category": "premium"
+      "category": "premium",
+      "vaulted": true
     },
     {
       "name": "imaginacion",
@@ -425,7 +452,8 @@
       "featured": false,
       "status": "available",
       "price": "6 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "inpregneable",
@@ -435,7 +463,8 @@
       "featured": false,
       "status": "available",
       "price": "10 SOL",
-      "category": "premium"
+      "category": "premium",
+      "vaulted": true
     },
     {
       "name": "internetkarma",
@@ -445,7 +474,8 @@
       "featured": false,
       "status": "available",
       "price": "8 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "itsgone",
@@ -455,7 +485,8 @@
       "featured": false,
       "status": "available",
       "price": "5 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "jetsetradio",
@@ -465,7 +496,8 @@
       "featured": false,
       "status": "available",
       "price": "9 SOL",
-      "category": "premium"
+      "category": "premium",
+      "vaulted": true
     },
     {
       "name": "johnnysilverhand",
@@ -475,7 +507,8 @@
       "featured": false,
       "status": "available",
       "price": "15 SOL",
-      "category": "premium"
+      "category": "premium",
+      "vaulted": true
     },
     {
       "name": "jpegdealer",
@@ -483,11 +516,12 @@
       "description": "NFT resale terminal for flippers",
       "image": "jpegdealer.png",
       "featured": false,
-      "status": "vaulted",
+      "status": "available",
       "price": "12 SOL",
       "category": "premium",
       "hasWebsite": true,
-      "website": "https://jpegdealer.netlify.app/"
+      "website": "https://jpegdealer.netlify.app/",
+      "vaulted": true
     },
     {
       "name": "jumpsetradio",
@@ -499,7 +533,8 @@
       "price": "5.5 SOL",
       "category": "mid",
       "hasWebsite": true,
-      "website": "https://jumpsetradio.netlify.app/"
+      "website": "https://jumpsetradio.netlify.app/",
+      "vaulted": true
     },
     {
       "name": "kombat",
@@ -509,7 +544,8 @@
       "featured": false,
       "status": "available",
       "price": "8 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "latenightdev",
@@ -519,7 +555,8 @@
       "featured": false,
       "status": "available",
       "price": "7 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "loungeprotocol",
@@ -529,7 +566,8 @@
       "featured": false,
       "status": "available",
       "price": "6 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "lurkerlife",
@@ -541,7 +579,8 @@
       "price": "12 SOL",
       "category": "premium",
       "hasWebsite": true,
-      "website": "https://lurkerlife.netlify.app/"
+      "website": "https://lurkerlife.netlify.app/",
+      "vaulted": true
     },
     {
       "name": "maidenless",
@@ -551,7 +590,8 @@
       "featured": false,
       "status": "available",
       "price": "5 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "mallprotocol",
@@ -561,7 +601,8 @@
       "featured": false,
       "status": "not_for_sale",
       "price": "N/A",
-      "category": "lore"
+      "category": "lore",
+      "vaulted": true
     },
     {
       "name": "marksmanhub",
@@ -571,7 +612,8 @@
       "featured": false,
       "status": "available",
       "price": "8 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "midnightcoder",
@@ -581,7 +623,8 @@
       "featured": false,
       "status": "available",
       "price": "7 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "midnighthustle",
@@ -591,7 +634,8 @@
       "featured": false,
       "status": "available",
       "price": "6 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "mindflow",
@@ -601,7 +645,8 @@
       "featured": false,
       "status": "available",
       "price": "8 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "momentoftruth",
@@ -611,7 +656,8 @@
       "featured": false,
       "status": "available",
       "price": "10 SOL",
-      "category": "premium"
+      "category": "premium",
+      "vaulted": true
     },
     {
       "name": "neverhooded",
@@ -621,7 +667,8 @@
       "featured": false,
       "status": "available",
       "price": "5 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "nightprotocol",
@@ -631,7 +678,8 @@
       "featured": false,
       "status": "available",
       "price": "8 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "nightterminal",
@@ -641,7 +689,8 @@
       "featured": false,
       "status": "available",
       "price": "7 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "ninjachain",
@@ -651,7 +700,8 @@
       "featured": false,
       "status": "available",
       "price": "9 SOL",
-      "category": "premium"
+      "category": "premium",
+      "vaulted": true
     },
     {
       "name": "noaura",
@@ -661,7 +711,8 @@
       "featured": false,
       "status": "available",
       "price": "6 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "nocturnalcodes",
@@ -671,7 +722,8 @@
       "featured": false,
       "status": "available",
       "price": "7 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "nodefinder",
@@ -681,7 +733,8 @@
       "featured": false,
       "status": "available",
       "price": "8 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "nodehunter",
@@ -691,7 +744,8 @@
       "featured": false,
       "status": "available",
       "price": "9 SOL",
-      "category": "premium"
+      "category": "premium",
+      "vaulted": true
     },
     {
       "name": "noloot",
@@ -701,7 +755,8 @@
       "featured": false,
       "status": "available",
       "price": "4 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "nosauce",
@@ -711,7 +766,8 @@
       "featured": false,
       "status": "available",
       "price": "3 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "noskill",
@@ -721,7 +777,8 @@
       "featured": false,
       "status": "available",
       "price": "4 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "notalpha",
@@ -731,7 +788,8 @@
       "featured": false,
       "status": "available",
       "price": "5 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "paymyinterns",
@@ -741,7 +799,8 @@
       "featured": false,
       "status": "not_for_sale",
       "price": "N/A",
-      "category": "lore"
+      "category": "lore",
+      "vaulted": true
     },
     {
       "name": "pingstation",
@@ -751,7 +810,8 @@
       "featured": false,
       "status": "not_for_sale",
       "price": "N/A",
-      "category": "lore"
+      "category": "lore",
+      "vaulted": true
     },
     {
       "name": "pistola",
@@ -761,7 +821,8 @@
       "featured": false,
       "status": "available",
       "price": "8 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "pushsignal",
@@ -771,7 +832,8 @@
       "featured": false,
       "status": "available",
       "price": "6 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "raidprotocol",
@@ -781,7 +843,8 @@
       "featured": false,
       "status": "not_for_sale",
       "price": "N/A",
-      "category": "lore"
+      "category": "lore",
+      "vaulted": true
     },
     {
       "name": "rektlog",
@@ -791,7 +854,8 @@
       "featured": false,
       "status": "not_for_sale",
       "price": "N/A",
-      "category": "lore"
+      "category": "lore",
+      "vaulted": true
     },
     {
       "name": "rektworthy",
@@ -801,7 +865,8 @@
       "featured": false,
       "status": "available",
       "price": "6 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "remixed",
@@ -811,7 +876,8 @@
       "featured": false,
       "status": "available",
       "price": "7 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "retailrunner",
@@ -821,7 +887,8 @@
       "featured": false,
       "status": "not_for_sale",
       "price": "N/A",
-      "category": "lore"
+      "category": "lore",
+      "vaulted": true
     },
     {
       "name": "retailverse",
@@ -832,7 +899,8 @@
       "status": "not_for_sale",
       "price": "N/A",
       "category": "lore",
-      "hasLore": true
+      "hasLore": true,
+      "vaulted": true
     },
     {
       "name": "rigbuilder",
@@ -844,7 +912,8 @@
       "price": "5.5 SOL",
       "category": "mid",
       "hasWebsite": true,
-      "website": "https://rigbuilder.netlify.app/"
+      "website": "https://rigbuilder.netlify.app/",
+      "vaulted": true
     },
     {
       "name": "scrollmage",
@@ -854,7 +923,8 @@
       "featured": false,
       "status": "available",
       "price": "8 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "signalcontrol",
@@ -864,7 +934,8 @@
       "featured": false,
       "status": "available",
       "price": "10 SOL",
-      "category": "premium"
+      "category": "premium",
+      "vaulted": true
     },
     {
       "name": "sk8culture",
@@ -874,7 +945,8 @@
       "featured": false,
       "status": "available",
       "price": "7 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "smoothestbrain",
@@ -884,7 +956,8 @@
       "featured": false,
       "status": "available",
       "price": "9 SOL",
-      "category": "premium"
+      "category": "premium",
+      "vaulted": true
     },
     {
       "name": "sniperguru",
@@ -893,8 +966,9 @@
       "image": "🎯",
       "featured": false,
       "status": "available",
-      "price": "8 SOL",
-      "category": "mid"
+      "price": "1 SOL",
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "stayfud",
@@ -904,7 +978,8 @@
       "featured": false,
       "status": "available",
       "price": "5 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "tdbagchaser",
@@ -914,7 +989,8 @@
       "featured": false,
       "status": "available",
       "price": "6 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "thisaintit",
@@ -924,7 +1000,8 @@
       "featured": false,
       "status": "available",
       "price": "4 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "trackalpha",
@@ -934,7 +1011,8 @@
       "featured": false,
       "status": "available",
       "price": "11 SOL",
-      "category": "premium"
+      "category": "premium",
+      "vaulted": true
     },
     {
       "name": "traitlocked",
@@ -944,7 +1022,8 @@
       "featured": false,
       "status": "available",
       "price": "7 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "unrelenting",
@@ -954,7 +1033,8 @@
       "featured": false,
       "status": "available",
       "price": "8 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "uplinknode",
@@ -964,7 +1044,8 @@
       "featured": false,
       "status": "not_for_sale",
       "price": "N/A",
-      "category": "lore"
+      "category": "lore",
+      "vaulted": true
     },
     {
       "name": "uploadstation",
@@ -974,7 +1055,8 @@
       "featured": false,
       "status": "available",
       "price": "8 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "urnotthatguy",
@@ -984,7 +1066,8 @@
       "featured": false,
       "status": "available",
       "price": "5 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "beckerprotocol",
@@ -994,7 +1077,8 @@
       "featured": false,
       "status": "available",
       "price": "8 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "broimearly",
@@ -1004,7 +1088,8 @@
       "featured": false,
       "status": "available",
       "price": "6 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "coinbureaus",
@@ -1014,7 +1099,8 @@
       "featured": false,
       "status": "available",
       "price": "9 SOL",
-      "category": "premium"
+      "category": "premium",
+      "vaulted": true
     },
     {
       "name": "copthisbro",
@@ -1024,7 +1110,8 @@
       "featured": false,
       "status": "available",
       "price": "4 SOL",
-      "category": "flash"
+      "category": "flash",
+      "vaulted": true
     },
     {
       "name": "gonnabuildsoon",
@@ -1034,7 +1121,8 @@
       "featured": false,
       "status": "available",
       "price": "5 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "imstillcoping",
@@ -1044,7 +1132,8 @@
       "featured": false,
       "status": "available",
       "price": "3 SOL",
-      "category": "flash"
+      "category": "flash",
+      "vaulted": true
     },
     {
       "name": "itspremiumbro",
@@ -1054,7 +1143,8 @@
       "featured": false,
       "status": "available",
       "price": "12 SOL",
-      "category": "premium"
+      "category": "premium",
+      "vaulted": true
     },
     {
       "name": "justmissed",
@@ -1064,7 +1154,8 @@
       "featured": false,
       "status": "available",
       "price": "4 SOL",
-      "category": "flash"
+      "category": "flash",
+      "vaulted": true
     },
     {
       "name": "lowballking",
@@ -1074,7 +1165,8 @@
       "featured": false,
       "status": "available",
       "price": "7 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "metablessed",
@@ -1084,7 +1176,8 @@
       "featured": false,
       "status": "available",
       "price": "10 SOL",
-      "category": "premium"
+      "category": "premium",
+      "vaulted": true
     },
     {
       "name": "missedpricedaf",
@@ -1094,7 +1187,8 @@
       "featured": false,
       "status": "available",
       "price": "5 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "registrygrifter",
@@ -1104,7 +1198,8 @@
       "featured": false,
       "status": "available",
       "price": "8 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "soldfortaxes",
@@ -1113,8 +1208,9 @@
       "image": "💰",
       "featured": false,
       "status": "available",
-      "price": "6 SOL",
-      "category": "mid"
+      "price": "8 SOL",
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "trustthemeta",
@@ -1124,7 +1220,8 @@
       "featured": false,
       "status": "available",
       "price": "9 SOL",
-      "category": "premium"
+      "category": "premium",
+      "vaulted": true
     },
     {
       "name": "verifiedsoon",
@@ -1134,7 +1231,8 @@
       "featured": false,
       "status": "available",
       "price": "7 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     },
     {
       "name": "whogaveyouthat",
@@ -1144,7 +1242,8 @@
       "featured": false,
       "status": "available",
       "price": "4 SOL",
-      "category": "flash"
+      "category": "flash",
+      "vaulted": true
     },
     {
       "name": "wordisbond",
@@ -1154,7 +1253,8 @@
       "featured": false,
       "status": "available",
       "price": "8 SOL",
-      "category": "mid"
+      "category": "mid",
+      "vaulted": true
     }
   ]
 } 

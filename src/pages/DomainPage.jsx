@@ -37,6 +37,9 @@ const DomainPage = () => {
   }
 
   // Funnel CTAs
+  const handleStoreReferrer = () => {
+    if (slug) sessionStorage.setItem('lastWikiSlug', slug);
+  };
   const funnelCTAs = (
     <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
       {domain.website && (
@@ -49,12 +52,26 @@ const DomainPage = () => {
           🌐 Visit Website
         </a>
       )}
-      <a
-        href="/marketplace"
-        className="neon-orange neon-orange-hover py-3 px-6 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 text-lg"
-      >
-        🛒 Buy on Marketplace
-      </a>
+      {/* Show green DM Buy button only for fudscience, else show original orange button */}
+      {slug === 'fudscience' ? (
+        <a
+          href="https://twitter.com/messages/compose?recipient_id=retailstarsol"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="neon-green neon-green-hover py-3 px-6 rounded-lg font-bold text-lg transition-all duration-200 shadow-lg animate-pulse focus:outline-none focus:ring-2 focus:ring-green-400/50 hover:bg-green-600 hover:text-white flex items-center gap-2"
+          onClick={handleStoreReferrer}
+        >
+          🛒 Buy
+        </a>
+      ) : (
+        <a
+          href="/marketplace"
+          className="neon-orange neon-orange-hover py-3 px-6 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 text-lg"
+          onClick={handleStoreReferrer}
+        >
+          🛒 Buy on Marketplace
+        </a>
+      )}
       {domain.vaulted && (
         <a
           href="/upgrade"
@@ -63,6 +80,13 @@ const DomainPage = () => {
           🔓 Unlock Vault
         </a>
       )}
+      <a
+        href="/catalog"
+        className="neon-cyan neon-cyan-hover py-3 px-6 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 text-lg"
+        onClick={handleStoreReferrer}
+      >
+        🗂️ Explore Catalog
+      </a>
     </div>
   );
 

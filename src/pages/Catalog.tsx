@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import FilteredCatalogView from '../components/FilteredCatalogView';
+// @ts-ignore: PNG import for Vite
 import retailwalkBg from '../assets/retailwalk.png';
 import SEOHead from '../components/SEOHead';
 
@@ -25,6 +26,10 @@ export default function Catalog() {
         customTitle="Catalog | Retailstar.sol - Premium Solana Domains for Sale"
         customDescription="Browse the full Retailstar catalog. Filter by premium builds, meme drops, quick snags, or vaulted domains."
         customKeywords="Solana domain catalog, .sol listings, premium builds, NFT tools"
+        imageUrl="https://retailstar.xyz/assets/rs-og-card.png"
+        canonicalUrl="https://retailstar.xyz/catalog"
+        ogImage="https://retailstar.xyz/assets/rs-og-card.png"
+        twitterImage="https://retailstar.xyz/assets/rs-og-card.png"
       />
       {/* LLM summary for Catalog */}
       {/*
@@ -48,7 +53,7 @@ export default function Catalog() {
             className="neon-purple neon-purple-hover py-3 px-8 rounded-lg font-bold text-lg flex items-center gap-2 shadow-lg transition-all duration-200 animate-pulse"
             style={{ boxShadow: '0 0 16px 2px #a259ff99' }}
           >
-            �� Currently Rotating: Flash Deals
+            🔄 Currently Rotating: Flash Deals
           </a>
         </div>
         <div className="flex justify-center mb-10">

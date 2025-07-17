@@ -20,6 +20,10 @@ export const scavDomains = [
     tags: ['missed', 'price', 'daf'],
     buyLink: 'https://tensor.trade/item/MISSEDPRICEDAF',
     social: 'https://x.com/missedpricedaf',
+    fixerQueue: false,
+    fixerActive: false,
+    queueExpires: null,
+    status: 'active',
   },
   {
     name: 'lowballking.sol',
@@ -27,6 +31,10 @@ export const scavDomains = [
     tags: ['lowball', 'king', 'negotiation'],
     buyLink: 'https://tensor.trade/item/LOWBALLKING',
     social: 'https://x.com/lowballking',
+    fixerQueue: true,
+    fixerActive: false,
+    queueExpires: '2025-07-20T23:00:00Z',
+    status: 'queued',
   },
   {
     name: 'copthisbro.sol',
@@ -34,6 +42,10 @@ export const scavDomains = [
     tags: ['cop', 'this', 'bro'],
     buyLink: 'https://tensor.trade/item/COPTHISBRO',
     social: 'https://x.com/copthisbro',
+    fixerQueue: false,
+    fixerActive: false,
+    queueExpires: null,
+    status: 'active',
   },
   {
     name: 'urnotthatguy.sol',
@@ -41,6 +53,10 @@ export const scavDomains = [
     tags: ['ur', 'not', 'that', 'guy'],
     buyLink: 'https://tensor.trade/item/URNOTTHATGUY',
     social: 'https://x.com/urnotthatguy',
+    fixerQueue: false,
+    fixerActive: false,
+    queueExpires: null,
+    status: 'active',
   },
   {
     name: 'thisaintit.sol',
@@ -48,5 +64,9 @@ export const scavDomains = [
     tags: ['this', 'aint', 'it'],
     buyLink: 'https://tensor.trade/item/THISAINTIT',
     social: 'https://x.com/thisaintit',
+    fixerQueue: false,
+    fixerActive: false,
+    queueExpires: null,
+    status: 'active',
   },
 ]; 

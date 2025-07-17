@@ -5,14 +5,10 @@
   "type": "module",
   "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js",
     "dev": "vite",
-    "build": "vite build",
+    "build": "npm run generate-sitemap && vite build",
     "preview": "vite preview",
-    "update": "node src/update-domains.js",
-    "rotate": "node src/rotate-domains.js",
-    "timer": "node src/rotation-timer.js",
-    "announce": "node src/announce-changes.js"
+    "generate-sitemap": "node scripts/generate-sitemap.js"
   },
   "dependencies": {
     "@bonfida/spl-name-service": "^3.0.12",

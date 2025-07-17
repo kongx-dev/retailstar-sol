@@ -16,7 +16,7 @@ const featuredNodes = [
     price: '12 SOL',
     description: 'The Meta: Instantly clear NFT resale theme',
     persona: 'Collectors, NFT Traders',
-    url: '/domains/jpegdealer',
+    url: '/wiki/jpegdealer',
   },
   {
     name: 'fudscience.sol',
@@ -34,7 +34,7 @@ const featuredNodes = [
     price: '5.5 SOL',
     description: 'Gamer x streetwear aesthetic, tons of creative upside',
     persona: 'Builder Bros, NFT Traders',
-    url: '/domains/jumpsetradio',
+    url: '/wiki/jumpsetradio',
   },
 ];
 

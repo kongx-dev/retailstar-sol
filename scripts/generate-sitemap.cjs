@@ -3,7 +3,7 @@ const path = require("path");
 
 // Import your domain data (assumes default export)
 const domainModule = require("../src/data/domains");
-const domains = domainModule.default || domainModule;
+const domains = domainModule.default || domainModule.domains || domainModule;
 
 // Validate the import:
 if (!Array.isArray(domains)) {

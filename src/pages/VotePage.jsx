@@ -147,6 +147,16 @@ const VotePage = () => {
               Your vote shapes the Retailverse. Choose which domain gets the next build.
             </p>
 
+            {/* Funnel Navigation CTA */}
+            <div className="flex justify-center mb-8">
+              <Link
+                to="/catalog"
+                className="neon-orange neon-orange-hover py-3 px-8 rounded-lg font-bold text-lg flex items-center gap-2 shadow-lg transition-all duration-200"
+              >
+                🏆 See Winning Domains
+              </Link>
+            </div>
+
             {/* Poll Info */}
             <div className="max-w-2xl mx-auto mb-8">
               <div className="steel-surface rounded-lg p-6 border border-purple-500/30">

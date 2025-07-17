@@ -350,3 +350,13 @@ body {
     opacity: 0;
   }
 }
+
+.btn-glow {
+  @apply bg-green-500 text-black font-bold px-4 py-2 rounded-full hover:bg-green-400;
+  box-shadow: 0 0 8px #22c55e;
+}
+
+.neon-border {
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}

@@ -1,6 +1,5 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { domainLore } from '../data/domains';
 import domainsData from '../data/domains.json';
 import DomainTemplate from '../components/DomainTemplate';
 
@@ -11,9 +10,6 @@ const DomainPage = () => {
   // Find domain in the new domains.json data
   const domain = domainsData.domains.find(d => d.slug === slug);
   
-  // Get lore from existing domains.js if available
-  const lore = domainLore[slug];
-
   if (!domain) {
     return (
       <div className="min-h-screen text-white relative overflow-hidden">
@@ -39,7 +35,50 @@ const DomainPage = () => {
     );
   }
 
-  return <DomainTemplate domain={domain} lore={lore} />;
+  // Funnel CTAs
+  const funnelCTAs = (
+    <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+      {domain.website && (
+        <a
+          href={domain.website}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="neon-green neon-green-hover py-3 px-6 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 text-lg"
+        >
+          🌐 Visit Website
+        </a>
+      )}
+      <a
+        href="/marketplace"
+        className="neon-orange neon-orange-hover py-3 px-6 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 text-lg"
+      >
+        🛒 Buy on Marketplace
+      </a>
+      {domain.vaulted && (
+        <a
+          href="/upgrade"
+          className="neon-purple neon-purple-hover py-3 px-6 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 text-lg"
+        >
+          🔓 Unlock Vault
+        </a>
+      )}
+    </div>
+  );
+
+  return (
+    <div className="min-h-screen text-white relative overflow-hidden">
+      <img 
+        src={require('../assets/retailstar-body.png')} 
+        alt="RetailStar Background" 
+        className="pointer-events-none select-none fixed inset-0 w-full h-full object-cover opacity-50 z-0" 
+        aria-hidden="true"
+      />
+      <div className="relative z-10">
+        {funnelCTAs}
+        <DomainTemplate domain={domain} />
+      </div>
+    </div>
+  );
 };
 
 export default DomainPage; 

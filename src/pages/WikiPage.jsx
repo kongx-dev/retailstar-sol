@@ -5,6 +5,7 @@ import rsLogo from '../assets/rs-logo.png';
 import retailstarBody from '../assets/retailstar-body.png';
 import jpegdealerImage from '../assets/jpegdealer.png';
 import bidgremlinImage from '../assets/bidgremlin.png';
+import fudscientistImage from '../assets/fudscientist.png';
 
 const WikiPage = () => {
   const { slug } = useParams();
@@ -193,6 +194,14 @@ The Retailverse is alive with potential—every domain is a blank canvas waiting
                 <img 
                   src={bidgremlinImage} 
                   alt="Bid Gremlin" 
+                  className="w-32 h-32 mx-auto rounded-lg border-2 border-cyan-500/50 shadow-lg shadow-cyan-500/25"
+                />
+              </div>
+            ) : domain.slug === 'fudscience' ? (
+              <div className="mb-6">
+                <img 
+                  src={fudscientistImage} 
+                  alt="FUD Science" 
                   className="w-32 h-32 mx-auto rounded-lg border-2 border-cyan-500/50 shadow-lg shadow-cyan-500/25"
                 />
               </div>

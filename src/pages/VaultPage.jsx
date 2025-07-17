@@ -144,6 +144,28 @@ const VaultPage = () => {
               Complete domain collection. Every node in the Retailverse.
             </p>
             
+            {/* Funnel Navigation CTAs */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+              <Link
+                to="/upgrade"
+                className="neon-orange neon-orange-hover py-3 px-6 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 text-lg"
+              >
+                🔓 Unlock Vault
+              </Link>
+              <Link
+                to="/catalog"
+                className="neon-cyan neon-cyan-hover py-3 px-6 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 text-lg"
+              >
+                🔧 View Active Listings
+              </Link>
+              <Link
+                to="/directory"
+                className="neon-purple neon-purple-hover py-3 px-6 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 text-lg"
+              >
+                📖 Browse Lore
+              </Link>
+            </div>
+
             <div className="flex justify-center space-x-4">
               <Link 
                 to="/domains"

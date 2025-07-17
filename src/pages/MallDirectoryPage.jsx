@@ -72,6 +72,16 @@ const MallDirectoryPage = () => {
               </p>
             </div>
 
+            {/* Funnel Navigation CTA */}
+            <div className="flex justify-center mb-8">
+              <Link
+                to="/catalog"
+                className="neon-cyan neon-cyan-hover py-3 px-8 rounded-lg font-bold text-lg flex items-center gap-2 shadow-lg transition-all duration-200"
+              >
+                🔧 Browse Full Catalog
+              </Link>
+            </div>
+
             {/* Rotation Status Widget */}
             <div className="mb-12">
               <RotationStatus />

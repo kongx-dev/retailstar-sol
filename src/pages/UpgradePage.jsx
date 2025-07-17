@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import FireflyFX from "../components/FireflyFX";
+import retailstarelevatorBg from '../assets/retailstarelevator.png';
 
 export default function UpgradePage() {
   const [formData, setFormData] = useState({
@@ -53,7 +54,14 @@ export default function UpgradePage() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white px-6 py-12 font-mono relative side-glow">
+    <div className="min-h-screen bg-black text-white relative overflow-hidden">
+      {/* Background image at 50% opacity */}
+      <img
+        src={retailstarelevatorBg}
+        alt="RetailStar Elevator Background"
+        className="pointer-events-none select-none fixed inset-0 w-full h-full object-cover opacity-50 z-0"
+        aria-hidden="true"
+      />
       <FireflyFX count={15} />
       <div className="max-w-3xl mx-auto space-y-10 relative z-10">
         {/* HEADER */}

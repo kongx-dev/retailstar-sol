@@ -14,7 +14,7 @@ export default function VaultedList({ vaulted, showVaulted, toggleShowVaulted, o
         </button>
       </div>
       {showVaulted && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 neon-panel animate-glow-pulse">
           {vaulted.map((domain, idx) => (
             <DomainCard
               key={domain.name + idx}

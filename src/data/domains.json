@@ -90,7 +90,8 @@
       "price": "0.89 SOL",
       "quickSnagPrice": "0.89 SOL",
       "category": "mid",
-      "hasWebsite": true
+      "hasWebsite": true,
+      "website": "https://bidgremlin.netlify.app/"
     },
     {
       "name": "biggestofbrains",
@@ -102,7 +103,8 @@
       "price": "15 SOL",
       "category": "premium",
       "hasLore": true,
-      "hasWebsite": true
+      "hasWebsite": true,
+      "website": "https://biggestofbrains.netlify.app/"
     },
     {
       "name": "clicktopump",
@@ -143,7 +145,8 @@
       "status": "available",
       "price": "8.5 SOL",
       "category": "mid",
-      "hasWebsite": true
+      "hasWebsite": true,
+      "website": "https://commandhub.netlify.app/"
     },
     {
       "name": "commandvault",
@@ -194,7 +197,8 @@
       "status": "available",
       "price": "6.9 SOL",
       "category": "mid",
-      "hasWebsite": true
+      "hasWebsite": true,
+      "website": "https://copevendor.netlify.app/"
     },
     {
       "name": "deploydeck",
@@ -206,7 +210,8 @@
       "price": "2.5 SOL",
       "quickSnagPrice": "2.5 SOL",
       "category": "mid",
-      "hasWebsite": true
+      "hasWebsite": true,
+      "website": "https://deploydeck.netlify.app/"
     },
     {
       "name": "deploydock",
@@ -277,7 +282,20 @@
       "status": "vaulted",
       "price": "10 SOL",
       "category": "premium",
-      "hasWebsite": true
+      "hasWebsite": true,
+      "website": "https://fudscientist.netlify.app/"
+    },
+    {
+      "name": "fudscience",
+      "slug": "fudscience",
+      "description": "FOMO culture satire and research",
+      "image": "fudscientist.png",
+      "featured": false,
+      "status": "vaulted",
+      "price": "10 SOL",
+      "category": "premium",
+      "hasWebsite": true,
+      "website": "https://fudscience.netlify.app/"
     },
     {
       "name": "getgoodkid",
@@ -468,7 +486,8 @@
       "status": "vaulted",
       "price": "12 SOL",
       "category": "premium",
-      "hasWebsite": true
+      "hasWebsite": true,
+      "website": "https://jpegdealer.netlify.app/"
     },
     {
       "name": "jumpsetradio",
@@ -479,7 +498,8 @@
       "status": "available",
       "price": "5.5 SOL",
       "category": "mid",
-      "hasWebsite": true
+      "hasWebsite": true,
+      "website": "https://jumpsetradio.netlify.app/"
     },
     {
       "name": "kombat",
@@ -515,7 +535,7 @@
       "name": "lurkerlife",
       "slug": "lurkerlife",
       "description": "For the quiet sniper in the shadows",
-      "image": "👁️",
+      "image": "lurkerlife.png",
       "featured": false,
       "status": "vaulted",
       "price": "12 SOL",
@@ -823,7 +843,8 @@
       "status": "available",
       "price": "5.5 SOL",
       "category": "mid",
-      "hasWebsite": true
+      "hasWebsite": true,
+      "website": "https://rigbuilder.netlify.app/"
     },
     {
       "name": "scrollmage",

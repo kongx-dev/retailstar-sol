@@ -6,7 +6,7 @@ import CountdownTimer from "./CountdownTimer";
 export default function DomainCard({ domain, faded, isVaulted, onExpire, onPurchase, onView }) {
   return (
     <Card
-      className={`relative p-4 bg-zinc-900 rounded-2xl shadow-xl border border-zinc-700 transition-all duration-700 ${
+      className={`relative p-4 bg-zinc-900 rounded-2xl shadow-xl border border-zinc-700 transition-all duration-700 neon-panel animate-glow-pulse ${
         faded ? "opacity-0 scale-90" : "hover:scale-105"
       } ${
         domain.tier === "Epic"

@@ -84,6 +84,34 @@ const HomePage = () => {
               Welcome to Retailstar. Mallcore begins here.
             </p>
             
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+              <Link 
+                to="/catalog"
+                className="neon-cyan neon-cyan-hover py-4 px-8 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center text-lg"
+                data-persona="Collectors, NFT Traders, Builder Bros"
+                data-meta="cta-catalog"
+              >
+                🔧 Fixer's Catalog
+              </Link>
+              <Link 
+                to="/catalog#flash"
+                className="neon-orange neon-orange-hover py-4 px-8 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center text-lg"
+                data-persona="Flash Hunters"
+                data-meta="cta-flash"
+              >
+                🎯 Flash Rack
+              </Link>
+              <Link 
+                to="/scavrack"
+                className="neon-green neon-green-hover py-4 px-8 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center text-lg"
+                data-persona="Meme Collectors"
+                data-meta="cta-scavrack"
+              >
+                🟢 Scav Rack
+              </Link>
+            </div>
+
             {/* Subtext */}
             <p className="text-lg text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed" data-persona="Lore Seekers, Info Farmers" data-meta="subtext">
               Not everything's for sale. But if you know what to ask for… you might find it.
@@ -92,7 +120,7 @@ const HomePage = () => {
             {/* CTA Button */}
             <div className="mb-16">
               <Link 
-                to="/acquisition-levels"
+                to="/catalog"
                 className="neon-cyan neon-cyan-hover py-4 px-8 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center mx-auto text-lg"
                 data-persona="Collectors, NFT Traders, Builder Bros"
                 data-meta="cta"

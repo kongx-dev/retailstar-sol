@@ -1,19 +1,38 @@
 import React from "react";
 import "./domain-card.css";
 
-const DomainCard = ({
+/**
+ * @typedef {Object} DomainCardProps
+ * @property {string} domain
+ * @property {string} price
+ * @property {"epic"|"rare"|"base"} rarity
+ * @property {string} tag
+ * @property {boolean} [hasSite]
+ * @property {boolean} [vaulted]
+ * @property {boolean} [forSale]
+ * @property {boolean} [flashRack]
+ * @property {boolean} [lore]
+ * @property {string} [className]
+ * @property {boolean} [lockBadge]
+ */
+
+/**
+ * @param {DomainCardProps} props
+ */
+function DomainCard({
   domain,
   price,
   rarity,         // 'epic' | 'rare' | 'base'
   tag,            // 'Premium' | 'Mid Tier' | 'Quick Snag'
-  hasSite,        // boolean
-  vaulted,        // boolean
-  forSale,        // boolean
-  flashRack,      // boolean
-  lore            // boolean
-}) => {
+  hasSite = false,
+  vaulted = false,
+  forSale = false,
+  flashRack = false,
+  lore = false,
+  className = '',
+  lockBadge = false
+}) {
   const rarityClass = `rarity-${rarity}`;
-  
   // Label tag mapping based on main tag
   const tagMap = {
     "Premium": "tag-premium",
@@ -22,14 +41,15 @@ const DomainCard = ({
   };
 
   return (
-    <div className={`domain-card ${rarityClass}`} style={{position: 'relative'}}>
+    <div className={`domain-card ${rarityClass} ${className}`} style={{position: 'relative'}}>
       {/* Tag label (top left corner) */}
       <div className={`tag ${tagMap[tag] || "tag-base"}`} style={{position: 'absolute', top: 10, left: 10}}>
         {tag}
       </div>
       {/* Vaulted/Unvaulted tag (top right corner) */}
       <div className={`tag ${vaulted ? "tag-vaulted" : "tag-unvaulted"}`} style={{position: 'absolute', top: 10, right: 10, display: 'flex', alignItems: 'center', gap: '2px'}}>
-        {vaulted ? '🔒 Vaulted' : '✅ Unvaulted'}
+        {lockBadge && <span style={{marginRight: 2}}>🔒</span>}
+        {vaulted ? 'Vaulted' : 'Unvaulted'}
       </div>
       {/* Domain name */}
       <h3 style={{ fontWeight: 600, fontSize: "16px", marginTop: "32px" }}>
@@ -70,6 +90,6 @@ const DomainCard = ({
       )}
     </div>
   );
-};
+}
 
 export default DomainCard; 

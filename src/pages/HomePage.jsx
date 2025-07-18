@@ -44,9 +44,9 @@ const HomePage = () => {
       <SEOHead 
         target="retailstar.sol"
         pageType="main"
-        customTitle="Retailstar.sol | The Solana Domain Mall"
-        customDescription="Enter the Retailverse. Explore Solana domains with lore, rarity, and high-conviction builds."
-        customKeywords="Solana domains, .sol names, NFT websites, domain lore, meme domains, SNS"
+        customTitle="Retailstar – Meme Luxury Domain Outlet | Buy .SOL Meme Domains"
+        customDescription="Retailstar: Your Meme-Luxury Domain Outlet. Because your meme deserves a mansion, not a motel. Explore premium .sol domains with lore, rarity, and high-conviction builds."
+        customKeywords="meme domains, luxury domains, .sol names, NFT websites, domain lore, Solana domains, SNS"
         imageUrl={siteUrl + '/src/assets/rs-logo.png'}
       />
       {/* LLM summary for HomePage */}
@@ -80,12 +80,12 @@ const HomePage = () => {
             
             {/* Title */}
             <h1 className="text-5xl md:text-7xl font-black mb-6 neon-pulse solana-gradient flicker-solana" data-persona="all" data-meta="site-title">
-              Access Point
+              Retailstar: Your Meme-Luxury Domain Outlet
             </h1>
             
             {/* Tagline */}
             <p className="text-xl md:text-2xl text-gray-300 mb-8 flicker max-w-3xl mx-auto leading-relaxed glow-blue" data-persona="all" data-meta="tagline">
-              Welcome to Retailstar. Mallcore begins here.
+              Because your meme deserves a mansion, not a motel.
             </p>
             
             {/* CTA Buttons */}

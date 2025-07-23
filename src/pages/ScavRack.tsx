@@ -76,6 +76,95 @@ function ScavRack() {
         twitterImage="https://retailstar.sol/src/assets/rsvendingmachine.png"
       />
 
+      {/* SNS Profile Banner */}
+      <div className="relative z-20 bg-gradient-to-b from-blue-900/90 to-blue-800/80 border-b border-blue-600/30">
+        <div className="max-w-6xl mx-auto px-4 py-6">
+          <div className="flex items-center space-x-4">
+            {/* RS Icon */}
+            <div className="w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-full flex items-center justify-center relative">
+              <span className="text-white font-bold text-xl">RS</span>
+              <div className="absolute -top-1 -right-1 w-4 h-4 bg-purple-400 rounded-full flex items-center justify-center">
+                <span className="text-white text-xs">★</span>
+              </div>
+            </div>
+            
+            {/* Profile Info */}
+            <div className="flex-1">
+              <h1 className="text-2xl font-bold text-white mb-1">retailstar.sol</h1>
+              <div className="flex items-center space-x-2 text-gray-300 text-sm">
+                <span className="font-mono">E3cwMaukbBs9PDxwziqL9DWXVLbF35y9y5x3hE21EebU</span>
+                <button className="text-gray-400 hover:text-white transition-colors">
+                  📋
+                </button>
+              </div>
+            </div>
+            
+            {/* Social Links */}
+            <div className="flex space-x-2">
+              <div className="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center">
+                <span className="text-white text-sm">🌐</span>
+              </div>
+              <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center">
+                <span className="text-white text-sm">𝕏</span>
+              </div>
+              <div className="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center">
+                <span className="text-white text-sm">💬</span>
+              </div>
+              <div className="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center">
+                <span className="text-white text-sm">📧</span>
+              </div>
+              <div className="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center">
+                <span className="text-white text-sm">📱</span>
+              </div>
+              <div className="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center">
+                <span className="text-white text-sm">🐙</span>
+              </div>
+            </div>
+          </div>
+          
+          {/* Navigation Tabs */}
+          <div className="mt-6 border-b border-blue-600/30">
+            <div className="flex space-x-8">
+              <div className="pb-2 border-b-2 border-green-500 text-white font-medium">
+                Domains
+              </div>
+              <div className="pb-2 text-gray-400 hover:text-white transition-colors cursor-pointer">
+                Activity
+              </div>
+              <div className="pb-2 text-gray-400 hover:text-white transition-colors cursor-pointer">
+                Settings
+              </div>
+            </div>
+          </div>
+          
+          {/* Domain Controls */}
+          <div className="mt-4 flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <select className="bg-blue-800/50 border border-blue-600/30 rounded px-3 py-1 text-white text-sm">
+                <option>All (182)</option>
+              </select>
+              <select className="bg-blue-800/50 border border-blue-600/30 rounded px-3 py-1 text-white text-sm">
+                <option>Sorted by: Domain (A-Z)</option>
+              </select>
+            </div>
+            <div className="flex items-center space-x-2">
+              <div className="relative">
+                <input 
+                  type="text" 
+                  placeholder="Search" 
+                  className="bg-blue-800/50 border border-blue-600/30 rounded px-3 py-1 text-white text-sm pl-8"
+                />
+                <span className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm">🔍</span>
+              </div>
+              <div className="flex border border-blue-600/30 rounded overflow-hidden">
+                <button className="bg-green-600 px-3 py-1 text-white text-sm">📋</button>
+                <button className="bg-blue-800/50 px-3 py-1 text-gray-400 text-sm">⊞</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Background */}
       <div className="absolute inset-0 z-0">
         <img 

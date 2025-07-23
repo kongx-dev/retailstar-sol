@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { retailrunnerMoodEngine } from '../utils/retailrunnerMoodEngine';
+// @ts-ignore: PNG import for Vite
+import wifhoodieImage from '../assets/Wifhoodie 631.png';
 
 export default function Retailrunner() {
   const [isOpen, setIsOpen] = useState(false);
@@ -67,7 +69,7 @@ export default function Retailrunner() {
         className="w-14 h-14 rounded-full bg-zinc-800 border border-white/20 flex items-center justify-center shadow-lg hover:shadow-xl overflow-hidden transition-all duration-200 hover:scale-105"
       >
         <img
-          src="/src/assets/Wifhoodie 631.png"
+          src={wifhoodieImage}
           alt="Retailrunner Avatar"
           className="w-full h-full object-cover rounded-full animate-pulse"
         />

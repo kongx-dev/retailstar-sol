@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import SNSRedirectModal from './SNSRedirectModal';
 
 type ScavDomain = {
   name: string;
@@ -36,48 +37,52 @@ function setRetailTickets(count: number) {
   }
 }
 
-function getSpinsUsed(domainSlug: string) {
+function getSpinsUsed(domainName: string): number {
   try {
     const spins = localStorage.getItem(SPINS_KEY);
-    const spinsData = spins ? JSON.parse(spins) : {};
-    return spinsData[domainSlug] || 0;
+    if (!spins) return 0;
+    const data = JSON.parse(spins);
+    return data[domainName] || 0;
   } catch {
     return 0;
   }
 }
 
-function saveSpinsUsed(domainSlug: string, spins: number) {
+function saveSpinsUsed(domainName: string, count: number) {
   try {
-    const existing = localStorage.getItem(SPINS_KEY);
-    const spinsData = existing ? JSON.parse(existing) : {};
-    spinsData[domainSlug] = Math.min(spins, 3);
-    localStorage.setItem(SPINS_KEY, JSON.stringify(spinsData));
+    const spins = localStorage.getItem(SPINS_KEY);
+    const data = spins ? JSON.parse(spins) : {};
+    data[domainName] = count;
+    localStorage.setItem(SPINS_KEY, JSON.stringify(data));
   } catch (error) {
-    console.error('Error setting spins:', error);
+    console.error('Error saving spins:', error);
   }
 }
 
-// Tier system styling
 const tierStyles = {
-  'vaulted-premium': 'border-purple-500 bg-purple-950/20 text-purple-100',
-  'blueprint-tier': 'border-blue-400 bg-blue-950/20 text-blue-100',
-  'quick-snag': 'border-green-400 bg-green-950/20 text-green-100',
-  'flash-rack': 'border-yellow-400 bg-yellow-950/20 text-yellow-100 animate-pulse',
+  'vaulted-premium': 'border-purple-500 shadow-purple-500/20',
+  'blueprint-tier': 'border-blue-500 shadow-blue-500/20',
+  'quick-snag': 'border-green-500 shadow-green-500/20',
+  'flash-rack': 'border-yellow-500 shadow-yellow-500/20'
 };
 
 const tierLabels = {
-  'vaulted-premium': '🟣 VAULTED PREMIUM',
-  'blueprint-tier': '🔵 BLUEPRINT TIER',
-  'quick-snag': '🟢 QUICK SNAG',
-  'flash-rack': '⚡ FLASH RACK',
+  'vaulted-premium': '🔒 Vaulted Premium',
+  'blueprint-tier': '📋 Blueprint Tier',
+  'quick-snag': '⚡ Quick Snag',
+  'flash-rack': '🎰 Flash Rack'
 };
 
 const tierDescriptions = {
-  'vaulted-premium': 'Includes full website, visuals, and lore integration',
-  'blueprint-tier': 'Upgradeable to full Retailstar build',
-  'quick-snag': 'Loot only. No build. No support. No regrets.',
-  'flash-rack': 'Flash deal. Limited time. Chaos pricing.',
+  'vaulted-premium': 'Full website + lore integration',
+  'blueprint-tier': 'Domain only - upgradeable later',
+  'quick-snag': 'Loot only - no build included',
+  'flash-rack': 'Limited time - chaos pricing'
 };
+
+function shouldRevealFixerQueue(domain: ScavDomain): boolean {
+  return Boolean(domain.fixerQueue && !domain.fixerActive);
+}
 
 // Slot Machine Component
 function SlotMachine({ isOpen, onClose, onPurchase, domain }: { 
@@ -189,39 +194,28 @@ function SlotMachine({ isOpen, onClose, onPurchase, domain }: {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
-      {/* Vignette overlay */}
-      <div 
-        className="absolute inset-0 bg-black" 
-        onClick={handleClose}
-      ></div>
-      
-      {/* Slot Machine UI */}
-      <div className="relative bg-gradient-to-br from-slate-900 to-slate-800 border-2 border-cyan-500 rounded-xl p-8 max-w-md w-full mx-4 shadow-2xl">
-        {/* Close button - positioned outside the main container */}
-        <button 
+    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[9999] flex items-center justify-center p-4">
+      <div className="bg-zinc-900 border border-cyan-500/30 rounded-xl p-6 max-w-sm w-full shadow-2xl relative">
+        <button
           onClick={handleClose}
-          className="absolute -top-4 -right-4 text-white hover:text-red-400 text-xl transition-colors z-[60] bg-red-600 hover:bg-red-700 rounded-full w-12 h-12 flex items-center justify-center border-2 border-red-500 shadow-lg"
-          style={{ pointerEvents: 'auto' }}
+          className="absolute top-4 right-4 text-gray-400 hover:text-white text-xl"
         >
-          ✕
+          ×
         </button>
         
-        {/* Title */}
-        <h3 className="text-2xl font-bold text-center text-cyan-400 mb-6">
-          🎰 {domain.name} Slot Machine
-        </h3>
+        <div className="text-center mb-6">
+          <h3 className="text-xl font-bold text-cyan-400 mb-2">🎰 Slot Machine</h3>
+          <p className="text-sm text-gray-400">Spin for a discount on {domain.name}</p>
+        </div>
         
         {/* Reels */}
         <div className="flex justify-center gap-2 mb-6">
-          {[0, 1, 2].map((reel) => (
-            <div 
-              key={reel}
-              className={`w-16 h-16 bg-slate-700 border border-cyan-400 rounded-lg flex items-center justify-center text-2xl font-bold transition-all duration-500 ${
-                isSpinning ? 'animate-pulse shadow-lg shadow-cyan-500/50' : ''
-              }`}
+          {reelSymbols.map((symbol, index) => (
+            <div
+              key={index}
+              className="w-12 h-12 bg-zinc-800 border border-cyan-500/30 rounded-lg flex items-center justify-center text-2xl font-bold"
             >
-              {reelSymbols[reel]}
+              {symbol}
             </div>
           ))}
         </div>
@@ -276,27 +270,27 @@ function SlotMachine({ isOpen, onClose, onPurchase, domain }: {
   );
 }
 
-function shouldRevealFixerQueue(domain: ScavDomain) {
-  if (!domain.fixerQueue || domain.status === 'promoted') return false;
-  if (domain.fixerActive) return true;
-  return Math.random() < 0.12;
-}
-
 function ScavDomainCard({ domain, onSlotMachineToggle }: { 
   domain: ScavDomain; 
   onSlotMachineToggle?: (isOpen: boolean) => void;
 }) {
   const [showSlotMachine, setShowSlotMachine] = useState(false);
+  const [showSNSModal, setShowSNSModal] = useState(false);
   const [tickets, setTickets] = useState(getRetailTickets());
   const tier = domain.tier || 'quick-snag';
 
   const handleBuyClick = () => {
-    setShowSlotMachine(true);
+    setShowSNSModal(true);
     onSlotMachineToggle?.(true);
   };
 
   const handleSlotMachineClose = () => {
     setShowSlotMachine(false);
+    onSlotMachineToggle?.(false);
+  };
+
+  const handleSNSModalClose = () => {
+    setShowSNSModal(false);
     onSlotMachineToggle?.(false);
   };
 
@@ -382,7 +376,7 @@ function ScavDomainCard({ domain, onSlotMachineToggle }: {
           onClick={handleBuyClick}
           className="btn-glow w-full text-center block mb-2 animate-pulse bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-4 rounded-lg hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-green-500/25"
         >
-          🎰 Buy Now
+          🛒 Buy Now
         </button>
         {domain.social && (
           <a
@@ -399,7 +393,14 @@ function ScavDomainCard({ domain, onSlotMachineToggle }: {
         </a>
       </div>
       
-      {/* Slot Machine Modal */}
+      {/* SNS Redirect Modal */}
+      <SNSRedirectModal
+        isOpen={showSNSModal}
+        onClose={handleSNSModalClose}
+        domainName={domain.name}
+      />
+      
+      {/* Slot Machine (kept for potential future use) */}
       <SlotMachine
         isOpen={showSlotMachine}
         onClose={handleSlotMachineClose}

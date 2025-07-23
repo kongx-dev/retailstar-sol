@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import SNSRedirectModal from './SNSRedirectModal';
 
 type ScavDomain = {
@@ -15,49 +15,6 @@ type ScavDomain = {
 };
 
 const fallbackPng = '/assets/rs-logo.png';
-
-// Retail Ticket System
-const TICKET_KEY = 'retailstar_tickets';
-const SPINS_KEY = 'retailstar_spins';
-
-function getRetailTickets() {
-  try {
-    const tickets = localStorage.getItem(TICKET_KEY);
-    return tickets ? parseInt(tickets) : 0;
-  } catch {
-    return 0;
-  }
-}
-
-function setRetailTickets(count: number) {
-  try {
-    localStorage.setItem(TICKET_KEY, Math.min(count, 5).toString());
-  } catch (error) {
-    console.error('Error setting tickets:', error);
-  }
-}
-
-function getSpinsUsed(domainName: string): number {
-  try {
-    const spins = localStorage.getItem(SPINS_KEY);
-    if (!spins) return 0;
-    const data = JSON.parse(spins);
-    return data[domainName] || 0;
-  } catch {
-    return 0;
-  }
-}
-
-function saveSpinsUsed(domainName: string, count: number) {
-  try {
-    const spins = localStorage.getItem(SPINS_KEY);
-    const data = spins ? JSON.parse(spins) : {};
-    data[domainName] = count;
-    localStorage.setItem(SPINS_KEY, JSON.stringify(data));
-  } catch (error) {
-    console.error('Error saving spins:', error);
-  }
-}
 
 const tierStyles = {
   'vaulted-premium': 'border-purple-500 shadow-purple-500/20',
@@ -84,219 +41,16 @@ function shouldRevealFixerQueue(domain: ScavDomain): boolean {
   return Boolean(domain.fixerQueue && !domain.fixerActive);
 }
 
-// Slot Machine Component
-function SlotMachine({ isOpen, onClose, onPurchase, domain }: { 
-  isOpen: boolean; 
-  onClose: () => void; 
-  onPurchase: (price: string) => void;
-  domain: ScavDomain;
-}) {
-  const [isSpinning, setIsSpinning] = useState(false);
-  const [result, setResult] = useState<string>('');
-  const [showRespin, setShowRespin] = useState(false);
-  const [tickets, setTickets] = useState(getRetailTickets());
-  const [spinsUsed, setSpinsUsed] = useState(getSpinsUsed(domain.name));
-  const [reelSymbols, setReelSymbols] = useState(['🎰', '🎰', '🎰']);
-  const [isInitialized, setIsInitialized] = useState(false);
-
-  const symbols = ['🔤', '💰', '🧃', '🎰', '💎', '🔥', '⭐', '🎯'];
-  
-  const spinReels = () => {
-    setIsSpinning(true);
-    setResult('');
-    setShowRespin(false);
-    setIsInitialized(true);
-
-    // Update reel symbols during spin - faster updates
-    const spinInterval = setInterval(() => {
-      setReelSymbols([
-        symbols[Math.floor(Math.random() * symbols.length)],
-        symbols[Math.floor(Math.random() * symbols.length)],
-        symbols[Math.floor(Math.random() * symbols.length)]
-      ]);
-    }, 80); // Faster updates
-
-    // Simulate spinning animation - shorter duration
-    setTimeout(() => {
-      clearInterval(spinInterval);
-      const random = Math.random();
-      let price: string;
-      
-      if (random < 0.01) {
-        // Jackpot: 1% chance
-        price = 'FREE';
-        setRetailTickets(Math.min(tickets + 5, 5));
-        setTickets(Math.min(tickets + 5, 5));
-      } else if (random < 0.11) {
-        // Rare discount: 10% chance
-        price = '0.19 SOL';
-      } else {
-        // Standard price: 89% chance
-        price = '0.25 SOL';
-      }
-      
-      setResult(price);
-      setIsSpinning(false);
-      setShowRespin(true);
-      setReelSymbols(['🎰', '🎰', '🎰']);
-    }, 1500); // Shorter spin duration
-  };
-
-  const handleRespin = () => {
-    if (tickets > 0 && spinsUsed < 3) {
-      setTickets(tickets - 1);
-      setRetailTickets(tickets - 1);
-      const newSpinsUsed = spinsUsed + 1;
-      saveSpinsUsed(domain.name, newSpinsUsed);
-      setSpinsUsed(newSpinsUsed);
-      spinReels();
-    }
-  };
-
-  const handlePurchase = () => {
-    if (result === 'FREE') {
-      // Award tickets for free purchase
-      const newTickets = Math.min(tickets + 1, 5);
-      setTickets(newTickets);
-      setRetailTickets(newTickets);
-    } else if (result.includes('SOL')) {
-      // Award tickets for SOL purchase (1 ticket per 0.2 SOL)
-      const solAmount = parseFloat(result.split(' ')[0]);
-      const ticketsEarned = Math.floor(solAmount / 0.2);
-      const newTickets = Math.min(tickets + ticketsEarned, 5);
-      setTickets(newTickets);
-      setRetailTickets(newTickets);
-    }
-    
-    onPurchase(result);
-    onClose();
-  };
-
-  // Cleanup on close
-  const handleClose = () => {
-    setIsSpinning(false);
-    setResult('');
-    setShowRespin(false);
-    setIsInitialized(false);
-    onClose();
-  };
-
-  useEffect(() => {
-    if (isOpen) {
-      // Small delay to ensure smooth opening
-      const timer = setTimeout(() => {
-        spinReels();
-      }, 100);
-      return () => clearTimeout(timer);
-    }
-  }, [isOpen]);
-
-  if (!isOpen) return null;
-
-  return (
-    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[9999] flex items-center justify-center p-4">
-      <div className="bg-zinc-900 border border-cyan-500/30 rounded-xl p-6 max-w-sm w-full shadow-2xl relative">
-        <button
-          onClick={handleClose}
-          className="absolute top-4 right-4 text-gray-400 hover:text-white text-xl"
-        >
-          ×
-        </button>
-        
-        <div className="text-center mb-6">
-          <h3 className="text-xl font-bold text-cyan-400 mb-2">🎰 Slot Machine</h3>
-          <p className="text-sm text-gray-400">Spin for a discount on {domain.name}</p>
-        </div>
-        
-        {/* Reels */}
-        <div className="flex justify-center gap-2 mb-6">
-          {reelSymbols.map((symbol, index) => (
-            <div
-              key={index}
-              className="w-12 h-12 bg-zinc-800 border border-cyan-500/30 rounded-lg flex items-center justify-center text-2xl font-bold"
-            >
-              {symbol}
-            </div>
-          ))}
-        </div>
-        
-        {/* Result */}
-        {result && (
-          <div className="text-center mb-6">
-            <div className={`text-3xl font-bold mb-2 transition-all duration-500 ${
-              result === 'FREE' ? 'text-yellow-400' : 'text-cyan-400'
-            }`}>
-              {result}
-            </div>
-            {result === 'FREE' && (
-              <div className="text-sm text-yellow-300 mb-2">
-                🎉 JACKPOT! +5 Retail Tickets
-              </div>
-            )}
-          </div>
-        )}
-        
-        {/* Purchase button */}
-        {result && !isSpinning && (
-          <button
-            onClick={handlePurchase}
-            className="w-full bg-green-600 hover:bg-green-500 text-white py-3 px-6 rounded-lg font-bold text-lg transition-all duration-200 mb-4 shadow-lg hover:shadow-green-500/25"
-          >
-            🛒 Purchase for {result}
-          </button>
-        )}
-        
-        {/* Respin option */}
-        {showRespin && tickets > 0 && spinsUsed < 3 && (
-          <div className="text-center">
-            <div className="text-sm text-gray-400 mb-2">
-              Use 1 Retail Ticket to Respin? (You have {tickets})
-            </div>
-            <button
-              onClick={handleRespin}
-              className="bg-orange-600 hover:bg-orange-500 text-white py-2 px-4 rounded-lg font-semibold transition-all duration-200 shadow-lg hover:shadow-orange-500/25"
-            >
-              🔄 Respin ({3 - spinsUsed} left)
-            </button>
-          </div>
-        )}
-        
-        {/* Ticket count */}
-        <div className="absolute top-4 left-4 bg-slate-800 px-3 py-1 rounded-full text-sm border border-cyan-500/30">
-          🎫 {tickets} Tickets
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function ScavDomainCard({ domain, onSlotMachineToggle }: { 
-  domain: ScavDomain; 
-  onSlotMachineToggle?: (isOpen: boolean) => void;
-}) {
-  const [showSlotMachine, setShowSlotMachine] = useState(false);
+function ScavDomainCard({ domain }: { domain: ScavDomain }) {
   const [showSNSModal, setShowSNSModal] = useState(false);
-  const [tickets, setTickets] = useState(getRetailTickets());
   const tier = domain.tier || 'quick-snag';
 
   const handleBuyClick = () => {
     setShowSNSModal(true);
-    onSlotMachineToggle?.(true);
-  };
-
-  const handleSlotMachineClose = () => {
-    setShowSlotMachine(false);
-    onSlotMachineToggle?.(false);
   };
 
   const handleSNSModalClose = () => {
     setShowSNSModal(false);
-    onSlotMachineToggle?.(false);
-  };
-
-  const handlePurchase = (price: string) => {
-    console.log(`🎉 Purchased ${domain.name} for ${price}!`);
-    // Here you would integrate with actual payment system
   };
 
   if (shouldRevealFixerQueue(domain)) {
@@ -398,14 +152,6 @@ function ScavDomainCard({ domain, onSlotMachineToggle }: {
         isOpen={showSNSModal}
         onClose={handleSNSModalClose}
         domainName={domain.name}
-      />
-      
-      {/* Slot Machine (kept for potential future use) */}
-      <SlotMachine
-        isOpen={showSlotMachine}
-        onClose={handleSlotMachineClose}
-        onPurchase={handlePurchase}
-        domain={domain}
       />
     </>
   );

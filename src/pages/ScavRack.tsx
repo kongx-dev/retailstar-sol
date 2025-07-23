@@ -1,9 +1,12 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { scavDomains } from '../data/scavDomains';
 import ScavDomainCard from '../components/ScavDomainCard';
+import SpinToWin from '../components/SpinToWin';
 import { Link } from 'react-router-dom';
 // @ts-ignore: PNG import for Vite
 import vendingBg from '../assets/rsvendingmachine.png';
+// @ts-ignore: PNG import for Vite
+import rsLogo from '../assets/rs-logo.png';
 import SEOHead from '../components/SEOHead';
 
 // Retail Ticket System
@@ -24,7 +27,6 @@ function ScavRack() {
     [...scavDomains].sort(() => Math.random() - 0.5)
   );
   const [tickets, setTickets] = useState(getRetailTickets());
-  const [slotMachineOpen, setSlotMachineOpen] = useState(false);
 
   const handleScrollToGrid = () => {
     gridRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -80,12 +82,13 @@ function ScavRack() {
       <div className="relative z-20 bg-gradient-to-b from-blue-900/90 to-blue-800/80 border-b border-blue-600/30">
         <div className="max-w-6xl mx-auto px-4 py-6">
           <div className="flex items-center space-x-4">
-            {/* RS Icon */}
-            <div className="w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-full flex items-center justify-center relative">
-              <span className="text-white font-bold text-xl">RS</span>
-              <div className="absolute -top-1 -right-1 w-4 h-4 bg-purple-400 rounded-full flex items-center justify-center">
-                <span className="text-white text-xs">★</span>
-              </div>
+            {/* RS Logo */}
+            <div className="w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-full flex items-center justify-center relative overflow-hidden">
+              <img 
+                src={rsLogo} 
+                alt="Retailstar Logo" 
+                className="w-16 h-16 object-cover rounded-full"
+              />
             </div>
             
             {/* Profile Info */}
@@ -254,11 +257,7 @@ function ScavRack() {
             {shuffledDomains.map((domain, idx) => (
               <div
                 key={domain.name + idx}
-                className={`border border-pink-600 transition-all duration-300 rounded-md relative overflow-hidden group ${
-                  slotMachineOpen 
-                    ? 'pointer-events-none opacity-50' 
-                    : 'hover:rotate-1 hover:scale-105'
-                }`}
+                className="border border-pink-600 transition-all duration-300 rounded-md relative overflow-hidden group hover:rotate-1 hover:scale-105"
               >
                 {domain.tags?.map((tag, i) => (
                   <span
@@ -268,18 +267,16 @@ function ScavRack() {
                     {tag}
                   </span>
                 ))}
-                <div className={`transition-transform duration-300 ${
-                  slotMachineOpen ? '' : 'group-hover:scale-105'
-                }`}>
-                  <ScavDomainCard 
-                    domain={domain} 
-                    onSlotMachineToggle={setSlotMachineOpen}
-                  />
+                <div className="transition-transform duration-300 group-hover:scale-105">
+                  <ScavDomainCard domain={domain} />
                 </div>
               </div>
             ))}
           </div>
         </section>
+
+        {/* SPIN 2 WIN Component */}
+        <SpinToWin />
 
         {/* CSS for animations */}
         <style dangerouslySetInnerHTML={{

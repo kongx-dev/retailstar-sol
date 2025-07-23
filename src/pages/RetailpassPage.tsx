@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import { useWallet } from '@solana/wallet-adapter-react';
 import { claimDayPass } from '../lib/supabase';
 import { useRetailAccess } from '../hooks/useRetailAccess';
 import SEOHead from '../components/SEOHead';
 import DayPassCountdown from '../components/DayPassCountdown';
 
 export default function RetailpassPage() {
-  const { publicKey } = useWallet();
-  const walletAddress = publicKey?.toString() || null;
+  // For demo purposes, use a mock wallet address
+  const walletAddress = "7vswd...fE9s"; // Mock wallet - replace with actual wallet connection later
   const access = useRetailAccess(walletAddress);
   const [isClaiming, setIsClaiming] = useState(false);
   const [claimResult, setClaimResult] = useState<{ success: boolean; message: string } | null>(null);

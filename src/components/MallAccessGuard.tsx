@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { useWallet } from '@solana/wallet-adapter-react';
 import { useRetailAccess } from '../hooks/useRetailAccess';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,8 +7,8 @@ interface MallAccessGuardProps {
 }
 
 export default function MallAccessGuard({ children }: MallAccessGuardProps) {
-  const { publicKey } = useWallet();
-  const walletAddress = publicKey?.toString() || null;
+  // For demo purposes, use a mock wallet address
+  const walletAddress = "7vswd...fE9s"; // Mock wallet - replace with actual wallet connection later
   const access = useRetailAccess(walletAddress);
   const navigate = useNavigate();
 

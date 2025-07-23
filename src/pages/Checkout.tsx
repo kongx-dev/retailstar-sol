@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useGOATAgent } from '../hooks/useGOATAgent';
-import { useWallet } from '@solana/wallet-adapter-react';
 import SEOHead from '../components/SEOHead';
 // @ts-ignore: PNG import for Vite
 import threeStoryView from '../assets/3storyview.png';
@@ -17,15 +16,8 @@ const mockDomainData = {
 };
 
 const CheckoutOptions = ({ onRecipientSelected }: { onRecipientSelected: (recipient: string) => void }) => {
-  const { publicKey, connect, connected } = useWallet();
   const [email, setEmail] = useState('');
-  const [selected, setSelected] = useState(null);
-
-  useEffect(() => {
-    if (connected && publicKey) {
-      onRecipientSelected(publicKey.toBase58());
-    }
-  }, [connected, publicKey]);
+  const [selected, setSelected] = useState<string | null>(null);
 
   const handleEmailSubmit = () => {
     if (!email.includes('@')) return alert('Enter a valid email');
@@ -37,22 +29,10 @@ const CheckoutOptions = ({ onRecipientSelected }: { onRecipientSelected: (recipi
     <div className="flex flex-col gap-3 mt-6">
       <p className="text-lg font-medium">Choose checkout method:</p>
 
-      {!connected && (
-        <button
-          onClick={() => {
-            setSelected('phantom');
-            connect();
-          }}
-          className="bg-purple-600 text-white px-4 py-2 rounded"
-        >
-          Connect Phantom Wallet
-        </button>
-      )}
-
       <div className="flex flex-col gap-2">
         <input
           type="email"
-          placeholder="Or enter your email"
+          placeholder="Enter your email"
           className="border p-2 rounded"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -67,7 +47,7 @@ const CheckoutOptions = ({ onRecipientSelected }: { onRecipientSelected: (recipi
 
       {selected && (
         <p className="text-green-600">
-          Checkout via: <strong>{selected === 'phantom' ? 'Phantom Wallet' : email}</strong>
+          Checkout via: <strong>{email}</strong>
         </p>
       )}
     </div>
@@ -76,7 +56,7 @@ const CheckoutOptions = ({ onRecipientSelected }: { onRecipientSelected: (recipi
 
 function CheckoutPage() {
   const { slug } = useParams<{ slug: string }>();
-  const [recipient, setRecipient] = useState(null);
+  const [recipient, setRecipient] = useState<string | null>(null);
   const [receiptEmail, setReceiptEmail] = useState('');
   const [receiptSent, setReceiptSent] = useState(false);
   const {

@@ -14,4 +14,9 @@ export default defineConfig({
   optimizeDeps: {
     include: ['buffer'],
   },
+  server: {
+    fs: {
+      allow: ['..'],
+    },
+  },
 })

@@ -51,6 +51,7 @@ function SpinToWin() {
   const [spinsUsed, setSpinsUsed] = useState(getSpinsUsed());
   const [reelSymbols, setReelSymbols] = useState(['🎰', '🎰', '🎰']);
   const [isOpen, setIsOpen] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const symbols = ['🔤', '💰', '🧃', '🎰', '💎', '🔥', '⭐', '🎯'];
   
@@ -138,13 +139,94 @@ function SpinToWin() {
 
   return (
     <>
-      {/* SPIN 2 WIN Button */}
-      <button
-        onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-bold py-3 px-6 rounded-full shadow-lg hover:shadow-purple-500/25 transition-all duration-200 z-50 animate-pulse"
-      >
-        🎰 SPIN 2 WIN
-      </button>
+      {/* Collapsible Side Panel */}
+      <div className={`fixed right-0 top-1/2 transform -translate-y-1/2 z-50 transition-all duration-300 ${
+        isExpanded ? 'w-80' : 'w-16'
+      }`}>
+        <div className="bg-zinc-900 border-l border-purple-500/30 h-96 rounded-l-xl shadow-2xl relative">
+          {/* Toggle Button */}
+          <button
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="absolute -left-3 top-1/2 transform -translate-y-1/2 bg-purple-600 hover:bg-purple-500 text-white w-6 h-6 rounded-full flex items-center justify-center shadow-lg transition-all duration-200"
+          >
+            {isExpanded ? '→' : '←'}
+          </button>
+
+          {/* Collapsed State */}
+          {!isExpanded && (
+            <div className="h-full flex flex-col items-center justify-center p-2">
+              <div className="text-center">
+                <div className="text-2xl mb-2">🎰</div>
+                <div className="text-xs font-bold text-purple-400" style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}>
+                  SPIN 2 WIN
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Expanded State */}
+          {isExpanded && (
+            <div className="h-full p-4">
+              <div className="text-center mb-4">
+                <h3 className="text-lg font-bold text-purple-400 mb-1">🎰 SPIN 2 WIN</h3>
+                <p className="text-xs text-gray-400">Win Retail Tickets!</p>
+                <div className="text-xs text-gray-500 mt-1">
+                  Spins: {spinsUsed}/5 | Tickets: {tickets}
+                </div>
+              </div>
+              
+              {/* Reels */}
+              <div className="flex justify-center gap-1 mb-4">
+                {reelSymbols.map((symbol, index) => (
+                  <div
+                    key={index}
+                    className="w-8 h-8 bg-zinc-800 border border-purple-500/30 rounded flex items-center justify-center text-lg font-bold"
+                  >
+                    {symbol}
+                  </div>
+                ))}
+              </div>
+              
+              {/* Result */}
+              {result && (
+                <div className="text-center mb-4">
+                  <div className={`text-lg font-bold mb-1 transition-all duration-500 ${
+                    result.includes('JACKPOT') ? 'text-yellow-400' : 
+                    result.includes('+') ? 'text-green-400' : 'text-red-400'
+                  }`}>
+                    {result}
+                  </div>
+                </div>
+              )}
+              
+              {/* Spin button */}
+              {!result && !isSpinning && spinsUsed < 5 && (
+                <button
+                  onClick={handleSpin}
+                  className="w-full bg-purple-600 hover:bg-purple-500 text-white py-2 px-3 rounded text-sm font-bold transition-all duration-200 mb-3 shadow-lg hover:shadow-purple-500/25"
+                >
+                  🎰 SPIN ({5 - spinsUsed} left)
+                </button>
+              )}
+              
+              {/* Respin option */}
+              {showRespin && tickets > 0 && spinsUsed < 5 && (
+                <div className="text-center">
+                  <div className="text-xs text-gray-400 mb-2">
+                    Use 1 Ticket to Respin? ({tickets} available)
+                  </div>
+                  <button
+                    onClick={handleRespin}
+                    className="bg-orange-600 hover:bg-orange-500 text-white py-1 px-2 rounded text-xs font-semibold transition-all duration-200 shadow-lg hover:shadow-orange-500/25"
+                  >
+                    🔄 Respin ({5 - spinsUsed} left)
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
 
       {/* Slot Machine Modal */}
       {isOpen && (

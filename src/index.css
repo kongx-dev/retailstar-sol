@@ -360,3 +360,19 @@ body {
   box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
+
+.cyber-border-glow {
+  border: 1px solid #00ffff33;
+  box-shadow:
+    0 0 4px #00ffff66,
+    0 0 8px #ff00ff44,
+    0 0 2px 1px #00ffff33 inset;
+  animation: flicker 2s infinite alternate;
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  45% { opacity: 0.85; }
+  50% { opacity: 0.75; }
+  55% { opacity: 0.9; }
+}

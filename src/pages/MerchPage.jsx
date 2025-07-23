@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import SEOHead from '../components/SEOHead';
 import rsLogo from '../assets/rs-logo.png';
 
 const MerchPage = () => {
@@ -40,6 +41,18 @@ const MerchPage = () => {
 
   return (
     <div className="min-h-screen text-white relative overflow-hidden">
+      <SEOHead 
+        target="retailstar.sol"
+        pageType="merch"
+        customTitle="RetailStar™ Merch Drop Zone | Limited Edition Gear"
+        customDescription="Gear up for the Retailverse with limited edition RetailStar merchandise. Neon hoodies, Mall Rat tees, and cyberpunk accessories."
+        customKeywords="RetailStar merch, limited edition, hoodie, t-shirt, cyberpunk, solana merch, retailverse gear"
+        imageUrl="https://retailstar.xyz/assets/rs-og-card.png"
+        canonicalUrl="https://retailstar.sol/merch"
+        ogImage="https://retailstar.xyz/assets/rs-og-card.png"
+        twitterImage="https://retailstar.xyz/assets/rs-og-card.png"
+      />
+      
       {/* Background with reduced opacity */}
       <div className="fixed inset-0 bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-cyan-900/20 z-0"></div>
 
@@ -113,7 +126,7 @@ const MerchPage = () => {
         <footer className="border-t border-gray-800 bg-black/40 backdrop-blur-sm py-12 px-4">
           <div className="max-w-6xl mx-auto text-center">
             <p className="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed glow-blue mb-6">
-              Merch drops are limited edition. Once they're gone, they're gone forever in the Retailverse.
+              Merch drops are limited edition. Once they&apos;re gone, they&apos;re gone forever in the Retailverse.
             </p>
             
             <div className="flex justify-center space-x-8 text-sm">

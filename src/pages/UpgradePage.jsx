@@ -114,7 +114,7 @@ export default function UpgradePage() {
         <section className="relative border border-gray-700 rounded-xl p-6 bg-zinc-900 shadow-inner neon-panel">
           <h2 className="text-xl font-semibold mb-2">📨 Deployment Request Form</h2>
           <p className="text-sm text-gray-300 mb-4">
-            Not sure what you need? Send a brief and we'll get back to you.
+            Not sure what you need? Send a brief and we&apos;ll get back to you.
           </p>
           <form onSubmit={handleFormSubmit} className="space-y-4">
             <input
@@ -149,7 +149,7 @@ export default function UpgradePage() {
         {/* Success Message */}
         {showSuccess && (
           <div className="fixed top-4 right-4 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-pulse">
-            ✅ Request submitted! We'll get back to you soon.
+            ✅ Request submitted! We&apos;ll get back to you soon.
           </div>
         )}
 

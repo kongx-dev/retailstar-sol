@@ -1,0 +1,70 @@
+{
+  "prizes": [
+    { "label": "1 Free Domain Landing Page", "rarity": "Legendary", "weight": 5 },
+    { "label": "2 Extra Tickets", "rarity": "Rare", "weight": 10 },
+    { "label": "10% Off Any Mythic Domain", "rarity": "Epic", "weight": 8 },
+    { "label": "Free Retailstar Sticker Pack", "rarity": "Common", "weight": 15 },
+    { "label": "Retail Discount Code", "rarity": "Uncommon", "weight": 20 },
+    { "label": "Nothing 😶", "rarity": "Neutral", "weight": 30 }
+  ],
+  "campaign": {
+    "name": "🎯 Scav Madness",
+    "description": "Buy 2 Scav Rack domains = 🎟️ x5",
+    "startDate": "2025-01-20T00:00:00Z",
+    "endDate": "2025-01-28T23:59:59Z",
+    "bonusMultiplier": 2,
+    "eligibleTags": ["Liquid Tags", "Blueprint Ready"],
+    "active": true
+  },
+  "spinWheel": {
+    "costPerSpin": 5,
+    "rewards": [
+      {
+        "label": "15% Off Coupon",
+        "type": "coupon",
+        "value": "15OFF",
+        "rarity": "common",
+        "weight": 40,
+        "description": "15% off any domain purchase"
+      },
+      {
+        "label": "Free Landing Page",
+        "type": "service",
+        "value": "1-page-site",
+        "rarity": "rare",
+        "weight": 20,
+        "description": "Custom landing page build"
+      },
+      {
+        "label": "10 Tickets",
+        "type": "tickets",
+        "value": 10,
+        "rarity": "uncommon",
+        "weight": 30,
+        "description": "Bonus tickets for more spins"
+      },
+      {
+        "label": "Whitelist for Hoodie Drop",
+        "type": "whitelist",
+        "value": "hoodie-premium",
+        "rarity": "epic",
+        "weight": 10,
+        "description": "Exclusive merch access"
+      }
+    ]
+  },
+  "ticketEarning": {
+    "purchase": {
+      "liquidTags": 1,
+      "blueprintReady": 2,
+      "premium": 3,
+      "vaulted": 5
+    },
+    "feedback": 3,
+    "referral": 5,
+    "wheelWin": {
+      "min": 5,
+      "max": 20
+    }
+  }
+} 

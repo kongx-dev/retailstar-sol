@@ -105,7 +105,7 @@ class RotationTimer {
     return categories[nextIndex];
   }
 
-  async rotateDomain(domainName) {
+   async rotateDomain(domainName) {
     const domain = this.domains.domains.find(d => d.name === domainName);
     if (!domain) {
       this.logger.error(`Domain ${domainName} not found in state`);
@@ -118,25 +118,20 @@ class RotationTimer {
 
     const oldCategory = domain.category;
     const newCategory = this.getRotationCategory(oldCategory, hasWebsite);
-    
-    // Update domain state
+
     domain.category = newCategory;
     domain.lastRotated = new Date().toISOString();
-    
-    // Update config to match
+
     if (configDomain) {
       configDomain.category = newCategory;
       configDomain.lastRotated = domain.lastRotated;
     }
 
     this.logger.info(`🔄 Rotating ${domainName}.sol from ${oldCategory} to ${newCategory}`);
-    
-    // Save state
+
     this.saveDomains();
-    
-    // Announce rotation
     await this.announceRotation(domainName, oldCategory, newCategory);
-    
+
     this.logger.success(`✅ ${domainName}.sol rotated to ${newCategory}`);
     return true;
   }
@@ -149,10 +144,8 @@ class RotationTimer {
     };
 
     const message = `🔄 Retailrunner.sol: ${domainName}.sol moved from ${categoryNames[oldCategory]} to ${categoryNames[newCategory]}`;
-    
     this.logger.info(`📢 ROTATION: ${message}`);
-    
-    // Webhook announcement (if configured)
+
     if (process.env.WEBHOOK_URL) {
       try {
         const response = await fetch(process.env.WEBHOOK_URL, {
@@ -225,7 +218,7 @@ class RotationTimer {
       }
     });
 
-    Object.entries(categories).forEach(([key, category]) => {
+    Object.entries(categories).forEach(([, category]) => {
       if (category.domains.length > 0) {
         console.log(`\n🛍️  ${category.name} (${category.domains.length} domains):`);
         category.domains.forEach(domain => {
@@ -251,7 +244,7 @@ class RotationTimer {
       case 'status':
         this.showRotationStatus();
         break;
-      case 'force':
+      case 'force': {
         const domain = process.argv[3];
         if (!domain) {
           console.log('Usage: node src/rotation-timer.js force <domain>');
@@ -259,6 +252,7 @@ class RotationTimer {
         }
         await this.rotateDomain(domain);
         break;
+      }
       default:
         console.log(`
 🕐 Retailrunner Rotation Timer

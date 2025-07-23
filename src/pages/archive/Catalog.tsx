@@ -1,8 +1,13 @@
+// Archived as of July 22, 2025
+// Original purpose: Curated premium domains w/ full sites
+// Replaced by Vaulted Domains + Marketplace
+// Consider reviving if a new "editor's picks" section is needed
+
 import React, { useState } from 'react';
-import FilteredCatalogView from '../components/FilteredCatalogView';
+import FilteredCatalogView from '../../components/FilteredCatalogView';
 // @ts-ignore: PNG import for Vite
-import retailwalkBg from '../assets/retailwalk.png';
-import SEOHead from '../components/SEOHead';
+import retailwalkBg from '../../assets/retailwalk.png';
+import SEOHead from '../../components/SEOHead';
 
 const TABS = [
   { key: 'all', label: 'All' },

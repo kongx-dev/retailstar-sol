@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import "./domain-card.css";
+import TierInfoModal from './TierInfoModal';
 
 /**
  * @typedef {Object} DomainCardProps
@@ -14,6 +15,7 @@ import "./domain-card.css";
  * @property {boolean} [lore]
  * @property {string} [className]
  * @property {boolean} [lockBadge]
+ * @property {string} [tier] - New tier system: 'vaulted-premium', 'blueprint-tier', 'quick-snag', 'flash-rack'
  */
 
 /**
@@ -30,8 +32,33 @@ function DomainCard({
   flashRack = false,
   lore = false,
   className = '',
-  lockBadge = false
+  lockBadge = false,
+  tier = 'quick-snag' // Default tier
 }) {
+  const [showModal, setShowModal] = useState(false);
+
+  // New tier system styling
+  const tierStyles = {
+    'vaulted-premium': 'border-purple-500 bg-purple-950/20 text-purple-100',
+    'blueprint-tier': 'border-blue-400 bg-blue-950/20 text-blue-100',
+    'quick-snag': 'border-green-400 bg-green-950/20 text-green-100',
+    'flash-rack': 'border-yellow-400 bg-yellow-950/20 text-yellow-100 animate-pulse',
+  };
+
+  const tierLabels = {
+    'vaulted-premium': '🟣 VAULTED PREMIUM',
+    'blueprint-tier': '🔵 BLUEPRINT TIER',
+    'quick-snag': '🟢 QUICK SNAG',
+    'flash-rack': '⚡ FLASH RACK',
+  };
+
+  const tierDescriptions = {
+    'vaulted-premium': 'Includes full Retailstar website, animated visuals, and deep lore integration.',
+    'blueprint-tier': 'Domain only. Upgradeable to a full site later. Reserved listing with "coming soon" status.',
+    'quick-snag': 'No build. No support. Loot only. You\'re on your own — and that\'s the thrill.',
+    'flash-rack': 'Chaos drop. Limited time. May disappear at any moment.',
+  };
+
   const rarityClass = `rarity-${rarity}`;
   // Label tag mapping based on main tag
   const tagMap = {
@@ -41,27 +68,59 @@ function DomainCard({
   };
 
   return (
-    <div className={`domain-card ${rarityClass} ${className}`} style={{position: 'relative'}}>
-      {/* Tag label (top left corner) */}
-      <div className={`tag ${tagMap[tag] || "tag-base"}`} style={{position: 'absolute', top: 10, left: 10}}>
-        {tag}
+    <div className={`domain-card ${rarityClass} ${className} ${tierStyles[tier]} rounded-xl border-2 p-4 shadow-lg`} style={{position: 'relative'}}>
+      {/* Tier Label (clickable) */}
+      <div 
+        className="text-sm font-bold tracking-wide mb-2 cursor-pointer hover:underline transition-colors"
+        onClick={() => setShowModal(true)}
+      >
+        {tierLabels[tier]}
       </div>
-      {/* Vaulted/Unvaulted tag (top right corner) */}
-      <div className={`tag ${vaulted ? "tag-vaulted" : "tag-unvaulted"}`} style={{position: 'absolute', top: 10, right: 10, display: 'flex', alignItems: 'center', gap: '2px'}}>
-        {lockBadge && <span style={{marginRight: 2}}>🔒</span>}
-        {vaulted ? 'Vaulted' : 'Unvaulted'}
-      </div>
+      
       {/* Domain name */}
-      <h3 style={{ fontWeight: 600, fontSize: "16px", marginTop: "32px" }}>
+      <h3 className="text-2xl font-semibold mb-2">
         {domain}
       </h3>
-      {/* Rarity Tags / Meta Grid (no vaulted/unvaulted here) */}
+      
+      {/* Price */}
+      {forSale && (
+        <p className="text-xs mt-1 opacity-80 mb-3">
+          Price: {vaulted ? '? SOL' : price.replace(/\s*SOL\s*$/i, '') + ' SOL'}
+        </p>
+      )}
+      
+      {/* Tier-specific content */}
+      {tier === 'blueprint-tier' && (
+        <>
+          <p className="mt-2 text-xs italic text-blue-200">Upgradeable to full Retailstar build</p>
+          <button 
+            className="mt-3 text-blue-300 underline text-sm hover:text-blue-200 transition-colors" 
+            onClick={() => alert('Upgrade flow coming soon!')}
+          >
+            Upgrade to Vaulted Premium
+          </button>
+        </>
+      )}
+
+      {tier === 'quick-snag' && (
+        <p className="mt-2 text-xs italic text-green-300">Loot only. No build. No support. No regrets.</p>
+      )}
+
+      {tier === 'vaulted-premium' && (
+        <p className="mt-2 text-xs italic text-purple-300">Includes full website, visuals, and lore integration</p>
+      )}
+
+      {tier === 'flash-rack' && (
+        <p className="mt-2 text-xs italic text-yellow-300">Flash deal. Limited time. Chaos pricing.</p>
+      )}
+      
+      {/* Legacy Tags (bottom) */}
       <div style={{
         display: "flex",
         flexWrap: "wrap",
         justifyContent: "center",
         gap: "4px",
-        marginTop: "6px"
+        marginTop: "12px"
       }}>
         <span className={`tag ${hasSite ? "tag-website" : "tag-nowebsite"}`}>
           {hasSite ? "Website" : "No Website"}
@@ -71,22 +130,29 @@ function DomainCard({
         </span>
         {flashRack && <span className="tag tag-flash">⚡ Flash Rack</span>}
         {lore && <span className="tag tag-lore">✨ Lore Domain</span>}
+        {vaulted && <span className="tag tag-vaulted">🔒 Vaulted</span>}
       </div>
-      {/* Price & CTA */}
+      
+      {/* CTA Button */}
       {forSale && (
-        <>
-          <div className="price" style={{ marginTop: "10px" }}>
-            {vaulted ? '? SOL' : price.replace(/\s*SOL\s*$/i, '') + ' SOL'}
-          </div>
-          <a
-            href={`https://x.com/messages/compose?recipient_id=1689270192859781120`}
-            className="buy-button"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {vaulted ? 'DM to Inquire' : 'DM to Buy'}
-          </a>
-        </>
+        <a
+          href={`https://x.com/messages/compose?recipient_id=1689270192859781120`}
+          className="buy-button mt-3"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {vaulted ? 'DM to Inquire' : 'DM to Buy'}
+        </a>
+      )}
+
+      {/* Tier Info Modal */}
+      {showModal && (
+        <TierInfoModal
+          tier={tier}
+          title={tierLabels[tier]}
+          description={tierDescriptions[tier]}
+          onClose={() => setShowModal(false)}
+        />
       )}
     </div>
   );

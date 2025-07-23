@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import rsLogo from '../assets/rs-logo.png';
 import retailstarBody from '../assets/retailstar-body.png';
 import SEOHead from '../components/SEOHead';
+import { isForSale } from '../data/blocklist';
 
 // Poll data - this could be fetched from an API in the future
 const pollData = {
@@ -58,7 +59,7 @@ const pollData = {
       votes: 22,
       category: "Mid"
     }
-  ],
+  ].filter(option => isForSale(option.name)), // Filter out blocklisted domains
   totalVotes: 186,
   endDate: "2025-02-15"
 };

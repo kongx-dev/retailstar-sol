@@ -1,22 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import SEOHead from '../components/SEOHead';
+import MythicRotator from '../components/MythicRotator';
 import rsLogo from '../assets/rs-logo.png';
 import retailstarBody from '../assets/retailstar-body.png';
 import jpegdealerImage from '../assets/jpegdealer.png';
 import fudscientistImage from '../assets/fudscientist.png';
 import jumpsetradioImage from '../assets/jumpsetradio.png';
+import commandhubImage from '../assets/commandhub.png';
 
 const siteUrl = 'https://retailstar.sol';
 const featuredNodes = [
   {
-    name: 'jpegdealer.sol',
-    image: jpegdealerImage,
-    alt: 'jpegdealer.sol NFT resale platform logo',
-    price: '12 SOL',
-    description: 'The Meta: Instantly clear NFT resale theme',
-    persona: 'Collectors, NFT Traders',
-    url: '/wiki/jpegdealer',
+    name: 'commandhub.sol',
+    image: commandhubImage,
+    alt: 'commandhub.sol AI dashboard logo',
+    price: '8.5 SOL',
+    description: 'AI dashboard + infrastructure ready',
+    persona: 'Builder Bros, Developers',
+    url: '/wiki/commandhub',
   },
   {
     name: 'fudscience.sol',
@@ -91,20 +93,12 @@ const HomePage = () => {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
               <Link 
-                to="/catalog"
+                to="/marketplace"
                 className="neon-cyan neon-cyan-hover py-4 px-8 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center text-lg"
                 data-persona="Collectors, NFT Traders, Builder Bros"
-                data-meta="cta-catalog"
+                data-meta="cta-marketplace"
               >
-                🔧 Fixer's Catalog
-              </Link>
-              <Link 
-                to="/catalog#flash"
-                className="neon-orange neon-orange-hover py-4 px-8 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center text-lg"
-                data-persona="Flash Hunters"
-                data-meta="cta-flash"
-              >
-                🎯 Flash Rack
+                🛍️ Browse Marketplace
               </Link>
               <Link 
                 to="/scavrack"
@@ -118,13 +112,13 @@ const HomePage = () => {
 
             {/* Subtext */}
             <p className="text-lg text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed" data-persona="Lore Seekers, Info Farmers" data-meta="subtext">
-              Not everything's for sale. But if you know what to ask for… you might find it.
+              Not everything&apos;s for sale. But if you know what to ask for… you might find it.
             </p>
 
             {/* CTA Button */}
             <div className="mb-16">
               <Link 
-                to="/catalog"
+                to="/marketplace"
                 className="neon-cyan neon-cyan-hover py-4 px-8 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center mx-auto text-lg"
                 data-persona="Collectors, NFT Traders, Builder Bros"
                 data-meta="cta"
@@ -165,6 +159,13 @@ const HomePage = () => {
                 </Link>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* Mythic Domains Section */}
+        <section className="px-4 py-16" data-persona="High Rollers, Collectors" data-meta="mythic-nodes">
+          <div className="max-w-6xl mx-auto">
+            <MythicRotator />
           </div>
         </section>
       </div>

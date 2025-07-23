@@ -1,4 +1,5 @@
 import domainsJson from './domains.json';
+import { filterBlocklisted, isForSale } from './blocklist';
 
 export type Domain = {
   name: string;
@@ -44,12 +45,22 @@ export const domains: Domain[] = domainsJson.domains.map((d) => {
   };
 });
 
-// Filtering helpers
+// Filtering helpers with blocklist integration
 export const filterDomains = {
-  all: (list: Domain[]) => list,
-  premium: (list: Domain[]) => list.filter((d) => d.category === 'premium' && !d.vaulted),
-  mid: (list: Domain[]) => list.filter((d) => d.category === 'mid' && !d.vaulted),
-  quickSnag: (list: Domain[]) => list.filter((d) => d.quickSnag && !d.vaulted),
-  flashRack: (list: Domain[]) => list.filter((d) => d.flashRack && !d.vaulted),
-  vaulted: (list: Domain[]) => list.filter((d) => d.vaulted),
+  all: (list: Domain[]) => filterBlocklisted(list),
+  premium: (list: Domain[]) => filterBlocklisted(list.filter((d) => d.category === 'premium')),
+  mid: (list: Domain[]) => filterBlocklisted(list.filter((d) => d.category === 'mid')),
+  quickSnag: (list: Domain[]) => filterBlocklisted(list.filter((d) => d.quickSnag)),
+  flashRack: (list: Domain[]) => filterBlocklisted(list.filter((d) => d.flashRack)),
+  vaulted: (list: Domain[]) => filterBlocklisted(list.filter((d) => d.vaulted)),
+};
+
+// Helper to get domains available for sale (excludes blocklisted)
+export const getAvailableForSale = (domainList: Domain[] = domains): Domain[] => {
+  return filterBlocklisted(domainList.filter(d => d.status === 'available'));
+};
+
+// Helper to check if a specific domain is for sale
+export const isDomainForSale = (domainName: string): boolean => {
+  return isForSale(domainName);
 }; 

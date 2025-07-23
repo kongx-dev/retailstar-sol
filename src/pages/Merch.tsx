@@ -17,13 +17,14 @@ export default function MerchPage() {
         <p className="text-lg mb-6 text-center max-w-lg">
           Official streetwear for domain dealers. First run — limited supply. DM to claim or join the drop list.
         </p>
-        <a
-          href="https://twitter.com/messages/compose?recipient_id=RETAILSTAR_X_ID"
-          target="_blank"
-          className="bg-gradient-to-r from-purple-500 to-cyan-500 px-6 py-3 rounded-full text-xl font-bold hover:scale-105 transition"
-        >
-          DM to Buy
-        </a>
+       <a
+  href="https://twitter.com/messages/compose?recipient_id=RETAILSTAR_X_ID"
+  target="_blank"
+  rel="noreferrer"
+  className="bg-gradient-to-r from-purple-500 to-cyan-500 px-6 py-3 rounded-full text-xl font-bold hover:scale-105 transition"
+>
+  DM to Buy
+</a>
       </main>
     </>
   );

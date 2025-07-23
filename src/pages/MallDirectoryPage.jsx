@@ -5,10 +5,17 @@ import retailstarBody from '../assets/retailstar-body.png';
 import departmentsData from '../data/departments.json';
 import RotationStatus from '../components/RotationStatus';
 import SEOHead from '../components/SEOHead';
+import LoreButton from '../components/LoreButton';
+import { filterBlocklisted } from '../data/blocklist';
 
 const MallDirectoryPage = () => {
   const [flicker, setFlicker] = useState(false);
   const [booting, setBooting] = useState(true);
+
+  // Helper function to filter blocklisted domains from department data
+  const filterDepartmentDomains = (domains) => {
+    return filterBlocklisted(domains);
+  };
 
   useEffect(() => {
     const flickerInterval = setInterval(() => {
@@ -54,6 +61,14 @@ const MallDirectoryPage = () => {
         flicker ? "opacity-90" : "opacity-100"
       }`}>
         
+        {/* Home Button */}
+        <Link 
+          to="/" 
+          className="absolute top-4 right-4 z-50 text-cyan-300 hover:text-cyan-200 transition-colors duration-200 bg-black/20 backdrop-blur-sm border border-cyan-500/30 rounded-lg px-4 py-2 hover:border-cyan-400/50 hover:shadow-lg hover:shadow-cyan-500/20"
+        >
+          🏠 Home
+        </Link>
+        
         {booting && (
           <div className="absolute inset-0 bg-black/90 text-green-400 flex items-center justify-center text-2xl animate-pulse z-50">
             <span className="glitch-text">[BOOTING TERMINAL...]</span>
@@ -84,13 +99,24 @@ const MallDirectoryPage = () => {
               </p>
             </div>
 
-            {/* Funnel Navigation CTA */}
+            {/* Lore Button */}
             <div className="flex justify-center mb-8">
+              <LoreButton />
+            </div>
+
+            {/* Funnel Navigation CTA */}
+            <div className="flex justify-center gap-4 mb-8">
               <Link
-                to="/catalog"
+                to="/marketplace"
                 className="neon-cyan neon-cyan-hover py-3 px-8 rounded-lg font-bold text-lg flex items-center gap-2 shadow-lg transition-all duration-200"
               >
-                🔧 Browse Full Catalog
+                🛍️ Browse Marketplace
+              </Link>
+              <Link
+                to="/wiki-directory"
+                className="neon-purple neon-purple-hover py-3 px-8 rounded-lg font-bold text-lg flex items-center gap-2 shadow-lg transition-all duration-200"
+              >
+                📚 Wiki Directory
               </Link>
             </div>
 
@@ -138,7 +164,7 @@ const MallDirectoryPage = () => {
                               <p className="text-xs text-purple-400 mb-4">⏰ 7d rotation</p>
                             )}
                             <div className="space-y-2">
-                              {wingData.domains.map((domain) => (
+                              {filterDepartmentDomains(wingData.domains).map((domain) => (
                                 <div key={domain} className="flex items-center justify-between">
                                   <Link 
                                     to={`/wiki/${domain.replace('.sol', '')}`}
@@ -155,11 +181,11 @@ const MallDirectoryPage = () => {
                       </div>
                     ) : (
                       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {floorData.domains.map((domain) => (
+                        {filterDepartmentDomains(floorData.domains).map((domain) => (
                           <div key={domain} className="flex items-center justify-between bg-black/20 p-3 rounded border border-green-500/10">
                             <Link 
                               to={`/wiki/${domain.replace('.sol', '')}`}
-                              className="text-cyan-400 hover:text-cyan-300 transition-colors hover:underline"
+                              className="text-cyan-300 transition-colors hover:underline"
                             >
                               {domain}
                             </Link>

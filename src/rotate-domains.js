@@ -104,15 +104,19 @@ async function main() {
     case 'status':
       rotator.showStatus();
       break;
-    case 'rotate':
-      const domain = process.argv[3];
-      const category = process.argv[4];
-      if (!domain || !category) {
-        console.log('Usage: node src/rotate-domains.js rotate <domain> <category>');
-        process.exit(1);
-      }
-      rotator.rotateDomain(domain, category);
-      break;
+   case 'rotate': {
+  const domain = process.argv[3];
+  const category = process.argv[4];
+
+  if (!domain || !category) {
+    console.log('Usage: node src/rotate-domains.js rotate <domain> <category>');
+    process.exit(1);
+  }
+
+  rotator.rotateDomain(domain, category);
+  break;
+}
+
     case 'random':
       rotator.rotateRandom();
       break;

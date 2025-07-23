@@ -7,11 +7,11 @@ import jpegdealerImage from '../assets/jpegdealer.png';
 import bidgremlinImage from '../assets/bidgremlin.png';
 import fudscientistImage from '../assets/fudscientist.png';
 import jumpsetradioImage from '../assets/jumpsetradio.png';
+import SEOHead from '../components/SEOHead';
 
 const WikiPage = () => {
   const { slug } = useParams();
   const [domain, setDomain] = useState(null);
-  const [isLoreExpanded, setIsLoreExpanded] = useState(false);
 
   useEffect(() => {
     const foundDomain = domainsData.domains.find(d => d.slug === slug);
@@ -21,6 +21,14 @@ const WikiPage = () => {
   if (!domain) {
     return (
       <div className="min-h-screen text-white relative overflow-hidden">
+        <SEOHead 
+          target="retailstar.sol"
+          pageType="wiki"
+          customTitle="Domain Not Found | Retailstar.sol"
+          customDescription="This domain doesn't exist in the Retailverse. Browse our collection of Solana domains."
+          customKeywords="domain not found, retailstar domains, solana domains"
+          canonicalUrl="https://retailstar.sol/wiki/not-found"
+        />
         <img 
           src={retailstarBody} 
           alt="RetailStar Background" 
@@ -30,7 +38,7 @@ const WikiPage = () => {
         <div className="relative z-10 flex items-center justify-center min-h-screen">
           <div className="text-center">
             <h1 className="text-4xl font-bold mb-4 solana-gradient">Domain Not Found</h1>
-            <p className="text-gray-300 mb-8">This domain doesn't exist in the Retailverse.</p>
+            <p className="text-gray-300 mb-8">This domain doesn&apos;t exist in the Retailverse.</p>
             <Link 
               to="/domains" 
               className="neon-cyan neon-cyan-hover py-3 px-6 rounded-lg font-semibold transition-all duration-200"
@@ -150,6 +158,15 @@ The Retailverse is alive with potential—every domain is a blank canvas waiting
 
   return (
     <div className="min-h-screen text-white relative overflow-hidden">
+      <SEOHead 
+        target={`${domain.slug}.sol`}
+        pageType="wiki"
+        customTitle={`${domain.slug}.sol | ${lore.title} - Retailstar Domain Wiki`}
+        customDescription={`Explore ${domain.slug}.sol in the Retailverse. ${lore.content.substring(0, 150)}...`}
+        customKeywords={`${domain.slug}.sol, retailstar domain, solana domain, domain wiki, ${domain.slug}, retailverse`}
+        canonicalUrl={`https://retailstar.sol/wiki/${domain.slug}`}
+      />
+      
       {/* Background image */}
       <img 
         src={retailstarBody} 
@@ -168,7 +185,7 @@ The Retailverse is alive with potential—every domain is a blank canvas waiting
               <span className="text-xl font-bold solana-gradient">RetailStar</span>
             </Link>
             <nav className="flex space-x-6">
-              <Link to="/how-it-works" className="text-cyan-300 hover:text-white font-semibold transition-colors">
+              <Link to="/guide" className="text-cyan-300 hover:text-white font-semibold transition-colors">
                 📖 How to Navigate
               </Link>
               <Link to="/domains" className="text-gray-300 hover:text-white transition-colors">
@@ -205,7 +222,7 @@ The Retailverse is alive with potential—every domain is a blank canvas waiting
               <div className="mb-6">
                 <img 
                   src={fudscientistImage} 
-                  alt="FUD Scientist" 
+                  alt="FUD Science" 
                   className="w-32 h-32 mx-auto rounded-lg border-2 border-cyan-500/50 shadow-lg shadow-cyan-500/25"
                 />
               </div>
@@ -217,150 +234,82 @@ The Retailverse is alive with potential—every domain is a blank canvas waiting
                   className="w-32 h-32 mx-auto rounded-lg border-2 border-cyan-500/50 shadow-lg shadow-cyan-500/25"
                 />
               </div>
-            ) : (
-              <div className="text-6xl mb-6">{domain.image}</div>
-            )}
-            <h1 className="text-5xl font-black mb-4 solana-gradient flicker-solana">
-              {domain.name}.sol
+            ) : null}
+            
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 solana-gradient">
+              {domain.slug}.sol
             </h1>
-            <p className="text-xl text-gray-300 mb-6 max-w-2xl mx-auto">
-              {domain.description}
+            <p className="text-xl text-gray-300 mb-8">
+              {domain.description || `A domain in the Retailverse waiting for its story to unfold.`}
             </p>
-            <div className="flex justify-center space-x-4 mb-8">
-              <span className={`px-4 py-2 rounded-full text-sm font-semibold ${
-                domain.status === 'available' ? 'bg-green-600 text-white glow-blue' : 'bg-gray-600 text-white'
-              }`}>
-                {domain.status === 'available' ? 'Available' : domain.status}
-              </span>
-              <span className="px-4 py-2 rounded-full text-sm font-semibold bg-blue-600 text-white">
-                {domain.quickSnagPrice ? domain.quickSnagPrice : domain.price}
-              </span>
-              <span className="px-4 py-2 rounded-full text-sm font-semibold bg-purple-600 text-white">
-                {domain.quickSnagPrice ? 'Quick Snag' : domain.category}
-              </span>
-            </div>
-          </div>
-
-          {/* Summary Section */}
-          <div className="steel-surface rounded-lg p-8 mb-8 border border-blue-500/30">
-            <h2 className="text-2xl font-bold mb-4 solana-gradient">Domain Summary</h2>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div>
-                <h3 className="text-lg font-semibold mb-2 text-cyan-400">Technical Specs</h3>
-                <ul className="space-y-2 text-gray-300">
-                  <li>• Solana Name Service (SNS) Domain</li>
-                  <li>• Fully transferable ownership</li>
-                  <li>• Compatible with all Solana wallets</li>
-                  <li>• Ready for immediate deployment</li>
-                </ul>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold mb-2 text-cyan-400">Potential Use Cases</h3>
-                <ul className="space-y-2 text-gray-300">
-                  <li>• Web3 project landing page</li>
-                  <li>• NFT marketplace or gallery</li>
-                  <li>• DeFi protocol interface</li>
-                  <li>• Community hub or DAO</li>
-                </ul>
-              </div>
-            </div>
           </div>
 
           {/* Lore Section */}
-          <div className="steel-surface rounded-lg p-8 mb-8 border border-blue-500/30">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-2xl font-bold solana-gradient">{lore.title}</h2>
-              <button
-                onClick={() => setIsLoreExpanded(!isLoreExpanded)}
-                className="text-cyan-400 hover:text-cyan-300 transition-colors"
-              >
-                {isLoreExpanded ? 'Collapse' : 'Expand'}
-              </button>
-            </div>
-            {isLoreExpanded && (
-              <div className="prose prose-invert max-w-none">
-                <p className="text-gray-300 leading-relaxed text-lg">
-                  {lore.content}
-                </p>
+          <div className="mb-12">
+            <h2 className="text-3xl font-bold mb-6 text-cyan-400">{lore.title}</h2>
+            <div className="prose prose-invert max-w-none">
+              <div className="text-gray-300 leading-relaxed whitespace-pre-wrap">
+                {lore.content}
               </div>
-            )}
+            </div>
           </div>
 
-          {/* Demo & Purchase Section */}
-          <div className="steel-surface rounded-lg p-8 border border-blue-500/30">
-            <h2 className="text-2xl font-bold mb-6 solana-gradient">Take Action</h2>
-            <div className="grid md:grid-cols-2 gap-6">
-              {/* Demo Link */}
-              <div className="text-center">
-                <h3 className="text-lg font-semibold mb-4 text-cyan-400">Live Demo</h3>
-                {domain.website ? (
-                  <a
-                    href={domain.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="neon-cyan neon-cyan-hover py-3 px-6 rounded-lg font-semibold transition-all duration-200 inline-block"
-                  >
-                    🚀 Visit Demo Site
-                  </a>
-                ) : (
-                  <a
-                    href={`https://${domain.name}.sol`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="neon-cyan neon-cyan-hover py-3 px-6 rounded-lg font-semibold transition-all duration-200 inline-block"
-                  >
-                    🚀 Visit Demo Site
-                  </a>
+          {/* Domain Details */}
+          {domain.category && (
+            <div className="mb-8">
+              <h3 className="text-2xl font-bold mb-4 text-green-400">Domain Details</h3>
+              <div className="grid gap-4">
+                <div className="bg-black/20 border border-gray-700 rounded-lg p-4">
+                  <h4 className="font-bold text-white mb-2">Category</h4>
+                  <p className="text-gray-300">{domain.category}</p>
+                </div>
+                {domain.tags && domain.tags.length > 0 && (
+                  <div className="bg-black/20 border border-gray-700 rounded-lg p-4">
+                    <h4 className="font-bold text-white mb-2">Tags</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {domain.tags.map((tag, index) => (
+                        <span key={index} className="bg-cyan-600 text-white px-3 py-1 rounded-full text-sm">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 )}
-                <p className="text-sm text-gray-400 mt-2">
-                  {domain.website ? 'Visit the live website' : 'See this domain in action'}
-                </p>
+                {domain.status && (
+                  <div className="bg-black/20 border border-gray-700 rounded-lg p-4">
+                    <h4 className="font-bold text-white mb-2">Status</h4>
+                    <p className="text-gray-300">{domain.status}</p>
+                  </div>
+                )}
               </div>
+            </div>
+          )}
 
-                             {/* Purchase CTA */}
-               <div className="text-center">
-                 <h3 className="text-lg font-semibold mb-4 text-cyan-400">Domain Status</h3>
-                 {['fudscience', 'jpegdealer', 'jumpsetradio'].includes(domain.slug) ? (
-                   <a
-                     href="https://twitter.com/messages/compose?recipient_id=retailstarsol"
-                     target="_blank"
-                     rel="noopener noreferrer"
-                     className="bg-green-600 hover:bg-green-700 text-white py-3 px-6 rounded-lg font-bold transition-all duration-200 inline-block animate-pulse focus:outline-none focus:ring-2 focus:ring-green-400/50"
-                   >
-                     🛒 Buy Now
-                   </a>
-                 ) : domain.status === 'available' ? (
-                   <a
-                     href={`https://app.sns.id/domain/${domain.name}`}
-                     target="_blank"
-                     rel="noopener noreferrer"
-                     className="bg-green-600 hover:bg-green-700 text-white py-3 px-6 rounded-lg font-semibold transition-all duration-200 inline-block"
-                   >
-                     🛒 Buy Now - {domain.quickSnagPrice ? domain.quickSnagPrice : domain.price}
-                   </a>
-                 ) : domain.status === 'not_for_sale' ? (
-                   <span className="bg-orange-600 text-white py-3 px-6 rounded-lg font-semibold inline-block">
-                     📖 Lore Domain
-                   </span>
-                 ) : (
-                   <span className="bg-gray-600 text-white py-3 px-6 rounded-lg font-semibold inline-block">
-                     Not Available
-                   </span>
-                 )}
-                 <p className="text-sm text-gray-400 mt-2">
-                   {domain.status === 'not_for_sale' ? 'Part of the Retailverse lore' : 'Secure this domain for your project'}
-                 </p>
-               </div>
+          {/* Navigation */}
+          <div className="text-center mt-12">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                to="/wiki-directory"
+                className="neon-cyan neon-cyan-hover py-3 px-6 rounded-lg font-semibold transition-all duration-200"
+              >
+                📚 View All Lore
+              </Link>
+              <Link
+                to="/directory"
+                className="neon-green neon-green-hover py-3 px-6 rounded-lg font-semibold transition-all duration-200"
+              >
+                View Mall Directory
+              </Link>
             </div>
           </div>
-
-          {/* Back to Domains */}
-          <div className="text-center mt-12">
+          
+          {/* Back to Wiki Directory */}
+          <div className="text-center mt-6">
             <Link
-              to="/domains"
-              className="text-cyan-400 hover:text-cyan-300 transition-colors"
+              to="/wiki-directory"
+              className="text-gray-400 hover:text-cyan-300 transition-colors duration-200 text-sm"
             >
-              ← Back to All Domains
+              ← Back to Wiki Directory
             </Link>
           </div>
         </div>

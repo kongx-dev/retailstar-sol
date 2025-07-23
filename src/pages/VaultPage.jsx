@@ -186,10 +186,10 @@ const VaultPage = () => {
                 ← Active Listings
               </Link>
               <Link 
-                to="/catalog"
+                to="/marketplace"
                 className="neon-cyan neon-cyan-hover py-3 px-6 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2"
               >
-                🔧 Fixer's Catalog
+                🛍️ Browse Marketplace
               </Link>
             </div>
           </div>

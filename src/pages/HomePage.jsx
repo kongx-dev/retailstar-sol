@@ -90,7 +90,20 @@ const HomePage = () => {
               Because your meme deserves a mansion, not a motel.
             </p>
             
-            {/* CTA Buttons */}
+            {/* Primary CTA - Tour the Mall */}
+            <div className="mb-8">
+              <Link 
+                to="/basement"
+                className="inline-block neon-red neon-red-hover py-5 px-10 rounded-lg font-bold transition-all duration-200 text-xl animate-pulse"
+                data-persona="All Users"
+                data-meta="cta-basement-tour"
+              >
+                🕳️ Start in the Basement
+              </Link>
+              <p className="text-sm text-gray-400 mt-2">No wallet required. Just vibes.</p>
+            </div>
+
+            {/* Secondary CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
               <Link 
                 to="/marketplace"
@@ -111,9 +124,19 @@ const HomePage = () => {
             </div>
 
             {/* Subtext */}
-            <p className="text-lg text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed" data-persona="Lore Seekers, Info Farmers" data-meta="subtext">
+            <p className="text-lg text-gray-400 mb-8 max-w-2xl mx-auto leading-relaxed" data-persona="Lore Seekers, Info Farmers" data-meta="subtext">
               Not everything&apos;s for sale. But if you know what to ask for… you might find it.
             </p>
+
+            {/* Basement Intro */}
+            <div className="bg-gray-900/50 border border-red-500/30 rounded-lg p-4 mb-12 max-w-2xl mx-auto">
+              <p className="text-red-400 font-semibold mb-2">🕳️ Welcome to the Basement</p>
+              <p className="text-sm text-gray-300">
+                The Glitch Militia HQ is fully public. No gates, no passes—just raw hustle 
+                and opportunity. Explore featured .sol domains, chat with NPCs, and discover 
+                where legends are born.
+              </p>
+            </div>
 
             {/* CTA Button */}
             <div className="mb-16">

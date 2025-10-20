@@ -19,13 +19,19 @@ import LorePage from './pages/LorePage';
 import RetailpassPage from './pages/RetailpassPage';
 import RetailTickets from './pages/RetailTickets';
 import MerchWaitlist from './pages/MerchWaitlist';
+import InsightsPage from './pages/InsightsPage';
+import InsightArticlePage from './pages/InsightArticlePage';
+import ToolsIndexPage from './pages/tools/ToolsIndexPage';
+import DomainTesterPage from './pages/tools/DomainTesterPage';
+import ArchetypeQuizPage from './pages/tools/ArchetypeQuizPage';
+import LeaderboardPage from './pages/tools/LeaderboardPage';
 import { StatusLight } from './components/StatusLight';
 import { checkForEasterEggs } from './utils/retailrunnerPersonality';
 import MallLayout from './components/MallLayout';
 import TiersPage from './pages/TiersPage';
 import SalesToastStream from './components/SalesToastStream';
-import AudioZone from './components/AudioZone';
-import AudioToggle from './components/AudioToggle';
+// import AudioZone from './components/AudioZone';
+// import AudioToggle from './components/AudioToggle';
 
 function App() {
   // Global easter egg listener
@@ -61,9 +67,9 @@ function App() {
         {/* Sales Toast Stream */}
         <SalesToastStream />
         
-        {/* Zone Audio System */}
-        <AudioZone />
-        <AudioToggle />
+        {/* Zone Audio System - Disabled */}
+        {/* <AudioZone />
+        <AudioToggle /> */}
         
         <Routes>
           {/* SEO redirect: /catalog to /domains */}
@@ -93,6 +99,12 @@ function App() {
             <Route path="/tiers" element={<TiersPage />} />
             <Route path="/retail-tickets" element={<RetailTickets />} />
             <Route path="/merch-waitlist" element={<MerchWaitlist />} />
+            <Route path="/insights" element={<InsightsPage />} />
+            <Route path="/insights/:slug" element={<InsightArticlePage />} />
+            <Route path="/tools" element={<ToolsIndexPage />} />
+            <Route path="/tools/domain-tester" element={<DomainTesterPage />} />
+            <Route path="/tools/archetype-quiz" element={<ArchetypeQuizPage />} />
+            <Route path="/tools/leaderboard" element={<LeaderboardPage />} />
           </Route>
         </Routes>
       </Router>

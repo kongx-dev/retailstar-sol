@@ -95,6 +95,78 @@ const DomainPage = () => {
   const domainKeywords = domain ? `${domain.name}, domain lore, Solana websites, SNS builds` : 'domain not found, Solana domains';
   const domainGeoSummary = domain ? `This page displays a detailed breakdown of ${domain.name}, including lore, rarity, purchase info, and build details.` : 'No domain data available.';
 
+  // Generate Product/Offer schema for domain pages
+  const productSchema = domain ? {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": `${domain.name}.sol`,
+    "description": domain.description,
+    "category": domain.category,
+    "brand": {
+      "@type": "Brand",
+      "name": "Retailstar.sol"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": domain.price,
+      "priceCurrency": "SOL",
+      "availability": domain.status === 'available' ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+      "seller": {
+        "@type": "Organization",
+        "name": "Retailstar.sol",
+        "url": "https://retailstar.xyz"
+      },
+      "url": `https://retailstar.xyz/domains/${domain.slug}`
+    },
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Status",
+        "value": domain.status
+      },
+      {
+        "@type": "PropertyValue", 
+        "name": "Category",
+        "value": domain.category
+      },
+      ...(domain.vaulted ? [{
+        "@type": "PropertyValue",
+        "name": "Vaulted",
+        "value": "true"
+      }] : []),
+      ...(domain.hasWebsite ? [{
+        "@type": "PropertyValue",
+        "name": "Has Website",
+        "value": "true"
+      }] : [])
+    ]
+  } : null;
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://retailstar.xyz"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Domains",
+        "item": "https://retailstar.xyz/domains"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": domain?.name || "Domain",
+        "item": `https://retailstar.xyz/domains/${domain?.slug || 'not-found'}`
+      }
+    ]
+  };
+
   return (
     <div className="min-h-screen text-white relative overflow-hidden">
       <SEOHead
@@ -103,6 +175,8 @@ const DomainPage = () => {
         customTitle={domainTitle}
         customDescription={domainDescription}
         customKeywords={domainKeywords}
+        customSchema={productSchema}
+        additionalSchema={[breadcrumbSchema]}
       />
       {/* LLM summary for DomainPage */}
       {/*

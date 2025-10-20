@@ -7,6 +7,7 @@ import RotationStatus from '../components/RotationStatus';
 import SEOHead from '../components/SEOHead';
 import LoreButton from '../components/LoreButton';
 import { filterBlocklisted } from '../data/blocklist';
+import { domains } from '../data/domains';
 
 const MallDirectoryPage = () => {
   const [flicker, setFlicker] = useState(false);
@@ -32,6 +33,80 @@ const MallDirectoryPage = () => {
     };
   }, []);
 
+  // Generate comprehensive schema for directory page
+  const getAllDomains = () => {
+    const allDomains = [];
+    Object.values(departmentsData).forEach(floor => {
+      if (floor.domains) {
+        allDomains.push(...filterDepartmentDomains(floor.domains));
+      }
+      if (floor.wings) {
+        Object.values(floor.wings).forEach(wing => {
+          allDomains.push(...filterDepartmentDomains(wing.domains));
+        });
+      }
+    });
+    return allDomains;
+  };
+
+  const allDomains = getAllDomains();
+  const domainObjects = allDomains.map(domainName => {
+    const domain = domains.find(d => d.name === domainName.replace('.sol', ''));
+    return {
+      "@type": "ListItem",
+      "position": allDomains.indexOf(domainName) + 1,
+      "name": domainName,
+      "url": `https://retailstar.xyz/wiki/${domainName.replace('.sol', '')}`,
+      "description": domain?.description || `Explore ${domainName} in the Retailverse`
+    };
+  });
+
+  const itemListSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Retailstar Domain Directory",
+    "description": "Complete directory of Solana domains in the Retailverse ecosystem",
+    "numberOfItems": allDomains.length,
+    "itemListElement": domainObjects
+  };
+
+  const webSiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Retailstar.sol",
+    "url": "https://retailstar.xyz",
+    "description": "A cyberpunk domain mall for digital degens - where every .sol domain is a storefront",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://retailstar.xyz/directory?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Retailstar.sol",
+      "url": "https://retailstar.xyz"
+    }
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://retailstar.xyz"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Directory",
+        "item": "https://retailstar.xyz/directory"
+      }
+    ]
+  };
+
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
       <SEOHead
@@ -41,6 +116,8 @@ const MallDirectoryPage = () => {
         customDescription="View the Retailverse map. Explore domain wings, lore floors, and meta-mall connections."
         customKeywords="Retailverse, domain map, lore floors, Solana mall, SNS directory"
         canonicalUrl="https://retailstar.xyz/directory"
+        customSchema={itemListSchema}
+        additionalSchema={[webSiteSchema, breadcrumbSchema]}
       />
       {/* LLM summary for MallDirectoryPage */}
       {/*

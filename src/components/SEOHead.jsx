@@ -17,12 +17,14 @@ const SEOHead = ({
   imageUrl,
   canonicalUrl,
   ogImage,
-  twitterImage
+  twitterImage,
+  customSchema,
+  additionalSchema
 }) => {
   const title = customTitle || generatePageTitle(target, pageType);
   const description = customDescription || generateMetaDescription(target);
   const keywords = customKeywords || generateMetaKeywords(target);
-  const jsonLd = generateJSONLD(target);
+  const jsonLd = customSchema || generateJSONLD(target);
   const domainName = target?.replace('.sol', '') || 'retailstar';
   const defaultImage = imageUrl || defaultOGImage;
   const ogImageUrl = ogImage || defaultImage;
@@ -72,8 +74,15 @@ const SEOHead = ({
         {JSON.stringify(jsonLd)}
       </script>
       
-      {/* Additional Structured Data for E-commerce/Content */}
-      {pageType !== 'main' && (
+      {/* Additional Schema Objects */}
+      {additionalSchema && additionalSchema.map((schema, index) => (
+        <script key={index} type="application/ld+json">
+          {JSON.stringify(schema)}
+        </script>
+      ))}
+      
+      {/* Default Article Schema for non-main pages */}
+      {pageType !== 'main' && !customSchema && (
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",

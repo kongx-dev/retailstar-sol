@@ -11,6 +11,8 @@ const links = [
   { name: 'Vaulted Domains', href: '/vault', icon: '🔒' },
   { name: 'Guide', href: '/guide', icon: '📖' },
   { name: 'Wiki', href: '/wiki-directory', icon: '📚' },
+  { name: 'Insights', href: '/insights', icon: '📝' },
+  { name: 'Tools', href: '/tools', icon: '🛠️' },
   { name: 'Retail Tickets', href: '/retail-tickets', icon: '🎟️' },
   { name: 'Merch Waitlist', href: '/merch-waitlist', icon: '🧥' },
   { name: 'Pricing', href: '#pricing', icon: '💰', isModal: true },

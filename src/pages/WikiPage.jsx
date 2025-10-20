@@ -157,6 +157,87 @@ The Retailverse is alive with potential—every domain is a blank canvas waiting
 
   const lore = getLoreContent(domain.slug);
 
+  // Generate TechArticle schema for wiki pages
+  const techArticleSchema = {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": `${domain.slug}.sol - ${lore.title}`,
+    "description": `Explore ${domain.slug}.sol in the Retailverse. ${lore.content.substring(0, 150)}...`,
+    "author": {
+      "@type": "Organization",
+      "name": "Retailstar.sol",
+      "url": "https://retailstar.xyz"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Retailstar.sol",
+      "url": "https://retailstar.xyz",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://retailstar.xyz/assets/rs-logo.png"
+      }
+    },
+    "datePublished": new Date().toISOString(),
+    "dateModified": new Date().toISOString(),
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://retailstar.xyz/wiki/${domain.slug}`
+    },
+    "articleBody": lore.content,
+    "keywords": `${domain.slug}.sol, retailstar domain, solana domain, domain wiki, ${domain.slug}, retailverse`,
+    "articleSection": "Domain Lore",
+    "wordCount": lore.content.split(' ').length,
+    "inLanguage": "en-US",
+    "about": {
+      "@type": "Thing",
+      "name": `${domain.slug}.sol`,
+      "description": domain.description
+    }
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://retailstar.xyz"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Wiki",
+        "item": "https://retailstar.xyz/wiki-directory"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": `${domain.slug}.sol`,
+        "item": `https://retailstar.xyz/wiki/${domain.slug}`
+      }
+    ]
+  };
+
+  const webPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": `${domain.slug}.sol - ${lore.title}`,
+    "description": `Explore ${domain.slug}.sol in the Retailverse. ${lore.content.substring(0, 150)}...`,
+    "url": `https://retailstar.xyz/wiki/${domain.slug}`,
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Retailstar.sol",
+      "url": "https://retailstar.xyz"
+    },
+    "about": {
+      "@type": "Thing",
+      "name": `${domain.slug}.sol`,
+      "description": domain.description
+    }
+  };
+
   return (
     <div className="min-h-screen text-white relative overflow-hidden">
       <SEOHead 
@@ -166,6 +247,8 @@ The Retailverse is alive with potential—every domain is a blank canvas waiting
         customDescription={`Explore ${domain.slug}.sol in the Retailverse. ${lore.content.substring(0, 150)}...`}
         customKeywords={`${domain.slug}.sol, retailstar domain, solana domain, domain wiki, ${domain.slug}, retailverse`}
         canonicalUrl={`https://retailstar.sol/wiki/${domain.slug}`}
+        customSchema={techArticleSchema}
+        additionalSchema={[breadcrumbSchema, webPageSchema]}
       />
       
       {/* Background image */}
@@ -293,6 +376,49 @@ The Retailverse is alive with potential—every domain is a blank canvas waiting
               domainName={domain.slug}
             />
           )}
+
+          {/* Related Content */}
+          <div className="mt-12 pt-8 border-t border-gray-700">
+            <h3 className="text-xl font-bold text-cyan-400 mb-6">Explore More</h3>
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="bg-black/20 border border-gray-700 rounded-lg p-4">
+                <h4 className="text-lg font-bold text-white mb-2">Domain Insights</h4>
+                <p className="text-gray-300 text-sm mb-3">
+                  Learn about domain strategy and the future of Web3 marketplaces.
+                </p>
+                <Link 
+                  to="/insights"
+                  className="text-cyan-400 hover:text-cyan-300 text-sm font-semibold"
+                >
+                  Read Insights →
+                </Link>
+              </div>
+              <div className="bg-black/20 border border-gray-700 rounded-lg p-4">
+                <h4 className="text-lg font-bold text-white mb-2">Domain Tools</h4>
+                <p className="text-gray-300 text-sm mb-3">
+                  Test domains, find your archetype, and discover what's trending.
+                </p>
+                <Link 
+                  to="/tools"
+                  className="text-cyan-400 hover:text-cyan-300 text-sm font-semibold"
+                >
+                  Try Tools →
+                </Link>
+              </div>
+              <div className="bg-black/20 border border-gray-700 rounded-lg p-4">
+                <h4 className="text-lg font-bold text-white mb-2">Browse All Domains</h4>
+                <p className="text-gray-300 text-sm mb-3">
+                  Explore our complete collection of Solana domains and lore.
+                </p>
+                <Link 
+                  to="/directory"
+                  className="text-cyan-400 hover:text-cyan-300 text-sm font-semibold"
+                >
+                  Browse Now →
+                </Link>
+              </div>
+            </div>
+          </div>
 
           {/* Navigation */}
           <div className="text-center mt-12">

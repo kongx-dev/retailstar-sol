@@ -40,6 +40,7 @@ const MallDirectoryPage = () => {
         customTitle="Retailverse Map | Retailstar.sol - Explore Domain Wings and Lore Floors"
         customDescription="View the Retailverse map. Explore domain wings, lore floors, and meta-mall connections."
         customKeywords="Retailverse, domain map, lore floors, Solana mall, SNS directory"
+        canonicalUrl="https://retailstar.xyz/directory"
       />
       {/* LLM summary for MallDirectoryPage */}
       {/*
@@ -97,6 +98,16 @@ const MallDirectoryPage = () => {
               <p className="text-xl text-gray-300 mb-8 flicker max-w-3xl mx-auto leading-relaxed glow-green">
                 Navigate the digital corridors of the Retailverse
               </p>
+              
+              {/* Welcome intro section */}
+              <div className="max-w-4xl mx-auto mb-8 p-6 bg-black/40 border border-green-500/30 rounded-xl">
+                <h2 className="text-2xl font-bold text-green-400 mb-4 text-center">
+                  Welcome to the Retailstar Mall Directory
+                </h2>
+                <p className="text-lg text-gray-300 leading-relaxed text-center">
+                  Explore the digital hallways of Retailstar Mall. This directory helps you discover meme shops, dev tools, and secret vaults scattered across our cyberpunk marketplace. 👀 <strong>Tip:</strong> Click any domain to learn more or enter its storefront. Some are hidden. Some are mythical. All are part of the ecosystem.
+                </p>
+              </div>
             </div>
 
             {/* Lore Button */}

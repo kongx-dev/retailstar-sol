@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import DomainPage from './pages/DomainPage';
 import VaultPage from './pages/VaultPage';
@@ -24,6 +24,8 @@ import { checkForEasterEggs } from './utils/retailrunnerPersonality';
 import MallLayout from './components/MallLayout';
 import TiersPage from './pages/TiersPage';
 import SalesToastStream from './components/SalesToastStream';
+import AudioZone from './components/AudioZone';
+import AudioToggle from './components/AudioToggle';
 
 function App() {
   // Global easter egg listener
@@ -59,7 +61,14 @@ function App() {
         {/* Sales Toast Stream */}
         <SalesToastStream />
         
+        {/* Zone Audio System */}
+        <AudioZone />
+        <AudioToggle />
+        
         <Routes>
+          {/* SEO redirect: /catalog to /domains */}
+          <Route path="/catalog" element={<Navigate to="/domains" replace />} />
+          
           {/* Home page outside mall layout */}
           <Route path="/" element={<HomePage />} />
           <Route path="/app" element={<RetailstarAppHome />} />

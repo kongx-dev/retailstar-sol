@@ -8,6 +8,7 @@ import bidgremlinImage from '../assets/bidgremlin.png';
 import fudscientistImage from '../assets/fudscientist.png';
 import jumpsetradioImage from '../assets/jumpsetradio.png';
 import SEOHead from '../components/SEOHead';
+import WebsitePreview from '../components/WebsitePreview';
 
 const WikiPage = () => {
   const { slug } = useParams();
@@ -283,6 +284,14 @@ The Retailverse is alive with potential—every domain is a blank canvas waiting
                 )}
               </div>
             </div>
+          )}
+
+          {/* Website Preview */}
+          {domain.hasWebsite && domain.website && (
+            <WebsitePreview 
+              websiteUrl={domain.website} 
+              domainName={domain.slug}
+            />
           )}
 
           {/* Navigation */}

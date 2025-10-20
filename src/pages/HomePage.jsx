@@ -118,7 +118,7 @@ const HomePage = () => {
             {/* CTA Button */}
             <div className="mb-16">
               <Link 
-                to="/marketplace"
+                to="/directory"
                 className="neon-cyan neon-cyan-hover py-4 px-8 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center mx-auto text-lg"
                 data-persona="Collectors, NFT Traders, Builder Bros"
                 data-meta="cta"

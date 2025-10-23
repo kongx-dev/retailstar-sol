@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import rsLogo from '../assets/rs-logo.png';
 import retailstarBody from '../assets/retailstar-body.png';
 import departmentsData from '../data/departments.json';
@@ -7,15 +7,32 @@ import RotationStatus from '../components/RotationStatus';
 import SEOHead from '../components/SEOHead';
 import LoreButton from '../components/LoreButton';
 import { filterBlocklisted } from '../data/blocklist';
-import { domains } from '../data/domains';
+import { useDomains } from '../hooks/useDomains';
+import DomainLoadingSkeleton from '../components/DomainLoadingSkeleton';
+import DomainErrorFallback from '../components/DomainErrorFallback';
 
 const MallDirectoryPage = () => {
   const [flicker, setFlicker] = useState(false);
   const [booting, setBooting] = useState(true);
+  const [searchParams] = useSearchParams();
+  const archetypeFilter = searchParams.get('archetype');
+  const { domains: supabaseDomains, loading, error } = useDomains({ listed: true });
 
   // Helper function to filter blocklisted domains from department data
   const filterDepartmentDomains = (domains) => {
     return filterBlocklisted(domains);
+  };
+
+  // Helper function to filter domains by archetype
+  const filterDomainsByArchetype = (domainList) => {
+    if (!archetypeFilter) return domainList;
+    
+    return domainList.filter(domain => {
+      const domainObj = supabaseDomains.find(d => d.name === domain.replace('.sol', ''));
+      if (!domainObj) return true; // Keep if not found in domains data
+      
+      return domainObj.archetype === archetypeFilter || domainObj.archetype === 'both';
+    });
   };
 
   useEffect(() => {
@@ -51,7 +68,7 @@ const MallDirectoryPage = () => {
 
   const allDomains = getAllDomains();
   const domainObjects = allDomains.map(domainName => {
-    const domain = domains.find(d => d.name === domainName.replace('.sol', ''));
+    const domain = supabaseDomains.find(d => d.name === domainName.replace('.sol', ''));
     return {
       "@type": "ListItem",
       "position": allDomains.indexOf(domainName) + 1,
@@ -155,8 +172,16 @@ const MallDirectoryPage = () => {
 
         {!booting && (
           <>
-            {/* Header */}
-            <div className="text-center mb-12">
+            {loading ? (
+              <div className="text-center py-12">
+                <DomainLoadingSkeleton count={6} />
+              </div>
+            ) : error ? (
+              <DomainErrorFallback error={error} onRetry={() => window.location.reload()} />
+            ) : (
+              <>
+                {/* Header */}
+                <div className="text-center mb-12">
               <div className="mb-8 flex justify-center">
                 <div className="relative">
                   <img 
@@ -185,6 +210,23 @@ const MallDirectoryPage = () => {
                   Explore the digital hallways of Retailstar Mall. This directory helps you discover meme shops, dev tools, and secret vaults scattered across our cyberpunk marketplace. 👀 <strong>Tip:</strong> Click any domain to learn more or enter its storefront. Some are hidden. Some are mythical. All are part of the ecosystem.
                 </p>
               </div>
+
+              {/* Archetype Filter Indicator */}
+              {archetypeFilter && (
+                <div className="max-w-4xl mx-auto mb-8 p-4 bg-gradient-to-r from-cyan-900/20 to-pink-900/20 border border-cyan-500/30 rounded-lg">
+                  <div className="flex items-center justify-center space-x-4">
+                    <span className="text-cyan-400 font-semibold">
+                      Filtering by: {archetypeFilter === 'builder' ? '🛠️ Builder Mode' : '🧃 Degen Mode'}
+                    </span>
+                    <Link 
+                      to="/directory"
+                      className="text-gray-400 hover:text-white text-sm underline"
+                    >
+                      Clear Filter
+                    </Link>
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Lore Button */}
@@ -252,7 +294,7 @@ const MallDirectoryPage = () => {
                               <p className="text-xs text-purple-400 mb-4">⏰ 7d rotation</p>
                             )}
                             <div className="space-y-2">
-                              {filterDepartmentDomains(wingData.domains).map((domain) => (
+                              {filterDomainsByArchetype(filterDepartmentDomains(wingData.domains)).map((domain) => (
                                 <div key={domain} className="flex items-center justify-between">
                                   <Link 
                                     to={`/wiki/${domain.replace('.sol', '')}`}
@@ -269,7 +311,7 @@ const MallDirectoryPage = () => {
                       </div>
                     ) : (
                       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {filterDepartmentDomains(floorData.domains).map((domain) => (
+                        {filterDomainsByArchetype(filterDepartmentDomains(floorData.domains)).map((domain) => (
                           <div key={domain} className="flex items-center justify-between bg-black/20 p-3 rounded border border-green-500/10">
                             <Link 
                               to={`/wiki/${domain.replace('.sol', '')}`}
@@ -296,6 +338,8 @@ const MallDirectoryPage = () => {
                 Browse All Domains
               </Link>
             </div>
+              </>
+            )}
           </>
         )}
       </div>

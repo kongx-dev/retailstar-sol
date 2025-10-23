@@ -1,10 +1,12 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { scavDomains } from '../data/scavDomains';
+import { useScavDomains } from '../hooks/useDomains';
 import ScavDomainCard from '../components/ScavDomainCard';
 import { Link } from 'react-router-dom';
 // @ts-ignore: PNG import for Vite
 import vendingBg from '../assets/rsvendingmachine.png';
 import SEOHead from '../components/SEOHead';
+import DomainLoadingSkeleton from '../components/DomainLoadingSkeleton';
+import ScavRackErrorFallback from '../components/DomainErrorFallback';
 
 // Retail Ticket System
 const TICKET_KEY = 'retailstar_tickets';
@@ -20,9 +22,8 @@ function getRetailTickets() {
 
 function ScavRack() {
   const gridRef = useRef(null);
-  const [shuffledDomains, setShuffledDomains] = useState(
-    [...scavDomains].sort(() => Math.random() - 0.5)
-  );
+  const { domains: scavDomains, loading, error, refetch } = useScavDomains();
+  const [shuffledDomains, setShuffledDomains] = useState([]);
   const [tickets, setTickets] = useState(getRetailTickets());
   const [slotMachineOpen, setSlotMachineOpen] = useState(false);
 
@@ -51,6 +52,13 @@ function ScavRack() {
     const positions = ['top-2', 'top-8', 'top-14', 'top-20'];
     return positions[index] || 'top-2';
   };
+
+  // Update shuffled domains when scavDomains change
+  useEffect(() => {
+    if (scavDomains.length > 0) {
+      setShuffledDomains([...scavDomains].sort(() => Math.random() - 0.5));
+    }
+  }, [scavDomains]);
 
   // Update ticket count when localStorage changes
   useEffect(() => {
@@ -128,35 +136,41 @@ function ScavRack() {
 
       {/* PNG Domain Grid */}
       <section ref={gridRef} className="flex-1 px-4 pb-20 relative z-10">
-        <div className="max-w-7xl mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-          {shuffledDomains.map((domain, idx) => (
-            <div
-              key={domain.name + idx}
-              className={`border border-pink-600 transition-all duration-300 rounded-md relative overflow-hidden group ${
-                slotMachineOpen 
-                  ? 'pointer-events-none opacity-50' 
-                  : 'hover:rotate-1 hover:scale-105'
-              }`}
-            >
-              {domain.tags?.map((tag, i) => (
-                <span
-                  key={tag + i}
-                  className={`absolute ${getTagPosition(i)} left-2 text-xs px-2 py-1 rounded text-white shadow ${getTagColor(tag)}`}
-                >
-                  {tag}
-                </span>
-              ))}
-              <div className={`transition-transform duration-300 ${
-                slotMachineOpen ? '' : 'group-hover:scale-105'
-              }`}>
-                <ScavDomainCard 
-                  domain={domain} 
-                  onSlotMachineToggle={setSlotMachineOpen}
-                />
+        {loading ? (
+          <DomainLoadingSkeleton count={8} />
+        ) : error ? (
+          <ScavRackErrorFallback error={error} onRetry={refetch} />
+        ) : (
+          <div className="max-w-7xl mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+            {shuffledDomains.map((domain, idx) => (
+              <div
+                key={domain.name + idx}
+                className={`border border-pink-600 transition-all duration-300 rounded-md relative overflow-hidden group ${
+                  slotMachineOpen 
+                    ? 'pointer-events-none opacity-50' 
+                    : 'hover:rotate-1 hover:scale-105'
+                }`}
+              >
+                {domain.tags?.map((tag, i) => (
+                  <span
+                    key={tag + i}
+                    className={`absolute ${getTagPosition(i)} left-2 text-xs px-2 py-1 rounded text-white shadow ${getTagColor(tag)}`}
+                  >
+                    {tag}
+                  </span>
+                ))}
+                <div className={`transition-transform duration-300 ${
+                  slotMachineOpen ? '' : 'group-hover:scale-105'
+                }`}>
+                  <ScavDomainCard 
+                    domain={domain} 
+                    onSlotMachineToggle={setSlotMachineOpen}
+                  />
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </section>
 
       {/* CSS for animations */}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import domainsData from '../data/domains.json';
+import { getDomainByName } from '../lib/domainQueries';
 import rsLogo from '../assets/rs-logo.png';
 import retailstarBody from '../assets/retailstar-body.png';
 import jpegdealerImage from '../assets/jpegdealer.png';
@@ -9,15 +9,62 @@ import fudscientistImage from '../assets/fudscientist.png';
 import jumpsetradioImage from '../assets/jumpsetradio.png';
 import SEOHead from '../components/SEOHead';
 import WebsitePreview from '../components/WebsitePreview';
+import DomainLoadingSkeleton from '../components/DomainLoadingSkeleton';
+import DomainErrorFallback from '../components/DomainErrorFallback';
 
 const WikiPage = () => {
   const { slug } = useParams();
   const [domain, setDomain] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const foundDomain = domainsData.domains.find(d => d.slug === slug);
-    setDomain(foundDomain);
+    const loadDomain = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        const foundDomain = await getDomainByName(slug);
+        setDomain(foundDomain);
+      } catch (err) {
+        console.error('Error loading domain:', err);
+        setError('Failed to load domain data');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (slug) {
+      loadDomain();
+    }
   }, [slug]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen text-white relative overflow-hidden">
+        <SEOHead 
+          target="retailstar.sol"
+          pageType="wiki"
+          customTitle="Loading Domain | Retailstar.sol"
+          customDescription="Loading domain information from the Retailverse."
+        />
+        <DomainLoadingSkeleton count={1} />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen text-white relative overflow-hidden">
+        <SEOHead 
+          target="retailstar.sol"
+          pageType="wiki"
+          customTitle="Error Loading Domain | Retailstar.sol"
+          customDescription="Unable to load domain information."
+        />
+        <DomainErrorFallback error={error} onRetry={() => window.location.reload()} />
+      </div>
+    );
+  }
 
   if (!domain) {
     return (

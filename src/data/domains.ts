@@ -1,51 +1,16 @@
-import domainsJson from './domains.json';
+// DEPRECATED: This file is kept for reference only
+// Supabase is now the single source of truth for domain data
+// Use useDomains hook or domainQueries for fetching domains
+
 import { filterBlocklisted, isForSale } from './blocklist';
 
-export type Domain = {
-  name: string;
-  slug: string;
-  description: string;
-  image: string;
-  featured?: boolean;
-  status: 'available' | 'not_for_sale' | 'vaulted' | string;
-  price: string;
-  category: 'premium' | 'mid' | 'quickSnag' | 'flashRack' | 'vaulted' | string;
-  quickSnagPrice?: string;
-  hasWebsite?: boolean;
-  website?: string;
-  hasLore?: boolean;
-  rarity?: 'epic' | 'rare' | 'base';
-  vaulted?: boolean;
-  flashRack?: boolean;
-  redacted?: boolean;
-  [key: string]: any;
-};
+// Re-export Domain type from supabase for backward compatibility
+export type { Domain } from '../lib/supabase';
 
-export const domains: Domain[] = domainsJson.domains.map((d) => {
-  // Centralized tagging logic
-  let rarity: Domain['rarity'] = 'base';
-  if (d.category === 'premium') rarity = 'epic';
-  else if (d.category === 'mid') rarity = 'rare';
-  const isVaulted = (('vaulted' in d && !!d.vaulted) || d.status === 'vaulted');
-  if (isVaulted) rarity = 'epic';
+// DEPRECATED: Local domain array removed - use Supabase queries instead
+// export const domains: Domain[] = ... (removed)
 
-  // Tag flashRack
-  const flashRack = !!(('flashRack' in d && d.flashRack) || d.category === 'flashRack');
-  // Tag quickSnag
-  const quickSnag = !!d.quickSnagPrice || d.category === 'quickSnag';
-  // Tag vaulted
-  const vaulted = !!isVaulted;
-
-  return {
-    ...d,
-    rarity,
-    flashRack,
-    quickSnag,
-    vaulted,
-  };
-});
-
-// Filtering helpers with blocklist integration
+// Filtering helpers with blocklist integration (still useful for client-side filtering)
 export const filterDomains = {
   all: (list: Domain[]) => filterBlocklisted(list),
   premium: (list: Domain[]) => filterBlocklisted(list.filter((d) => d.category === 'premium')),
@@ -56,7 +21,7 @@ export const filterDomains = {
 };
 
 // Helper to get domains available for sale (excludes blocklisted)
-export const getAvailableForSale = (domainList: Domain[] = domains): Domain[] => {
+export const getAvailableForSale = (domainList: Domain[]): Domain[] => {
   return filterBlocklisted(domainList.filter(d => d.status === 'available'));
 };
 

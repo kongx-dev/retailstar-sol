@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Terminal from '../../components/Terminal';
 import SEOHead from '../../components/SEOHead';
-import { basementDomains, npcDialogues, basementLore } from '../../data/basementDomains';
+import { npcDialogues, basementLore } from '../../data/basementDomains';
+import { useBasementDomains } from '../../hooks/useDomains';
+import DomainLoadingSkeleton from '../../components/DomainLoadingSkeleton';
+import DomainErrorFallback from '../../components/DomainErrorFallback';
 // @ts-ignore: PNG import for Vite
 import rsbasement from '../../assets/rsbasement.png';
 
@@ -11,6 +14,7 @@ const MOCK_WALLET = "7vswd...fE9s";
 
 export default function BasementPage() {
   const [currentNpcDialogue, setCurrentNpcDialogue] = useState('');
+  const { domains: basementDomains, loading, error } = useBasementDomains();
 
   // Glitch effect for background
   useEffect(() => {
@@ -186,24 +190,30 @@ export default function BasementPage() {
                 Featured Basement Shops
               </h3>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {basementDomains.map((domain) => (
-                  <Link
-                    key={domain.slug}
-                    to={`/domains/${domain.slug}`}
-                    className={`bg-gray-900/80 border-2 rounded-lg p-6 transition-all duration-200 hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/20 ${getColorClasses(domain.color)}`}
-                  >
-                    <div className="flex items-start space-x-4">
-                      <div className="text-4xl">{domain.icon}</div>
-                      <div className="flex-1">
-                        <h4 className="text-xl font-bold text-white mb-1">{domain.name}</h4>
-                        <p className="text-sm text-cyan-400 font-semibold mb-2">{domain.tagline}</p>
-                        <p className="text-xs text-gray-400">{domain.description}</p>
+              {loading ? (
+                <DomainLoadingSkeleton count={4} />
+              ) : error ? (
+                <DomainErrorFallback error={error} onRetry={() => window.location.reload()} />
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {basementDomains.map((domain) => (
+                    <Link
+                      key={domain.slug || domain.name}
+                      to={`/domains/${domain.slug || domain.name}`}
+                      className={`bg-gray-900/80 border-2 rounded-lg p-6 transition-all duration-200 hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/20 ${getColorClasses(domain.color || 'cyan')}`}
+                    >
+                      <div className="flex items-start space-x-4">
+                        <div className="text-4xl">{domain.icon || '🏪'}</div>
+                        <div className="flex-1">
+                          <h4 className="text-xl font-bold text-white mb-1">{domain.name}</h4>
+                          <p className="text-sm text-cyan-400 font-semibold mb-2">{domain.tagline || domain.description}</p>
+                          <p className="text-xs text-gray-400">{domain.description}</p>
+                        </div>
                       </div>
-                    </div>
-                  </Link>
-                ))}
-              </div>
+                    </Link>
+                  ))}
+                </div>
+              )}
 
               {/* Call to Action */}
               <div className="mt-8 bg-gradient-to-r from-cyan-900/50 to-purple-900/50 border border-cyan-500/50 rounded-lg p-6 text-center">

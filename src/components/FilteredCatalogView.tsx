@@ -1,6 +1,9 @@
 import React, { useMemo } from 'react';
-import { domains, filterDomains, Domain } from '../data/domains.ts';
+import { useDomains } from '../hooks/useDomains';
+import { filterDomains, Domain } from '../data/domains.ts';
 import DomainCard from './DomainCard';
+import DomainLoadingSkeleton from './DomainLoadingSkeleton';
+import DomainErrorFallback from './DomainErrorFallback';
 
 interface FilteredCatalogViewProps {
   filterKey: keyof typeof filterDomains;
@@ -8,7 +11,10 @@ interface FilteredCatalogViewProps {
 
 // Remove React.FC typing and use a plain function component
 export default function FilteredCatalogView({ filterKey }: FilteredCatalogViewProps) {
+  const { domains, loading, error } = useDomains({ listed: true });
+  
   const filtered = useMemo(() => {
+    if (!domains.length) return [];
     const list = filterDomains[filterKey](domains);
     // Sort: featured first, then by price descending (if available)
     return list.sort((a, b) => {
@@ -19,7 +25,15 @@ export default function FilteredCatalogView({ filterKey }: FilteredCatalogViewPr
       const priceB = parseFloat(b.price) || 0;
       return priceB - priceA;
     });
-  }, [filterKey]);
+  }, [filterKey, domains]);
+
+  if (loading) {
+    return <DomainLoadingSkeleton count={6} />;
+  }
+
+  if (error) {
+    return <DomainErrorFallback error={error} onRetry={() => window.location.reload()} />;
+  }
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">

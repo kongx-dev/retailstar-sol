@@ -1,6 +1,33 @@
 // @ts-ignore: Supabase types
 import { createClient } from '@supabase/supabase-js';
 
+// Domain interface matching Supabase schema
+export interface Domain {
+  id?: number;
+  name: string;
+  slug: string;
+  description: string;
+  image_url: string;
+  featured?: boolean;
+  status: 'available' | 'not_for_sale' | 'vaulted' | string;
+  price: string;
+  category: 'premium' | 'mid' | 'quickSnag' | 'flashRack' | 'vaulted' | 'scav' | 'basement' | string;
+  quickSnagPrice?: string;
+  hasWebsite?: boolean;
+  website?: string;
+  hasLore?: boolean;
+  rarity?: 'epic' | 'rare' | 'base';
+  vaulted?: boolean;
+  flashRack?: boolean;
+  redacted?: boolean;
+  archetype?: 'builder' | 'degen' | 'both';
+  listed: boolean;
+  available: boolean;
+  tags: string[];
+  meta_json?: any;
+  [key: string]: any;
+}
+
 // Initialize Supabase client with better error handling
 const supabaseUrl = (import.meta as any).env?.VITE_SUPABASE_URL;
 const supabaseKey = (import.meta as any).env?.VITE_SUPABASE_ANON_KEY;
@@ -11,13 +38,17 @@ let supabase: any = null;
 if (supabaseUrl && supabaseKey && supabaseUrl !== 'https://your-project.supabase.co' && supabaseKey !== 'your-anon-key') {
   try {
     supabase = createClient(supabaseUrl, supabaseKey);
+    console.log('Supabase client initialized successfully');
   } catch (error) {
     console.warn('Failed to initialize Supabase client:', error);
     supabase = null;
   }
 } else {
-  console.warn('Supabase credentials not configured. Using localStorage fallback only.');
+  console.warn('Supabase credentials not configured. Please set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in your .env file.');
 }
+
+// Export the client for domain queries
+export { supabase };
 
 // Database utility functions
 export async function getUserAccessData(walletAddress: string) {

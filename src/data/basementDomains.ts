@@ -1,3 +1,7 @@
+// DEPRECATED: This file is kept for reference only
+// Supabase is now the single source of truth for basement domain data
+// Use useDomains hook or domainQueries for fetching basement domains
+
 export interface BasementDomain {
   slug: string;
   name: string;
@@ -7,48 +11,8 @@ export interface BasementDomain {
   description: string;
 }
 
-export const basementDomains: BasementDomain[] = [
-  {
-    slug: 'copevendor',
-    name: 'copevendor.sol',
-    tagline: 'Cope & Vend Since 2024',
-    icon: '😤',
-    color: 'cyan',
-    description: 'Your one-stop shop for premium copium and hopium. We vend the finest copes in the game.'
-  },
-  {
-    slug: 'jpegdealer',
-    name: 'jpegdealer.sol',
-    tagline: 'Your NFT Plug',
-    icon: '🖼️',
-    color: 'purple',
-    description: 'The JPEG game runs deep. We deal in pixels, vibes, and generational wealth (maybe).'
-  },
-  {
-    slug: 'dripdealer',
-    name: 'dripdealer.sol',
-    tagline: 'Streetwear x Web3',
-    icon: '💧',
-    color: 'green',
-    description: 'Drip so hard they call it a flood. Streetwear meets blockchain aesthetics.'
-  },
-  {
-    slug: 'lurkerlife',
-    name: 'lurkerlife.sol',
-    tagline: 'For the Silent Observers',
-    icon: '👁️',
-    color: 'yellow',
-    description: 'Lurking is a lifestyle. Watch, learn, never speak. Maximum efficiency, minimal exposure.'
-  },
-  {
-    slug: 'commandhub',
-    name: 'commandhub.sol',
-    tagline: 'AI Dashboard & Infra',
-    icon: '⚡',
-    color: 'red',
-    description: 'Command center for builders. AI-powered infrastructure ready to deploy.'
-  }
-];
+// DEPRECATED: Local basement domains array removed - use Supabase queries instead
+// export const basementDomains: BasementDomain[] = ... (removed)
 
 export const npcDialogues = [
   "Yo, check out copevendor.sol if you need that hopium fix 😤",
@@ -82,4 +46,7 @@ The NPCs standing around? Those are your future business partners.
 Welcome to the foundation. Welcome to the Glitch Militia HQ.`,
   motto: "From the Basement to the Moon 🚀"
 };
+
+
+
 

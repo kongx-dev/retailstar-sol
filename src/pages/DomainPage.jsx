@@ -1,15 +1,65 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import domainsData from '../data/domains.json';
+import { getDomainByName } from '../lib/domainQueries';
 import DomainTemplate from '../components/DomainTemplate';
 import SEOHead from '../components/SEOHead';
+import DomainLoadingSkeleton from '../components/DomainLoadingSkeleton';
+import DomainErrorFallback from '../components/DomainErrorFallback';
 
 const DomainPage = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
+  const [domain, setDomain] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Find domain in the new domains.json data
-  const domain = domainsData.domains.find(d => d.slug === slug);
+  useEffect(() => {
+    const loadDomain = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        const foundDomain = await getDomainByName(slug);
+        setDomain(foundDomain);
+      } catch (err) {
+        console.error('Error loading domain:', err);
+        setError('Failed to load domain data');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (slug) {
+      loadDomain();
+    }
+  }, [slug]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen text-white relative overflow-hidden">
+        <SEOHead 
+          target="retailstar.sol"
+          pageType="domain"
+          customTitle="Loading Domain | Retailstar.sol"
+          customDescription="Loading domain information from the Retailverse."
+        />
+        <DomainLoadingSkeleton count={1} />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen text-white relative overflow-hidden">
+        <SEOHead 
+          target="retailstar.sol"
+          pageType="domain"
+          customTitle="Error Loading Domain | Retailstar.sol"
+          customDescription="Unable to load domain information."
+        />
+        <DomainErrorFallback error={error} onRetry={() => window.location.reload()} />
+      </div>
+    );
+  }
   
   if (!domain) {
     return (

@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { domains as allDomains, getAvailableForSale } from '../data/domains';
-import { mythicDomains } from '../data/mythicDomains';
+import { useDomains } from '../hooks/useDomains';
+import { getMythicDomains, getFeaturedDomains, getFlashOffers } from '../lib/domainQueries';
+import { getAvailableForSale } from '../data/domains';
 import bgImage from "../assets/chowdown.png";
 import chevronUp from "../assets/chevron.png";
 import SEOHead from '../components/SEOHead';
-import SNSRedirectModal from '../components/SNSRedirectModal';
-import { Link } from 'react-router-dom'; // Added Link import
+import { Link } from 'react-router-dom';
+import { MarketplaceCardSkeleton, OfferTileSkeleton } from '../components/DomainLoadingSkeleton';
+import { MarketplaceErrorFallback } from '../components/DomainErrorFallback';
 
 // Import domain images
 import jpegdealerImg from "../assets/jpegdealer.png";
@@ -60,55 +62,64 @@ function getAvailableDomains() {
 }
 
 // Helper to check if domain is Mythic
-function isMythicDomain(domain) {
+function isMythic(domain) {
   return mythicDomains.some(mythic => mythic.name === domain.name);
 }
 
-// Helper to check if domain is Featured
-function isFeaturedDomain(domain) {
-  return domain.category === 'premium' || domain.category === 'mid';
+// Helper to get available domains from Supabase
+async function getAvailableDomainsFromSupabase() {
+  const { domains } = useDomains({ listed: true, available: true });
+  return domains;
 }
 
-// Get Mythic domains
-function getMythicDomains() {
-  return getAvailableDomains().filter(isMythicDomain);
+// Helper to get Mythic domains from Supabase
+async function getMythicDomainsFromSupabase() {
+  const domains = await getMythicDomains();
+  return domains.map(d => ({
+    ...d,
+    rotationGroup: "mythic",
+    rotationExpires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(), // 30 days
+  }));
 }
 
-// Get Featured domains
-function getFeaturedDomains() {
-  return getAvailableDomains().filter(isFeaturedDomain).slice(0, 6);
+// Helper to get featured domains from Supabase
+async function getFeaturedDomainsFromSupabase() {
+  const domains = await getFeaturedDomains();
+  return domains.slice(0, 2).map(d => ({
+    ...d,
+    rotationGroup: "featured",
+    rotationExpires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(), // 7 days
+  }));
 }
 
-// Get Flash offers
-function getFlashOffers() {
-  return getAvailableDomains().filter(domain => domain.category === 'flash').slice(0, 12);
+// Helper to get flash offers from Supabase
+async function getFlashOffersFromSupabase() {
+  const domains = await getFlashOffers();
+  return domains.map(d => ({
+    ...d,
+    rotationGroup: "daily",
+    rotationExpires: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(), // 24 hours
+  }));
 }
 
 // Timer component
-function Timer({ expiresAt, onExpire }) {
+function Timer({ expiresAt }) {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
-    if (!expiresAt) return;
+    const timer = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = new Date(expiresAt).getTime() - now;
 
-    const calculateTimeLeft = () => {
-      const difference = new Date(expiresAt).getTime() - new Date().getTime();
-      
-      if (difference > 0) {
-        setTimeLeft({
-          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-          hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-          minutes: Math.floor((difference / 1000 / 60) % 60),
-          seconds: Math.floor((difference / 1000) % 60)
-        });
-      } else {
-        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-        onExpire?.();
+      if (distance > 0) {
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        setTimeLeft({ days, hours, minutes, seconds });
       }
-    };
-
-    calculateTimeLeft();
-    const timer = setInterval(calculateTimeLeft, 1000);
+    }, 1000);
 
     return () => clearInterval(timer);
   }, [expiresAt]);
@@ -124,11 +135,12 @@ function Timer({ expiresAt, onExpire }) {
 // Mythic Domain Card Component
 function MythicDomainCard({ domain, onPurchase }) {
   const handlePurchase = () => {
+    markDomainAsSold(domain.slug);
     onPurchase(domain.slug);
   };
 
   const imageKey = domain.name.toLowerCase();
-  const imageSrc = domainImages[imageKey] || domainImages.jpegdealer;
+  const imageSrc = domain.image_url || domainImages[imageKey] || domainImages.jpegdealer;
 
   return (
     <div className="relative group cursor-pointer">
@@ -172,11 +184,12 @@ function MythicDomainCard({ domain, onPurchase }) {
 // Featured Domain Card Component
 function FeaturedDomainCard({ domain, onPurchase }) {
   const handlePurchase = () => {
+    markDomainAsSold(domain.slug);
     onPurchase(domain.slug);
   };
 
   const imageKey = domain.name.toLowerCase();
-  const imageSrc = domainImages[imageKey] || domainImages.jpegdealer;
+  const imageSrc = domain.image_url || domainImages[imageKey] || domainImages.jpegdealer;
 
   return (
     <div className="bg-gray-800/50 border border-gray-700 rounded-xl p-6 shadow-lg hover:shadow-cyan-500/25 transition-all duration-200">
@@ -214,11 +227,12 @@ function FeaturedDomainCard({ domain, onPurchase }) {
 // Offer Tile Component
 function OfferTile({ domain, onPurchase }) {
   const handlePurchase = () => {
+    markDomainAsSold(domain.slug);
     onPurchase(domain.slug);
   };
 
   const imageKey = domain.name.toLowerCase();
-  const imageSrc = domainImages[imageKey] || domainImages.jpegdealer;
+  const imageSrc = domain.image_url || domainImages[imageKey] || domainImages.jpegdealer;
 
   return (
     <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-4 shadow-lg hover:shadow-orange-500/25 transition-all duration-200">
@@ -258,184 +272,243 @@ export default function MarketplacePage() {
   const [featuredDomains, setFeaturedDomains] = useState([]);
   const [flashOffers, setFlashOffers] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [showSNSModal, setShowSNSModal] = useState(false);
-  const [selectedDomain, setSelectedDomain] = useState(null);
+  const [error, setError] = useState(null);
 
   // Refresh inventory when domains are purchased
-  const handleDomainPurchase = (domainSlug) => {
-    setSelectedDomain(domainSlug);
-    setShowSNSModal(true);
-  };
-
-  const handleSNSModalClose = () => {
-    setShowSNSModal(false);
-    setSelectedDomain(null);
-  };
-
-  // Load domains on mount
-  useEffect(() => {
-    const loadDomains = () => {
-      const newMythic = getMythicDomains();
-      const newFeatured = getFeaturedDomains();
-      const newFlash = getFlashOffers();
+  const handleDomainPurchase = async (domainSlug) => {
+    try {
+      // Refresh all domain data
+      const [newMythic, newFeatured, newFlash] = await Promise.all([
+        getMythicDomainsFromSupabase(),
+        getFeaturedDomainsFromSupabase(),
+        getFlashOffersFromSupabase()
+      ]);
       
       setMythicDomains(newMythic);
       setFeaturedDomains(newFeatured);
       setFlashOffers(newFlash);
-      setLoading(false);
+      
+      // Show purchase notification
+      console.log(`🎉 ${domainSlug}.sol has been purchased!`);
+    } catch (err) {
+      console.error('Error refreshing domains:', err);
+      setError('Failed to refresh domain data');
+    }
+  };
+
+  useEffect(() => {
+    const loadDomains = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        
+        const [mythic, featured, flash] = await Promise.all([
+          getMythicDomainsFromSupabase(),
+          getFeaturedDomainsFromSupabase(),
+          getFlashOffersFromSupabase()
+        ]);
+        
+        setMythicDomains(mythic);
+        setFeaturedDomains(featured);
+        setFlashOffers(flash);
+      } catch (err) {
+        console.error('Error loading domains:', err);
+        setError('Failed to load marketplace data');
+      } finally {
+        setLoading(false);
+      }
     };
 
     loadDomains();
   }, []);
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-black text-white flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-cyan-500 mx-auto mb-4"></div>
-          <p className="text-cyan-400">Loading marketplace...</p>
-        </div>
-      </div>
-    );
-  }
+  // Listen for storage changes (in case another tab purchases)
+  useEffect(() => {
+    const handleStorageChange = () => {
+      // Refresh domains when storage changes
+      handleDomainPurchase('refresh');
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, []);
 
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
       <SEOHead
         target="retailstar.sol"
         pageType="marketplace"
-        customTitle="Marketplace | Retailstar.sol - Premium Domain Collection"
-        customDescription="Browse our curated collection of premium .sol domains. From mythic artifacts to quick snags, find your perfect digital real estate."
-        customKeywords="solana domains, marketplace, premium domains, mythic domains, retailstar"
-        imageUrl="https://retailstar.sol/src/assets/rs-logo.png"
-        canonicalUrl="https://retailstar.sol/marketplace"
-        ogImage="https://retailstar.sol/src/assets/rs-logo.png"
-        twitterImage="https://retailstar.sol/src/assets/rs-logo.png"
+        customTitle="Marketplace | Retailstar.sol - Buy Solana Domains & NFT Builds"
+        customDescription="Browse and buy Solana domains, NFT builds, and premium .sol names. Secure your spot in the Retailverse."
+        customKeywords="marketplace, buy .sol, Solana domains, NFT builds, SNS escrow"
       />
-
-      {/* Background */}
-      <div className="absolute inset-0 z-0">
-        <img 
-          src={bgImage} 
-          alt="Marketplace Background" 
-          className="w-full h-full object-cover opacity-20"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/80"></div>
-      </div>
-
-      {/* Content */}
-      <div className="relative z-10 min-h-screen">
+      
+      {/* Background image */}
+      <img
+        src={bgImage}
+        alt="Retailstar Marketplace Background"
+        className="pointer-events-none select-none fixed inset-0 w-full h-full object-cover opacity-80 z-0"
+        style={{ filter: "brightness(0.7)" }}
+        aria-hidden="true"
+      />
+      
+      {/* Overlay for readability */}
+      <div className="fixed inset-0 bg-black/60 z-0" aria-hidden="true"></div>
+      
+      {/* Main content */}
+      <div className="relative z-10 p-6">
         {/* Header */}
-        <section className="py-20 px-4 text-center">
-          <h1 className="text-4xl md:text-6xl font-black mb-4 neon-cyan drop-shadow-neon">
-            Marketplace
+        <div className="text-center mb-8">
+          <h1 className="text-4xl md:text-6xl font-black mb-4 neon-pulse solana-gradient">
+            RETAILSTAR MARKETPLACE
           </h1>
-          <p className="text-lg md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            Premium .sol domains curated by Retailstar Mall
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+            Premium domains with live sites, lore, and high-conviction builds
           </p>
-          
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-            <Link
-              to="/scavrack"
-              className="neon-green neon-green-hover py-3 px-6 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 text-lg"
-            >
-              🟢 Scav Rack
-            </Link>
-            <Link
-              to="/vault"
-              className="neon-purple neon-purple-hover py-3 px-6 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 text-lg"
-            >
-              🔒 Vaulted Domains
-            </Link>
+          {/* Inventory status */}
+          <div className="mt-4 text-sm text-gray-400">
+            {mythicDomains.length + featuredDomains.length + flashOffers.length} domains available • First come, first served
           </div>
-        </section>
+        </div>
 
         {/* Mythic Section */}
-        {mythicDomains.length > 0 && (
-          <section className="py-12 px-4">
-            <div className="max-w-7xl mx-auto">
-              <h2 className="text-3xl font-bold text-center mb-8 neon-purple">
-                🧿 Mythic Artifacts
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {mythicDomains.map((domain) => (
-                  <MythicDomainCard 
-                    key={domain.slug} 
-                    domain={domain} 
-                    onPurchase={handleDomainPurchase}
-                  />
-                ))}
-              </div>
+        <div className="mb-12">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-bold text-violet-400">🧿 MYTHIC</h2>
+            <div className="text-sm text-gray-400">
+              {mythicDomains.length > 0 ? `${mythicDomains.length} available` : 'All sold out'}
             </div>
-          </section>
-        )}
+          </div>
+          
+          {loading ? (
+            <MarketplaceCardSkeleton count={2} />
+          ) : error ? (
+            <MarketplaceErrorFallback error={error} onRetry={() => window.location.reload()} />
+          ) : mythicDomains.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {mythicDomains.map((domain, idx) => (
+                <MythicDomainCard 
+                  key={`${domain.name}-${idx}`} 
+                  domain={domain} 
+                  onPurchase={handleDomainPurchase}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12">
+              <div className="text-2xl font-bold text-gray-500 mb-2">SOLD OUT</div>
+              <div className="text-gray-400">All mythic domains have been claimed</div>
+            </div>
+          )}
+        </div>
 
         {/* Featured Section */}
-        {featuredDomains.length > 0 && (
-          <section className="py-12 px-4">
-            <div className="max-w-7xl mx-auto">
-              <h2 className="text-3xl font-bold text-center mb-8 neon-cyan">
-                ⭐ Featured Domains
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {featuredDomains.map((domain) => (
-                  <FeaturedDomainCard 
-                    key={domain.slug} 
-                    domain={domain} 
-                    onPurchase={handleDomainPurchase}
-                  />
-                ))}
-              </div>
+        <div className="mb-12">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-bold text-cyan-400">FEATURED</h2>
+            <div className="text-sm text-gray-400">
+              {featuredDomains.length > 0 ? `${featuredDomains.length} available` : 'All sold out'}
             </div>
-          </section>
-        )}
-
-        {/* Flash Offers Section */}
-        {flashOffers.length > 0 && (
-          <section className="py-12 px-4">
-            <div className="max-w-7xl mx-auto">
-              <h2 className="text-3xl font-bold text-center mb-8 neon-orange">
-                ⚡ Flash Offers
-              </h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                {flashOffers.map((domain) => (
-                  <OfferTile 
-                    key={domain.slug} 
-                    domain={domain} 
-                    onPurchase={handleDomainPurchase}
-                  />
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* Footer CTA */}
-        <section className="py-20 px-4 text-center">
-          <div className="max-w-2xl mx-auto">
-            <h3 className="text-2xl font-bold mb-4 neon-green">
-              Ready to claim your domain?
-            </h3>
-            <p className="text-gray-300 mb-8">
-              All purchases are processed through SNS for security and transparency.
-            </p>
-            <Link
-              to="/scavrack"
-              className="neon-green neon-green-hover py-4 px-8 rounded-lg font-semibold transition-all duration-200 text-lg inline-block"
-            >
-              🟢 Browse Scav Rack
-            </Link>
           </div>
-        </section>
-      </div>
+          
+          {loading ? (
+            <MarketplaceCardSkeleton count={2} />
+          ) : error ? (
+            <MarketplaceErrorFallback error={error} onRetry={() => window.location.reload()} />
+          ) : featuredDomains.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {featuredDomains.map((domain, idx) => (
+                <FeaturedDomainCard 
+                  key={`${domain.name}-${idx}`} 
+                  domain={domain} 
+                  onPurchase={handleDomainPurchase}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12">
+              <div className="text-2xl font-bold text-gray-500 mb-2">SOLD OUT</div>
+              <div className="text-gray-400">All featured domains have been claimed</div>
+            </div>
+          )}
+        </div>
 
-      {/* SNS Redirect Modal */}
-      <SNSRedirectModal
-        isOpen={showSNSModal}
-        onClose={handleSNSModalClose}
-        domainName={selectedDomain}
-      />
+        {/* Offers Section */}
+        <div className="mb-12">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-bold text-green-400">OFFERS</h2>
+            <div className="text-sm text-gray-400">
+              {flashOffers.length > 0 ? `${flashOffers.length} available` : 'All sold out'}
+            </div>
+          </div>
+          
+          {loading ? (
+            <OfferTileSkeleton count={6} />
+          ) : error ? (
+            <MarketplaceErrorFallback error={error} onRetry={() => window.location.reload()} />
+          ) : flashOffers.length > 0 ? (
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+              {flashOffers.map((domain, idx) => (
+                <OfferTile 
+                  key={`${domain.name}-${idx}`} 
+                  domain={domain} 
+                  onPurchase={handleDomainPurchase}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12">
+              <div className="text-2xl font-bold text-gray-500 mb-2">SOLD OUT</div>
+              <div className="text-gray-400">All offer domains have been claimed</div>
+            </div>
+          )}
+        </div>
+
+        {/* Footer */}
+        <footer className="border-t border-gray-800 bg-black/40 backdrop-blur-sm py-8 px-4 mt-16">
+          <div className="max-w-6xl mx-auto text-center">
+            <div className="mb-6 flex items-center justify-center gap-6">
+              <img src={chevronUp} alt="Chevron Left" className="w-8 h-8 opacity-60" style={{ transform: 'rotate(-90deg)' }} />
+              <p className="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                RetailStar is a broadcast from Solana&apos;s underlayer — every domain is a node waiting to go live.
+              </p>
+              <img src={chevronUp} alt="Chevron Right" className="w-8 h-8 opacity-60" style={{ transform: 'rotate(90deg)' }} />
+            </div>
+            
+            {/* Navigation Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
+              <Link
+                to="/scavrack"
+                className="neon-green neon-green-hover py-3 px-6 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 text-lg"
+              >
+                🟢 Scav Rack
+              </Link>
+              <Link
+                to="/"
+                className="neon-purple neon-purple-hover py-3 px-6 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 text-lg"
+              >
+                🏠 Home
+              </Link>
+            </div>
+            
+            {/* Additional Links */}
+            <div className="flex flex-wrap justify-center gap-6 text-sm text-gray-400">
+              <Link to="/wiki/retailverse" className="hover:text-cyan-400 transition-colors">
+                📚 Wiki
+              </Link>
+              <Link to="/guide" className="hover:text-cyan-400 transition-colors">
+                📖 Guide
+              </Link>
+              <Link to="/merch" className="hover:text-cyan-400 transition-colors">
+                👕 Merch
+              </Link>
+              <Link to="/vote" className="hover:text-cyan-400 transition-colors">
+                🗳️ Vote
+              </Link>
+            </div>
+          </div>
+        </footer>
+      </div>
     </div>
   );
 } 

@@ -385,8 +385,8 @@ Ready to explore the world of Solana domains? [Explore the Retailstar Mall](http
       name: 'Kongnificent',
       url: 'https://twitter.com/kongnficent_'
     },
-    publishedAt: '2025-11-12T00:00:00Z',
-    updatedAt: '2025-11-12T00:00:00Z',
+    publishedAt: '2025-11-12T12:00:00Z',
+    updatedAt: '2025-11-12T12:00:00Z',
     tags: ['Solana', 'Domains', 'Web3', 'Beginner Guides'],
     category: 'Guide',
     featured: true,

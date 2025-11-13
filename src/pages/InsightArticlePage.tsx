@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import SEOHead from '../components/SEOHead';
 import BlogLayout from '../components/BlogLayout';
 import { getBlogPost } from '../data/blogPosts';
+import rsopengraph from '../assets/rsopengraph.png';
 
 const InsightArticlePage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -37,7 +38,34 @@ const InsightArticlePage: React.FC = () => {
 
   // Convert markdown-like content to HTML
   const formatContent = (content: string) => {
-    return content
+    // Handle markdown tables first (before other processing)
+    const tableRegex = /(\|.+\|\n\|[\s\-:]+\|\n(?:\|.+\|\n?)+)/g;
+    let processed = content.replace(tableRegex, (match) => {
+      const lines = match.trim().split('\n');
+      const headerRow = lines[0];
+      const dataRows = lines.slice(2); // Skip separator row
+      
+      const headerCells = headerRow.split('|').map(c => c.trim()).filter(c => c);
+      const headerHtml = `<thead><tr>${headerCells.map(cell => `<th class="border border-gray-700 px-4 py-2 text-left font-bold text-white bg-gray-800">${cell}</th>`).join('')}</tr></thead>`;
+      
+      const bodyRows = dataRows.map(row => {
+        const cells = row.split('|').map(c => c.trim()).filter(c => c);
+        return `<tr>${cells.map(cell => `<td class="border border-gray-700 px-4 py-2 text-gray-300">${cell}</td>`).join('')}</tr>`;
+      }).join('');
+      
+      return `<table class="w-full border-collapse border border-gray-700 my-6">${headerHtml}<tbody>${bodyRows}</tbody></table>`;
+    });
+    
+    // Handle links - detect internal vs external
+    processed = processed.replace(/\[([^\]]+)\]\(([^)]+)\)/gim, (match, text, url) => {
+      const isInternal = url.startsWith('/') || url.startsWith('#');
+      const isExternal = url.startsWith('http://') || url.startsWith('https://');
+      const linkClass = 'text-cyan-400 hover:text-cyan-300 underline';
+      const target = isExternal ? ' target="_blank" rel="noopener noreferrer"' : '';
+      return `<a href="${url}" class="${linkClass}"${target}>${text}</a>`;
+    });
+    
+    return processed
       .replace(/^# (.*$)/gim, '<h1 class="text-3xl font-bold text-white mb-6">$1</h1>')
       .replace(/^## (.*$)/gim, '<h2 class="text-2xl font-bold text-cyan-400 mb-4 mt-8">$1</h2>')
       .replace(/^### (.*$)/gim, '<h3 class="text-xl font-bold text-white mb-3 mt-6">$1</h3>')
@@ -48,42 +76,44 @@ const InsightArticlePage: React.FC = () => {
       .replace(/\*\*(.*?)\*\*/gim, '<strong class="text-white font-semibold">$1</strong>')
       .replace(/\*(.*?)\*/gim, '<em class="text-gray-300 italic">$1</em>')
       .replace(/`(.*?)`/gim, '<code class="bg-gray-800 text-cyan-300 px-2 py-1 rounded text-sm">$1</code>')
-      .replace(/\[([^\]]+)\]\(([^)]+)\)/gim, '<a href="$2" class="text-cyan-400 hover:text-cyan-300 underline">$1</a>')
       .replace(/^> (.*$)/gim, '<blockquote class="border-l-4 border-cyan-500 pl-4 italic text-cyan-300 my-4">$1</blockquote>')
       .replace(/^---$/gim, '<hr class="border-gray-700 my-8">')
       .replace(/\n\n/gim, '</p><p class="text-gray-300 leading-relaxed mb-4">')
-      .replace(/^(?!<[h|l|b|c|a|p])(.*$)/gim, '<p class="text-gray-300 leading-relaxed mb-4">$1</p>');
+      .replace(/^(?!<[h|l|b|c|a|p|t])(.*$)/gim, '<p class="text-gray-300 leading-relaxed mb-4">$1</p>');
   };
 
   const formattedContent = formatContent(post.content);
 
   // Generate comprehensive schema for blog posts
+  // Use Person type for Kongnificent, Organization for others
+  const isKongnificent = post.author.name === 'Kongnificent';
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": post.schema.articleType,
     "headline": post.title,
     "description": post.description,
     "image": post.image,
-    "author": {
+    "author": isKongnificent ? {
+      "@type": "Person",
+      "name": post.author.name
+    } : {
       "@type": "Organization",
       "name": post.author.name,
       "url": post.author.url
     },
     "publisher": {
       "@type": "Organization",
-      "name": "Retailstar.sol",
-      "url": "https://retailstar.xyz",
+      "name": "Retailstar Mall",
       "logo": {
         "@type": "ImageObject",
         "url": "https://retailstar.xyz/assets/rs-logo.png"
       }
     },
-    "datePublished": post.publishedAt,
-    "dateModified": post.updatedAt,
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": post.canonicalUrl
     },
+    "datePublished": post.publishedAt,
     "articleBody": post.content,
     "keywords": post.keywords,
     "articleSection": post.category,
@@ -199,6 +229,10 @@ const InsightArticlePage: React.FC = () => {
               src={post.image} 
               alt={post.title}
               className="w-full h-64 object-cover rounded-lg border border-gray-700"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.src = rsopengraph;
+              }}
             />
           </div>
         )}

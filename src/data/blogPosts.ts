@@ -168,6 +168,255 @@ Or if you're looking to **acquire, customize, or flip a high-potential domain**,
       articleType: 'Article',
       mainEntity: 'Retailstar.sol'
     }
+  },
+  {
+    slug: '50-meme-domains-under-20-sol',
+    title: '50 Meme .sol Domains Under 20 USDC That Might Just Go Viral',
+    description: 'Need a cheap, hilarious Solana domain? Here are 50+ meme-worthy .sol names under 20 USDC with degen commentary and buy links.',
+    content: `# 50 Meme .sol Domains Under 20 USDC That Might Just Go Viral
+
+Meme domains are like meme coins — cheap, dumb, and potentially legendary. Here's our curated scav rack of .sol names that'll make you the hero (or clown) of CT.
+
+## The Meme Domain Hall of Fame
+
+*Scroll down to see our full list of meme-worthy domains, complete with degen commentary and direct buy links.*
+
+### Why These Domains Matter
+
+In the wild west of Web3, your domain is your digital identity. But who says that identity can't be absolutely ridiculous?
+
+These domains aren't just cheap — they're **culturally significant**. Each one captures a moment, a vibe, or an inside joke that only the real ones will understand.
+
+### The Selection Criteria
+
+- **Under 20 USDC** (because we're not made of money)
+- **Meme-worthy** (obviously)
+- **Actually available** (no point in teasing you)
+- **CT-approved** (if it doesn't make you laugh, it's not worth it)
+
+Ready to dive in? Let's explore the chaos.
+
+---
+
+*[The full list of domains will be rendered dynamically from our scavDomains data]*
+
+---
+
+## Found Something Funny?
+
+Screenshot it. Tag us @RetailstarMall and flex your new domain.
+
+These aren't just domains — they're **cultural artifacts** waiting to be claimed by the right degen.
+
+> **Ready to claim your meme domain?** [Browse the full collection](/domains) or [start building your legacy](/submit).
+
+---
+
+*This list is updated regularly as new meme domains enter the ecosystem. Check back for fresh chaos.*`,
+    author: {
+      name: 'Retailstar Team',
+      url: 'https://retailstar.xyz'
+    },
+    publishedAt: '2024-01-20T00:00:00Z',
+    updatedAt: '2024-01-20T00:00:00Z',
+    tags: ['meme domains', 'solana', 'cheap domains', 'degen', 'scav rack', 'funny domains'],
+    category: 'Guide',
+    featured: true,
+    image: 'https://retailstar.xyz/assets/rs-og-card.png',
+    canonicalUrl: 'https://retailstar.xyz/insights/50-meme-domains-under-20-sol',
+    keywords: 'funny solana domain names, cheap solana domain, meme .sol ideas, solana scav rack, degen domains',
+    schema: {
+      articleType: 'Article',
+      mainEntity: 'Meme Domains'
+    }
+  },
+  {
+    slug: 'what-are-sol-domains',
+    title: 'What Are .sol Domains? A Beginner\'s Guide for Web3 Builders',
+    description: 'Learn what .sol domains are, how they work, and why Solana builders use them for identity, apps, and branding. A simple guide for Web3 beginners.',
+    content: `# What Are .sol Domains? A Beginner's Guide for Web3 Builders
+
+If you're building on Solana or exploring Web3, you've probably heard about \`.sol\` domains. But what exactly are they, and why should you care?
+
+In this guide, we'll break down everything you need to know about Solana Name Service (SNS) domains — from the basics to how builders are using them to create memorable Web3 experiences.
+
+---
+
+## What Are .sol Domains?
+
+A \`.sol\` domain is a human-readable name on the Solana blockchain that maps to a Solana wallet address. Instead of sending crypto to a long, confusing address like \`7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU\`, you can use something simple like \`yourname.sol\`.
+
+Think of it like the difference between an IP address and a website domain. \`.sol\` domains make Solana addresses as easy to remember as \`google.com\`.
+
+---
+
+## How Do .sol Domains Work?
+
+Solana Name Service (SNS) is the decentralized naming system that powers \`.sol\` domains. Here's how it works:
+
+1. **Registration**: You register a \`.sol\` domain name on the Solana blockchain
+2. **Ownership**: The domain is stored as an NFT in your wallet — you truly own it
+3. **Resolution**: Wallets and dApps can resolve your \`.sol\` name to your wallet address
+4. **Transfer**: You can transfer, sell, or trade your domain like any other NFT
+
+Unlike traditional domains, \`.sol\` domains are:
+- **Decentralized**: No central authority controls them
+- **Censorship-resistant**: Once you own it, it's yours
+- **Blockchain-native**: Built directly on Solana, not a separate system
+
+---
+
+## Why Do Solana Builders Use .sol Domains?
+
+### 1. **Human-Readable Identity**
+
+Your \`.sol\` domain becomes your Web3 identity. Instead of sharing a long wallet address, you can share \`yourname.sol\` — much more memorable and professional.
+
+### 2. **Branding for Projects**
+
+Many Solana projects use \`.sol\` domains as their primary branding. A domain like \`yourproject.sol\` is:
+- Easy to remember
+- Instantly recognizable
+- Perfect for marketing and community building
+
+### 3. **Integration with dApps**
+
+Solana dApps are increasingly supporting \`.sol\` domains for:
+- User profiles
+- Payment addresses
+- Project identification
+- Social features
+
+### 4. **Future-Proof Investment**
+
+As Solana grows, \`.sol\` domains become more valuable. Early adopters often see their domains appreciate in value, especially short or memorable names.
+
+---
+
+## How to Choose a .sol Domain
+
+When selecting a \`.sol\` domain, consider:
+
+- **Length**: Shorter domains are more valuable and memorable
+- **Brandability**: Does it match your project or personal brand?
+- **Memorability**: Can people easily remember and type it?
+- **Availability**: Check if your desired name is available
+
+Explore meme, builder-ready, and brandable names in the [Retailstar Mall directory](/directory).
+
+---
+
+## Where to Find .sol Domains
+
+You can find \`.sol\` domains in several places:
+
+### Primary Marketplaces
+- Official SNS registrars
+- Domain marketplaces
+- NFT marketplaces that support SNS
+
+### Secondary Markets
+- [Retailstar Mall directory](/directory) — curated collection of brandable domains
+- [Scav Rack](/scavrack) — check the Scav Rack for cheap or funny .sol domains
+- Other domain resale platforms
+
+---
+
+## What Can You Do With a .sol Domain?
+
+Once you own a \`.sol\` domain, you can:
+
+1. **Use it as your wallet address** — send and receive crypto using your domain
+2. **Build a website** — host content at your domain
+3. **Create a brand** — use it as your project's identity
+4. **Trade it** — sell or transfer your domain
+5. **Integrate with dApps** — use it across the Solana ecosystem
+
+---
+
+## .sol vs .com: What's the Difference?
+
+| Feature | .sol Domains | .com Domains |
+|---------|--------------|--------------|
+| **Ownership** | You own it as an NFT | You lease it from a registrar |
+| **Decentralization** | Fully decentralized | Centralized (ICANN) |
+| **Censorship** | Censorship-resistant | Can be seized or suspended |
+| **Integration** | Native to Solana blockchain | Requires traditional DNS |
+| **Transfer** | Instant, trustless transfer | Requires registrar approval |
+
+---
+
+## Getting Started with .sol Domains
+
+Ready to get your own \`.sol\` domain? Here's how to start:
+
+1. **Browse available domains** — Check out the [Retailstar Mall directory](/directory) for curated options
+2. **Register or purchase** — Buy from a marketplace or register a new name
+3. **Set up your wallet** — Make sure you have a Solana wallet ready
+4. **Start building** — Use your domain for your project or personal brand
+
+Need a branded site for your .sol domain? Visit our [Get Started page](/insights) to learn more about building on Solana.
+
+---
+
+## The Future of .sol Domains
+
+As Solana continues to grow, \`.sol\` domains are becoming essential infrastructure for:
+- Web3 identity systems
+- Decentralized applications
+- NFT projects and communities
+- DeFi protocols
+- Gaming and metaverse projects
+
+Early adoption of a good \`.sol\` domain can position you or your project at the forefront of Solana's ecosystem.
+
+---
+
+## Conclusion
+
+\`.sol\` domains are more than just wallet addresses — they're your identity, your brand, and your gateway to the Solana ecosystem. Whether you're a builder, a degen, or just exploring Web3, understanding \`.sol\` domains is essential.
+
+Ready to explore the world of Solana domains? [Explore the Retailstar Mall](https://retailstar.xyz) to find your perfect \`.sol\` domain today.
+
+---
+
+*Want to learn more about Solana and Web3? Check out our other [insights](/insights) for guides, tips, and deep dives into the Solana ecosystem.*`,
+    author: {
+      name: 'Kongnificent',
+      url: 'https://twitter.com/kongnficent_'
+    },
+    publishedAt: '2025-11-12T00:00:00Z',
+    updatedAt: '2025-11-12T00:00:00Z',
+    tags: ['Solana', 'Domains', 'Web3', 'Beginner Guides'],
+    category: 'Guide',
+    featured: true,
+    image: 'https://retailstar.xyz/assets/RS-sns-cover.png',
+    canonicalUrl: 'https://retailstar.xyz/insights/what-are-sol-domains',
+    keywords: [
+      'what are .sol domains',
+      'solana domain guide',
+      'solana name service beginner',
+      'solana domains for builders',
+      'how .sol domains work',
+      'decentralized identity solana',
+      'Web3 identity on Solana',
+      'solana builder tools',
+      'solana domain naming',
+      'solana domains for dapps',
+      '.sol vs .com',
+      'solana domain marketplace',
+      'buy .sol domain',
+      'solana project branding',
+      'how to choose a .sol domain',
+      'beginner guide solana domains',
+      'solana domain for web3 project',
+      'what can you do with .sol domains',
+      'decentralized domains solana'
+    ],
+    schema: {
+      articleType: 'Article',
+      mainEntity: '.sol Domains'
+    }
   }
 ];
 

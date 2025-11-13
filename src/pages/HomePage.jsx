@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import SEOHead from '../components/SEOHead';
 import MythicRotator from '../components/MythicRotator';
+import PathFork from '../components/PathFork';
+import Footer from '../components/Footer';
 import rsLogo from '../assets/rs-logo.png';
 import retailstarBody from '../assets/retailstar-body.png';
 import jpegdealerImage from '../assets/jpegdealer.png';
@@ -49,7 +51,7 @@ const HomePage = () => {
         customTitle="Retailstar – Meme Luxury Domain Outlet | Buy .SOL Meme Domains"
         customDescription="Retailstar: Your Meme-Luxury Domain Outlet. Because your meme deserves a mansion, not a motel. Explore premium .sol domains with lore, rarity, and high-conviction builds."
         customKeywords="meme domains, luxury domains, .sol names, NFT websites, domain lore, Solana domains, SNS"
-        imageUrl={siteUrl + '/src/assets/rs-logo.png'}
+        imageUrl={siteUrl + '/assets/rs-logo.png'}
       />
       {/* LLM summary for HomePage */}
       {/*
@@ -90,36 +92,18 @@ const HomePage = () => {
               Because your meme deserves a mansion, not a motel.
             </p>
             
-            {/* Primary CTA - Tour the Mall */}
-            <div className="mb-8">
-              <Link 
-                to="/basement"
-                className="inline-block neon-red neon-red-hover py-5 px-10 rounded-lg font-bold transition-all duration-200 text-xl animate-pulse"
-                data-persona="All Users"
-                data-meta="cta-basement-tour"
-              >
-                🕳️ Start in the Basement
-              </Link>
-              <p className="text-sm text-gray-400 mt-2">No wallet required. Just vibes.</p>
+            {/* Path Fork Component */}
+            <div className="mb-12">
+              <PathFork />
             </div>
 
-            {/* Secondary CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-              <Link 
-                to="/marketplace"
-                className="neon-cyan neon-cyan-hover py-4 px-8 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center text-lg"
-                data-persona="Collectors, NFT Traders, Builder Bros"
-                data-meta="cta-marketplace"
+            {/* Pricing Guide Button */}
+            <div className="mb-8">
+              <Link
+                to="/guide"
+                className="inline-block bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold py-3 px-8 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-cyan-500/25 border border-cyan-400/30"
               >
-                🛍️ Browse Marketplace
-              </Link>
-              <Link 
-                to="/scavrack"
-                className="neon-green neon-green-hover py-4 px-8 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center text-lg"
-                data-persona="Meme Collectors"
-                data-meta="cta-scavrack"
-              >
-                🟢 Scav Rack
+                💰 Curious what it costs to play?
               </Link>
             </div>
 
@@ -127,28 +111,6 @@ const HomePage = () => {
             <p className="text-lg text-gray-400 mb-8 max-w-2xl mx-auto leading-relaxed" data-persona="Lore Seekers, Info Farmers" data-meta="subtext">
               Not everything&apos;s for sale. But if you know what to ask for… you might find it.
             </p>
-
-            {/* Basement Intro */}
-            <div className="bg-gray-900/50 border border-red-500/30 rounded-lg p-4 mb-12 max-w-2xl mx-auto">
-              <p className="text-red-400 font-semibold mb-2">🕳️ Welcome to the Basement</p>
-              <p className="text-sm text-gray-300">
-                The Glitch Militia HQ is fully public. No gates, no passes—just raw hustle 
-                and opportunity. Explore featured .sol domains, chat with NPCs, and discover 
-                where legends are born.
-              </p>
-            </div>
-
-            {/* CTA Button */}
-            <div className="mb-16">
-              <Link 
-                to="/directory"
-                className="neon-cyan neon-cyan-hover py-4 px-8 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center mx-auto text-lg"
-                data-persona="Collectors, NFT Traders, Builder Bros"
-                data-meta="cta"
-              >
-                🪙 Curious what it costs to play?
-              </Link>
-            </div>
           </div>
         </section>
 
@@ -191,7 +153,22 @@ const HomePage = () => {
             <MythicRotator />
           </div>
         </section>
+
+        {/* SEO Reinforcement Section */}
+        <section className="px-4 py-12" data-persona="all" data-meta="seo-reinforcement">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
+              Solana Domains for Builders & Degens
+            </h2>
+            <p className="text-lg text-gray-300 leading-relaxed">
+              Retailstar Mall is a cyberpunk marketplace for .sol domains. Browse brand-ready names, meme identities,
+              and launch templates for Solana creators, founders, and degens.
+            </p>
+          </div>
+        </section>
       </div>
+      
+      <Footer />
     </div>
   );
 };

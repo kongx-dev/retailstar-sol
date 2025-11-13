@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import SEOHead from '../components/SEOHead';
 import BlogLayout from '../components/BlogLayout';
 import { getAllPosts, getFeaturedPosts } from '../data/blogPosts';
+import rsopengraph from '../assets/rsopengraph.png';
 
 const InsightsPage: React.FC = () => {
   const allPosts = getAllPosts();
@@ -64,6 +65,10 @@ const InsightsPage: React.FC = () => {
                       src={featuredPosts[0].image} 
                       alt={featuredPosts[0].title}
                       className="w-full h-full object-cover rounded-lg border border-cyan-500/30"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.src = rsopengraph;
+                      }}
                     />
                   </div>
                 )}
@@ -121,6 +126,10 @@ const InsightsPage: React.FC = () => {
                         src={post.image} 
                         alt={post.title}
                         className="w-full h-full object-cover rounded-lg border border-gray-600"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.src = rsopengraph;
+                        }}
                       />
                     </div>
                   )}

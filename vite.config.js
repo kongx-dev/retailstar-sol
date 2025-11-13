@@ -13,10 +13,14 @@ export default defineConfig({
   },
   optimizeDeps: {
     include: ['buffer'],
+    exclude: ['retailrunner-bot']
   },
   server: {
+    host: '0.0.0.0',
+    port: 5173,
     fs: {
       allow: ['..'],
+      deny: ['retailrunner-bot/**']
     },
   },
 })

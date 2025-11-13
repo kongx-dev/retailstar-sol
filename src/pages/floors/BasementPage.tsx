@@ -16,6 +16,16 @@ export default function BasementPage() {
   const [currentNpcDialogue, setCurrentNpcDialogue] = useState('');
   const { domains: basementDomains, loading, error } = useBasementDomains();
 
+  // Debug logging
+  useEffect(() => {
+    console.log('BasementPage render:', { 
+      loading, 
+      error, 
+      domainsCount: basementDomains.length,
+      domains: basementDomains 
+    });
+  }, [loading, error, basementDomains]);
+
   // Glitch effect for background
   useEffect(() => {
     const glitchInterval = setInterval(() => {
@@ -57,7 +67,7 @@ export default function BasementPage() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white relative overflow-hidden">
+    <div className="min-h-screen bg-black text-white relative overflow-hidden" style={{ zIndex: 1 }}>
       <SEOHead 
         target="basement.retailstar.sol"
         pageType="floor"
@@ -100,9 +110,14 @@ export default function BasementPage() {
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10">
+      <div className="relative z-10" style={{ position: 'relative', zIndex: 10, minHeight: '100vh' }}>
+        {/* Debug: Test if content is rendering */}
+        <div style={{ position: 'absolute', top: 0, left: 0, background: 'red', color: 'white', padding: '10px', zIndex: 9999 }}>
+          DEBUG: BasementPage is rendering - Loading: {loading ? 'true' : 'false'}, Domains: {basementDomains.length}, Error: {error || 'none'}
+        </div>
+        
         {/* Header */}
-        <header className="p-6 border-b border-cyan-500/30">
+        <header className="p-6 border-b border-cyan-500/30" style={{ position: 'relative', zIndex: 100 }}>
           <div className="flex items-center justify-between flex-wrap gap-4">
             <div className="flex items-center space-x-4">
               <span className="text-4xl">🕳️</span>
@@ -194,24 +209,45 @@ export default function BasementPage() {
                 <DomainLoadingSkeleton count={4} />
               ) : error ? (
                 <DomainErrorFallback error={error} onRetry={() => window.location.reload()} />
+              ) : basementDomains.length === 0 ? (
+                <div className="bg-gray-900/80 border border-gray-700 rounded-lg p-8 text-center">
+                  <div className="text-6xl mb-4">🏪</div>
+                  <h4 className="text-xl font-bold text-white mb-2">No Basement Shops Available</h4>
+                  <p className="text-gray-400 mb-4">
+                    Check back soon for new basement domains, or explore the full marketplace.
+                  </p>
+                  <Link
+                    to="/marketplace"
+                    className="inline-block bg-cyan-600 hover:bg-cyan-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+                  >
+                    Browse Marketplace
+                  </Link>
+                </div>
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {basementDomains.map((domain) => (
-                    <Link
-                      key={domain.slug || domain.name}
-                      to={`/domains/${domain.slug || domain.name}`}
-                      className={`bg-gray-900/80 border-2 rounded-lg p-6 transition-all duration-200 hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/20 ${getColorClasses(domain.color || 'cyan')}`}
-                    >
-                      <div className="flex items-start space-x-4">
-                        <div className="text-4xl">{domain.icon || '🏪'}</div>
-                        <div className="flex-1">
-                          <h4 className="text-xl font-bold text-white mb-1">{domain.name}</h4>
-                          <p className="text-sm text-cyan-400 font-semibold mb-2">{domain.tagline || domain.description}</p>
-                          <p className="text-xs text-gray-400">{domain.description}</p>
+                  {basementDomains.map((domain, index) => {
+                    // Assign colors based on index for visual variety
+                    const colors = ['cyan', 'green', 'purple', 'red', 'yellow', 'cyan'];
+                    const color = colors[index % colors.length];
+                    return (
+                      <Link
+                        key={domain.slug || domain.name || index}
+                        to={`/domains/${domain.slug || domain.name}`}
+                        className={`bg-gray-900/80 border-2 rounded-lg p-6 transition-all duration-200 hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/20 ${getColorClasses(color)}`}
+                      >
+                        <div className="flex items-start space-x-4">
+                          <div className="text-4xl">{domain.image_url || '🏪'}</div>
+                          <div className="flex-1">
+                            <h4 className="text-xl font-bold text-white mb-1">{domain.name}</h4>
+                            <p className="text-sm text-cyan-400 font-semibold mb-2">{domain.description}</p>
+                            {domain.price && domain.price !== 'N/A' && (
+                              <p className="text-xs text-gray-400 mt-2">Price: {domain.price}</p>
+                            )}
+                          </div>
                         </div>
-                      </div>
-                    </Link>
-                  ))}
+                      </Link>
+                    );
+                  })}
                 </div>
               )}
 

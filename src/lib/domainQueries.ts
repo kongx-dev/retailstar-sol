@@ -8,6 +8,9 @@ export interface DomainQueryOptions {
   search?: string;
   limit?: number;
   featured?: boolean;
+  has_build?: boolean;
+  has_pfp?: boolean;
+  available?: boolean;
 }
 
 // Fallback data for when Supabase is not configured
@@ -56,6 +59,51 @@ const fallbackDomains: Domain[] = [
     listed: true,
     available: true,
     tags: ['cope', 'basement', 'meme']
+  },
+  {
+    id: 4,
+    name: 'commandhub',
+    slug: 'commandhub',
+    description: 'AI dashboard + infrastructure ready - For builders who mean business',
+    image_url: '⚡',
+    featured: true,
+    status: 'available',
+    price: '8.5 SOL',
+    category: 'basement',
+    vaulted: false,
+    listed: true,
+    available: true,
+    tags: ['ai', 'basement', 'builder', 'infrastructure']
+  },
+  {
+    id: 5,
+    name: 'jpegdealer',
+    slug: 'jpegdealer',
+    description: 'Your NFT Plug - The JPEG game runs deep',
+    image_url: '🖼️',
+    featured: true,
+    status: 'available',
+    price: '5 SOL',
+    category: 'basement',
+    vaulted: false,
+    listed: true,
+    available: true,
+    tags: ['nft', 'basement', 'art', 'degen']
+  },
+  {
+    id: 6,
+    name: 'lurkerlife',
+    slug: 'lurkerlife',
+    description: 'For the real ones who watch, wait, and strike when the time is right',
+    image_url: '👁️',
+    featured: false,
+    status: 'available',
+    price: '3 SOL',
+    category: 'basement',
+    vaulted: false,
+    listed: true,
+    available: true,
+    tags: ['basement', 'meme', 'culture']
   }
 ];
 
@@ -91,6 +139,18 @@ export async function getAllDomains(options: DomainQueryOptions = {}): Promise<D
       query = query.eq('featured', options.featured);
     }
 
+    if (options.has_build !== undefined) {
+      query = query.eq('has_build', options.has_build);
+    }
+
+    if (options.has_pfp !== undefined) {
+      query = query.eq('has_pfp', options.has_pfp);
+    }
+
+    if (options.available !== undefined) {
+      query = query.eq('available', options.available);
+    }
+
     if (options.search) {
       query = query.or(`name.ilike.%${options.search}%,description.ilike.%${options.search}%`);
     }
@@ -99,7 +159,8 @@ export async function getAllDomains(options: DomainQueryOptions = {}): Promise<D
       query = query.limit(options.limit);
     }
 
-    query = query.order('name', { ascending: true });
+    // Featured-first sorting with fallbacks
+    query = query.order('featured', { ascending: false }).order('created_at', { ascending: false }).order('name', { ascending: true });
 
     const { data, error } = await query;
 
@@ -119,6 +180,15 @@ export async function getDomainsByCategory(category: string): Promise<Domain[]> 
   return getAllDomains({ category, listed: true });
 }
 
+export async function getMarketplaceDomains(filters: DomainQueryOptions = {}): Promise<Domain[]> {
+  const defaultFilters = {
+    listed: true,
+    ...filters
+  };
+  
+  return getAllDomains(defaultFilters);
+}
+
 export async function getScavDomains(): Promise<Domain[]> {
   if (!supabase) {
     return fallbackDomains.filter(d => d.category === 'scav' || d.tags.includes('meme'));
@@ -131,12 +201,17 @@ export async function getScavDomains(): Promise<Domain[]> {
 
 export async function getBasementDomains(): Promise<Domain[]> {
   if (!supabase) {
-    return fallbackDomains.filter(d => d.category === 'basement');
+    console.log('Supabase not configured, using fallback basement domains');
+    const fallback = fallbackDomains.filter(d => d.category === 'basement');
+    console.log('Fallback basement domains:', fallback);
+    return fallback;
   }
-  return getAllDomains({ 
+  const domains = await getAllDomains({ 
     category: 'basement',
     listed: true 
   });
+  console.log('Fetched basement domains from Supabase:', domains);
+  return domains;
 }
 
 export async function getVaultedDomains(): Promise<Domain[]> {

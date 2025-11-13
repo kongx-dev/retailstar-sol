@@ -1,12 +1,14 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useScavDomains } from '../hooks/useDomains';
 import ScavDomainCard from '../components/ScavDomainCard';
+import FilterControls from '../components/FilterControls';
 import { Link } from 'react-router-dom';
 // @ts-ignore: PNG import for Vite
 import vendingBg from '../assets/rsvendingmachine.png';
 import SEOHead from '../components/SEOHead';
 import DomainLoadingSkeleton from '../components/DomainLoadingSkeleton';
 import ScavRackErrorFallback from '../components/DomainErrorFallback';
+import SoftSignInBanner from '../components/SoftSignInBanner';
 
 // Retail Ticket System
 const TICKET_KEY = 'retailstar_tickets';
@@ -22,7 +24,14 @@ function getRetailTickets() {
 
 function ScavRack() {
   const gridRef = useRef(null);
-  const { domains: scavDomains, loading, error, refetch } = useScavDomains();
+  const [filters, setFilters] = useState({ 
+    has_pfp: false, 
+    listed: true, 
+    vaulted: false,
+    featured: false,
+    has_build: false
+  });
+  const { domains: scavDomains, loading, error, refetch } = useScavDomains(filters);
   const [shuffledDomains, setShuffledDomains] = useState([]);
   const [tickets, setTickets] = useState(getRetailTickets());
   const [slotMachineOpen, setSlotMachineOpen] = useState(false);
@@ -56,7 +65,11 @@ function ScavRack() {
   // Update shuffled domains when scavDomains change
   useEffect(() => {
     if (scavDomains.length > 0) {
-      setShuffledDomains([...scavDomains].sort(() => Math.random() - 0.5));
+      const filtered = scavDomains.filter(domain => 
+        domain.name?.toLowerCase() !== 'retailstar' && 
+        domain.name?.toLowerCase() !== 'retailstar.sol'
+      );
+      setShuffledDomains([...filtered].sort(() => Math.random() - 0.5));
     }
   }, [scavDomains]);
 
@@ -84,6 +97,15 @@ function ScavRack() {
         twitterImage="https://retailstar.xyz/assets/rs-og-card.png"
       />
       
+      {/* Soft Sign-in Banner */}
+      <div className="relative z-10 px-4 pt-4">
+        <SoftSignInBanner 
+          title="Connect to earn Retail Tickets"
+          message="Sign in to earn RT rewards when you purchase domains and participate in mall activities"
+          ctaText="Connect Wallet"
+        />
+      </div>
+      
       {/* Background image */}
       <img
         src={vendingBg}
@@ -109,6 +131,13 @@ function ScavRack() {
         <p className="text-sm italic text-zinc-400 mb-8">
           You probably won&apos;t make it… but if you do, it started here.
         </p>
+        
+        {/* Filter Controls */}
+        <FilterControls 
+          filters={filters} 
+          setFilters={setFilters}
+          availableFilters={['has_pfp', 'listed', 'vaulted', 'featured', 'has_build']}
+        />
         
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
@@ -142,7 +171,7 @@ function ScavRack() {
           <ScavRackErrorFallback error={error} onRetry={refetch} />
         ) : (
           <div className="max-w-7xl mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-            {shuffledDomains.map((domain, idx) => (
+            {shuffledDomains.filter(domain => domain.name?.toLowerCase() !== 'retailstar' && domain.name?.toLowerCase() !== 'retailstar.sol').map((domain, idx) => (
               <div
                 key={domain.name + idx}
                 className={`border border-pink-600 transition-all duration-300 rounded-md relative overflow-hidden group ${

@@ -49,7 +49,7 @@ export function useFloorAccess(wallet: string | null): FloorAccess {
     ];
     const hasDaoAccess = daoWhitelist.includes(wallet) || 
       retailAccess.tier === 'Mallcore' || 
-      retailAccess.tier === 'Hoodieguard';
+      retailAccess.tier === 'Ghostrunner';
 
     setAccess({
       basement: true,
@@ -85,6 +85,8 @@ export function canAccessFloor(floor: 'basement' | 'mainFloor' | 'blueprint' | '
       return false;
   }
 }
+
+
 
 
 

@@ -37,7 +37,7 @@ Every .2 SOL spent fed the machine.`,
 
 It gated.
 
-A chrome door appeared at the front of Retailstar Mall. It scanned wallets. Only those with RTs, vault domains, or valid Retailpunk tier could enter.
+A chrome door appeared at the front of Retailstar Mall. It scanned wallets. Only those with RTs, vault domains, or valid tier access could enter.
 
 Inside? Vault-only drops. Slot Machines. Flash sales. Hoodies-only dojo rooms. A place where knowledge of lore, not just SOL, gave you edge.`,
     emoji: "🛍️"
@@ -47,11 +47,11 @@ Inside? Vault-only drops. Slot Machines. Flash sales. Hoodies-only dojo rooms. A
     title: "Rise of the Factions",
     content: `From the ruins of the Scav Rack and the neon-lit vault emerged classes:
 
-- **Retailpunks**: the bin snipers who never left
-- **Mallrats**: active mall wanderers, always clicking
-- **Slotlords**: the risk-takers, armed with Retail Tickets and nothing to lose
-- **Hoodieguards**: domain whales guarding the secret paths
-- **Backdoor Dealers**: those who cracked the vending machine's final cipher
+- **Retailpunks**: the newest bodies wandering the neon walkways — wide-eyed, broke, and clutching their first Retail Ticket
+- **Mallrats**: survivors who've learned the shortcuts, the back alleys, and the exact spots where expired domains respawn
+- **SolDealers**: operators who move inventory through shadowy corridors, always "knowing a guy"
+- **Retailrunners**: part human, part legend, part system error — the mall's unofficial sysadmins
+- **Ghostrunners**: mythic shadows that move between firewalls, crawlspaces, and dreamlike voids
 
 Each with their perks. Each with secrets.`,
     emoji: "👥"

@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
-import { getUserAccessData } from '../lib/supabase';
+import { getUserAccessData, createUserRecord } from '../lib/supabase';
+import { useRetailTickets } from './useRetailTickets';
+import { useRetailpassClaims } from './useRetailpassClaims';
 import { 
   getLocalUserAccess, 
   getLocalRetailTickets, 
@@ -19,12 +21,16 @@ export interface RetailAccess {
 export function useRetailAccess(wallet: string | null): RetailAccess {
   const [access, setAccess] = useState({
     hasAccess: false,
-    tier: 'Tier 0',
+    tier: 'Retailpunk',
     expiresAt: null,
     wifhoodie: false,
     retailTickets: 0,
     loading: true
   } as RetailAccess);
+
+  // Use new hooks for tickets and claims
+  const { balance: retailTickets, loading: ticketsLoading } = useRetailTickets(wallet);
+  const { activeClaim, loading: claimsLoading } = useRetailpassClaims(wallet);
 
   useEffect(() => {
     if (!wallet) {
@@ -37,46 +43,82 @@ export function useRetailAccess(wallet: string | null): RetailAccess {
         // Try Supabase first
         let data = await getUserAccessData(wallet);
         
-        // If Supabase fails, fall back to localStorage
+        // If user doesn't exist in Supabase, create a new record
+        if (!data || (data.wallet === wallet && (data.current_tier === 'Tier 0' || data.current_tier === 'Retailpunk') && data.retail_tickets === 0)) {
+          // Check if this is truly a new user (no data at all, not just default data)
+          const localData = getLocalUserAccess(wallet);
+          if (!localData) {
+            // This is a new user - create record in Supabase
+            console.log('🆕 New wallet detected, creating user record:', wallet);
+            const newRecord = await createUserRecord(wallet);
+            if (newRecord) {
+              data = newRecord;
+            } else {
+              // If Supabase insert failed, use default data
+              data = {
+                wallet: wallet,
+                current_tier: 'Retailpunk',
+                retail_tickets: 0,
+                last_login: new Date().toISOString(),
+                discord_id: null,
+                username: null
+              };
+            }
+          } else {
+            // User exists in localStorage but not Supabase - migrate data
+            data = {
+              wallet: localData.wallet_address,
+              current_tier: localData.tier,
+              retail_tickets: localData.total_rts,
+              last_login: new Date().toISOString(),
+              discord_id: null,
+              username: null
+            };
+            // Try to create Supabase record with existing data
+            await createUserRecord(wallet);
+          }
+        }
+        
+        // If Supabase still fails, fall back to localStorage
         if (!data) {
           const localData = getLocalUserAccess(wallet);
           if (localData) {
-            data = localData;
+            data = {
+              wallet: localData.wallet_address,
+              current_tier: localData.tier,
+              retail_tickets: localData.total_rts,
+              last_login: new Date().toISOString(),
+              discord_id: null,
+              username: null
+            };
           } else {
             // Create default data
             data = {
-              wallet_address: wallet,
-              tier: 'Tier 0',
-              domains_owned: 0,
-              wifhoodie_holder: false,
-              retailpass_expiry: null,
-              total_rts: 0,
-              status: 'Active'
+              wallet: wallet,
+              current_tier: 'Retailpunk',
+              retail_tickets: 0,
+              last_login: new Date().toISOString(),
+              discord_id: null,
+              username: null
             };
           }
         }
 
-        // Get retail tickets from localStorage as fallback
-        const localTickets = getLocalRetailTickets(wallet);
-        const tickets = data.total_rts || localTickets;
-
-        // Check day pass from localStorage
-        const localDayPass = getLocalDayPassExpiry(wallet);
-        const dayPassExpiry = data.retailpass_expiry || localDayPass;
-
+        // Check for active claim
         const now = new Date();
-        const passActive = dayPassExpiry && new Date(dayPassExpiry) > now;
-        const hasAccess = data.wifhoodie_holder || 
-                         passActive || 
-                         ['Retailpunk', 'Mallrat', 'Slotlord', 'Hoodieguard'].includes(data.tier);
+        const hasActiveClaim = activeClaim && new Date(activeClaim.expires_at) > now;
+        
+        // Determine access based on new logic
+        const hasAccess = hasActiveClaim || 
+                         ['Retailpunk', 'Mallrat', 'SolDealer', 'Retailrunner', 'Ghostrunner'].includes(data.current_tier);
 
         setAccess({
           hasAccess,
-          tier: data.tier,
-          expiresAt: dayPassExpiry,
-          wifhoodie: data.wifhoodie_holder,
-          retailTickets: tickets,
-          loading: false
+          tier: data.current_tier,
+          expiresAt: activeClaim?.expires_at || null,
+          wifhoodie: false, // This would need to be determined from NFT ownership
+          retailTickets: retailTickets,
+          loading: ticketsLoading || claimsLoading
         });
       } catch (error) {
         console.error('Error checking access:', error);
@@ -87,7 +129,7 @@ export function useRetailAccess(wallet: string | null): RetailAccess {
         
         setAccess({
           hasAccess: dayPassValid,
-          tier: 'Tier 0',
+          tier: 'Retailpunk',
           expiresAt: getLocalDayPassExpiry(wallet),
           wifhoodie: false,
           retailTickets: localTickets,
@@ -97,7 +139,7 @@ export function useRetailAccess(wallet: string | null): RetailAccess {
     };
 
     checkAccess();
-  }, [wallet]);
+  }, [wallet, retailTickets, activeClaim, ticketsLoading, claimsLoading]);
 
   return access;
 } 

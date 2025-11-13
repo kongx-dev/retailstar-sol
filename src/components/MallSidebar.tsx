@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import PricingModal from './PricingModal';
 import { mythicDomains } from '../data/mythicDomains';
 import { generateSolanaLikeWallet } from '../utils/fakeWallet';
+import { useFloorAccess } from '../hooks/useFloorAccess';
+import FloorIndicator from './FloorIndicator';
+import { getAllTierLore } from '../data/tierLore';
 
 const links = [
   { name: 'Mall Map', href: '/directory', icon: '🗺️' },
@@ -47,6 +50,10 @@ const MallSidebar: React.FC<MallSidebarProps> = ({
   const [glitchLines, setGlitchLines] = useState<Array<{id: number, top: number, color: string}>>([]);
   const [showPricingModal, setShowPricingModal] = useState(false);
   const [showTiersModal, setShowTiersModal] = useState(false);
+  
+  // Mock wallet for demo
+  const MOCK_WALLET = "7vswd...fE9s";
+  const floorAccess = useFloorAccess(MOCK_WALLET);
 
   // Use external collapsed state if provided, otherwise use internal
   const collapsed = externalCollapsed !== undefined ? externalCollapsed : internalCollapsed;
@@ -279,6 +286,11 @@ ${wallet} just acquired ${randomDomain} for ${randomPrice}
               ))}
             </nav>
 
+            {/* Floor Indicator */}
+            <div className="mt-6">
+              <FloorIndicator wallet={MOCK_WALLET} />
+            </div>
+
             {/* Mini Terminal */}
             <div className="mt-6">
               <label className="block text-sm mb-1 text-gray-400">Mini Terminal</label>
@@ -349,19 +361,20 @@ ${wallet} just acquired ${randomDomain} for ${randomPrice}
               ✕
             </button>
             <h2 className="text-2xl font-bold mb-4 text-teal-300">🧱 Retailstar Access Tiers</h2>
-            <div className="space-y-4 text-sm leading-relaxed">
-              <div className="border border-gray-700 rounded-lg p-3 bg-gray-800/50">
-                <span className="font-bold text-white">🛡️ Retailpunk:</span>
-                <p className="text-xs text-gray-400 mt-1">Basic access. You're here, that's something.</p>
-              </div>
-              <div className="border border-gray-700 rounded-lg p-3 bg-gray-800/50">
-                <span className="font-bold text-white">⚡ Slotlord:</span>
-                <p className="text-xs text-gray-400 mt-1">Mid-tier access. You've earned some respect.</p>
-              </div>
-              <div className="border border-teal-600 rounded-lg p-3 bg-teal-900/20">
-                <span className="font-bold text-teal-300">👑 Mallcore:</span>
-                <p className="text-xs text-gray-400 mt-1">VIP access. You're one of us now.</p>
-              </div>
+            <div className="space-y-4 text-sm leading-relaxed max-h-[60vh] overflow-y-auto">
+              {getAllTierLore().map((tier) => {
+                const tierNumber = tier.tierNumber === 'prestige' ? 'SECRET PRESTIGE' : `Tier ${tier.tierNumber}`;
+                return (
+                  <div key={tier.tierName} className={`border ${tier.borderColor} rounded-lg p-3 ${tier.bgColor}`}>
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="text-lg">{tier.icon}</span>
+                      <span className="font-bold text-white">{tier.tierName}</span>
+                      <span className="text-xs text-gray-400">({tierNumber})</span>
+                    </div>
+                    <p className="text-xs text-gray-300 italic mt-1">{tier.shortDescription}</p>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>

@@ -15,8 +15,8 @@ export default function PatchNotes() {
   }, []);
 
   // Example: Replace with real user tier logic
-  const userTier = 'Hoodieguard';
-  const visibleNotes = notes.filter((n: PatchNote) => !n.restricted || userTier === 'Hoodieguard');
+  const userTier = 'Ghostrunner';
+  const visibleNotes = notes.filter((n: PatchNote) => !n.restricted || userTier === 'Ghostrunner');
 
   if (!loaded) return <div className="font-mono p-6 text-green-400">Booting terminal...</div>;
 

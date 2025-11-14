@@ -115,7 +115,7 @@ const InsightArticlePage: React.FC = () => {
     },
     "datePublished": post.publishedAt,
     "articleBody": post.content,
-    "keywords": post.keywords,
+    "keywords": Array.isArray(post.keywords) ? post.keywords : (post.keywords || '').split(',').map(k => k.trim()),
     "articleSection": post.category,
     "wordCount": post.content.split(' ').length,
     "inLanguage": "en-US"
@@ -170,7 +170,7 @@ const InsightArticlePage: React.FC = () => {
         pageType="article"
         customTitle={post.title}
         customDescription={post.description}
-        customKeywords={post.keywords.join(', ')}
+        customKeywords={Array.isArray(post.keywords) ? post.keywords.join(', ') : post.keywords}
         canonicalUrl={post.canonicalUrl}
         imageUrl={post.image}
         customSchema={articleSchema}

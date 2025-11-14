@@ -89,7 +89,7 @@ Domains are split across a stylized three-tier structure:
 
 ### 🕳 Glitch Militia (Basement)
 - Tactical domains with encrypted vibes
-- Home to archetypes like \`commandhub.sol\`
+- Home to archetypes like [commandhub.sol](https://commandhub.netlify.app)
 - Accessed via \`/vault\` or the **Mini Terminal**
 
 ---
@@ -98,9 +98,9 @@ Domains are split across a stylized three-tier structure:
 
 | Domain | Archetype | Vibe |
 |--------|-----------|------|
-| \`jpegdealer.sol\` | Black Market Salesman | NFT flipping with spice |
-| \`fudscience.sol\` | Satirical Authority | Meme science meets fake news |
-| \`commandhub.sol\` | Glitch Militia | Tactical, encrypted, aggressive |
+| [jpegdealer.sol](https://jpegdealer.netlify.app) | Black Market Salesman | NFT flipping with spice |
+| [fudscience.sol](https://fudscience.netlify.app) | Satirical Authority | Meme science meets fake news |
+| [commandhub.sol](https://commandhub.netlify.app) | Glitch Militia | Tactical, encrypted, aggressive |
 
 → [Browse the Full Directory](/directory)
 
@@ -111,7 +111,8 @@ Domains are split across a stylized three-tier structure:
 Retailstar isn't just a marketplace — it's a **creative playground**.
 
 You can:
-- Get inspired by already-built domains like \`copevendor.sol\`
+- Get inspired by already-built domains like [copevendor.sol](https://copevendor.netlify.app)
+- Explore the [wiki directory](/wiki-directory) to dive deep into domain lore and stories
 - Order a **custom build** for a \`.sol\` you already own
 - Submit your own project to be listed in the mall
 - Or… just stroll the mall and vibe with the lore
@@ -156,8 +157,8 @@ Or if you're looking to **acquire, customize, or flip a high-potential domain**,
       name: 'Retailstar Team',
       url: 'https://retailstar.xyz'
     },
-    publishedAt: '2024-01-15T00:00:00Z',
-    updatedAt: '2024-01-15T00:00:00Z',
+    publishedAt: '2025-11-14T08:26:00Z',
+    updatedAt: '2025-11-14T08:26:00Z',
     tags: ['solana', 'domains', 'web3', 'cyberpunk', 'marketplace', 'retailstar'],
     category: 'Company',
     featured: true,

@@ -64,6 +64,7 @@ function runSitemapGeneration() {
   }
 
   const baseUrl = "https://retailstar.xyz";
+  const BLOG_BASE_PATH = "/insights";
 
   const staticRoutes = [
     "/",
@@ -137,13 +138,13 @@ ${routes
   const vaultedRoutes = domains.filter((d) => d.vaulted).map((d) => `/wiki/${d.slug}`);
   writeFile("sitemap-vaulted.xml", buildXml(vaultedRoutes));
 
-  // Create blog posts sitemap with lastmod dates
+  // Create insights posts sitemap with lastmod dates
   const blogRoutes = blogPosts.map((post) => ({
-    url: `/insights/${post.slug}`,
+    url: `${BLOG_BASE_PATH}/${post.slug}`,
     lastmod: post.updatedAt || post.publishedAt || new Date().toISOString().split("T")[0],
   }));
-  writeFile("sitemap-blog.xml", buildXml(blogRoutes));
-  console.log(`✅ Generated sitemap with ${blogPosts.length} blog posts`);
+  writeFile("sitemap-insights.xml", buildXml(blogRoutes));
+  console.log(`✅ Generated sitemap with ${blogPosts.length} insights posts`);
 
   // Create domain pages sitemap
   const domainRoutes = domains.map((d) => `/domains/${d.slug}`);
@@ -155,7 +156,7 @@ ${routes
   <sitemap><loc>${baseUrl}/sitemap-static.xml</loc></sitemap>
   <sitemap><loc>${baseUrl}/sitemap-wiki.xml</loc></sitemap>
   <sitemap><loc>${baseUrl}/sitemap-vaulted.xml</loc></sitemap>
-  <sitemap><loc>${baseUrl}/sitemap-blog.xml</loc></sitemap>
+  <sitemap><loc>${baseUrl}/sitemap-insights.xml</loc></sitemap>
   <sitemap><loc>${baseUrl}/sitemap-domains.xml</loc></sitemap>
 </sitemapindex>`;
 

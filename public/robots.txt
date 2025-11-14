@@ -6,7 +6,7 @@ Sitemap: https://retailstar.xyz/sitemap-index.xml
 Sitemap: https://retailstar.xyz/sitemap-static.xml
 Sitemap: https://retailstar.xyz/sitemap-wiki.xml
 Sitemap: https://retailstar.xyz/sitemap-vaulted.xml
-Sitemap: https://retailstar.xyz/sitemap-blog.xml
+Sitemap: https://retailstar.xyz/sitemap-insights.xml
 Sitemap: https://retailstar.xyz/sitemap-domains.xml
 
 # Crawl delay (optional - helps with server load)

@@ -10,6 +10,12 @@ import SEOHead from '../components/SEOHead';
 import DomainLoadingSkeleton from '../components/DomainLoadingSkeleton';
 import ScavRackErrorFallback from '../components/DomainErrorFallback';
 import SoftSignInBanner from '../components/SoftSignInBanner';
+// Import domain images
+import lowballkingImg from '../assets/lowballking.png';
+import missedpricedafImg from '../assets/missedpricedaf.png';
+import copthisbroImg from '../assets/copthisbro.png';
+import thisaintitImg from '../assets/thisaintit.png';
+import urnotthatguyImg from '../assets/urnotthatguy.png';
 
 // Retail Ticket System
 const TICKET_KEY = 'retailstar_tickets';
@@ -23,6 +29,50 @@ function getRetailTickets() {
   }
 }
 
+// Static Scav Rack domains
+const staticScavDomains = [
+  {
+    name: 'lowballking',
+    slug: 'lowballking',
+    pngUrl: lowballkingImg,
+    buyLink: '/checkout/lowballking',
+    listed: true,
+    tier: 'quick-snag',
+  },
+  {
+    name: 'missedpricedaf',
+    slug: 'missedpricedaf',
+    pngUrl: missedpricedafImg,
+    buyLink: '/checkout/missedpricedaf',
+    listed: true,
+    tier: 'quick-snag',
+  },
+  {
+    name: 'copthisbro',
+    slug: 'copthisbro',
+    pngUrl: copthisbroImg,
+    buyLink: '/checkout/copthisbro',
+    listed: true,
+    tier: 'quick-snag',
+  },
+  {
+    name: 'thisaintit',
+    slug: 'thisaintit',
+    pngUrl: thisaintitImg,
+    buyLink: '/checkout/thisaintit',
+    listed: true,
+    tier: 'quick-snag',
+  },
+  {
+    name: 'urnotthatguy',
+    slug: 'urnotthatguy',
+    pngUrl: urnotthatguyImg,
+    buyLink: '/checkout/urnotthatguy',
+    listed: true,
+    tier: 'quick-snag',
+  },
+];
+
 function ScavRack() {
   const gridRef = useRef(null);
   const [filters, setFilters] = useState({ 
@@ -33,7 +83,7 @@ function ScavRack() {
     has_build: false
   });
   const { domains: scavDomains, loading, error, refetch } = useScavDomains(filters);
-  const [shuffledDomains, setShuffledDomains] = useState([]);
+  const [shuffledDomains, setShuffledDomains] = useState([...staticScavDomains].sort(() => Math.random() - 0.5));
   const [tickets, setTickets] = useState(getRetailTickets());
   const [slotMachineOpen, setSlotMachineOpen] = useState(false);
 
@@ -65,13 +115,13 @@ function ScavRack() {
 
   // Update shuffled domains when scavDomains change
   useEffect(() => {
-    if (scavDomains.length > 0) {
-      const filtered = scavDomains.filter(domain => 
-        domain.name?.toLowerCase() !== 'retailstar' && 
-        domain.name?.toLowerCase() !== 'retailstar.sol'
-      );
-      setShuffledDomains([...filtered].sort(() => Math.random() - 0.5));
-    }
+    const filtered = scavDomains.filter(domain => 
+      domain.name?.toLowerCase() !== 'retailstar' && 
+      domain.name?.toLowerCase() !== 'retailstar.sol'
+    );
+    // Merge static domains with dynamic domains
+    const allDomains = [...staticScavDomains, ...filtered];
+    setShuffledDomains([...allDomains].sort(() => Math.random() - 0.5));
   }, [scavDomains]);
 
   // Update ticket count when localStorage changes

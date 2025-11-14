@@ -12,6 +12,7 @@ import { MarketplaceErrorFallback } from '../components/DomainErrorFallback';
 
 // Import domain images
 import jpegdealerImg from "../assets/jpegdealer.png";
+import fudscientistImg from "../assets/fudscientist.png";
 import lurkerlifeImg from "../assets/lurkerlife.png";
 import commandhubImg from "../assets/commandhub.png";
 import jumpsetradioImg from "../assets/jumpsetradio.png";
@@ -273,12 +274,48 @@ function OfferTile({ domain, onPurchase }) {
   );
 }
 
+// Domain Card Component
+function DomainCard({ 
+  title, 
+  tier, 
+  price, 
+  img, 
+  href 
+}) {
+  return (
+    <div className="group bg-[#0d0f14]/70 backdrop-blur-md border border-[#1f2230] rounded-xl p-4 shadow-lg hover:shadow-[#00f2ff]/40 transition-all duration-300">
+      {/* Image */}
+      <div className="relative w-full h-48 rounded-lg overflow-hidden border border-[#1b1e2a]">
+        <img 
+          src={img}
+          alt={title}
+          className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition"
+        />
+      </div>
+
+      {/* Title */}
+      <h3 className="mt-4 text-xl font-bold text-white tracking-wide">
+        {title}
+      </h3>
+
+      {/* Tier */}
+      <p className="text-[#00f2ff] text-sm">{tier}</p>
+
+      {/* Price */}
+      <p className="text-gray-400 text-sm mb-3">{price}</p>
+
+      {/* CTA */}
+      <Link
+        to={href}
+        className="inline-block mt-2 px-4 py-2 rounded-md bg-[#00f2ff]/10 text-[#00f2ff] border border-[#00f2ff]/30 hover:bg-[#00f2ff]/20 transition-all"
+      >
+        View Site
+      </Link>
+    </div>
+  );
+}
+
 export default function MarketplacePage() {
-  const [mythicDomains, setMythicDomains] = useState([]);
-  const [featuredDomains, setFeaturedDomains] = useState([]);
-  const [flashOffers, setFlashOffers] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [filters, setFilters] = useState({
     featured: false,
     available: false,
@@ -286,65 +323,6 @@ export default function MarketplacePage() {
     has_build: false,
     has_pfp: false
   });
-
-  // Refresh inventory when domains are purchased
-  const handleDomainPurchase = async (domainSlug) => {
-    try {
-      // Refresh all domain data
-      const [newMythic, newFeatured, newFlash] = await Promise.all([
-        getMythicDomainsFromSupabase(),
-        getFeaturedDomainsFromSupabase(),
-        getFlashOffersFromSupabase()
-      ]);
-      
-      setMythicDomains(newMythic);
-      setFeaturedDomains(newFeatured);
-      setFlashOffers(newFlash);
-      
-      // Show purchase notification
-      console.log(`🎉 ${domainSlug}.sol has been purchased!`);
-    } catch (err) {
-      console.error('Error refreshing domains:', err);
-      setError('Failed to refresh domain data');
-    }
-  };
-
-  useEffect(() => {
-    const loadDomains = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-        
-        const [mythic, featured, flash] = await Promise.all([
-          getMythicDomainsFromSupabase(),
-          getFeaturedDomainsFromSupabase(),
-          getFlashOffersFromSupabase()
-        ]);
-        
-        setMythicDomains(mythic);
-        setFeaturedDomains(featured);
-        setFlashOffers(flash);
-      } catch (err) {
-        console.error('Error loading domains:', err);
-        setError('Failed to load marketplace data');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadDomains();
-  }, []);
-
-  // Listen for storage changes (in case another tab purchases)
-  useEffect(() => {
-    const handleStorageChange = () => {
-      // Refresh domains when storage changes
-      handleDomainPurchase('refresh');
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
 
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
@@ -380,7 +358,7 @@ export default function MarketplacePage() {
           </p>
           {/* Inventory status */}
           <div className="mt-4 text-sm text-gray-400">
-            {mythicDomains.length + featuredDomains.length + flashOffers.length} domains available • First come, first served
+            4 domains available • First come, first served
           </div>
           
           {/* Filter Controls */}
@@ -391,97 +369,65 @@ export default function MarketplacePage() {
           />
         </div>
 
-        {/* Mythic Section */}
+        {/* Mythic Worlds Section */}
         <div className="mb-12">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-violet-400">🧿 MYTHIC</h2>
-            <div className="text-sm text-gray-400">
-              {mythicDomains.length > 0 ? `${mythicDomains.length} available` : 'All sold out'}
-            </div>
+          <div className="mb-6">
+            <h2 className="text-2xl font-bold text-violet-400">🧿 Mythic Worlds (15+ SOL Apex Builds)</h2>
           </div>
           
-          {loading ? (
-            <MarketplaceCardSkeleton count={2} />
-          ) : error ? (
-            <MarketplaceErrorFallback error={error} onRetry={() => window.location.reload()} />
-          ) : mythicDomains.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {mythicDomains.map((domain, idx) => (
-                <MythicDomainCard 
-                  key={`${domain.name}-${idx}`} 
-                  domain={domain} 
-                  onPurchase={handleDomainPurchase}
-                />
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-12">
-              <div className="text-2xl font-bold text-gray-500 mb-2">SOLD OUT</div>
-              <div className="text-gray-400">All mythic domains have been claimed</div>
-            </div>
-          )}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <DomainCard
+              title="jpegdealer.sol"
+              tier="Mythic"
+              price="15+ SOL"
+              img={jpegdealerImg}
+              href="/domains/jpegdealer"
+            />
+            <DomainCard
+              title="fudscience.sol"
+              tier="Mythic"
+              price="15+ SOL"
+              img={fudscientistImg}
+              href="/domains/fudscience"
+            />
+          </div>
         </div>
 
-        {/* Featured Section */}
+        {/* Mid-Grade Builds Section */}
         <div className="mb-12">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-cyan-400">FEATURED</h2>
-            <div className="text-sm text-gray-400">
-              {featuredDomains.length > 0 ? `${featuredDomains.length} available` : 'All sold out'}
-            </div>
+          <div className="mb-6">
+            <h2 className="text-2xl font-bold text-cyan-400">💎 Mid-Grade Builds (3–5 SOL)</h2>
           </div>
           
-          {loading ? (
-            <MarketplaceCardSkeleton count={2} />
-          ) : error ? (
-            <MarketplaceErrorFallback error={error} onRetry={() => window.location.reload()} />
-          ) : featuredDomains.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {featuredDomains.map((domain, idx) => (
-                <FeaturedDomainCard 
-                  key={`${domain.name}-${idx}`} 
-                  domain={domain} 
-                  onPurchase={handleDomainPurchase}
-                />
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-12">
-              <div className="text-2xl font-bold text-gray-500 mb-2">SOLD OUT</div>
-              <div className="text-gray-400">All featured domains have been claimed</div>
-            </div>
-          )}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <DomainCard
+              title="jumpsetradio.sol"
+              tier="Mid-Grade"
+              price="3–5 SOL"
+              img={jumpsetradioImg}
+              href="/domains/jumpsetradio"
+            />
+            <DomainCard
+              title="lurkerlife.sol"
+              tier="Mid-Grade"
+              price="3–5 SOL"
+              img={lurkerlifeImg}
+              href="/domains/lurkerlife"
+            />
+          </div>
         </div>
 
-        {/* Offers Section */}
+        {/* Offers & Promos Section */}
         <div className="mb-12">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-green-400">OFFERS</h2>
-            <div className="text-sm text-gray-400">
-              {flashOffers.length > 0 ? `${flashOffers.length} available` : 'All sold out'}
-            </div>
+          <div className="mb-6">
+            <h2 className="text-2xl font-bold text-green-400">🔮 Offers & Promos (Coming Soon)</h2>
           </div>
           
-          {loading ? (
-            <OfferTileSkeleton count={6} />
-          ) : error ? (
-            <MarketplaceErrorFallback error={error} onRetry={() => window.location.reload()} />
-          ) : flashOffers.length > 0 ? (
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-              {flashOffers.map((domain, idx) => (
-                <OfferTile 
-                  key={`${domain.name}-${idx}`} 
-                  domain={domain} 
-                  onPurchase={handleDomainPurchase}
-                />
-              ))}
+          <div className="text-center py-12">
+            <div className="text-gray-300 text-lg">
+              Retailstar ecosystem drops and featured promotions will appear here soon.
             </div>
-          ) : (
-            <div className="text-center py-12">
-              <div className="text-2xl font-bold text-gray-500 mb-2">SOLD OUT</div>
-              <div className="text-gray-400">All offer domains have been claimed</div>
-            </div>
-          )}
+          </div>
         </div>
 
         {/* Footer */}

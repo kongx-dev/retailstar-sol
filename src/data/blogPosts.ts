@@ -171,67 +171,6 @@ Or if you're looking to **acquire, customize, or flip a high-potential domain**,
     }
   },
   {
-    slug: '50-meme-domains-under-20-sol',
-    title: '50 Meme .sol Domains Under 20 USDC That Might Just Go Viral',
-    description: 'Need a cheap, hilarious Solana domain? Here are 50+ meme-worthy .sol names under 20 USDC with degen commentary and buy links.',
-    content: `# 50 Meme .sol Domains Under 20 USDC That Might Just Go Viral
-
-Meme domains are like meme coins — cheap, dumb, and potentially legendary. Here's our curated scav rack of .sol names that'll make you the hero (or clown) of CT.
-
-## The Meme Domain Hall of Fame
-
-*Scroll down to see our full list of meme-worthy domains, complete with degen commentary and direct buy links.*
-
-### Why These Domains Matter
-
-In the wild west of Web3, your domain is your digital identity. But who says that identity can't be absolutely ridiculous?
-
-These domains aren't just cheap — they're **culturally significant**. Each one captures a moment, a vibe, or an inside joke that only the real ones will understand.
-
-### The Selection Criteria
-
-- **Under 20 USDC** (because we're not made of money)
-- **Meme-worthy** (obviously)
-- **Actually available** (no point in teasing you)
-- **CT-approved** (if it doesn't make you laugh, it's not worth it)
-
-Ready to dive in? Let's explore the chaos.
-
----
-
-*[The full list of domains will be rendered dynamically from our scavDomains data]*
-
----
-
-## Found Something Funny?
-
-Screenshot it. Tag us @RetailstarMall and flex your new domain.
-
-These aren't just domains — they're **cultural artifacts** waiting to be claimed by the right degen.
-
-> **Ready to claim your meme domain?** [Browse the full collection](/domains) or [start building your legacy](/submit).
-
----
-
-*This list is updated regularly as new meme domains enter the ecosystem. Check back for fresh chaos.*`,
-    author: {
-      name: 'Retailstar Team',
-      url: 'https://retailstar.xyz'
-    },
-    publishedAt: '2024-01-20T00:00:00Z',
-    updatedAt: '2024-01-20T00:00:00Z',
-    tags: ['meme domains', 'solana', 'cheap domains', 'degen', 'scav rack', 'funny domains'],
-    category: 'Guide',
-    featured: true,
-    image: 'https://retailstar.xyz/assets/rs-og-card.png',
-    canonicalUrl: 'https://retailstar.xyz/insights/50-meme-domains-under-20-sol',
-    keywords: 'funny solana domain names, cheap solana domain, meme .sol ideas, solana scav rack, degen domains',
-    schema: {
-      articleType: 'Article',
-      mainEntity: 'Meme Domains'
-    }
-  },
-  {
     slug: 'what-are-sol-domains',
     title: 'What Are .sol Domains? A Beginner\'s Guide for Web3 Builders',
     description: 'Learn what .sol domains are, how they work, and why Solana builders use them for identity, apps, and branding. A simple guide for Web3 beginners.',
@@ -417,6 +356,261 @@ Ready to explore the world of Solana domains? [Explore the Retailstar Mall](http
     schema: {
       articleType: 'Article',
       mainEntity: '.sol Domains'
+    }
+  },
+  {
+    slug: '25-meme-domains',
+    title: '25 Meme .sol Domains That Might Go Viral (Plus the Full Retailstar Build Ladder)',
+    description: 'Web3 is split into builders and degens. Whether you want a brandable .sol domain or a stupidly funny one to flex on the timeline, this guide breaks down the Retailstar build ladder and 25 meme-worthy domains that might actually go viral.',
+    content: `# 25 Meme .sol Domains That Might Go Viral (Plus the Full Retailstar Build Ladder)
+
+Web3 is split into two types of people:
+
+**Builders** — who want a clean, brandable .sol domain to launch something real
+
+**Degens** — who want a stupidly funny .sol domain to flex on the timeline
+
+Retailstar is built for both.
+
+Whether you're trying to spin up a meme coin, launch a micro-project, or finally give your PFP an identity crisis, this guide breaks down:
+
+- The full Retailstar build ladder (so you know what each tier gets you)
+- 25 meme-worthy .sol domains that might actually go viral
+- Where to upgrade your domain once you snag it
+
+Let's get into it.
+
+---
+
+## ⚡ The Retailstar Build Ladder (What You Actually Get)
+
+Every buyer gets a different build depending on their goals, budget, or level of degenerate behavior.
+
+### ⭐ 1. QUICK SNAG — 0.5–1.5 SOL
+
+"Snag it, ship it, stun 'em."
+
+Perfect for fast flips, meme sites, shitcoin promos, or your next identity flex.
+
+**What you get:**
+
+- 1 clean landing page
+- Custom hero/banner
+- Snappy degen copy
+- Social/mint links
+- Delivered in 48–72 hours
+
+**Best for:**
+
+\`urnotthatguy.sol\` • \`lowballking.sol\` • \`wastakenbro.sol\`
+
+### 🧱 2. MID-GRADE — 3–5 SOL
+
+"Not basic. Not maxed. Just right."
+
+For people who want real presence without a huge build.
+
+**What you get:**
+
+- Up to 2 fully styled pages
+- Clean layouts + light animations
+- Styled CTAs
+- Optional: collections, widgets, 1–2 data modules
+
+**Best for:**
+
+Concept pages, meme coin pre-launches, project previews.
+
+### 🔮 3. PREMIUM — 9+ SOL
+
+"This ain't a build. It's a world."
+
+This is where your domain stops being a joke and becomes lore.
+
+**What you get:**
+
+- 2–3 full custom pages
+- Scroll-based animations & transitions
+- Lore-infused storytelling
+- Optional token-gating
+- Optional dashboard & analytics
+
+**Examples:**
+
+[jpegdealer.sol](https://jpegdealer.netlify.app)
+
+[fudscience.sol](https://fudscience.netlify.app)
+
+(Both fully built, both mythic-level sites.)
+
+### 🔧 4. RETAINER PLAN — 0.5–1 SOL/mo
+
+Your domain is a storefront, not a graveyard.
+
+**Includes:**
+
+- Ongoing updates
+- UI tweaks
+- Seasonal refreshes
+- Module swaps
+
+Perfect for people who plan to evolve their site over time.
+
+### 🧠 5. CUSTOM QUOTE — 15+ SOL
+
+For the insane ideas that deserve an insane build.
+
+**Use cases:**
+
+- Marketplace builds
+- DAO access zones
+- Mini-game portals
+- Fully gated platforms
+
+**Includes:**
+
+Discovery call • Figma mockups • Dev cycle planning
+
+**Examples to preview:**
+
+[lurkerlife.netlify.app](https://lurkerlife.netlify.app)
+
+[jumpsetradio.netlify.app](https://jumpsetradio.netlify.app)
+
+---
+
+## 🔥 25 Meme .sol Domains That Might Just Go Viral
+
+Yes — these are real .sol domains.
+
+Yes — they're absolutely ridiculous.
+
+No — we don't judge.
+
+Below are grouped collections for your browsing pleasure.
+
+### 🔥 Identity Flex Names
+
+The ones you buy because your personality depends on it.
+
+- \`urnotthatguy.sol\`
+- \`yournotthatguy.sol\`
+- \`maidenless.sol\`
+- \`headempty.sol\`
+- \`smoothestbrain.sol\`
+- \`logoffking.sol\`
+- \`wastakenbro.sol\`
+
+### 🧪 Meme & Joke Names
+
+Perfect for shitposting, promo pages, meme coins, or embarrassing your friends.
+
+- \`copevendor.sol\`
+- \`bongwaterking.sol\`
+- \`whatabum.sol\`
+- \`whyumad.sol\`
+- \`noaura.sol\`
+- \`nosauce.sol\`
+- \`notalpha.sol\`
+
+### ⚔️ Degen / Trading Names
+
+The ones you buy at 4AM because you "felt something."
+
+- \`lordofliquidity.sol\`
+- \`sniperguru.sol\`
+- \`rektworthy.sol\`
+- \`tdbagchaser.sol\`
+- \`verifiedsoon.sol\`
+- \`scamdetected.sol\`
+- \`summonscam.sol\`
+
+### 📡 Tech / Router-Style Meme Names
+
+Names that make you look like you run a datacenter in your mom's basement (in a good way).
+
+- \`memeengine.sol\`
+- \`memerouter.sol\`
+- \`memepipeline.sol\`
+- \`memestation.sol\`
+- \`memesupplier.sol\`
+- \`memeprovider.sol\`
+- \`ninjachain.sol\`
+
+### 💀 Extra Chaotic Energy Names
+
+Too cursed to ignore.
+
+- \`artthoumad.sol\`
+- \`whogaveyouthat.sol\`
+- \`whisperingeye.sol\`
+- \`influencerdump.sol\`
+- \`yapenomics.sol\`
+
+---
+
+## 🧠 Why Meme Domains Actually Matter
+
+People think meme domains are dumb.
+
+They're right. But also — they're powerful.
+
+Here's why:
+
+**They become identity.**
+
+Your .sol name is your PFP's lore.
+
+**They go viral.**
+
+CT loves stupid branding.
+
+**They launch meme coins.**
+
+A funny domain can become the entire narrative.
+
+**They're culture.**
+
+Memes are half the Solana economy.
+
+**They flip.**
+
+Degens really will pay 5+ SOL for the right name.
+
+If ENS domains are LinkedIn…
+
+.sol meme domains are whatever the opposite of LinkedIn is.`,
+    author: {
+      name: 'Retailstar Team',
+      url: 'https://retailstar.xyz'
+    },
+    publishedAt: '2025-11-11T00:00:00Z',
+    updatedAt: '2025-11-14T00:00:00Z',
+    tags: ['meme domains', 'solana', 'guide', 'retailstar', 'build ladder'],
+    category: 'Guide',
+    featured: true,
+    image: '/assets/25-sol-domains.png',
+    canonicalUrl: 'https://retailstar.xyz/insights/25-meme-domains',
+    keywords: [
+      'meme solana domains',
+      'funny .sol domain names',
+      'retailstar build ladder',
+      'solana domain guide',
+      'meme coin domains',
+      'degen domains',
+      'viral .sol domains',
+      'solana domain marketplace',
+      'buy meme domains',
+      'solana domain pricing',
+      'custom .sol domain builds',
+      'solana domain development',
+      'meme domain ideas',
+      'solana CT domains',
+      'viral domain names'
+    ],
+    schema: {
+      articleType: 'Article',
+      mainEntity: 'Meme Domains'
     }
   }
 ];

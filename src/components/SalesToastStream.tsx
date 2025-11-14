@@ -21,10 +21,8 @@ export default function SalesToastStream() {
   const [showConfetti, setShowConfetti] = useState(false);
   const [currentWallet, setCurrentWallet] = useState(generateSolanaLikeWallet());
 
-  // Don't show sales toast on upgrade page
-  if (location.pathname === '/upgrade') {
-    return null;
-  }
+  // Sales toast disabled across the entire site
+  return null;
 
   useEffect(() => {
     const interval = setInterval(() => {

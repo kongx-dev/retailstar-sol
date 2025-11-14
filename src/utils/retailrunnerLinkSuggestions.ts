@@ -28,9 +28,9 @@ const keywordMappings: Array<{
     suggestion: {
       type: 'link',
       title: 'Meme Domains',
-      description: '50 meme domains under 20 SOL',
+      description: '25 meme domains that might go viral',
       emoji: '🤡',
-      url: '/insights/50-meme-domains-under-20-sol',
+      url: '/insights/25-meme-domains',
       sarcasm: "*sighs* Of course you want meme domains... Here's some 'quality' content."
     }
   },

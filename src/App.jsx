@@ -127,7 +127,6 @@ function App() {
             <Route path="/tiers" element={<TiersPage />} />
             <Route path="/retail-tickets" element={<RetailTickets />} />
             <Route path="/insights" element={<InsightsPage />} />
-            <Route path="/insights/50-meme-domains-under-20-sol" element={<MemeDomainBlog />} />
             <Route path="/insights/:slug" element={<InsightArticlePage />} />
             <Route path="/tools" element={<ToolsIndexPage />} />
             <Route path="/tools/domain-tester" element={<DomainTesterPage />} />

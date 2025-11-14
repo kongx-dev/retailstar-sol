@@ -96,7 +96,7 @@ export function useDomains(options: UseDomainsOptions = {}): UseDomainsReturn {
 }
 
 // Convenience hooks for common use cases
-export function useScavDomains() {
+export function useScavDomains(filters: Record<string, boolean> = {}) {
   const [domains, setDomains] = useState<Domain[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -106,8 +106,21 @@ export function useScavDomains() {
       try {
         setLoading(true);
         setError(null);
-        const { getScavDomains } = await import('../lib/domainQueries');
-        const scavDomains = await getScavDomains();
+        const { getAllDomains } = await import('../lib/domainQueries');
+        
+        // Build query options from filters
+        const queryOptions: any = {
+          category: 'scav',
+          listed: true
+        };
+        
+        // Apply filters
+        if (filters.vaulted !== undefined) queryOptions.vaulted = filters.vaulted;
+        if (filters.featured !== undefined) queryOptions.featured = filters.featured;
+        if (filters.has_build !== undefined) queryOptions.has_build = filters.has_build;
+        if (filters.has_pfp !== undefined) queryOptions.has_pfp = filters.has_pfp;
+        
+        const scavDomains = await getAllDomains(queryOptions);
         setDomains(scavDomains);
       } catch (err) {
         console.error('Error fetching scav domains:', err);
@@ -119,7 +132,7 @@ export function useScavDomains() {
     };
 
     fetchScavDomains();
-  }, []);
+  }, [filters.vaulted, filters.featured, filters.has_build, filters.has_pfp]);
 
   return { domains, loading, error, refetch: () => window.location.reload() };
 }

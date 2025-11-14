@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
+import { useRetailTickets } from '../hooks/useRetailTickets';
 import RetailSpinWheel from './RetailSpinWheel';
 
 export default function RetailTicketsDashboard({ wallet }: { wallet: string }) {
-  const [ticketBalance, setTicketBalance] = useState<number>(0);
+  const { balance: ticketBalance, logs: ticketLogs, loading: ticketsLoading, refetch } = useRetailTickets(wallet);
   const [isLoading, setIsLoading] = useState(true);
 
   // Simulate wallet-based fetch
@@ -10,18 +11,9 @@ export default function RetailTicketsDashboard({ wallet }: { wallet: string }) {
     if (!wallet) return;
     
     setIsLoading(true);
-    const stored = localStorage.getItem(`tickets-${wallet}`);
-    const balance = stored ? parseInt(stored, 10) : 34; // Default 34 tickets
-    setTicketBalance(balance);
-    setIsLoading(false);
-  }, [wallet]);
-
-  // Persist ticket balance
-  useEffect(() => {
-    if (wallet) {
-      localStorage.setItem(`tickets-${wallet}`, ticketBalance.toString());
-    }
-  }, [ticketBalance, wallet]);
+    // Use the new hook data instead of localStorage
+    setIsLoading(ticketsLoading);
+  }, [wallet, ticketsLoading]);
 
   if (isLoading) {
     return (
@@ -45,8 +37,28 @@ export default function RetailTicketsDashboard({ wallet }: { wallet: string }) {
       <RetailSpinWheel
         wallet={wallet}
         ticketBalance={ticketBalance}
-        setTicketBalance={setTicketBalance}
+        setTicketBalance={(newBalance) => {
+          // This would need to be updated to use the new hook's refetch
+          refetch();
+        }}
       />
+
+      {/* Transaction History */}
+      {ticketLogs.length > 0 && (
+        <div className="mt-8 p-4 bg-zinc-900/50 border border-zinc-700/50 rounded-lg">
+          <h3 className="text-lg font-semibold text-cyan-300 mb-3">📋 Recent Transactions</h3>
+          <div className="space-y-2 text-sm">
+            {ticketLogs.slice(0, 5).map((log) => (
+              <div key={log.id} className="flex justify-between items-center">
+                <span className="text-zinc-300">{log.action} from {log.source}</span>
+                <span className={`font-medium ${log.amount > 0 ? 'text-green-400' : 'text-red-400'}`}>
+                  {log.amount > 0 ? '+' : ''}{log.amount} RT
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Ticket earning info */}
       <div className="mt-8 p-4 bg-zinc-900/50 border border-zinc-700/50 rounded-lg">

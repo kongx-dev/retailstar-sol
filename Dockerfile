@@ -4,6 +4,19 @@ FROM node:20.18.0-alpine as builder
 # Set working directory
 WORKDIR /app
 
+# Accept build arguments for environment variables
+# These will be available during the build process
+ARG VITE_SUPABASE_URL
+ARG VITE_SUPABASE_ANON_KEY
+ARG VITE_SOLANA_RPC_URL
+ARG VITE_SOLANA_NETWORK
+
+# Set as environment variables for Vite to pick up during build
+ENV VITE_SUPABASE_URL=$VITE_SUPABASE_URL
+ENV VITE_SUPABASE_ANON_KEY=$VITE_SUPABASE_ANON_KEY
+ENV VITE_SOLANA_RPC_URL=$VITE_SOLANA_RPC_URL
+ENV VITE_SOLANA_NETWORK=$VITE_SOLANA_NETWORK
+
 # Install dependencies first (for better caching)
 COPY package*.json ./
 RUN npm ci --legacy-peer-deps && npm cache clean --force
@@ -11,7 +24,7 @@ RUN npm ci --legacy-peer-deps && npm cache clean --force
 # Copy source code
 COPY . .
 
-# Build the application
+# Build the application (Vite will use the ENV vars above)
 RUN npm run build
 
 # ---------- Production Stage ----------
@@ -29,18 +42,30 @@ RUN rm -rf /usr/share/nginx/html/*
 # Copy built Vite files
 COPY --from=builder /app/dist /usr/share/nginx/html
 
+# Install Node.js in production stage for runtime config generation
+RUN apk add --no-cache nodejs npm
+
+# Copy runtime config generation script
+COPY scripts/generate-runtime-config.js /usr/local/bin/generate-runtime-config.js
+RUN chmod +x /usr/local/bin/generate-runtime-config.js
+
 # Copy custom nginx config
 COPY nginx.conf /etc/nginx/nginx.conf
+
+# Create entrypoint script that generates runtime config from env vars
+RUN echo '#!/bin/sh' > /entrypoint.sh && \
+    echo 'echo "🔧 Generating runtime config from environment variables..."' >> /entrypoint.sh && \
+    echo 'node /usr/local/bin/generate-runtime-config.js' >> /entrypoint.sh && \
+    echo 'exec nginx -g "daemon off;"' >> /entrypoint.sh && \
+    chmod +x /entrypoint.sh
 
 # Set proper permissions
 RUN chown -R appuser:appgroup /usr/share/nginx/html && \
     chmod -R 755 /usr/share/nginx/html
 
-# Switch to non-root user
-USER appuser
-
 # Expose port 80
 EXPOSE 80
 
-# Start nginx
-CMD ["nginx", "-g", "daemon off;"] 
+# Use entrypoint that generates runtime config from env vars
+# This allows setting env vars at container runtime without rebuilding
+ENTRYPOINT ["/entrypoint.sh"] 

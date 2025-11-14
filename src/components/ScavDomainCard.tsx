@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Domain } from '../lib/supabase';
+import StatusBadges from './ui/StatusBadges';
 
 type ScavDomain = Domain & {
   pngUrl?: string;
@@ -320,6 +321,7 @@ function ScavDomainCard({ domain, onSlotMachineToggle }: {
     }
     return (
       <div className={`bg-black neon-border rounded-2xl p-4 flex flex-col items-center shadow-lg animate-pulse border-2 border-orange-400 relative hover:rotate-1 transition-all duration-200 ${tierStyles[tier]}`}>
+        <StatusBadges domain={domain} showCategory={true} />
         <div className="absolute top-2 right-2 bg-orange-500 text-white text-xs px-2 py-1 rounded-full animate-glow font-bold">
           🔧 Fixer Upgrade Incoming
         </div>
@@ -359,6 +361,7 @@ function ScavDomainCard({ domain, onSlotMachineToggle }: {
   return (
     <>
       <div className={`bg-black neon-border rounded-2xl p-4 flex flex-col items-center shadow-lg transition-all hover:drop-shadow-neon hover:rotate-1 hover:scale-105 duration-200 group ${tierStyles[tier]}`}>
+        <StatusBadges domain={domain} showCategory={true} />
         <div className="text-sm font-bold tracking-wide mb-2">
           {tierLabels[tier]}
         </div>

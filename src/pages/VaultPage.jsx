@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useWallet } from '@solana/wallet-adapter-react';
+import { useSession } from '@supabase/auth-helpers-react';
 import rsLogo from '../assets/rs-logo.png';
 import retailstarBody from '../assets/retailstar-body.png';
 import SEOHead from '../components/SEOHead';
@@ -111,6 +113,35 @@ const DomainCard = ({ domain }) => (
 );
 
 const VaultPage = () => {
+  const navigate = useNavigate();
+  const { publicKey } = useWallet();
+  const session = useSession();
+  
+  // Check if user has wallet OR social auth
+  const isAuthenticated = !!publicKey || !!session;
+
+  useEffect(() => {
+    // If not authenticated, redirect to outerring after a brief delay
+    if (!isAuthenticated) {
+      const timer = setTimeout(() => {
+        navigate('/outerring');
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [isAuthenticated, navigate]);
+
+  // Show loading or redirect message if not authenticated
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-400 mx-auto mb-4"></div>
+          <p className="text-cyan-400 font-semibold">Redirecting to authentication...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
       <SEOHead

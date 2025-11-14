@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { useParams, Link } from 'react-router-dom';
 import { getDomainByName } from '../lib/domainQueries';
 import rsLogo from '../assets/rs-logo.png';
@@ -287,6 +288,17 @@ The Retailverse is alive with potential—every domain is a blank canvas waiting
 
   return (
     <div className="min-h-screen text-white relative overflow-hidden">
+      {slug === 'fudscience' && domain && (
+        <Helmet>
+          <title>FUDscience Wiki • Retailstar Knowledge Base • Retailstar Mall</title>
+          <meta
+            name="description"
+            content="Learn about FUDscience and its role in the Retailstar ecosystem."
+          />
+          <meta name="robots" content="index, follow" />
+          <link rel="canonical" href="https://retailstar.xyz/wiki/fudscience" />
+        </Helmet>
+      )}
       <SEOHead 
         target={`${domain.slug}.sol`}
         pageType="wiki"
@@ -370,10 +382,34 @@ The Retailverse is alive with potential—every domain is a blank canvas waiting
             <h1 className="text-4xl md:text-6xl font-bold mb-4 solana-gradient">
               {domain.slug}.sol
             </h1>
+            
+            {slug === 'fudscience' && (
+              <section className="static-seo-content mb-6">
+                <p>
+                  The fudscience.sol wiki page documents a specific domain within the Retailstar Mall ecosystem. This page provides detailed information about the FUDscience domain, including its purpose, background story, and role within the cyberpunk marketplace. The wiki entry explains how this domain functions as both a satirical commentary on crypto market analysis and a genuine resource for Web3 insights. It describes the domain's place within the broader Solana ecosystem and Retailverse marketplace.
+                </p>
+                <p>
+                  The page outlines the concept behind FUDscience and how it relates to the overall theme of Retailstar Mall. It explains the domain's approach to market analysis, combining humor with useful information for the crypto community. The wiki entry helps users understand what makes this particular Solana domain unique within the marketplace collection. This documentation provides context for visitors interested in learning about specific domains and their functions within the Web3 space.
+                </p>
+              </section>
+            )}
+            
             <p className="text-xl text-gray-300 mb-8">
               {domain.description || `A domain in the Retailverse waiting for its story to unfold.`}
             </p>
           </div>
+
+          {/* SEO Intro Section - Only for fudscience */}
+          {slug === 'fudscience' && (
+            <section className="prose prose-invert mb-10">
+              <p>
+                FUDscience.sol represents the satirical edge of the Retailstar Mall ecosystem, where market analysis meets cyberpunk humor in the Solana domain space. This wiki entry explores how FUDscience operates as both a parody of over-serious alpha threads and a genuine source of insights within the Web3 marketplace. Born from the chaos of Crypto Twitter and the FOMO labs of the Retailverse, FUDscience distills market chaos into fake research, fake graphs, and dangerously real truths about the Solana ecosystem.
+              </p>
+              <p>
+                In the cyberpunk marketplace that defines Retailstar Mall, FUDscience serves as a bridge between the underground energy of degen culture and the polished analysis that builders need. This .sol domain demonstrates how the Retailverse embraces both serious Web3 innovation and the absurdity that makes the Solana ecosystem unique. Whether you're a builder looking for genuine insights or a degen appreciating the satire, FUDscience shows how Retailstar Mall curates domains that reflect the full spectrum of crypto culture.
+              </p>
+            </section>
+          )}
 
           {/* Lore Section */}
           <div className="mb-12">
@@ -494,6 +530,18 @@ The Retailverse is alive with potential—every domain is a blank canvas waiting
               ← Back to Wiki Directory
             </Link>
           </div>
+
+          {/* See Also Section - Only for fudscience */}
+          {slug === 'fudscience' && (
+            <section className="mt-16 border-t pt-8 text-sm opacity-80">
+              <h3 className="font-medium mb-3">Explore More</h3>
+              <ul className="space-y-1">
+                <li><a href="/lore" className="text-sky-400 hover:underline">Lore</a></li>
+                <li><a href="/directory" className="text-sky-400 hover:underline">Directory</a></li>
+                <li><a href="/domains" className="text-sky-400 hover:underline">Domains</a></li>
+              </ul>
+            </section>
+          )}
         </div>
       </div>
     </div>

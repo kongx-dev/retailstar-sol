@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDomains } from '../hooks/useDomains';
 import { getMythicDomains, getFeaturedDomains, getFlashOffers } from '../lib/domainQueries';
 import { getAvailableForSale } from '../data/domains';
+import FilterControls from '../components/FilterControls';
 import bgImage from "../assets/chowdown.png";
 import chevronUp from "../assets/chevron.png";
 import SEOHead from '../components/SEOHead';
@@ -144,7 +145,9 @@ function MythicDomainCard({ domain, onPurchase }) {
 
   return (
     <div className="relative group cursor-pointer">
-      <div className="bg-gradient-to-br from-purple-800 to-violet-900 border border-violet-600 rounded-xl p-6 shadow-xl hover:animate-glow transition-all">
+      <div className={`bg-gradient-to-br from-purple-800 to-violet-900 border border-violet-600 rounded-xl p-6 shadow-xl hover:animate-glow transition-all ${
+        domain.featured ? 'ring-2 ring-yellow-400 ring-opacity-50 shadow-yellow-400/25' : ''
+      }`}>
         {/* Domain image */}
         <div className="flex justify-center mb-4">
           <img 
@@ -158,7 +161,7 @@ function MythicDomainCard({ domain, onPurchase }) {
         <div className="text-center">
           <div className="text-lg font-bold text-white mb-1">{domain.name}.sol</div>
           <div className="text-xs text-violet-300 mb-2">🧿 MYTHIC</div>
-          <div className="text-orange-400 text-xs font-bold mb-2">🔥 Featured</div>
+          {domain.featured && <div className="text-yellow-400 text-xs font-bold mb-2 animate-pulse">⭐ Featured</div>}
         </div>
         
         {/* Timer */}
@@ -192,7 +195,9 @@ function FeaturedDomainCard({ domain, onPurchase }) {
   const imageSrc = domain.image_url || domainImages[imageKey] || domainImages.jpegdealer;
 
   return (
-    <div className="bg-gray-800/50 border border-gray-700 rounded-xl p-6 shadow-lg hover:shadow-cyan-500/25 transition-all duration-200">
+    <div className={`bg-gray-800/50 border border-gray-700 rounded-xl p-6 shadow-lg hover:shadow-cyan-500/25 transition-all duration-200 ${
+      domain.featured ? 'ring-2 ring-yellow-400 ring-opacity-50 shadow-yellow-400/25' : ''
+    }`}>
       {/* Domain image */}
       <div className="flex justify-center mb-4">
         <img 
@@ -206,6 +211,7 @@ function FeaturedDomainCard({ domain, onPurchase }) {
       <div className="text-center">
         <div className="text-sm font-bold text-white mb-1">{domain.name}.sol</div>
         <div className="text-xs text-gray-400">{domain.category?.toUpperCase() || 'DOMAIN'}</div>
+        {domain.featured && <div className="text-yellow-400 text-xs font-bold mt-1 animate-pulse">⭐ Featured</div>}
       </div>
       
       {/* Timer */}
@@ -273,6 +279,13 @@ export default function MarketplacePage() {
   const [flashOffers, setFlashOffers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [filters, setFilters] = useState({
+    featured: false,
+    available: false,
+    vaulted: false,
+    has_build: false,
+    has_pfp: false
+  });
 
   // Refresh inventory when domains are purchased
   const handleDomainPurchase = async (domainSlug) => {
@@ -369,6 +382,13 @@ export default function MarketplacePage() {
           <div className="mt-4 text-sm text-gray-400">
             {mythicDomains.length + featuredDomains.length + flashOffers.length} domains available • First come, first served
           </div>
+          
+          {/* Filter Controls */}
+          <FilterControls 
+            filters={filters} 
+            setFilters={setFilters}
+            availableFilters={['featured', 'available', 'vaulted', 'has_build', 'has_pfp']}
+          />
         </div>
 
         {/* Mythic Section */}

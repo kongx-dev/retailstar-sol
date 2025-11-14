@@ -18,10 +18,10 @@ const MerchWaitlist = () => {
         customTitle="CONFIDENTIAL: OPERATION THREADCOUNT | Retailstar.sol"
         customDescription="Declassified merch drop dossier. Only the first 25 are guaranteed. First 50 enter the archive."
         customKeywords="merch waitlist, hoodie drop, retailstar merch, confidential, threadcount ops"
-        imageUrl="https://retailstar.sol/src/assets/rs-logo.png"
+        imageUrl="https://retailstar.sol/assets/rs-logo.png"
         canonicalUrl="https://retailstar.sol/merch-waitlist"
-        ogImage="https://retailstar.sol/src/assets/rs-logo.png"
-        twitterImage="https://retailstar.sol/src/assets/rs-logo.png"
+        ogImage="https://retailstar.sol/assets/rs-logo.png"
+        twitterImage="https://retailstar.sol/assets/rs-logo.png"
       />
       
       {/* Header */}

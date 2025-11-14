@@ -31,29 +31,59 @@ export interface Domain {
 }
 
 // ENV CHECK - Log at the top to verify Vite is loading .env.local
-console.log("ENV CHECK URL:", import.meta.env.VITE_SUPABASE_URL);
-console.log("ENV CHECK KEY:", import.meta.env.VITE_SUPABASE_ANON_KEY ? "Loaded" : "Missing");
+// Check both Vite env vars (build-time) and runtime config (runtime)
+const getEnvVar = (key: string): string | undefined => {
+  // First check Vite build-time env vars
+  const viteValue = import.meta.env[key];
+  if (viteValue) return viteValue;
+  
+  // Fallback to runtime config (for cases where build-time vars aren't available)
+  if (typeof window !== 'undefined' && (window as any).__RUNTIME_CONFIG__) {
+    return (window as any).__RUNTIME_CONFIG__[key];
+  }
+  
+  return undefined;
+};
+
+const supabaseUrl = getEnvVar('VITE_SUPABASE_URL');
+const supabaseKey = getEnvVar('VITE_SUPABASE_ANON_KEY');
+
+console.log("ENV CHECK URL:", supabaseUrl || "undefined");
+console.log("ENV CHECK KEY:", supabaseKey ? "Loaded" : "Missing");
+console.log("ENV SOURCE:", import.meta.env.VITE_SUPABASE_URL ? "Build-time" : 
+  (typeof window !== 'undefined' && (window as any).__RUNTIME_CONFIG__?.VITE_SUPABASE_URL ? "Runtime config" : "None"));
 
 // Warn if variables would evaluate to undefined
-if (import.meta.env.VITE_SUPABASE_URL === undefined) {
+if (!supabaseUrl) {
   console.warn("⚠️ WARNING: VITE_SUPABASE_URL is undefined. Vite will not load .env.local if it doesn't exist or variables don't start with VITE_");
+  console.warn("⚠️ App will run in fallback mode without database features.");
 }
 
-if (import.meta.env.VITE_SUPABASE_ANON_KEY === undefined) {
+if (!supabaseKey) {
   console.warn("⚠️ WARNING: VITE_SUPABASE_ANON_KEY is undefined. Vite will not load .env.local if it doesn't exist or variables don't start with VITE_");
+  console.warn("⚠️ App will run in fallback mode without database features.");
 }
 
-// Initialize Supabase client - direct initialization (no conditional null)
-// This will throw an error at runtime if env vars are undefined, which helps diagnose the issue
-export const supabase = createClient(
-  import.meta.env.VITE_SUPABASE_URL,
-  import.meta.env.VITE_SUPABASE_ANON_KEY
-);
+// Initialize Supabase client conditionally - only if both URL and key are provided
+// This prevents the app from crashing when env vars are missing in production
+let supabaseClient: ReturnType<typeof createClient> | null = null;
 
-// Log successful initialization
-if (import.meta.env.VITE_SUPABASE_URL) {
-  console.log(`✅ Supabase initialized ${import.meta.env.VITE_SUPABASE_URL}`);
+if (supabaseUrl && supabaseKey && 
+    supabaseUrl !== 'https://your-project.supabase.co' && 
+    supabaseKey !== 'your-anon-key') {
+  try {
+    supabaseClient = createClient(supabaseUrl, supabaseKey);
+    console.log(`✅ Supabase initialized: ${supabaseUrl.substring(0, 30)}...`);
+  } catch (error) {
+    console.error("❌ Failed to initialize Supabase client:", error);
+    supabaseClient = null;
+  }
+} else {
+  console.warn("⚠️ Supabase not initialized - missing or placeholder credentials");
+  console.warn("⚠️ App will run in fallback mode. Database features will be disabled.");
 }
+
+export const supabase = supabaseClient;
 
 // Helper function to assert Supabase is available
 export function assertSupabase() {

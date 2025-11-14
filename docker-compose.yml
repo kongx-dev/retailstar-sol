@@ -2,7 +2,14 @@ version: "3.9"
 
 services:
   hoodie-republic:
-    build: .
+    build:
+      context: .
+      args:
+        # Build-time args (for Vite build)
+        - VITE_SUPABASE_URL=${VITE_SUPABASE_URL}
+        - VITE_SUPABASE_ANON_KEY=${VITE_SUPABASE_ANON_KEY}
+        - VITE_SOLANA_RPC_URL=${VITE_SOLANA_RPC_URL:-https://api.mainnet-beta.solana.com}
+        - VITE_SOLANA_NETWORK=${VITE_SOLANA_NETWORK:-mainnet-beta}
     ports:
       - "8080:80"
     restart: unless-stopped
@@ -19,6 +26,11 @@ services:
       start_period: 10s
     environment:
       - NODE_ENV=production
+      # Runtime env vars (for runtime-config.js generation)
+      - VITE_SUPABASE_URL=${VITE_SUPABASE_URL}
+      - VITE_SUPABASE_ANON_KEY=${VITE_SUPABASE_ANON_KEY}
+      - VITE_SOLANA_RPC_URL=${VITE_SOLANA_RPC_URL:-https://api.mainnet-beta.solana.com}
+      - VITE_SOLANA_NETWORK=${VITE_SOLANA_NETWORK:-mainnet-beta}
     networks:
       - hoodie-network
 

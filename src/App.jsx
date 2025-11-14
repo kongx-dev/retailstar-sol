@@ -17,19 +17,31 @@ import Checkout from './pages/Checkout';
 import GuidePage from './pages/GuidePage';
 import LorePage from './pages/LorePage';
 import RetailpassPage from './pages/RetailpassPage';
+import TermsOfServicePage from './pages/TermsOfServicePage';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
+import ContactPage from './pages/ContactPage';
 import RetailTickets from './pages/RetailTickets';
+import OuterRingPage from './pages/OuterRingPage';
 import MerchWaitlist from './pages/MerchWaitlist';
+import RetailTicketsBadge from './components/RetailTicketsBadge';
 import InsightsPage from './pages/InsightsPage';
 import InsightArticlePage from './pages/InsightArticlePage';
+import MemeDomainBlog from './pages/MemeDomainBlog';
 import ToolsIndexPage from './pages/tools/ToolsIndexPage';
 import DomainTesterPage from './pages/tools/DomainTesterPage';
 import ArchetypeQuizPage from './pages/tools/ArchetypeQuizPage';
 import LeaderboardPage from './pages/tools/LeaderboardPage';
+import MemeGeneratorPage from './pages/tools/MemeGeneratorPage';
 import { StatusLight } from './components/StatusLight';
 import { checkForEasterEggs } from './utils/retailrunnerPersonality';
 import MallLayout from './components/MallLayout';
 import TiersPage from './pages/TiersPage';
 import SalesToastStream from './components/SalesToastStream';
+// Floor Pages
+import BasementPage from './pages/floors/BasementPage';
+import MainFloorPage from './pages/floors/MainFloorPage';
+import BlueprintSuitesPage from './pages/floors/BlueprintSuitesPage';
+import RooftopLoungePage from './pages/floors/RooftopLoungePage';
 // import AudioZone from './components/AudioZone';
 // import AudioToggle from './components/AudioToggle';
 
@@ -67,6 +79,9 @@ function App() {
         {/* Sales Toast Stream */}
         <SalesToastStream />
         
+        {/* Floating Retail Tickets Badge - Shows on all pages */}
+        <RetailTicketsBadge />
+        
         {/* Zone Audio System - Disabled */}
         {/* <AudioZone />
         <AudioToggle /> */}
@@ -78,33 +93,50 @@ function App() {
           {/* Home page outside mall layout */}
           <Route path="/" element={<HomePage />} />
           <Route path="/app" element={<RetailstarAppHome />} />
+          <Route path="/outerring" element={<OuterRingPage />} />
+          <Route path="/terms" element={<TermsOfServicePage />} />
+          <Route path="/privacy" element={<PrivacyPolicyPage />} />
+          <Route path="/contact" element={<ContactPage />} />
           
-          {/* Mall layout routes */}
+          {/* Floor Pages - Outside MallLayout for custom styling */}
+          <Route path="/basement" element={<BasementPage />} />
+          <Route path="/main-floor" element={<MainFloorPage />} />
+          <Route path="/blueprint-suites" element={<BlueprintSuitesPage />} />
+          <Route path="/rooftop-lounge" element={<RooftopLoungePage />} />
+          
+          {/* Mall layout routes - redistributed across floors */}
           <Route element={<MallLayout />}>
-            <Route path="/domains" element={<ScavRack />} />
+            {/* Basement routes - accessible to all */}
+            <Route path="/marketplace" element={<MarketplacePage />} />
+            <Route path="/scavrack" element={<ScavRack />} />
             <Route path="/domains/:slug" element={<DomainPage />} />
-            <Route path="/wiki/:slug" element={<WikiPage />} />
-            <Route path="/wiki-directory" element={<WikiDirectoryPage />} />
+            <Route path="/checkout/:slug" element={<Checkout />} />
+            
+            {/* Main Floor routes - require domain purchase */}
+            <Route path="/domains" element={<ScavRack />} />
             <Route path="/directory" element={<MallDirectoryPage />} />
+            <Route path="/wiki-directory" element={<WikiDirectoryPage />} />
+            <Route path="/guide" element={<GuidePage />} />
+            <Route path="/wiki/:slug" element={<WikiPage />} />
             <Route path="/vault" element={<VaultPage />} />
             <Route path="/upgrade" element={<UpgradePage />} />
             <Route path="/vote" element={<VotePage />} />
-            <Route path="/marketplace" element={<MarketplacePage />} />
-            <Route path="/scavrack" element={<ScavRack />} />
             <Route path="/airtable-domains" element={<DomainList />} />
-            <Route path="/checkout/:slug" element={<Checkout />} />
-            <Route path="/guide" element={<GuidePage />} />
             <Route path="/lore" element={<LorePage />} />
             <Route path="/retailpass" element={<RetailpassPage />} />
             <Route path="/tiers" element={<TiersPage />} />
             <Route path="/retail-tickets" element={<RetailTickets />} />
-            <Route path="/merch-waitlist" element={<MerchWaitlist />} />
             <Route path="/insights" element={<InsightsPage />} />
             <Route path="/insights/:slug" element={<InsightArticlePage />} />
+            <Route path="/insights/50-meme-domains-under-20-sol" element={<MemeDomainBlog />} />
             <Route path="/tools" element={<ToolsIndexPage />} />
             <Route path="/tools/domain-tester" element={<DomainTesterPage />} />
             <Route path="/tools/archetype-quiz" element={<ArchetypeQuizPage />} />
             <Route path="/tools/leaderboard" element={<LeaderboardPage />} />
+            <Route path="/tools/meme-gen" element={<MemeGeneratorPage />} />
+            
+            {/* Blueprint Suites routes - require WifHoodie NFT */}
+            <Route path="/merch-waitlist" element={<MerchWaitlist />} />
           </Route>
         </Routes>
       </Router>

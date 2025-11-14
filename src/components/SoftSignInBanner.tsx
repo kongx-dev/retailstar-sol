@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useWallet } from '@solana/wallet-adapter-react';
 
 interface SoftSignInBannerProps {
   title?: string;
@@ -18,16 +19,41 @@ export default function SoftSignInBanner({
 }: SoftSignInBannerProps) {
   const [isDismissed, setIsDismissed] = useState(false);
   const navigate = useNavigate();
+  const { connect, select, wallets, wallet, connecting } = useWallet();
 
   const handleDismiss = () => {
     setIsDismissed(true);
     onDismiss?.();
   };
 
-  const handleConnect = () => {
-    // For now, redirect to outerring for wallet connection
-    // In the future, this would trigger actual wallet connection
-    navigate('/outerring');
+  const handleConnect = async () => {
+    try {
+      // If no wallet is selected, try to select Phantom first
+      if (!wallet) {
+        const phantomWallet = wallets.find(w => w.adapter.name === 'Phantom');
+        const solflareWallet = wallets.find(w => w.adapter.name === 'Solflare');
+        
+        if (phantomWallet) {
+          select(phantomWallet.adapter.name);
+        } else if (solflareWallet) {
+          select(solflareWallet.adapter.name);
+        } else if (wallets.length > 0) {
+          select(wallets[0].adapter.name);
+        } else {
+          alert('No wallet extensions detected. Please install Phantom or Solflare wallet extension.');
+          return;
+        }
+        
+        await new Promise(resolve => setTimeout(resolve, 200));
+      }
+      
+      await connect();
+    } catch (error: any) {
+      console.error('Wallet connection error:', error);
+      if (!error?.message?.includes('User rejected') && !error?.message?.includes('User cancelled')) {
+        alert(`Failed to connect wallet: ${error?.message || 'Unknown error'}`);
+      }
+    }
   };
 
   if (isDismissed) {

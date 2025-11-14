@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
   <url>
     <loc>https://retailstar.xyz/</loc>
+  </url>
+  <url>
+    <loc>https://retailstar.xyz/app</loc>
   </url>
   <url>
     <loc>https://retailstar.xyz/catalog</loc>
@@ -20,6 +22,72 @@
     <loc>https://retailstar.xyz/directory</loc>
   </url>
   <url>
+    <loc>https://retailstar.xyz/wiki-directory</loc>
+  </url>
+  <url>
     <loc>https://retailstar.xyz/guide</loc>
+  </url>
+  <url>
+    <loc>https://retailstar.xyz/insights</loc>
+  </url>
+  <url>
+    <loc>https://retailstar.xyz/tools</loc>
+  </url>
+  <url>
+    <loc>https://retailstar.xyz/tools/domain-tester</loc>
+  </url>
+  <url>
+    <loc>https://retailstar.xyz/tools/archetype-quiz</loc>
+  </url>
+  <url>
+    <loc>https://retailstar.xyz/tools/leaderboard</loc>
+  </url>
+  <url>
+    <loc>https://retailstar.xyz/tools/meme-gen</loc>
+  </url>
+  <url>
+    <loc>https://retailstar.xyz/outerring</loc>
+  </url>
+  <url>
+    <loc>https://retailstar.xyz/terms</loc>
+  </url>
+  <url>
+    <loc>https://retailstar.xyz/privacy</loc>
+  </url>
+  <url>
+    <loc>https://retailstar.xyz/contact</loc>
+  </url>
+  <url>
+    <loc>https://retailstar.xyz/basement</loc>
+  </url>
+  <url>
+    <loc>https://retailstar.xyz/main-floor</loc>
+  </url>
+  <url>
+    <loc>https://retailstar.xyz/blueprint-suites</loc>
+  </url>
+  <url>
+    <loc>https://retailstar.xyz/rooftop-lounge</loc>
+  </url>
+  <url>
+    <loc>https://retailstar.xyz/lore</loc>
+  </url>
+  <url>
+    <loc>https://retailstar.xyz/retailpass</loc>
+  </url>
+  <url>
+    <loc>https://retailstar.xyz/tiers</loc>
+  </url>
+  <url>
+    <loc>https://retailstar.xyz/retail-tickets</loc>
+  </url>
+  <url>
+    <loc>https://retailstar.xyz/upgrade</loc>
+  </url>
+  <url>
+    <loc>https://retailstar.xyz/vote</loc>
+  </url>
+  <url>
+    <loc>https://retailstar.xyz/merch-waitlist</loc>
   </url>
 </urlset>

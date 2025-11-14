@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useGOATAgent } from '../hooks/useGOATAgent';
 import SEOHead from '../components/SEOHead';
+import { unlockMainFloor } from '../hooks/useFloorAccess';
 // @ts-ignore: PNG import for Vite
 import threeStoryView from '../assets/3storyview.png';
 
@@ -169,6 +170,64 @@ function CheckoutPage() {
 
           {success && <p className="text-green-500 mt-2">Success! NFT sent to {recipient}</p>}
           {error && <p className="text-red-500 mt-2">Error: {error}</p>}
+
+          {/* Floor Unlock Modal */}
+          {success && !showUnlockModal && (
+            <div className="mt-6">
+              <div className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white p-4 rounded-lg mb-4">
+                <h3 className="text-lg font-bold mb-2">🎉 Floor Unlocked!</h3>
+                <p className="text-sm">
+                  Your domain purchase has unlocked access to the Main Floor! 
+                  You can now access the cleaner mall experience with organized shops and premium features.
+                </p>
+              </div>
+              <div className="flex space-x-4">
+                <button
+                  onClick={() => {
+                    unlockMainFloor();
+                    setShowUnlockModal(true);
+                  }}
+                  className="bg-cyan-600 hover:bg-cyan-700 text-white px-6 py-2 rounded-lg font-semibold transition-colors"
+                >
+                  🪜 Ascend to Main Floor
+                </button>
+                <button
+                  onClick={() => setShowUnlockModal(true)}
+                  className="bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded-lg font-semibold transition-colors"
+                >
+                  Stay in Basement
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Unlock Modal */}
+          {showUnlockModal && (
+            <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+              <div className="bg-gray-900 border border-cyan-500 rounded-xl p-6 w-full max-w-md text-center">
+                <div className="text-4xl mb-4">🎉</div>
+                <h3 className="text-2xl font-bold text-cyan-400 mb-4">Floor Unlocked!</h3>
+                <p className="text-gray-300 mb-6">
+                  Your domain purchase has granted you access to the Main Floor. 
+                  Experience the full mall with organized shops, premium features, and exclusive content.
+                </p>
+                <div className="flex space-x-4">
+                  <button
+                    onClick={() => navigate('/main-floor')}
+                    className="bg-cyan-600 hover:bg-cyan-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+                  >
+                    🪜 Go to Main Floor
+                  </button>
+                  <button
+                    onClick={() => navigate('/basement')}
+                    className="bg-gray-600 hover:bg-gray-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+                  >
+                    Return to Basement
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
 
           {success && (
             <div className="mt-6">

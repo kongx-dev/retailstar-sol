@@ -18,6 +18,16 @@ export interface LocalUserAccess {
   status: string;
 }
 
+// New interface for updated schema
+export interface LocalRetailpunkRegistry {
+  wallet: string;
+  current_tier: string;
+  retail_tickets: number;
+  last_login: string;
+  discord_id?: string;
+  username?: string;
+}
+
 export interface LocalTicketLog {
   id: string;
   wallet_address: string;
@@ -26,6 +36,17 @@ export interface LocalTicketLog {
   access_target?: string;
   notes?: string;
   timestamp: string;
+}
+
+// New interface for updated ticket log schema
+export interface LocalRetailTicketLog {
+  id: string;
+  wallet: string;
+  action: string;
+  source: string;
+  amount: number;
+  notes?: string;
+  created_at: string;
 }
 
 // Get user access data from localStorage

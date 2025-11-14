@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Link, useSearchParams } from 'react-router-dom';
 import rsLogo from '../assets/rs-logo.png';
 import retailstarBody from '../assets/retailstar-body.png';
@@ -126,6 +127,15 @@ const MallDirectoryPage = () => {
 
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
+      <Helmet>
+        <title>Retailstar Mall Directory • All .sol Stores & Categories • Retailstar Mall</title>
+        <meta
+          name="description"
+          content="Browse the full cyberpunk mall directory to explore .sol domain storefronts and categories."
+        />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://retailstar.xyz/directory" />
+      </Helmet>
       <SEOHead
         target="retailstar.sol"
         pageType="directory"
@@ -197,19 +207,27 @@ const MallDirectoryPage = () => {
                 Retailstar Mall Directory
               </h1>
               
+              <section className="static-seo-content max-w-4xl mx-auto mb-6">
+                <p>
+                  The Retailstar Mall Directory provides a comprehensive map of all domains organized within the marketplace. This directory categorizes Solana domains by different sections and departments, making it easier for users to navigate the extensive collection. The page displays domains grouped by their function, theme, or location within the cyberpunk marketplace structure. Users can explore domains by category to find specific types of projects or services.
+                </p>
+                <p>
+                  The directory serves as a navigation tool for understanding how domains are organized across the Retailverse. Each category represents a different area of the marketplace, from meme domains to developer tools. The page helps users discover domains they might not find through direct search, revealing the full scope of what Retailstar Mall offers. This organizational system makes the Solana domain marketplace more accessible and easier to explore.
+                </p>
+              </section>
+              
               <p className="text-xl text-gray-300 mb-8 flicker max-w-3xl mx-auto leading-relaxed glow-green">
                 Navigate the digital corridors of the Retailverse
               </p>
               
-              {/* Welcome intro section */}
-              <div className="max-w-4xl mx-auto mb-8 p-6 bg-black/40 border border-green-500/30 rounded-xl">
-                <h2 className="text-2xl font-bold text-green-400 mb-4 text-center">
-                  Welcome to the Retailstar Mall Directory
-                </h2>
-                <p className="text-lg text-gray-300 leading-relaxed text-center">
-                  Explore the digital hallways of Retailstar Mall. This directory helps you discover meme shops, dev tools, and secret vaults scattered across our cyberpunk marketplace. 👀 <strong>Tip:</strong> Click any domain to learn more or enter its storefront. Some are hidden. Some are mythical. All are part of the ecosystem.
+              <section className="prose prose-invert mb-10 max-w-4xl mx-auto">
+                <p>
+                  The Retailstar Mall Directory is your complete guide to exploring .sol domains across our cyberpunk marketplace. This comprehensive map organizes every domain in the Retailverse by category, making it easy to discover meme shops, developer tools, and hidden vaults scattered throughout the Solana ecosystem. Whether you're a builder searching for the perfect domain name or a degen hunting for the next alpha, the directory reveals the full scope of what Retailstar Mall offers.
                 </p>
-              </div>
+                <p>
+                  Each category in the directory represents a different wing of our Web3 marketplace, from the neon-lit corridors of meme domains to the shadowy back alleys where developer tools hide. The Solana domains listed here aren't just addresses—they're nodes in a larger network that connects builders, degens, and creators across the Retailverse. Click any domain to learn its story, explore its storefront, or understand its place in the cyberpunk marketplace that defines Retailstar Mall.
+                </p>
+              </section>
 
               {/* Archetype Filter Indicator */}
               {archetypeFilter && (
@@ -338,13 +356,23 @@ const MallDirectoryPage = () => {
                 Browse All Domains
               </Link>
             </div>
+
+            {/* See Also Section */}
+            <section className="mt-16 border-t pt-8 text-sm opacity-80 max-w-4xl mx-auto">
+              <h3 className="font-medium mb-3">Explore More</h3>
+              <ul className="space-y-1">
+                <li><a href="/domains" className="text-sky-400 hover:underline">Domains</a></li>
+                <li><a href="/lore" className="text-sky-400 hover:underline">Lore</a></li>
+                <li><a href="/wiki/fudscience" className="text-sky-400 hover:underline">FUD Science</a></li>
+              </ul>
+            </section>
               </>
             )}
           </>
         )}
       </div>
 
-      <style jsx>{`
+      <style>{`
         .glitch-text {
           position: relative;
         }

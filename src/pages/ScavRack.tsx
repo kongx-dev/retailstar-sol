@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { useScavDomains } from '../hooks/useDomains';
 import ScavDomainCard from '../components/ScavDomainCard';
 import FilterControls from '../components/FilterControls';
@@ -85,6 +86,15 @@ function ScavRack() {
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col relative overflow-hidden">
+      <Helmet>
+        <title>Explore Solana Domains • Retailstar Mall</title>
+        <meta
+          name="description"
+          content="Discover curated .sol domains for builders and degens inside the cyberpunk Retailstar Mall."
+        />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://retailstar.xyz/domains" />
+      </Helmet>
       <SEOHead
         target="retailstar.sol"
         pageType="scavrack"
@@ -125,12 +135,31 @@ function ScavRack() {
         <h1 className="text-4xl md:text-6xl font-black mb-4 neon-green drop-shadow-neon">
           Scav Rack
         </h1>
+        
+        <section className="static-seo-content px-4 max-w-4xl mx-auto mb-6">
+          <p>
+            The Scav Rack page displays Retailstar Mall's collection of Solana domains available for purchase. This page serves as the main domain marketplace where users can browse and filter through various .sol domain listings. The page organizes domains by different attributes including listing status, featured properties, and build completion. Users can explore domains that range from basic PNG artwork to fully developed Web3 storefronts.
+              </p>
+              <p>
+                The Scav Rack represents the entry point for acquiring Solana domains within the Retailverse ecosystem. Visitors can filter domains based on specific criteria such as profile picture availability, vault status, and featured designations. The page provides tools for discovering domains that match different use cases, whether for meme projects, developer tools, or brand identities. This marketplace connects buyers with curated Solana domains that fit various needs in the Web3 space.
+              </p>
+            </section>
+        
         <p className="text-lg md:text-2xl text-gray-300 mb-2 max-w-2xl mx-auto">
           Low-barrier .sol domains with PNG-only artwork. Upgrade anytime to a full site build.
         </p>
         <p className="text-sm italic text-zinc-400 mb-8">
           You probably won&apos;t make it… but if you do, it started here.
         </p>
+        
+        <section className="prose prose-invert mb-10 px-4 max-w-4xl mx-auto">
+          <p>
+            The Scav Rack represents Retailstar Mall's curated collection of Solana domains, each handpicked to serve builders and degens across the Web3 landscape. These .sol domains aren't just digital assets—they're entry points into the cyberpunk marketplace that defines the Retailverse. Builders use them to establish their presence in the Solana ecosystem, while degens discover hidden gems that reflect the chaotic energy of the crypto space.
+          </p>
+          <p>
+            Retailstar Mall curates these domains because we understand that every .sol domain tells a story. Whether you're launching a meme project, building developer tools, or creating a brand identity, the right domain becomes your storefront in the Web3 world. Our marketplace bridges the gap between the underground energy of Solana's underlayer and the polished storefronts that define successful Web3 projects. Each domain here has been selected for its potential to become something greater in the Solana ecosystem.
+          </p>
+        </section>
         
         {/* Filter Controls */}
         <FilterControls 
@@ -200,6 +229,16 @@ function ScavRack() {
             ))}
           </div>
         )}
+      </section>
+
+      {/* See Also Section */}
+      <section className="mt-16 border-t pt-8 text-sm opacity-80 px-4">
+        <h3 className="font-medium mb-3">Explore More</h3>
+        <ul className="space-y-1">
+          <li><a href="/directory" className="text-sky-400 hover:underline">Directory</a></li>
+          <li><a href="/lore" className="text-sky-400 hover:underline">Lore</a></li>
+          <li><a href="/retail-tickets" className="text-sky-400 hover:underline">Retail Tickets</a></li>
+        </ul>
       </section>
 
       {/* CSS for animations */}

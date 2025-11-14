@@ -5,6 +5,9 @@ import RetailrunnerWidget from './RetailrunnerWidget';
 
 export default function MallLayout() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  
+  // For demo purposes, use a mock wallet address
+  const walletAddress = "7vswd...fE9s"; // Mock wallet - replace with actual wallet connection later
 
   return (
     <div className="flex min-h-screen bg-[#11151c] text-white font-sans">
@@ -22,7 +25,7 @@ export default function MallLayout() {
       </main>
 
       {/* Floating Retailrunner Widget */}
-      <RetailrunnerWidget />
+      <RetailrunnerWidget wallet={walletAddress} />
     </div>
   );
 } 

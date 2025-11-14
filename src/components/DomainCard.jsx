@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./domain-card.css";
 import TierInfoModal from './TierInfoModal';
+import StatusBadges from './ui/StatusBadges';
 
 /**
  * @typedef {Object} DomainCardProps
@@ -33,7 +34,11 @@ function DomainCard({
   lore = false,
   className = '',
   lockBadge = false,
-  tier = 'quick-snag' // Default tier
+  tier = 'quick-snag', // Default tier
+  featured = false,
+  has_build = false,
+  has_pfp = false,
+  listed = false
 }) {
   const [showModal, setShowModal] = useState(false);
 
@@ -69,6 +74,19 @@ function DomainCard({
 
   return (
     <div className={`domain-card ${rarityClass} ${className} ${tierStyles[tier]} rounded-xl border-2 p-4 shadow-lg`} style={{position: 'relative'}}>
+      {/* Status Badges */}
+      <StatusBadges 
+        domain={{ 
+          featured, 
+          vaulted, 
+          listed, 
+          has_build, 
+          has_pfp,
+          category: tier === 'quick-snag' ? 'scav' : 'marketplace'
+        }} 
+        showCategory={true} 
+      />
+      
       {/* Tier Label (clickable) */}
       <div 
         className="text-sm font-bold tracking-wide mb-2 cursor-pointer hover:underline transition-colors"

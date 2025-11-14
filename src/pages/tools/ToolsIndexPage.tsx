@@ -80,6 +80,30 @@ const ToolsIndexPage: React.FC = () => {
               </Link>
             </div>
 
+            {/* Meme Generator */}
+            <div className="bg-black/40 border border-pink-500/30 rounded-lg p-6 hover:border-pink-400/50 transition-colors">
+              <div className="flex items-center mb-4">
+                <div className="w-12 h-12 bg-pink-600 rounded-lg flex items-center justify-center mr-4">
+                  <span className="text-2xl">🧠</span>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-white">Meme Domain Generator</h3>
+                  <span className="text-sm text-green-400 bg-green-900/20 px-2 py-1 rounded-full">
+                    Live
+                  </span>
+                </div>
+              </div>
+              <p className="text-gray-300 mb-4">
+                Spin up a viral .sol on demand. Generate creative meme domain names with AI-powered combinations and rarity tags.
+              </p>
+              <Link 
+                to="/tools/meme-gen"
+                className="inline-flex items-center bg-pink-600 hover:bg-pink-700 text-white px-4 py-2 rounded-lg font-semibold transition-colors"
+              >
+                Generate Domains →
+              </Link>
+            </div>
+
             {/* Leaderboard */}
             <div className="bg-black/40 border border-green-500/30 rounded-lg p-6 hover:border-green-400/50 transition-colors">
               <div className="flex items-center mb-4">

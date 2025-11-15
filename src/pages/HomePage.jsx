@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { Link } from 'react-router-dom';
 import SEOHead from '../components/SEOHead';
-import MythicRotator from '../components/MythicRotator';
+const MythicRotator = lazy(() => import('../components/MythicRotator'));
 import PathFork from '../components/PathFork';
 import Footer from '../components/Footer';
+import SeoContentBlock from '../components/SeoContentBlock';
 import rsLogo from '../assets/rs-logo.png';
 import retailstarBody from '../assets/retailstar-body.png';
 import jpegdealerImage from '../assets/jpegdealer.png';
@@ -49,9 +50,10 @@ const HomePage = () => {
         target="retailstar.sol"
         pageType="main"
         customTitle="Retailstar – Meme Luxury Domain Outlet | Buy .SOL Meme Domains"
-        customDescription="Retailstar: Your Meme-Luxury Domain Outlet. Because your meme deserves a mansion, not a motel. Explore premium .sol domains with lore, rarity, and high-conviction builds."
+        customDescription="Retailstar Mall is a cyberpunk Solana domain marketplace offering meme sites, dev tools, and ready-to-use .sol builds."
         customKeywords="meme domains, luxury domains, .sol names, NFT websites, domain lore, Solana domains, SNS"
         imageUrl={siteUrl + '/assets/rs-logo.png'}
+        canonicalUrl="https://retailstar.xyz/"
       />
       {/* LLM summary for HomePage */}
       {/*
@@ -67,6 +69,8 @@ const HomePage = () => {
 
       {/* Main content (z-10) */}
       <div className="relative z-10">
+        {/* SEO H1 - Hidden but accessible */}
+        <h1 className="sr-only">Retailstar Mall — Solana Domain Marketplace</h1>
         {/* Hero Section */}
         <section className="relative pt-20 pb-16 px-4" data-persona="all" data-meta="hero">
           <div className="max-w-6xl mx-auto text-center">
@@ -83,9 +87,9 @@ const HomePage = () => {
             </div>
             
             {/* Title */}
-            <h1 className="text-5xl md:text-7xl font-black mb-6 neon-pulse solana-gradient flicker-solana" data-persona="all" data-meta="site-title">
+            <h2 className="text-5xl md:text-7xl font-black mb-6 neon-pulse solana-gradient flicker-solana" data-persona="all" data-meta="site-title">
               Retailstar: Your Meme-Luxury Domain Outlet
-            </h1>
+            </h2>
             
             {/* Tagline */}
             <p className="text-xl md:text-2xl text-gray-300 mb-8 flicker max-w-3xl mx-auto leading-relaxed glow-blue" data-persona="all" data-meta="tagline">
@@ -121,7 +125,7 @@ const HomePage = () => {
               <span className="text-pink-400">[</span> Featured Nodes <span className="text-pink-400">]</span>
             </h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {featuredNodes.map((node, idx) => (
                 <Link 
                   key={node.name} 
@@ -150,7 +154,9 @@ const HomePage = () => {
         {/* Mythic Domains Section */}
         <section className="px-4 py-16" data-persona="High Rollers, Collectors" data-meta="mythic-nodes">
           <div className="max-w-6xl mx-auto">
-            <MythicRotator />
+            <Suspense fallback={null}>
+              <MythicRotator />
+            </Suspense>
           </div>
         </section>
 
@@ -166,6 +172,9 @@ const HomePage = () => {
             </p>
           </div>
         </section>
+
+        {/* SEO Content Block */}
+        <SeoContentBlock />
       </div>
       
       <Footer />

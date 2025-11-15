@@ -61,6 +61,17 @@ const Footer = () => {
             © 2025 Retailstar. All rights reserved.
           </div>
         </div>
+        
+        <div className="mt-6">
+          <h3 className="text-sm font-semibold text-gray-400">Social</h3>
+          <ul className="space-y-2 text-sm">
+            <li><a href="https://x.com/retailstarsol" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors">X (Twitter)</a></li>
+            <li><a href="https://x.com/retailrunner" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors">Retailrunner Bot</a></li>
+            <li><a href="https://instagram.com/retailstar.sol" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors">Instagram</a></li>
+            {/* <li><a href="#" target="_blank" rel="noopener noreferrer">YouTube (coming soon)</a></li> */}
+            {/* <li><a href="#" target="_blank" rel="noopener noreferrer">LinkedIn (coming soon)</a></li> */}
+          </ul>
+        </div>
       </div>
     </footer>
   );

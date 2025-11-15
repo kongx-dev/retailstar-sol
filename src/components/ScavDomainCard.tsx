@@ -320,7 +320,7 @@ function ScavDomainCard({ domain, onSlotMachineToggle }: {
       }
     }
     return (
-      <div className={`bg-black neon-border rounded-2xl p-4 flex flex-col items-center shadow-lg animate-pulse border-2 border-orange-400 relative hover:rotate-1 transition-all duration-200 ${tierStyles[tier]}`}>
+      <div className={`bg-black neon-border rounded-xl p-4 md:p-6 text-base md:text-lg flex flex-col items-center shadow-lg animate-pulse border-2 border-orange-400 relative hover:rotate-1 transition-all duration-200 ${tierStyles[tier]}`}>
         <StatusBadges domain={domain} showCategory={true} />
         <div className="absolute top-2 right-2 bg-orange-500 text-white text-xs px-2 py-1 rounded-full animate-glow font-bold">
           🔧 Fixer Upgrade Incoming
@@ -347,7 +347,7 @@ function ScavDomainCard({ domain, onSlotMachineToggle }: {
           href={domain.buyLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="btn-glow w-full text-center block mb-2 animate-pulse bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-lg hover:scale-105 transition-all"
+          className="btn-glow w-full text-center block mb-2 animate-pulse bg-orange-500 hover:bg-orange-600 text-white font-bold px-4 py-3 text-base rounded-lg hover:scale-105 transition-all"
         >
           Claim Before Build
         </a>
@@ -360,7 +360,7 @@ function ScavDomainCard({ domain, onSlotMachineToggle }: {
   
   return (
     <>
-      <div className={`bg-black neon-border rounded-2xl p-4 flex flex-col items-center shadow-lg transition-all hover:drop-shadow-neon hover:rotate-1 hover:scale-105 duration-200 group ${tierStyles[tier]}`}>
+      <div className={`bg-black neon-border rounded-xl p-4 md:p-6 text-base md:text-lg flex flex-col items-center shadow-lg transition-all hover:drop-shadow-neon hover:rotate-1 hover:scale-105 duration-200 group ${tierStyles[tier]}`}>
         <StatusBadges domain={domain} showCategory={true} />
         <div className="text-sm font-bold tracking-wide mb-2">
           {tierLabels[tier]}
@@ -381,7 +381,7 @@ function ScavDomainCard({ domain, onSlotMachineToggle }: {
         </p>
         <button
           onClick={handleBuyClick}
-          className="btn-glow w-full text-center block mb-2 animate-pulse bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-4 rounded-lg hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-green-500/25"
+          className="btn-glow w-full text-center block mb-2 animate-pulse bg-green-600 hover:bg-green-500 text-white font-bold px-4 py-3 text-base rounded-lg hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-green-500/25"
         >
           🎰 Buy Now
         </button>

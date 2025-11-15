@@ -6,7 +6,7 @@ import CountdownTimer from "./CountdownTimer";
 export default function DomainCard({ domain, faded, isVaulted, onExpire, onPurchase, onView }) {
   return (
     <Card
-      className={`relative p-4 bg-zinc-900 rounded-2xl shadow-xl border border-zinc-700 transition-all duration-700 neon-panel animate-glow-pulse ${
+      className={`relative p-4 md:p-6 text-base md:text-lg bg-zinc-900 rounded-xl shadow-xl border border-zinc-700 transition-all duration-700 neon-panel animate-glow-pulse ${
         faded ? "opacity-0 scale-90" : "hover:scale-105"
       } ${
         domain.tier === "Epic"
@@ -30,7 +30,7 @@ export default function DomainCard({ domain, faded, isVaulted, onExpire, onPurch
           )}
         </div>
         <Button
-          className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-pink-500 hover:to-yellow-500"
+          className="w-full md:w-auto px-4 py-3 text-base bg-gradient-to-r from-purple-500 to-pink-500 hover:from-pink-500 hover:to-yellow-500"
           onClick={() => (isVaulted ? onPurchase(domain.name) : onView(domain.name))}
         >
           {isVaulted ? "Buy from Vault" : "View Details"}

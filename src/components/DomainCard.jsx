@@ -73,7 +73,7 @@ function DomainCard({
   };
 
   return (
-    <div className={`domain-card ${rarityClass} ${className} ${tierStyles[tier]} rounded-xl border-2 p-4 shadow-lg`} style={{position: 'relative'}}>
+    <div className={`domain-card ${rarityClass} ${className} ${tierStyles[tier]} rounded-xl border-2 p-4 md:p-6 text-base md:text-lg shadow-lg`} style={{position: 'relative'}}>
       {/* Status Badges */}
       <StatusBadges 
         domain={{ 
@@ -112,7 +112,7 @@ function DomainCard({
         <>
           <p className="mt-2 text-xs italic text-blue-200">Upgradeable to full Retailstar build</p>
           <button 
-            className="mt-3 text-blue-300 underline text-sm hover:text-blue-200 transition-colors" 
+            className="mt-3 text-blue-300 underline text-sm hover:text-blue-200 transition-colors px-4 py-3 text-base w-full md:w-auto" 
             onClick={() => alert('Upgrade flow coming soon!')}
           >
             Upgrade to Vaulted Premium
@@ -155,7 +155,7 @@ function DomainCard({
       {forSale && (
         <a
           href={`https://x.com/messages/compose?recipient_id=1689270192859781120`}
-          className="buy-button mt-3"
+          className="buy-button mt-3 px-4 py-3 text-base w-full md:w-auto"
           target="_blank"
           rel="noopener noreferrer"
         >

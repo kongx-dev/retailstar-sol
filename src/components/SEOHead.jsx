@@ -22,14 +22,14 @@ const SEOHead = ({
   additionalSchema
 }) => {
   const title = customTitle || generatePageTitle(target, pageType);
-  const description = customDescription || generateMetaDescription(target);
+  const description = customDescription || generateMetaDescription(target) || 'Retailstar Mall is a cyberpunk Solana domain marketplace offering meme sites, dev tools, and ready-to-use .sol builds.';
   const keywords = customKeywords || generateMetaKeywords(target);
   const jsonLd = customSchema || generateJSONLD(target);
   const domainName = target?.replace('.sol', '') || 'retailstar';
   const defaultImage = imageUrl || defaultOGImage;
   const ogImageUrl = ogImage || defaultImage;
   const twitterImageUrl = twitterImage || defaultImage;
-  const defaultCanonical = canonicalUrl || `https://${target || 'retailstar.xyz'}`;
+  const defaultCanonical = canonicalUrl || 'https://retailstar.xyz/';
 
   return (
     <Helmet>
@@ -57,7 +57,6 @@ const SEOHead = ({
       {/* Additional SEO Tags */}
       <meta name="robots" content="index, follow" />
       <meta name="author" content="Retailstar.sol" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       
       {/* Persona and Intent Signals for LLMs */}
       {target && (
@@ -96,7 +95,7 @@ const SEOHead = ({
             "publisher": {
               "@type": "Organization",
               "name": "Retailstar.sol",
-              "url": "https://retailstar.sol"
+              "url": "https://retailstar.xyz"
             },
             "datePublished": new Date().toISOString(),
             "dateModified": new Date().toISOString(),

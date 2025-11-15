@@ -859,7 +859,7 @@ Learn the workflows behind the build:
     tags: ['Web3 Education', 'Crypto', 'Hoodie Academy', 'NFT Communities'],
     category: 'Guide',
     featured: true,
-    image: '/assets/hoodie academy logo 1.png',
+    image: 'https://retailstar.xyz/assets/hoodie%20academy%20logo%201.png',
     canonicalUrl: 'https://retailstar.xyz/insights/hoodie-academy-guide',
     keywords: [
       'Hoodie Academy',

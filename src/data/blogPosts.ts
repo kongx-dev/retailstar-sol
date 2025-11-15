@@ -841,15 +841,15 @@ This is the perfect moment to publicly highlight what you've built.
 
 Want to see Hoodie Academy for yourself?
 
-Visit: https://hoodieacademy.com
+Visit: [Hoodie Academy](https://hoodieacademy.com)
 
 Curious how the ecosystem connects?
 
-Explore Retailstar: https://retailstar.xyz
+Explore [Retailstar](https://retailstar.xyz)
 
 Learn the workflows behind the build:
 
-https://lopezproductions.ai/playbook`,
+[Lopez Productions Playbook](https://lopezproductions.ai/playbook)`,
     author: {
       name: 'Retailstar Team',
       url: 'https://retailstar.xyz'

@@ -612,6 +612,281 @@ If ENS domains are LinkedIn…
       articleType: 'Article',
       mainEntity: 'Meme Domains'
     }
+  },
+  {
+    slug: 'hoodie-academy-guide',
+    title: 'Inside Hoodie Academy — The Web3 Classroom Built for Creators, Traders, and Builders',
+    description: 'A full breakdown of Hoodie Academy: squads, cipher gates, courses, and how this gamified Web3 education system works from the inside.',
+    content: `# Inside Hoodie Academy — The Web3 Classroom Built for Creators, Traders, and Builders
+
+Most Web3 education feels the same:
+
+Threads that repeat the same ideas
+
+Courses that cost too much
+
+"Alpha" that updates once a month
+
+Overcomplicated tutorials that assume you're a senior dev
+
+Hoodie Academy was built to fix all of that.
+
+It's a gamified Web3 learning system created for people who want to learn crypto, trading, automation, and AI—in a way that actually feels fun, structured, and community-driven.
+
+And since Retailstar.xyz has started sending traffic back to Hoodie Academy (and vice-versa), it's time to break down exactly what the Academy actually is, how it works, and why it's designed the way it is.
+
+## 1. What Is Hoodie Academy?
+
+Hoodie Academy is a squad-based learning ecosystem built around the WifHoodie community.
+
+Think of it as:
+
+A Web3 boot camp + gaming progression system + creative studio + trading dojo… all in one place.
+
+Every student (Hoodie holder) unlocks:
+
+Core courses on AI, trading, Web3 tools, automation, and security
+
+Squad-specific tracks for creators, analysts, editors, and researchers
+
+Weekly assignments to keep the community aligned
+
+Cipher-gated content, meaning only holders with the weekly PIN can access the next module
+
+A unified dashboard that tracks progress and unlocks new paths
+
+Nothing is passive.
+
+Everything is earned.
+
+## 2. How Hoodie Academy Works (Simple Breakdown)
+
+🎓 The Squads
+
+Every member falls into one of the following squads:
+
+Creators — content makers, storytellers, editors
+
+Decoders — researchers, analysts, technical problem solvers
+
+Speakers — hosts, narrators, community voices, X Spaces
+
+Raiders — hunters, scouts, airdrop chasers, opportunity finders
+
+Rangers — long-term strategists and special-ops roles
+
+Each squad gets its own coursework, tasks, and assignments that tie into the entire Academy ecosystem.
+
+🔐 The Cipher Gate
+
+Every week, the site generates a new rotating 4-digit cipher code.
+
+You can't open the next course without it.
+
+Why?
+
+Because it forces:
+
+Community participation
+
+Weekly momentum
+
+Accountability
+
+Shared energy
+
+When the squad leaders post the weekly cipher → class begins.
+
+📚 The Course System
+
+Every course is built modularly:
+
+100-level → beginner (open to everyone)
+
+200-level → squad-specific
+
+300-level → advanced strategies
+
+Final lessons → special "Cinema Alpha" modules
+
+Point Break
+
+White Men Can't Jump
+
+Moneyball
+
+Uncut Gems
+
+The courses mix education with narrative and entertainment—making the Academy feel more like a universe than a curriculum.
+
+## 3. Why Hoodie Academy Works
+
+✔ It's built for busy people
+
+No hour-long videos.
+
+No bloated lessons.
+
+Everything is short, actionable, and practical.
+
+✔ It rewards consistency
+
+Your progress unlocks new squads, new lessons, new tools, and eventually… Kimono DAO access.
+
+✔ It merges learning with culture
+
+Every lesson uses stories, films, memes, and Web3 moments to teach concepts from both sides of the brain.
+
+✔ It creates an identity
+
+Most Web3 courses feel corporate.
+
+Hoodie Academy feels like a guild.
+
+## 4. The Relationship Between Hoodie Academy and Retailstar.xyz
+
+If Hoodie Academy is the school, then Retailstar is the city it lives inside.
+
+You'll notice the loop:
+
+Hoodie Academy links students into key Retailstar pages
+
+Retailstar backlinks form a path back into Hoodie Academy
+
+The two sites strengthen each other's SEO signals
+
+Both live inside the same broader universe
+
+As Retailstar grows, Hoodie Academy benefits from the traffic.
+
+As Hoodie Academy grows, Retailstar gains domain awareness and culture.
+
+This is intentional.
+
+You're building a cross-site Web3 ecosystem that looks and feels like a fictional world—but functions like a real inbound funnel.
+
+## 5. What's Coming Next
+
+Based on the current roadmap inside the Academy:
+
+More 100-level courses (AI tools, airdrop hunting, Notion systems)
+
+Weekly squad tasks posted publicly
+
+Collaborative courses (Galactic Gecko series, community co-authored modules)
+
+A unified dashboard with announcements, homework, and progress
+
+The eventual Kimono DAO bridge
+
+And eventually, the Academy becomes more than a school:
+
+It becomes the onboarding portal for the entire WifHoodie ecosystem.
+
+## 6. How to Join Hoodie Academy
+
+Anyone can read the public previews.
+
+But to unlock the full platform:
+
+Own a Hoodie NFT
+
+Get the weekly cipher code
+
+Log in → start your squad track
+
+Complete assignments to unlock more paths
+
+The doors open every week.
+
+The cipher resets.
+
+Class begins.
+
+## A Final Whisper from the Mall
+
+Retailstar Mall is evolving fast.
+
+If you're a WifHoodie holder, you might notice certain locked doors, dim hallways, and unused terminals scattered around the mall. Those aren't just decoration.
+
+A new wing is coming: HoodieHQ — a dedicated space for the Hoodies inside the Retailstar universe.
+
+Hoodie Academy students will discover the doorway first.
+
+And yes… perks are involved.
+
+That's all that can be said (for now).
+
+## Final Thoughts
+
+Hoodie Academy isn't trying to be another Web3 course.
+
+It's trying to be the first real Web3 classroom:
+
+Built with lore
+
+Built with community
+
+Built with progression
+
+Built with gamified learning
+
+Built with culture
+
+And now that the backlink network between LopezProductions.ai ↔ Hoodie Academy ↔ Retailstar.xyz is complete…
+
+This is the perfect moment to publicly highlight what you've built.
+
+## CTA Block
+
+Want to see Hoodie Academy for yourself?
+
+Visit: https://hoodieacademy.com
+
+Curious how the ecosystem connects?
+
+Explore Retailstar: https://retailstar.xyz
+
+Learn the workflows behind the build:
+
+https://lopezproductions.ai/playbook`,
+    author: {
+      name: 'Retailstar Team',
+      url: 'https://retailstar.xyz'
+    },
+    publishedAt: '2025-11-15T12:00:00Z',
+    updatedAt: '2025-11-15T12:00:00Z',
+    tags: ['Web3 Education', 'Crypto', 'Hoodie Academy', 'NFT Communities'],
+    category: 'Guide',
+    featured: true,
+    image: '/assets/hoodie academy logo 1.png',
+    canonicalUrl: 'https://retailstar.xyz/insights/hoodie-academy-guide',
+    keywords: [
+      'Hoodie Academy',
+      'Hoodie Academy course',
+      'Hoodie Academy Web3',
+      'Web3 education',
+      'gamified learning Web3',
+      'crypto education',
+      'NFT community learning',
+      'WifHoodie Academy',
+      'Web3 boot camp',
+      'crypto trading courses',
+      'Web3 automation courses',
+      'Hoodie Academy squads',
+      'cipher gate Web3',
+      'Web3 classroom',
+      'Hoodie Academy guide',
+      'Web3 learning platform',
+      'NFT holder education',
+      'Solana education',
+      'Web3 community courses',
+      'Hoodie Academy review'
+    ],
+    schema: {
+      articleType: 'Article',
+      mainEntity: 'Hoodie Academy'
+    }
   }
 ];
 

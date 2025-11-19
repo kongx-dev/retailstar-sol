@@ -376,3 +376,16 @@ body {
   50% { opacity: 0.75; }
   55% { opacity: 0.9; }
 }
+
+/* Flickering cursor for terminal input */
+@keyframes cursor-blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.cursor-flicker::after {
+  content: '|';
+  animation: cursor-blink 1s infinite;
+  color: #fbbf24;
+  margin-left: 2px;
+}

@@ -32,6 +32,30 @@ const ToolsIndexPage: React.FC = () => {
 
           {/* Tools Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            {/* Appraisal Tool */}
+            <div className="bg-black/40 border border-amber-500/30 rounded-lg p-6 hover:border-amber-400/50 transition-colors">
+              <div className="flex items-center mb-4">
+                <div className="w-12 h-12 bg-amber-600 rounded-lg flex items-center justify-center mr-4">
+                  <span className="text-2xl">⚖️</span>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-white">Domain Appraisal</h3>
+                  <span className="text-sm text-green-400 bg-green-900/20 px-2 py-1 rounded-full">
+                    Live
+                  </span>
+                </div>
+              </div>
+              <p className="text-gray-300 mb-4">
+                Get instant rarity breakdown, value estimates, and meme scores for any .sol domain. Appraised by Retailrunner.
+              </p>
+              <Link 
+                to="/tools/appraisal"
+                className="inline-flex items-center bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg font-semibold transition-colors"
+              >
+                Appraise Domain →
+              </Link>
+            </div>
+
             {/* Domain Tester */}
             <div className="bg-black/40 border border-cyan-500/30 rounded-lg p-6 hover:border-cyan-400/50 transition-colors">
               <div className="flex items-center mb-4">

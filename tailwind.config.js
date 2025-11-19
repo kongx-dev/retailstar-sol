@@ -7,6 +7,8 @@ export default {
         neonBlue: "#60a5fa",
         darkBg: "#0f0f1a",
         'neon-green': '#22c55e',
+        neonAmber: "#fbbf24",
+        neonGold: "#f59e0b",
       },
       dropShadow: {
         neon: '0 0 0.3rem #22c55e',
@@ -22,6 +24,7 @@ export default {
         'glow': 'glow-pulse 1.2s ease-in-out infinite',
         'firefly': 'firefly 4s ease-in-out infinite',
         'typewriter': 'typewriter 3s steps(40) 1s forwards',
+        'cursor-blink': 'cursor-blink 1s infinite',
       },
       keyframes: {
         flicker: {
@@ -72,6 +75,10 @@ export default {
         'typewriter': {
           '0%': { width: '0' },
           '100%': { width: '100%' },
+        },
+        'cursor-blink': {
+          '0%, 50%': { opacity: '1' },
+          '51%, 100%': { opacity: '0' },
         },
       },
     },

@@ -6,6 +6,7 @@ import VaultPage from './pages/VaultPage';
 import WikiPage from './pages/WikiPage';
 import WikiDirectoryPage from './pages/WikiDirectoryPage';
 import MallDirectoryPage from './pages/MallDirectoryPage';
+import DirectoryDepartmentPage from './pages/DirectoryDepartmentPage';
 import HomePage from './pages/HomePage';
 import UpgradePage from './pages/UpgradePage';
 import VotePage from './pages/VotePage';
@@ -32,6 +33,7 @@ import DomainTesterPage from './pages/tools/DomainTesterPage';
 import ArchetypeQuizPage from './pages/tools/ArchetypeQuizPage';
 import LeaderboardPage from './pages/tools/LeaderboardPage';
 import MemeGeneratorPage from './pages/tools/MemeGeneratorPage';
+import AppraisalTool from './pages/tools/AppraisalTool';
 import { StatusLight } from './components/StatusLight';
 import { checkForEasterEggs } from './utils/retailrunnerPersonality';
 import MallLayout from './components/MallLayout';
@@ -42,6 +44,22 @@ import BasementPage from './pages/floors/BasementPage';
 import MainFloorPage from './pages/floors/MainFloorPage';
 import BlueprintSuitesPage from './pages/floors/BlueprintSuitesPage';
 import RooftopLoungePage from './pages/floors/RooftopLoungePage';
+// Collection Pages
+import MemeSolPage from './pages/collections/MemeSolPage';
+import CyberpunkSolPage from './pages/collections/CyberpunkSolPage';
+import BrandReadySolPage from './pages/collections/BrandReadySolPage';
+import PremiumVaultPage from './pages/collections/PremiumVaultPage';
+import ShortSolPage from './pages/collections/ShortSolPage';
+import EmojiSolPage from './pages/collections/EmojiSolPage';
+import AiTechPage from './pages/collections/AiTechPage';
+import DefiPage from './pages/collections/DefiPage';
+import GamingPage from './pages/collections/GamingPage';
+import DegenPage from './pages/collections/DegenPage';
+import DaoPage from './pages/collections/DaoPage';
+import CreatorPage from './pages/collections/CreatorPage';
+import AestheticPage from './pages/collections/AestheticPage';
+import LoreCollectionPage from './pages/collections/LorePage';
+import ScavDropPage from './pages/collections/ScavDropPage';
 // import AudioZone from './components/AudioZone';
 // import AudioToggle from './components/AudioToggle';
 
@@ -115,6 +133,7 @@ function App() {
             {/* Main Floor routes - require domain purchase */}
             <Route path="/domains" element={<ScavRack />} />
             <Route path="/directory" element={<MallDirectoryPage />} />
+            <Route path="/directory/dept/:deptSlug" element={<DirectoryDepartmentPage />} />
             <Route path="/wiki-directory" element={<WikiDirectoryPage />} />
             <Route path="/guide" element={<GuidePage />} />
             <Route path="/wiki/:slug" element={<WikiPage />} />
@@ -133,9 +152,27 @@ function App() {
             <Route path="/tools/archetype-quiz" element={<ArchetypeQuizPage />} />
             <Route path="/tools/leaderboard" element={<LeaderboardPage />} />
             <Route path="/tools/meme-gen" element={<MemeGeneratorPage />} />
+            <Route path="/tools/appraisal" element={<AppraisalTool />} />
             
             {/* Blueprint Suites routes - require WifHoodie NFT */}
             <Route path="/merch-waitlist" element={<MerchWaitlist />} />
+            
+            {/* Collection Pages */}
+            <Route path="/meme-sol-domains" element={<MemeSolPage />} />
+            <Route path="/cyberpunk-sol-domains" element={<CyberpunkSolPage />} />
+            <Route path="/brand-ready-sol-domains" element={<BrandReadySolPage />} />
+            <Route path="/premium-vault" element={<PremiumVaultPage />} />
+            <Route path="/short-sol-domains" element={<ShortSolPage />} />
+            <Route path="/emoji-sol-domains" element={<EmojiSolPage />} />
+            <Route path="/ai-tech-domains" element={<AiTechPage />} />
+            <Route path="/defi-domains" element={<DefiPage />} />
+            <Route path="/gaming-domains" element={<GamingPage />} />
+            <Route path="/degen-domains" element={<DegenPage />} />
+            <Route path="/dao-domains" element={<DaoPage />} />
+            <Route path="/creator-domains" element={<CreatorPage />} />
+            <Route path="/aesthetic-domains" element={<AestheticPage />} />
+            <Route path="/lore-domains" element={<LoreCollectionPage />} />
+            <Route path="/scav-drop" element={<ScavDropPage />} />
           </Route>
         </Routes>
       </Router>

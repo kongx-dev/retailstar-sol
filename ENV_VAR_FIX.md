@@ -104,3 +104,10 @@ After deployment, check the browser console:
 - App will run in fallback mode with static data
 - Check console for warnings about missing Supabase
 
+
+
+
+
+
+
+

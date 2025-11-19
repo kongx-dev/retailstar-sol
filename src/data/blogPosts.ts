@@ -1116,8 +1116,8 @@ Your identity deserves something cooler than a registry page.
 
 Welcome to the future.`,
     author: {
-      name: 'Reuben Lopez',
-      url: 'https://retailstar.xyz'
+      name: 'KongX @kongnificent_',
+      url: 'https://x.com/kongnificent_'
     },
     publishedAt: '2025-11-18T12:00:00Z',
     updatedAt: '2025-11-18T12:00:00Z',

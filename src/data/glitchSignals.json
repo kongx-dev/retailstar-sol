@@ -1,0 +1,51 @@
+[
+  {
+    "dept": ["security-wing", "tech-infrastructure"],
+    "text": "GLITCH SIGNAL: Node isolation event detected in sublevel P1. Artifact signature unidentified."
+  },
+  {
+    "dept": ["meme-arcade", "wildcard-deals"],
+    "text": "INTERCEPT: Viral propagation pattern detected. Origin point: unknown. Containment protocol: failed."
+  },
+  {
+    "dept": ["ai-agents", "tech-infrastructure"],
+    "text": "TRANSMISSION: Agent swarm activity spike. Multiple autonomous nodes reporting anomalous behavior."
+  },
+  {
+    "dept": ["security-wing", "alpha-labs"],
+    "text": "SIGNAL LEAK: Risk assessment protocols bypassed. Tactical intelligence suggests internal breach."
+  },
+  {
+    "dept": ["lore-worldbuilding", "artifacts-gallery"],
+    "text": "ARCHIVE ACCESS: Mythic artifact database queried. Unauthorized access attempt logged."
+  },
+  {
+    "dept": ["founders-row", "marketing-growth"],
+    "text": "DATA STREAM: Cap table modifications detected. Investor signal patterns analyzed."
+  },
+  {
+    "dept": ["gamer-zone", "audio-media"],
+    "text": "BROADCAST INTERCEPT: LAN party frequency detected. Stream overlay anomalies reported."
+  },
+  {
+    "dept": ["creator-tools", "social-identity"],
+    "text": "IDENTITY SCAN: Profile modification patterns detected. Cross-platform link verification failed."
+  },
+  {
+    "dept": ["cyber-markets", "wildcard-deals"],
+    "text": "TRANSACTION LOG: Checkout button anomalies. Cart abandonment rate: 99.7%. Investigating."
+  },
+  {
+    "dept": ["alpha-labs", "marketing-growth"],
+    "text": "ANALYTICS BREACH: Backtest data compromised. Signal room access logs show unauthorized entry."
+  },
+  {
+    "dept": ["tech-infrastructure", "security-wing"],
+    "text": "SYSTEM ALERT: RPC endpoint degradation. Node runner reports suggest coordinated attack."
+  },
+  {
+    "dept": ["artifacts-gallery", "lore-worldbuilding"],
+    "text": "VAULT ACCESS: Relic display plinth tampered. Museum-grade security protocols triggered."
+  }
+]
+

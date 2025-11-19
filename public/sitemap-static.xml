@@ -2,92 +2,74 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://retailstar.xyz/</loc>
-  </url>
-  <url>
-    <loc>https://retailstar.xyz/app</loc>
-  </url>
-  <url>
-    <loc>https://retailstar.xyz/catalog</loc>
-  </url>
-  <url>
-    <loc>https://retailstar.xyz/marketplace</loc>
-  </url>
-  <url>
-    <loc>https://retailstar.xyz/scavrack</loc>
-  </url>
-  <url>
-    <loc>https://retailstar.xyz/vault</loc>
+    <lastmod>2025-11-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
   </url>
   <url>
     <loc>https://retailstar.xyz/directory</loc>
+    <lastmod>2025-11-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://retailstar.xyz/wiki-directory</loc>
-  </url>
-  <url>
-    <loc>https://retailstar.xyz/guide</loc>
+    <loc>https://retailstar.xyz/domains</loc>
+    <lastmod>2025-11-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://retailstar.xyz/insights</loc>
-  </url>
-  <url>
-    <loc>https://retailstar.xyz/tools</loc>
-  </url>
-  <url>
-    <loc>https://retailstar.xyz/tools/domain-tester</loc>
-  </url>
-  <url>
-    <loc>https://retailstar.xyz/tools/archetype-quiz</loc>
-  </url>
-  <url>
-    <loc>https://retailstar.xyz/tools/leaderboard</loc>
-  </url>
-  <url>
-    <loc>https://retailstar.xyz/tools/meme-gen</loc>
-  </url>
-  <url>
-    <loc>https://retailstar.xyz/outerring</loc>
-  </url>
-  <url>
-    <loc>https://retailstar.xyz/terms</loc>
-  </url>
-  <url>
-    <loc>https://retailstar.xyz/privacy</loc>
+    <lastmod>2025-11-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://retailstar.xyz/contact</loc>
-  </url>
-  <url>
-    <loc>https://retailstar.xyz/basement</loc>
-  </url>
-  <url>
-    <loc>https://retailstar.xyz/main-floor</loc>
-  </url>
-  <url>
-    <loc>https://retailstar.xyz/blueprint-suites</loc>
-  </url>
-  <url>
-    <loc>https://retailstar.xyz/rooftop-lounge</loc>
+    <lastmod>2025-11-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://retailstar.xyz/lore</loc>
+    <lastmod>2025-11-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://retailstar.xyz/retailpass</loc>
+    <loc>https://retailstar.xyz/terms</loc>
+    <lastmod>2025-11-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://retailstar.xyz/tiers</loc>
+    <loc>https://retailstar.xyz/privacy</loc>
+    <lastmod>2025-11-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://retailstar.xyz/retail-tickets</loc>
+    <loc>https://retailstar.xyz/tools</loc>
+    <lastmod>2025-11-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://retailstar.xyz/upgrade</loc>
+    <loc>https://retailstar.xyz/tools/appraisal</loc>
+    <lastmod>2025-11-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://retailstar.xyz/vote</loc>
+    <loc>https://retailstar.xyz/tools/meme-gen</loc>
+    <lastmod>2025-11-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://retailstar.xyz/merch-waitlist</loc>
+    <loc>https://retailstar.xyz/tools/leaderboard</loc>
+    <lastmod>2025-11-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>

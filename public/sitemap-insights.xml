@@ -2,14 +2,32 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://retailstar.xyz/insights/why-retailstar</loc>
-    <lastmod>2024-01-15T00:00:00Z</lastmod>
-  </url>
-  <url>
-    <loc>https://retailstar.xyz/insights/50-meme-domains-under-20-sol</loc>
-    <lastmod>2024-01-20T00:00:00Z</lastmod>
+    <lastmod>2025-11-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://retailstar.xyz/insights/what-are-sol-domains</loc>
-    <lastmod>2025-11-13T03:43:00Z</lastmod>
+    <lastmod>2025-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://retailstar.xyz/insights/25-meme-domains</loc>
+    <lastmod>2025-11-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://retailstar.xyz/insights/hoodie-academy-guide</loc>
+    <lastmod>2025-11-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://retailstar.xyz/insights/cyberpunk-sol-domains-web3-identity</loc>
+    <lastmod>2025-11-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>

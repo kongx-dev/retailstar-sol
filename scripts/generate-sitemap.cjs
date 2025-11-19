@@ -1,9 +1,17 @@
 const fs = require("fs");
 const path = require("path");
 
-// Import your domain data (assumes default export)
-const domainModule = require("../src/data/domains");
-const domains = domainModule.default || domainModule.domains || domainModule;
+// Load domain data from JSON file (fallback local data, not Supabase)
+let domains = [];
+try {
+  const domainsJsonPath = path.resolve(__dirname, "../src/data/domains.json");
+  const domainsJson = JSON.parse(fs.readFileSync(domainsJsonPath, "utf-8"));
+  domains = domainsJson.domains || [];
+  console.log(`✅ Loaded ${domains.length} domains from domains.json`);
+} catch (error) {
+  console.error("❌ Error loading domains.json:", error.message);
+  process.exit(1);
+}
 
 // Import blog posts data - handle TypeScript module using dynamic import
 let blogPosts = [];
@@ -57,62 +65,55 @@ loadBlogPosts().then(() => {
 });
 
 function runSitemapGeneration() {
-  // Validate the import:
-  if (!Array.isArray(domains)) {
-    console.error("❌ 'domains' is not an array. Value:", domains);
+  // Validate domains array
+  if (!Array.isArray(domains) || domains.length === 0) {
+    console.error("❌ 'domains' is not a valid array or is empty");
     process.exit(1);
   }
 
   const baseUrl = "https://retailstar.xyz";
   const BLOG_BASE_PATH = "/insights";
+  const currentDate = new Date().toISOString().split("T")[0]; // YYYY-MM-DD format
 
+  // Only include real public SEO pages
   const staticRoutes = [
     "/",
-    "/app",
-    "/catalog",
-    "/marketplace",
-    "/scavrack",
-    "/vault",
     "/directory",
-    "/wiki-directory",
-    "/guide",
+    "/domains",
     "/insights",
-    "/tools",
-    "/tools/domain-tester",
-    "/tools/archetype-quiz",
-    "/tools/leaderboard",
-    "/tools/meme-gen",
-    "/outerring",
+    "/contact",
+    "/lore",
     "/terms",
     "/privacy",
-    "/contact",
-    "/basement",
-    "/main-floor",
-    "/blueprint-suites",
-    "/rooftop-lounge",
-    "/lore",
-    "/retailpass",
-    "/tiers",
-    "/retail-tickets",
-    "/upgrade",
-    "/vote",
-    "/merch-waitlist",
+    "/tools",
+    "/tools/appraisal",
+    "/tools/meme-gen",
+    "/tools/leaderboard",
   ];
 
-  function buildXml(routes, withDates = false) {
+  function buildXml(routes) {
     return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${routes
   .map((route) => {
     if (typeof route === "string") {
+      // Simple string route - use current date
       return `  <url>
     <loc>${baseUrl}${route}</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>`;
     } else {
-      // Route object with url and lastmod
+      // Route object with url, lastmod, and optional changefreq/priority
+      const lastmod = route.lastmod || currentDate;
+      const changefreq = route.changefreq || "weekly";
+      const priority = route.priority || "0.8";
       return `  <url>
-    <loc>${baseUrl}${route.url}</loc>${route.lastmod ? `
-    <lastmod>${route.lastmod}</lastmod>` : ""}
+    <loc>${baseUrl}${route.url}</loc>
+    <lastmod>${lastmod}</lastmod>
+    <changefreq>${changefreq}</changefreq>
+    <priority>${priority}</priority>
   </url>`;
     }
   })
@@ -126,39 +127,88 @@ ${routes
     console.log(`✅ Wrote ${filename}`);
   }
 
+  // Domains that have actual wiki content (from WikiPage.jsx getLoreContent function)
+  const domainsWithWikiContent = [
+    "jpegdealer",
+    "jumpsetradio",
+    "biggestofbrains",
+    "retailverse",
+    "fudscience",
+    "copevendor",
+    "commandhub",
+  ];
+
   // Create static page sitemap
-  writeFile("sitemap-static.xml", buildXml(staticRoutes));
+  const staticRoutesWithDates = staticRoutes.map((route) => ({
+    url: route,
+    lastmod: currentDate,
+    changefreq: route === "/" ? "weekly" : route === "/lore" || route === "/terms" || route === "/privacy" ? "monthly" : "weekly",
+    priority: route === "/" ? "1.0" : "0.8",
+  }));
+  writeFile("sitemap-static.xml", buildXml(staticRoutesWithDates));
   console.log(`✅ Generated static sitemap with ${staticRoutes.length} routes`);
 
-  // Create all wiki pages
-  const wikiRoutes = domains.map((d) => `/wiki/${d.slug}`);
+  // Create all wiki pages (all domains from domains.json)
+  const wikiRoutes = domains.map((d) => ({
+    url: `/wiki/${d.slug}`,
+    lastmod: currentDate,
+    changefreq: "weekly",
+    priority: "0.8",
+  }));
   writeFile("sitemap-wiki.xml", buildXml(wikiRoutes));
+  console.log(`✅ Generated wiki sitemap with ${wikiRoutes.length} pages`);
 
-  // Create vaulted-only pages
-  const vaultedRoutes = domains.filter((d) => d.vaulted).map((d) => `/wiki/${d.slug}`);
+  // Create vaulted-only pages - only include vaulted domains that have wiki content
+  const vaultedRoutes = domains
+    .filter((d) => {
+      // Must be vaulted
+      if (!d.vaulted) return false;
+      // Must have wiki content (either hasLore flag or in domainsWithWikiContent list)
+      return d.hasLore === true || domainsWithWikiContent.includes(d.slug);
+    })
+    .map((d) => ({
+      url: `/wiki/${d.slug}`,
+      lastmod: currentDate,
+      changefreq: "weekly",
+      priority: "0.8",
+    }));
   writeFile("sitemap-vaulted.xml", buildXml(vaultedRoutes));
+  console.log(`✅ Generated vaulted sitemap with ${vaultedRoutes.length} pages (only with wiki content)`);
 
   // Create insights posts sitemap with lastmod dates
-  const blogRoutes = blogPosts.map((post) => ({
-    url: `${BLOG_BASE_PATH}/${post.slug}`,
-    lastmod: post.updatedAt || post.publishedAt || new Date().toISOString().split("T")[0],
-  }));
+  const blogRoutes = blogPosts.map((post) => {
+    // Format date properly (convert ISO to YYYY-MM-DD if needed)
+    let lastmod = post.updatedAt || post.publishedAt || currentDate;
+    if (lastmod.includes("T")) {
+      lastmod = lastmod.split("T")[0];
+    }
+    return {
+      url: `${BLOG_BASE_PATH}/${post.slug}`,
+      lastmod: lastmod,
+      changefreq: "weekly",
+      priority: "0.8",
+    };
+  });
   writeFile("sitemap-insights.xml", buildXml(blogRoutes));
-  console.log(`✅ Generated sitemap with ${blogPosts.length} insights posts`);
+  console.log(`✅ Generated insights sitemap with ${blogPosts.length} posts`);
 
-  // Create domain pages sitemap
-  const domainRoutes = domains.map((d) => `/domains/${d.slug}`);
-  writeFile("sitemap-domains.xml", buildXml(domainRoutes));
-
-  // Create sitemap index
+  // Create sitemap index (only 4 sitemaps, no sitemap-domains.xml)
   const sitemapIndex = `<?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <sitemap><loc>${baseUrl}/sitemap-static.xml</loc></sitemap>
-  <sitemap><loc>${baseUrl}/sitemap-wiki.xml</loc></sitemap>
-  <sitemap><loc>${baseUrl}/sitemap-vaulted.xml</loc></sitemap>
-  <sitemap><loc>${baseUrl}/sitemap-insights.xml</loc></sitemap>
-  <sitemap><loc>${baseUrl}/sitemap-domains.xml</loc></sitemap>
+  <sitemap>
+    <loc>${baseUrl}/sitemap-static.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>${baseUrl}/sitemap-insights.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>${baseUrl}/sitemap-wiki.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>${baseUrl}/sitemap-vaulted.xml</loc>
+  </sitemap>
 </sitemapindex>`;
 
   writeFile("sitemap-index.xml", sitemapIndex);
+  console.log("✅ Generated sitemap-index.xml");
 } 

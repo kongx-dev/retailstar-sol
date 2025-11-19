@@ -1,11 +1,215 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SEOHead from '../../components/SEOHead';
-import { generateDomains, GeneratedDomain } from '../../utils/generateDomains';
-import { useManualSNSAvailability, SNSAvailabilityResult, SNSAvailabilityStatus } from '../../hooks/useCheckSNSAvailability';
+import { GeneratedDomain } from '../../utils/generateDomains';
+import { useManualSNSAvailability, SNSAvailabilityResult, SNSAvailabilityStatus, sanitizeDomainName, isValidDomainFormat } from '../../hooks/useCheckSNSAvailability';
+import memeGeneratorBg from '../../assets/meme-generator.png';
+
+const emotionWords = [
+  "cope", "panic", "fear", "despair", "fomo", "downbad", "tilted",
+  "overload", "shame", "fraud", "exhaustion", "mania", "stress",
+  "crybaby", "rekt", "doom", "scarcity", "regret", "delusion",
+  "euphoria", "ragequit", "loss", "pain"
+];
+
+const chaosNouns = [
+  "terminal", "factory", "extractor", "device", "module", "cabinet",
+  "engine", "matrix", "panel", "node", "conveyor", "gearbox",
+  "chamber", "forge", "locker", "garage", "basement", "overflow",
+  "filtration", "optimizer", "transmitter", "loop", "vault", 
+  "unit", "switch", "console", "station"
+];
+
+const meltdownWords = [
+  "crash", "hyper", "mega", "ultra", "super", "over", "nano", "giga",
+  "chainbreak", "rug", "liquidation", "meltdown", "eviction",
+  "migration", "wipeout", "drain", "exploit", "spiral"
+];
+
+const verbs = [
+  "drain", "extract", "optimize", "amplify", "distort", "wipe", 
+  "misprice", "farm", "flip", "detonate", "override", "inject",
+  "disrupt", "scramble", "degen", "inflate", "dump"
+];
+
+const npcs = [
+  "npc", "rookie", "intern", "scav", "mallrat", "normie", "tourist",
+  "lurker", "whalelet"
+];
+
+const damageWords = [
+  "bomb", "fuse", "blast", "strike", "spark", "shock", "grinder",
+  "ram", "wrecker", "breaker"
+];
+
+const trendShots = [
+  "solana congestion",
+  "pumpfun meta",
+  "jito airdrop",
+  "memecoin launch season",
+  "tensor whales",
+  "ai agent boom",
+  "market chop",
+  "flywheel rotation",
+  "airdrops farming"
+];
+
+const marketTerms = [
+  "liquidity","slippage","spread","bidask","leverage","funding","premium",
+  "discount","delta","gamma","vol","marketcap","ticker","onchain","sentiment",
+  "supply","demand","imbalance","volatility","rfq","feeengine","yield","lp",
+  "maker","taker","arb","swap","vault","oracle","router","index","matrix",
+  "ledger","staking","halving","airdrop","gasless","solcycle","lamports",
+  "orderbook","margin","lockup","proof","hashrate"
+];
+
+const cyberNouns = [
+  "kernel","gateway","proxy","buffer","cipher","layer","shard","packet",
+  "payload","vector","uplink","downlink","partition","datastream","inline",
+  "backdoor","checksum","runtime","terminal","archive","portal","core",
+  "backend","frontend","mesh","grid","stack","protocol","daemon","instance",
+  "cache","segment","monitor","driver","adapter"
+];
+
+const mallObjects = [
+  "stairwell","elevator","parkingdeck","mallmap","booth","kiosk","foodcourt",
+  "hallway","storage","loadingdock","retailunit","backroom","janitorcloset",
+  "securitypost","escalator","checkoutlane","cartreturn","register","mannequin",
+  "display","lounge","rooftop","alley","cellblock","stalls","fountain",
+  "chargingstation","gate","arch"
+];
+
+const prefixes = [
+  "mega","hyper","ultra","super","nano","proto","meta","retro","shadow",
+  "electric","neon","ghost","acid","static","holo","turbo","retro","void",
+  "phase","quantum","optic","astro","chrono","tactical","fractal","delta",
+  "flux","auto","crypto","xeno"
+];
+
+const bannedWords = [
+  "slur1", "slur2", "slur3", 
+  "offensive1", "offensive2", 
+  "politics", "election", "violence"
+];
+
+function cleanString(str: string): string {
+  if (!str) return "";
+  const lower = str.toLowerCase();
+  for (const bad of bannedWords) {
+    if (lower.includes(bad)) return "";
+  }
+  return lower.replace(/[^a-z0-9-]/g, "");
+}
+
+function pick(arr: string[]): string {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function scoreDomain(name: string): number {
+  let score = 0;
+  if (name.length <= 12) score += 20;
+  if (name.length <= 8) score += 15;
+  if (/mega|hyper|ultra/.test(name)) score += 10;
+  if (/crash|cope|panic|rekt/.test(name)) score += 20;
+  if (/npc|scav|mall/.test(name)) score += 10;
+  if (/-/.test(name)) score += 5;
+  return Math.min(score, 100);
+}
+
+function rarityForScore(score: number): GeneratedDomain['rarity'] {
+  if (score >= 85) return "vaulted";
+  if (score >= 70) return "rare";
+  return "common";
+}
+
+function memeOfTheDay() {
+  const seed = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+  let hash = 0;
+  for (let i = 0; i < seed.length; i++) {
+    hash = seed.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  const chaos = (hash % 10) + 1;
+  const seedWord = emotionWords[(hash % emotionWords.length)];
+  const core = buildChaosDomain(seedWord, chaos);
+  const score = scoreDomain(core);
+  const rarity = rarityForScore(score);
+
+  return {
+    domain: core + ".sol",
+    chaos,
+    score,
+    rarity
+  };
+}
+
+function buildChaosDomain(input: string | null, chaos: number): string {
+  const useInput = input && input.length > 0 ? cleanString(input) : null;
+
+  const baseTemplates = [
+    () => `${pick(emotionWords)}${pick(chaosNouns)}`,
+    () => `${pick(meltdownWords)}${pick(chaosNouns)}`,
+    () => `${pick(npcs)}${pick(chaosNouns)}`,
+    () => `${pick(emotionWords)}-${pick(chaosNouns)}`,
+    () => useInput ? `${useInput}${pick(chaosNouns)}` : `${pick(emotionWords)}${pick(verbs)}`,
+    () => useInput ? `${useInput}${pick(chaosNouns)}` : null,
+    () => useInput ? `${pick(emotionWords)}${useInput}` : null,
+    () => useInput ? `${useInput}-${pick(chaosNouns)}` : null
+  ];
+
+  const chaosTemplates = [
+    () => `mega${pick(chaosNouns)}`,
+    () => `hyper${pick(chaosNouns)}`,
+    () => `${pick(meltdownWords)}${pick(damageWords)}`,
+    () => `${pick(meltdownWords)}-${pick(chaosNouns)}`,
+    () => `${pick(emotionWords)}${pick(chaosNouns)}${pick(damageWords)}`,
+    () => useInput ? `mega${useInput}` : null,
+    () => useInput ? `hyper${useInput}${pick(chaosNouns)}` : null,
+    () => useInput ? `${pick(meltdownWords)}${useInput}${pick(damageWords)}` : null
+  ];
+
+  const meltdownTemplates = [
+    () => `${pick(meltdownWords)}${pick(prefixes)}${pick(chaosNouns)}`,
+    () => `${pick(prefixes)}${pick(prefixes)}${pick(chaosNouns)}`,
+    () => `${pick(trendShots)}${pick(chaosNouns)}`.replace(/\s+/g,''),
+    () => `${pick(emotionWords)}${pick(mallObjects)}`,
+    () => `${pick(marketTerms)}${pick(chaosNouns)}`,
+    () => useInput ? `${pick(meltdownWords)}${useInput}` : `${pick(meltdownWords)}${pick(emotionWords)}`,
+    () => useInput ? `${pick(prefixes)}${useInput}${pick(chaosNouns)}` : null,
+    () => useInput ? `${pick(prefixes)}${pick(prefixes)}${useInput}` : null,
+    () => useInput ? `${pick(trendShots).replace(/\s+/g,'')}${useInput}` : null
+  ];
+
+  // Weighted section selection based on chaos level
+  let templatePool = baseTemplates;
+
+  if (chaos >= 3 && chaos <= 6) {
+    templatePool = [...baseTemplates, ...chaosTemplates];
+  } else if (chaos > 6) {
+    templatePool = [...baseTemplates, ...chaosTemplates, ...meltdownTemplates];
+  }
+
+  // Reroll logic: keep trying until we get a valid result
+  let chosen = null;
+  let attempts = 0;
+  const maxAttempts = 50; // Safety limit to prevent infinite loops
+
+  while ((!chosen || chosen.trim() === '') && attempts < maxAttempts) {
+    const chosenTemplate = templatePool[Math.floor(Math.random() * templatePool.length)];
+    chosen = chosenTemplate();
+    attempts++;
+  }
+
+  // Fallback if all attempts failed
+  if (!chosen || chosen.trim() === '') {
+    chosen = `${pick(emotionWords)}${pick(chaosNouns)}`;
+  }
+
+  return cleanString(chosen);
+}
 
 const MemeGeneratorPage: React.FC = () => {
   const [userInput, setUserInput] = useState('');
+  const [chaos, setChaos] = useState(5);
   const [generatedDomains, setGeneratedDomains] = useState<GeneratedDomain[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
   const [copiedDomain, setCopiedDomain] = useState<string | null>(null);
@@ -13,6 +217,35 @@ const MemeGeneratorPage: React.FC = () => {
 
   // Manual availability checking hook
   const { checkDomain, isChecking } = useManualSNSAvailability();
+
+  // Helper function to get random rarity with weighted distribution
+  const getRandomRarity = (): { rarity: GeneratedDomain['rarity']; emoji: string } => {
+    const rand = Math.random();
+    if (rand < 0.6) return { rarity: 'common', emoji: '🔥' };
+    if (rand < 0.9) return { rarity: 'rare', emoji: '🔮' };
+    return { rarity: 'vaulted', emoji: '🕳' };
+  };
+
+  // Helper function to get random category
+  const getRandomCategory = (): GeneratedDomain['category'] => {
+    const categories: GeneratedDomain['category'][] = ['degen', 'meme', 'iconic', 'vibes'];
+    return categories[Math.floor(Math.random() * categories.length)];
+  };
+
+  // Check SNS availability and format as GeneratedDomain[]
+  const checkSNSThenAvailability = async (scoredDomains: Array<{ name: string; score: number; rarity: GeneratedDomain['rarity'] }>): Promise<GeneratedDomain[]> => {
+    return scoredDomains.map(item => {
+      const category = getRandomCategory();
+      const rarityEmoji = item.rarity === 'vaulted' ? '🕳' : item.rarity === 'rare' ? '🔮' : '🔥';
+      
+      return {
+        name: item.name,
+        category,
+        rarity: item.rarity,
+        rarityEmoji
+      };
+    });
+  };
 
   // Handle individual domain checking
   const handleCheckDomain = async (domainName: string) => {
@@ -54,9 +287,41 @@ const MemeGeneratorPage: React.FC = () => {
     }
   }, []);
 
-  const handleGenerate = async () => {
+  const generateDomains = async () => {
     setIsGenerating(true);
+
+    let collected = [];
+
+    // Keep generating until we have at least 5 VALID scored domains
+    while (collected.length < 5) {
+      const built = buildChaosDomain(userInput, chaos);
+      if (!built) continue;
+
+      const domain = built.toLowerCase() + ".sol";
+      const base = built.toLowerCase();
+
+      const score = scoreDomain(base);
+      if (score < 40) continue;
+
+      const rarity = rarityForScore(score);
+
+      collected.push({ name: domain, score, rarity });
+    }
+
+    // Deduplicate
+    const unique = [...new Set(collected.map(d => d.name))]
+      .map(n => collected.find(o => o.name === n));
+
+    // Pass domain list to existing availability checker
+    const final = await checkSNSThenAvailability(unique);
+
+    setGeneratedDomains(final);
+    setIsGenerating(false);
     
+    return final;
+  };
+
+  const handleGenerate = async () => {
     // Track generation event
     const inputUsed = userInput.trim();
     console.log('🎭 Meme Generator: Starting generation', {
@@ -65,13 +330,7 @@ const MemeGeneratorPage: React.FC = () => {
       userAgent: navigator.userAgent
     });
     
-    // Simulate API delay for better UX
-    await new Promise(resolve => setTimeout(resolve, 800));
-    
-    const domains = generateDomains({ 
-      userInput: inputUsed, 
-      count: 5 
-    });
+    const domains = await generateDomains();
     
     // Log generated domains
     console.log('🎭 Meme Generator: Generated domains', {
@@ -92,9 +351,6 @@ const MemeGeneratorPage: React.FC = () => {
         value: domains.length
       });
     }
-    
-    setGeneratedDomains(domains);
-    setIsGenerating(false);
     
     // Don't auto-trigger availability checking to prevent resource exhaustion
     // Users can manually trigger it by clicking the "Check Availability" button
@@ -215,8 +471,15 @@ const MemeGeneratorPage: React.FC = () => {
       />
       
       <div className="min-h-screen bg-black text-white relative overflow-hidden">
-        {/* Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/20 via-purple-900/20 to-pink-900/20"></div>
+        {/* Background Image */}
+        <img 
+          src={memeGeneratorBg} 
+          alt="Meme Generator Background" 
+          className="pointer-events-none select-none fixed inset-0 w-full h-full object-cover opacity-50 z-0" 
+          aria-hidden="true"
+        />
+        {/* Background Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/20 via-purple-900/20 to-pink-900/20 z-0"></div>
         
         <div className="relative z-10 container mx-auto px-4 py-12 max-w-6xl">
           {/* Header */}
@@ -267,6 +530,35 @@ const MemeGeneratorPage: React.FC = () => {
                 >
                   {isGenerating ? 'Generating...' : 'Generate Domains'}
                 </button>
+              </div>
+              <div className="mt-4 p-3 border border-neutral-800 bg-neutral-900/50 rounded-lg text-xs text-neutral-300 font-mono">
+                <div className="opacity-70 mb-1">Live Preview</div>
+                <div className="text-cyan-400">
+                  {buildChaosDomain(userInput, chaos) || "—"}
+                </div>
+              </div>
+              {(() => {
+                const motd = memeOfTheDay();
+                return (
+                  <>
+                    <div className="mt-4 text-xs opacity-70">Meme of the Day</div>
+                    <div className="text-pink-400 font-mono">{motd.domain}</div>
+                    <div className="text-neutral-500 text-xxs">
+                      {motd.rarity}, chaos {motd.chaos}
+                    </div>
+                  </>
+                );
+              })()}
+              <div className="mt-4 mb-2">
+                <label className="block text-xs opacity-70">Chaos Level</label>
+                <input
+                  type="range"
+                  min="0"
+                  max="10"
+                  value={chaos}
+                  onChange={(e) => setChaos(parseInt(e.target.value))}
+                  className="w-full accent-pink-500"
+                />
               </div>
               <p className="text-sm text-gray-400 mt-2">
                 Leave blank for completely random meme domains

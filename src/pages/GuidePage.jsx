@@ -1,11 +1,47 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import SEOHead from '../components/SEOHead';
 import LoreButton from '../components/LoreButton';
 import rsguide from '../assets/rsguide.png';
+import { getAllDepartments } from '../lib/useDepartmentQuery';
+import ToneBadge from '../components/ToneBadge';
 
 export default function GuidePage() {
+  const navigate = useNavigate();
+  const [departments, setDepartments] = useState([]);
+  const [selectedSector, setSelectedSector] = useState(null);
+
+  useEffect(() => {
+    const fetchDepartments = async () => {
+      const depts = await getAllDepartments();
+      setDepartments(depts);
+    };
+    fetchDepartments();
+  }, []);
+
+  const handleSectorChoice = (choice) => {
+    setSelectedSector(choice);
+    
+    // Map choices to departments
+    const routing = {
+      'meme': '/directory/dept/meme-arcade',
+      'building': '/directory/dept/ai-agents',
+      'identity': '/directory/dept/social-identity',
+      'tactical': '/directory/dept/security-wing'
+    };
+
+    const route = routing[choice];
+    if (route) {
+      setTimeout(() => navigate(route), 500);
+    }
+  };
+
+  // Helper to get department by slug
+  const getDeptBySlug = (slug) => {
+    return departments.find(d => d.slug === slug);
+  };
+
   return (
     <>
       <SEOHead 
@@ -57,7 +93,7 @@ export default function GuidePage() {
             <blockquote className="border-l-4 border-pink-500 pl-4 italic text-pink-300">
               &quot;Retailstar never promised luxury. It promised lore.&quot;
               <br />
-              <Link to="/directory?tab=lore" className="text-cyan-400 hover:text-cyan-300 underline">
+              <Link to="/directory" className="text-cyan-400 hover:text-cyan-300 underline">
                 — Read the Full Lore
               </Link>
             </blockquote>
@@ -69,20 +105,20 @@ export default function GuidePage() {
               <h3 className="text-lg font-bold text-white mb-3 text-center">🏢 Floor Guide</h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
                 <div className="flex items-center space-x-2">
-                  <span className="bg-red-600/20 text-red-300 px-2 py-1 rounded font-bold">B1</span>
-                  <span className="text-gray-300">Memes & Chaos</span>
+                  <span className="bg-red-600/20 text-red-300 px-2 py-1 rounded font-bold">P1</span>
+                  <span className="text-gray-300">Parking Garage (Scav Rack + Glitch Militia)</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <span className="bg-teal-600/20 text-teal-300 px-2 py-1 rounded font-bold">1F</span>
-                  <span className="text-gray-300">Directory & Shop</span>
+                  <span className="text-gray-300">Directory & Marketplace</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <span className="bg-orange-600/20 text-orange-300 px-2 py-1 rounded font-bold">2F</span>
-                  <span className="text-gray-300">Tools & Services</span>
+                  <span className="text-gray-300">Blueprint Suites</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <span className="bg-purple-600/20 text-purple-300 px-2 py-1 rounded font-bold">3F</span>
-                  <span className="text-gray-300">Insights & Lore</span>
+                  <span className="text-gray-300">Rooftop Lounge</span>
                 </div>
               </div>
             </div>
@@ -92,26 +128,26 @@ export default function GuidePage() {
           <div className="mb-8">
             <h2 className="text-3xl font-bold text-cyan-400 mb-6 text-center">🗺️ Explore the Mall</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
-              {/* B1 - Basement - Removed for now */}
-              {/* <motion.div
+              {/* P1 - Parking Garage */}
+              <motion.div
                 whileHover={{ scale: 1.02, y: -5 }}
                 whileTap={{ scale: 0.98 }}
                 className="group cursor-pointer"
               >
-                <Link to="/basement">
+                <Link to="/scav-rack">
                   <div className="bg-gradient-to-br from-red-900/30 to-cyan-900/30 border border-red-500/30 rounded-xl p-6 h-full hover:border-red-400/50 transition-all duration-300 hover:shadow-2xl hover:shadow-red-500/20">
                     <div className="text-center">
-                      <div className="text-4xl mb-3">🕳</div>
+                      <div className="text-4xl mb-3">🅿️</div>
                       <h3 className="text-xl font-bold text-white mb-2 group-hover:text-red-300 transition-colors">
-                        B1 - Basement
+                        P1 - Parking Garage
                       </h3>
                       <p className="text-gray-300 text-sm">
-                        Scav Rack, meme domains, chaos energy, degen central
+                        Scav Rack, Parking Garage Directory, meme domains, chaos energy, degen central
                       </p>
                     </div>
                   </div>
                 </Link>
-              </motion.div> */}
+              </motion.div>
 
               {/* 1F - Main Floor */}
               <motion.div
@@ -119,7 +155,7 @@ export default function GuidePage() {
                 whileTap={{ scale: 0.98 }}
                 className="group cursor-pointer"
               >
-                <Link to="/main-floor">
+                <Link to="/directory">
                   <div className="bg-gradient-to-br from-teal-900/30 to-green-900/30 border border-teal-500/30 rounded-xl p-6 h-full hover:border-teal-400/50 transition-all duration-300 hover:shadow-2xl hover:shadow-teal-500/20">
                     <div className="text-center">
                       <div className="text-4xl mb-3">🏬</div>
@@ -202,13 +238,76 @@ export default function GuidePage() {
             </div>
           </div>
 
+          {/* Start Exploring From Your Sector */}
+          <div className="mb-8">
+            <div className="bg-cyan-900/20 border border-cyan-500/30 rounded-lg p-6">
+              <h2 className="text-2xl font-bold text-cyan-400 mb-4 text-center">🧠 Start Exploring From Your Sector</h2>
+              
+              {!selectedSector ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                  <button
+                    onClick={() => handleSectorChoice('meme')}
+                    className="bg-pink-500/20 border border-pink-500/30 rounded-lg p-4 hover:bg-pink-500/30 hover:border-pink-400/50 transition-all duration-200 text-left"
+                  >
+                    <div className="text-2xl mb-2">🕹️</div>
+                    <h3 className="font-bold text-white mb-1">Meme</h3>
+                    <p className="text-gray-300 text-sm">Viral domains & meme culture</p>
+                  </button>
+                  
+                  <button
+                    onClick={() => handleSectorChoice('building')}
+                    className="bg-blue-500/20 border border-blue-500/30 rounded-lg p-4 hover:bg-blue-500/30 hover:border-blue-400/50 transition-all duration-200 text-left"
+                  >
+                    <div className="text-2xl mb-2">🤖</div>
+                    <h3 className="font-bold text-white mb-1">Building</h3>
+                    <p className="text-gray-300 text-sm">AI agents & infrastructure</p>
+                  </button>
+                  
+                  <button
+                    onClick={() => handleSectorChoice('identity')}
+                    className="bg-purple-500/20 border border-purple-500/30 rounded-lg p-4 hover:bg-purple-500/30 hover:border-purple-400/50 transition-all duration-200 text-left"
+                  >
+                    <div className="text-2xl mb-2">🪪</div>
+                    <h3 className="font-bold text-white mb-1">Identity</h3>
+                    <p className="text-gray-300 text-sm">Social identity & creator tools</p>
+                  </button>
+                  
+                  <button
+                    onClick={() => handleSectorChoice('tactical')}
+                    className="bg-red-500/20 border border-red-500/30 rounded-lg p-4 hover:bg-red-500/30 hover:border-red-400/50 transition-all duration-200 text-left"
+                  >
+                    <div className="text-2xl mb-2">🛡️</div>
+                    <h3 className="font-bold text-white mb-1">Tactical</h3>
+                    <p className="text-gray-300 text-sm">Security & alpha labs</p>
+                  </button>
+                </div>
+              ) : (
+                <div className="text-center py-4">
+                  <p className="text-cyan-300 mb-2">Redirecting to your sector...</p>
+                  <button
+                    onClick={() => setSelectedSector(null)}
+                    className="text-gray-400 hover:text-white text-sm underline"
+                  >
+                    Choose different sector
+                  </button>
+                </div>
+              )}
+
+              <div className="mt-4 pt-4 border-t border-cyan-500/20">
+                <p className="text-gray-300 text-sm text-center">
+                  Or explore all departments → <Link to="/directory" className="text-cyan-400 hover:text-cyan-300 underline">Mall Directory</Link>
+                </p>
+              </div>
+            </div>
+          </div>
+
           {/* First Time Here? */}
           <div className="mb-8">
             <div className="bg-cyan-900/20 border border-cyan-500/30 rounded-lg p-6 text-center">
               <h2 className="text-2xl font-bold text-cyan-400 mb-4">🧠 First Time Here?</h2>
               <div className="space-y-3 text-gray-300">
-                {/* <p>• Start in the <strong>Basement <span className="bg-red-600/20 text-red-300 px-2 py-0.5 rounded text-xs font-bold">B1</span></strong> to browse memes → <Link to="/basement" className="text-cyan-400 hover:text-cyan-300 underline">/basement</Link></p> */}
-                <p>• Ready to build? <strong>Head to Main Floor <span className="bg-teal-600/20 text-teal-300 px-2 py-0.5 rounded text-xs font-bold">1F</span></strong> for the directory → <Link to="/main-floor" className="text-cyan-400 hover:text-cyan-300 underline">/main-floor</Link></p>
+                <p>• Start in the <strong>Parking Garage <span className="bg-red-600/20 text-red-300 px-2 py-0.5 rounded text-xs font-bold">P1</span></strong> to browse memes → <Link to="/scav-rack" className="text-cyan-400 hover:text-cyan-300 underline">/scav-rack</Link></p>
+                <p>• Ready to build? <strong>Head to Main Floor <span className="bg-teal-600/20 text-teal-300 px-2 py-0.5 rounded text-xs font-bold">1F</span></strong> for the directory → <Link to="/directory" className="text-cyan-400 hover:text-cyan-300 underline">/directory</Link></p>
                 <p>• Need tools? <strong>Blueprint Suites <span className="bg-orange-600/20 text-orange-300 px-2 py-0.5 rounded text-xs font-bold">2F</span></strong> has generators & appraisers → <Link to="/blueprint-suites" className="text-cyan-400 hover:text-cyan-300 underline">/blueprint-suites</Link> <span className="bg-orange-500 text-white text-xs px-2 py-0.5 rounded-full">Soon</span></p>
                 <p>• Just vibing? <strong>Rooftop Lounge <span className="bg-purple-600/20 text-purple-300 px-2 py-0.5 rounded text-xs font-bold">3F</span></strong> for insights & lore → <Link to="/rooftop-lounge" className="text-cyan-400 hover:text-cyan-300 underline">/rooftop-lounge</Link></p>
                 <p className="text-cyan-300 font-semibold">Builder? Degenerate? Either way… <strong>We got a spot for you.</strong></p>
@@ -220,17 +319,16 @@ export default function GuidePage() {
           <div className="mb-8">
             <h2 className="text-3xl font-bold text-cyan-400 mb-6">🗺️ How to Navigate the Mall</h2>
             <div className="grid gap-4">
-              {/* Basement section removed for now */}
-              {/* <div className="bg-black/20 border border-gray-700 rounded-lg p-4">
-                <h3 className="font-bold text-white mb-2">
-                  <code className="bg-gray-800 px-2 py-1 rounded">/basement</code>
-                  <span className="ml-2 bg-red-600/20 text-red-300 px-2 py-0.5 rounded text-xs">B1</span>
-                </h3>
-                <p className="text-gray-300">Scav Rack, meme domains, chaos energy, degen central</p>
-              </div> */}
               <div className="bg-black/20 border border-gray-700 rounded-lg p-4">
                 <h3 className="font-bold text-white mb-2">
-                  <code className="bg-gray-800 px-2 py-1 rounded">/main-floor</code>
+                  <code className="bg-gray-800 px-2 py-1 rounded">/parking-garage</code>
+                  <span className="ml-2 bg-red-600/20 text-red-300 px-2 py-0.5 rounded text-xs">P1</span>
+                </h3>
+                <p className="text-gray-300">Parking Garage Directory, Scav Rack → <Link to="/scav-rack" className="text-cyan-400 hover:text-cyan-300 underline">/scav-rack</Link>, meme domains, chaos energy, degen central</p>
+              </div>
+              <div className="bg-black/20 border border-gray-700 rounded-lg p-4">
+                <h3 className="font-bold text-white mb-2">
+                  <code className="bg-gray-800 px-2 py-1 rounded">/directory</code>
                   <span className="ml-2 bg-teal-600/20 text-teal-300 px-2 py-0.5 rounded text-xs">1F</span>
                 </h3>
                 <p className="text-gray-300">Directory, marketplace, brandable domains, featured drops</p>
@@ -283,12 +381,12 @@ export default function GuidePage() {
           <div className="grid gap-4">
             <div className="bg-black/20 border border-red-500/30 rounded-lg p-4">
               <h3 className="font-bold text-white mb-2 flex items-center">
-                <span className="bg-red-600/20 text-red-300 px-2 py-1 rounded text-xs font-bold mr-2">B1</span>
-                Basement Tips
+                <span className="bg-red-600/20 text-red-300 px-2 py-1 rounded text-xs font-bold mr-2">P1</span>
+                Parking Garage Tips
               </h3>
               <ul className="text-gray-300 space-y-2">
-                <li>• Scav Rack (B1) has the best deals — check back often</li>
-                <li>• Meme domains under 20 USDC live in the basement</li>
+                <li>• <Link to="/scav-rack" className="text-cyan-400 hover:text-cyan-300 underline">Scav Rack</Link> (P1) has the best deals — check back often</li>
+                <li>• Meme domains under 20 USDC live in the Parking Garage</li>
                 <li>• Chaos energy = highest meme potential</li>
               </ul>
             </div>
@@ -336,24 +434,24 @@ export default function GuidePage() {
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               
-              {/* B1 Button - Removed for now */}
-              {/* <motion.div
+              {/* P1 Button */}
+              <motion.div
                 whileHover={{ scale: 1.03, y: -3 }}
                 whileTap={{ scale: 0.96 }}
               >
-                <Link to="/basement" className="block">
+                <Link to="/scav-rack" className="block">
                   <div className="bg-gradient-to-r from-red-600 to-cyan-600 hover:from-red-500 hover:to-cyan-500 text-white py-3 px-4 rounded-lg font-semibold text-center transition-all duration-200">
-                    🕳 B1 - Basement
+                    🅿️ P1 - Parking Garage
                   </div>
                 </Link>
-              </motion.div> */}
+              </motion.div>
 
               {/* 1F Button */}
               <motion.div
                 whileHover={{ scale: 1.03, y: -3 }}
                 whileTap={{ scale: 0.96 }}
               >
-                <Link to="/main-floor" className="block">
+                <Link to="/directory" className="block">
                   <div className="bg-gradient-to-r from-teal-600 to-green-600 hover:from-teal-500 hover:to-green-500 text-white py-3 px-4 rounded-lg font-semibold text-center transition-all duration-200">
                     🏬 1F - Main Floor
                   </div>

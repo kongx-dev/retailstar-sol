@@ -5,6 +5,7 @@ const MythicRotator = lazy(() => import('../components/MythicRotator'));
 import PathFork from '../components/PathFork';
 import Footer from '../components/Footer';
 import SeoContentBlock from '../components/SeoContentBlock';
+import { getAllPosts } from '../data/blogPosts';
 import rsLogo from '../assets/rs-logo.png';
 import retailstarBody from '../assets/retailstar-body.png';
 import jpegdealerImage from '../assets/jpegdealer.png';
@@ -13,6 +14,12 @@ import jumpsetradioImage from '../assets/jumpsetradio.png';
 import commandhubImage from '../assets/commandhub.png';
 
 const siteUrl = 'https://retailstar.sol';
+
+// Get latest 3 insights
+const latestInsights = getAllPosts()
+  .sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt))
+  .slice(0, 3);
+
 const featuredNodes = [
   {
     name: 'commandhub.sol',
@@ -175,6 +182,55 @@ const HomePage = () => {
 
         {/* SEO Content Block */}
         <SeoContentBlock />
+
+        {/* Latest Insights Section */}
+        <div className="mt-20 mb-24 px-6 max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold text-white mb-6 drop-shadow-lg">
+            Latest Insights
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+            {latestInsights.map((post) => (
+              <Link
+                key={post.slug}
+                to={`/insights/${post.slug}`}
+                className="block bg-black/40 border border-white/10 rounded-xl overflow-hidden hover:bg-black/50 transition-all shadow-lg"
+              >
+                {/* Cover Image */}
+                {post.image && (
+                  <div
+                    className="w-full h-40 bg-cover bg-center"
+                    style={{ backgroundImage: `url(${post.image})` }}
+                  />
+                )}
+
+                <div className="p-4">
+                  <h3 className="text-lg font-semibold text-white/90 mb-1">
+                    {post.title}
+                  </h3>
+                  <p className="text-white/60 text-sm line-clamp-3">
+                    {post.description}
+                  </p>
+                  <p className="text-white/40 text-xs mt-3">
+                    {new Date(post.publishedAt).toLocaleDateString()}
+                  </p>
+                </div>
+              </Link>
+            ))}
+
+          </div>
+
+          {/* View All Button */}
+          <div className="flex justify-end mt-8">
+            <Link
+              to="/insights"
+              className="text-cyan-300 hover:text-cyan-200 text-sm font-medium"
+            >
+              View All Insights →
+            </Link>
+          </div>
+        </div>
       </div>
       
       <Footer />

@@ -245,3 +245,4 @@ export function analyzeWordStructure(name: string): WordStructure {
   };
 }
 
+

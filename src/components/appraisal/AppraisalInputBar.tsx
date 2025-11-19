@@ -79,3 +79,4 @@ export const AppraisalInputBar: React.FC<AppraisalInputBarProps> = ({
   );
 };
 
+

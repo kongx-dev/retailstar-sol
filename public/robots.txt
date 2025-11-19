@@ -1,29 +1,67 @@
-User-agent: *
+# LLMs Access Policy for Retailstar Mall
+
+# Learn more at https://llmstxt.org
+
+
+
+User-Agent: *
+
 Allow: /
 
-# Sitemaps
+
+
+# OpenAI & ChatGPT
+
+User-Agent: ChatGPT-User
+
+Allow: /
+
+User-Agent: GPTBot
+
+Allow: /
+
+User-Agent: OpenAI-SearchBot
+
+Allow: /
+
+User-Agent: OAI-Extended
+
+Allow: /
+
+
+
+# Google AI Crawler
+
+User-Agent: Google-Extended
+
+Allow: /
+
+
+
+# Perplexity
+
+User-Agent: PerplexityBot
+
+Allow: /
+
+
+
+# Anthropic (Claude)
+
+User-Agent: Claude-Web
+
+Allow: /
+
+
+
+# CCBot (Common Crawl)
+
+User-Agent: CCBot
+
+Allow: /
+
+
+
+# Sitemap reference
+
 Sitemap: https://retailstar.xyz/sitemap-index.xml
-Sitemap: https://retailstar.xyz/sitemap-static.xml
-Sitemap: https://retailstar.xyz/sitemap-wiki.xml
-Sitemap: https://retailstar.xyz/sitemap-vaulted.xml
-Sitemap: https://retailstar.xyz/sitemap-insights.xml
-Sitemap: https://retailstar.xyz/sitemap-domains.xml
-
-# Crawl delay (optional - helps with server load)
-Crawl-delay: 1
-
-# Disallow any admin or test routes (if they exist)
-Disallow: /admin/
-Disallow: /test/
-Disallow: /api/
-Disallow: /_next/
-Disallow: /node_modules/
-
-# Allow all other content
-Allow: /insights/
-Allow: /tools/
-Allow: /domains/
-Allow: /wiki/
-Allow: /directory/
-Allow: /marketplace/
-Allow: /vault/

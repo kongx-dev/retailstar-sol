@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link, useSearchParams } from 'react-router-dom';
 import rsLogo from '../assets/rs-logo.png';
@@ -11,6 +11,10 @@ import { filterBlocklisted } from '../data/blocklist';
 import { useDomains } from '../hooks/useDomains';
 import DomainLoadingSkeleton from '../components/DomainLoadingSkeleton';
 import DomainErrorFallback from '../components/DomainErrorFallback';
+import { getAllDepartments } from '../lib/useDepartmentQuery';
+
+// Lazy load components
+const DepartmentTile = lazy(() => import('../components/DepartmentTile'));
 
 const MallDirectoryPage = () => {
   const [flicker, setFlicker] = useState(false);
@@ -18,6 +22,8 @@ const MallDirectoryPage = () => {
   const [searchParams] = useSearchParams();
   const archetypeFilter = searchParams.get('archetype');
   const { domains: supabaseDomains, loading, error } = useDomains({ listed: true });
+  const [departments, setDepartments] = useState([]);
+  const [departmentsLoading, setDepartmentsLoading] = useState(true);
 
   // Helper function to filter blocklisted domains from department data
   const filterDepartmentDomains = (domains) => {
@@ -49,6 +55,24 @@ const MallDirectoryPage = () => {
       clearInterval(flickerInterval);
       clearTimeout(bootTimeout);
     };
+  }, []);
+
+  // Fetch departments from Supabase
+  useEffect(() => {
+    const fetchDepartments = async () => {
+      try {
+        setDepartmentsLoading(true);
+        const depts = await getAllDepartments();
+        setDepartments(depts);
+      } catch (err) {
+        console.error('Error fetching departments:', err);
+        setDepartments([]);
+      } finally {
+        setDepartmentsLoading(false);
+      }
+    };
+
+    fetchDepartments();
   }, []);
 
   // Generate comprehensive schema for directory page
@@ -175,7 +199,7 @@ const MallDirectoryPage = () => {
         </Link>
         
         {booting && (
-          <div className="absolute inset-0 bg-black/90 text-green-400 flex items-center justify-center text-2xl animate-pulse z-50">
+          <div className="fixed inset-0 bg-black/90 text-green-400 flex items-center justify-center text-2xl animate-pulse z-[9999]">
             <span className="glitch-text">[BOOTING TERMINAL...]</span>
           </div>
         )}
@@ -186,186 +210,380 @@ const MallDirectoryPage = () => {
               <div className="text-center py-12">
                 <DomainLoadingSkeleton count={6} />
               </div>
-            ) : error ? (
+            ) : error && !error.includes('Supabase not configured') ? (
               <DomainErrorFallback error={error} onRetry={() => window.location.reload()} />
             ) : (
               <>
                 {/* Header */}
                 <div className="text-center mb-12">
-              <div className="mb-8 flex justify-center">
-                <div className="relative">
-                  <img 
-                    src={rsLogo} 
-                    alt="RetailStar Logo" 
-                    className="w-24 h-24 md:w-32 md:h-32 object-contain rounded-lg shadow-2xl shadow-green-500/20 border border-green-500/30 flicker-solana"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-r from-green-500/20 via-lime-500/20 to-cyan-400/20 rounded-lg"></div>
+                  <h1 className="text-4xl md:text-6xl font-black mb-4 neon-pulse solana-gradient flicker-solana">
+                    🏬 Main Floor — Retailstar Mall Directory
+                  </h1>
+                  <p className="text-xl text-gray-300 mb-8">
+                    Choose a department to start shopping.
+                  </p>
+                  
+                  {/* Archetype Filter Indicator - Simplified */}
+                  {archetypeFilter && (
+                    <div className="max-w-4xl mx-auto mb-6 p-3 bg-gradient-to-r from-cyan-900/20 to-pink-900/20 border border-cyan-500/30 rounded-lg">
+                      <div className="flex items-center justify-center space-x-4">
+                        <span className="text-cyan-400 font-semibold text-sm">
+                          Filtering by: {archetypeFilter === 'builder' ? '🛠️ Builder Mode' : '🧃 Degen Mode'}
+                        </span>
+                        <Link 
+                          to="/directory"
+                          className="text-gray-400 hover:text-white text-sm underline"
+                        >
+                          Clear Filter
+                        </Link>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {/* Supabase unavailable notice (subtle) */}
+                  {error && error.includes('Supabase not configured') && (
+                    <div className="max-w-4xl mx-auto mb-6 p-3 bg-yellow-900/20 border border-yellow-500/30 rounded-lg text-center">
+                      <p className="text-yellow-400 text-sm">
+                        ⚠️ Database features unavailable. Showing directory from static data.
+                      </p>
+                    </div>
+                  )}
                 </div>
-              </div>
-              
-              <h1 className="text-4xl md:text-6xl font-black mb-6 neon-pulse solana-gradient flicker-solana">
-                Retailstar Mall Directory
-              </h1>
-              
-              <section className="static-seo-content max-w-4xl mx-auto mb-6">
-                <p>
-                  The Retailstar Mall Directory provides a comprehensive map of all domains organized within the marketplace. This directory categorizes Solana domains by different sections and departments, making it easier for users to navigate the extensive collection. The page displays domains grouped by their function, theme, or location within the cyberpunk marketplace structure. Users can explore domains by category to find specific types of projects or services.
-                </p>
-                <p>
-                  The directory serves as a navigation tool for understanding how domains are organized across the Retailverse. Each category represents a different area of the marketplace, from meme domains to developer tools. The page helps users discover domains they might not find through direct search, revealing the full scope of what Retailstar Mall offers. This organizational system makes the Solana domain marketplace more accessible and easier to explore.
-                </p>
-              </section>
-              
-              <p className="text-xl text-gray-300 mb-8 flicker max-w-3xl mx-auto leading-relaxed glow-green">
-                Navigate the digital corridors of the Retailverse
-              </p>
-              
-              <section className="prose prose-invert mb-10 max-w-4xl mx-auto">
-                <p>
-                  The Retailstar Mall Directory is your complete guide to exploring .sol domains across our cyberpunk marketplace. This comprehensive map organizes every domain in the Retailverse by category, making it easy to discover meme shops, developer tools, and hidden vaults scattered throughout the Solana ecosystem. Whether you're a builder searching for the perfect domain name or a degen hunting for the next alpha, the directory reveals the full scope of what Retailstar Mall offers.
-                </p>
-                <p>
-                  Each category in the directory represents a different wing of our Web3 marketplace, from the neon-lit corridors of meme domains to the shadowy back alleys where developer tools hide. The Solana domains listed here aren't just addresses—they're nodes in a larger network that connects builders, degens, and creators across the Retailverse. Click any domain to learn its story, explore its storefront, or understand its place in the cyberpunk marketplace that defines Retailstar Mall.
-                </p>
-              </section>
 
-              {/* Archetype Filter Indicator */}
-              {archetypeFilter && (
-                <div className="max-w-4xl mx-auto mb-8 p-4 bg-gradient-to-r from-cyan-900/20 to-pink-900/20 border border-cyan-500/30 rounded-lg">
-                  <div className="flex items-center justify-center space-x-4">
-                    <span className="text-cyan-400 font-semibold">
-                      Filtering by: {archetypeFilter === 'builder' ? '🛠️ Builder Mode' : '🧃 Degen Mode'}
-                    </span>
-                    <Link 
-                      to="/directory"
-                      className="text-gray-400 hover:text-white text-sm underline"
-                    >
-                      Clear Filter
-                    </Link>
+                {/* Mini-Floor Map Visualization */}
+                <div className="max-w-md mx-auto mb-12">
+                  <div className="bg-black/40 border border-gray-700 rounded-lg p-4">
+                    <h3 className="text-sm font-bold text-gray-400 mb-3 text-center">📍 You Are Here</h3>
+                    <div className="flex flex-col gap-2">
+                      <Link 
+                        to="/parking-garage"
+                        className="flex items-center justify-between p-3 bg-black/40 border border-gray-600 rounded hover:border-red-500/50 transition-colors"
+                      >
+                        <span className="text-gray-400">🅿️ P1</span>
+                        <span className="text-gray-300 text-sm">Parking Garage</span>
+                      </Link>
+                      <div className="flex items-center justify-between p-3 bg-teal-900/30 border-2 border-teal-500 rounded shadow-lg shadow-teal-500/20">
+                        <span className="text-teal-300 font-bold">🏬 1F</span>
+                        <span className="text-teal-300 font-semibold">Main Floor</span>
+                        <span className="text-xs text-teal-400">← You Are Here</span>
+                      </div>
+                      <Link 
+                        to="/blueprint-suites"
+                        className="flex items-center justify-between p-3 bg-black/40 border border-gray-600 rounded hover:border-orange-500/50 transition-colors"
+                      >
+                        <span className="text-gray-400">🧪 2F</span>
+                        <span className="text-gray-300 text-sm">Blueprint Suites</span>
+                      </Link>
+                      <Link 
+                        to="/rooftop-lounge"
+                        className="flex items-center justify-between p-3 bg-black/40 border border-gray-600 rounded hover:border-purple-500/50 transition-colors"
+                      >
+                        <span className="text-gray-400">🌆 3F</span>
+                        <span className="text-gray-300 text-sm">Rooftop Lounge</span>
+                      </Link>
+                    </div>
                   </div>
                 </div>
-              )}
-            </div>
 
             {/* Lore Button */}
             <div className="flex justify-center mb-8">
               <LoreButton />
             </div>
 
-            {/* Funnel Navigation CTA */}
-            <div className="flex justify-center gap-4 mb-8">
-              <Link
-                to="/marketplace"
-                className="neon-cyan neon-cyan-hover py-3 px-8 rounded-lg font-bold text-lg flex items-center gap-2 shadow-lg transition-all duration-200"
-              >
-                🛍️ Browse Marketplace
-              </Link>
-              <Link
-                to="/wiki-directory"
-                className="neon-purple neon-purple-hover py-3 px-8 rounded-lg font-bold text-lg flex items-center gap-2 shadow-lg transition-all duration-200"
-              >
-                📚 Wiki Directory
-              </Link>
-            </div>
-
-            {/* Rotation Status Widget */}
-            <div className="mb-12">
-              <RotationStatus />
-            </div>
-
-            {/* Mall Directory Grid */}
-            <div className="max-w-7xl mx-auto">
-              <div className="grid gap-8">
-                {Object.entries(departmentsData).map(([floorKey, floorData]) => (
-                  <div
-                    key={floorKey}
-                    className="steel-surface border border-green-500/30 p-6 rounded-xl shadow-lg glitch-box"
-                  >
-                    {/* Floor Header */}
-                    <div className="mb-6">
-                      <h2 className="text-2xl font-bold mb-2 text-green-400 glitch-text">
-                        {floorKey.replace('_', ' ')} - {floorData.name}
-                      </h2>
-                      <p className="text-lg text-gray-300 mb-4">
-                        {floorData.description}
-                      </p>
+                {/* Department Tiles Grid - 5x3 */}
+                <div className="max-w-7xl mx-auto mb-12">
+                  <h2 className="text-2xl font-bold text-cyan-400 mb-6 text-center">🏪 Departments</h2>
+                  {departmentsLoading ? (
+                    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                      {[...Array(15)].map((_, i) => (
+                        <div key={i} className="bg-black/40 border border-cyan-500/30 rounded-lg p-4 animate-pulse">
+                          <div className="h-8 bg-gray-700 rounded mb-2"></div>
+                          <div className="h-4 bg-gray-700 rounded mb-1"></div>
+                          <div className="h-3 bg-gray-700 rounded w-3/4"></div>
+                        </div>
+                      ))}
                     </div>
+                  ) : departments.length > 0 ? (
+                    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                      {departments.map((dept) => {
+                        // Extract minimal props from department object
+                        const tone = typeof dept.tone === 'string' ? JSON.parse(dept.tone) : dept.tone;
+                        return (
+                          <Suspense 
+                            key={dept.slug} 
+                            fallback={
+                              <div className="bg-black/40 border border-cyan-500/30 rounded-lg p-4 animate-pulse">
+                                <div className="h-8 bg-gray-700 rounded mb-2"></div>
+                                <div className="h-4 bg-gray-700 rounded mb-1"></div>
+                                <div className="h-3 bg-gray-700 rounded w-3/4"></div>
+                              </div>
+                            }
+                          >
+                            <DepartmentTile
+                              icon={dept.icon}
+                              name={dept.name}
+                              short_bio={dept.short_bio}
+                              slug={dept.slug}
+                              toneCategory={tone?.category}
+                              flavor_text={dept.flavor_text}
+                              long_bio={dept.long_bio}
+                              toneVibe={tone?.vibe}
+                              toneEnergy={tone?.energy}
+                              toneHumor={tone?.humor}
+                            />
+                          </Suspense>
+                        );
+                      })}
+                    </div>
+                  ) : (
+                    <div className="text-center py-8 text-gray-400">
+                      <p>No departments found. Using fallback display.</p>
+                      {/* Fallback to hardcoded tiles if Supabase unavailable */}
+                      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-6">
+                        <Link 
+                          to="/directory/dept/meme-arcade"
+                          className="bg-black/40 border border-cyan-500/30 rounded-lg p-4 hover:border-cyan-400/50 hover:bg-black/60 transition-all duration-200 group"
+                        >
+                          <div className="text-3xl mb-2">🕹️</div>
+                          <h3 className="font-bold text-white mb-1 group-hover:text-cyan-300">Meme Arcade</h3>
+                          <p className="text-xs text-gray-400">Viral domains & meme culture</p>
+                        </Link>
 
-                    {/* Wings or Direct Domains */}
-                    {floorData.wings ? (
-                      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {Object.entries(floorData.wings).map(([wingKey, wingData]) => (
-                          <div key={wingKey} className="bg-black/40 border border-green-500/20 p-4 rounded-lg">
-                            <h3 className="font-bold text-lg text-green-300 mb-2">
-                              {wingData.name}
-                            </h3>
-                            <p className="text-sm text-gray-400 mb-2">
-                              {wingData.description}
-                            </p>
-                            {wingData.name.includes('Flash') && (
-                              <p className="text-xs text-green-400 mb-4">⏰ 24h rotation</p>
-                            )}
-                            {wingData.name.includes('Mid') && (
-                              <p className="text-xs text-blue-400 mb-4">⏰ 72h rotation</p>
-                            )}
-                            {wingData.name.includes('Premium') && (
-                              <p className="text-xs text-purple-400 mb-4">⏰ 7d rotation</p>
-                            )}
-                            <div className="space-y-2">
-                              {filterDomainsByArchetype(filterDepartmentDomains(wingData.domains)).map((domain) => (
-                                <div key={domain} className="flex items-center justify-between">
-                                  <Link 
-                                    to={`/wiki/${domain.replace('.sol', '')}`}
-                                    className="text-cyan-400 hover:text-cyan-300 transition-colors hover:underline"
-                                  >
-                                    {domain}
-                                  </Link>
-                                  <span className="text-xs text-gray-500">→</span>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                        ))}
+                    {/* AI Agents & Automations */}
+                    <Link 
+                      to="/directory/dept/ai-agents"
+                      className="bg-black/40 border border-cyan-500/30 rounded-lg p-4 hover:border-cyan-400/50 hover:bg-black/60 transition-all duration-200 group"
+                    >
+                      <div className="text-3xl mb-2">🤖</div>
+                      <h3 className="font-bold text-white mb-1 group-hover:text-cyan-300">AI Agents & Automations</h3>
+                      <p className="text-xs text-gray-400">AI-powered domain tools</p>
+                    </Link>
+
+                    {/* Gamer Zone */}
+                    <Link 
+                      to="/directory/dept/gamer-zone"
+                      className="bg-black/40 border border-cyan-500/30 rounded-lg p-4 hover:border-cyan-400/50 hover:bg-black/60 transition-all duration-200 group"
+                    >
+                      <div className="text-3xl mb-2">🎯</div>
+                      <h3 className="font-bold text-white mb-1 group-hover:text-cyan-300">Gamer Zone</h3>
+                      <p className="text-xs text-gray-400">Gaming & GameFi domains</p>
+                    </Link>
+
+                    {/* Founder's Row */}
+                    <Link 
+                      to="/directory/dept/founders-row"
+                      className="bg-black/40 border border-cyan-500/30 rounded-lg p-4 hover:border-cyan-400/50 hover:bg-black/60 transition-all duration-200 group"
+                    >
+                      <div className="text-3xl mb-2">👔</div>
+                      <h3 className="font-bold text-white mb-1 group-hover:text-cyan-300">Founder's Row</h3>
+                      <p className="text-xs text-gray-400">Startup & founder domains</p>
+                    </Link>
+
+                    {/* Creator Tools */}
+                    <Link 
+                      to="/directory/dept/creator-tools"
+                      className="bg-black/40 border border-cyan-500/30 rounded-lg p-4 hover:border-cyan-400/50 hover:bg-black/60 transition-all duration-200 group"
+                    >
+                      <div className="text-3xl mb-2">🛠️</div>
+                      <h3 className="font-bold text-white mb-1 group-hover:text-cyan-300">Creator Tools</h3>
+                      <p className="text-xs text-gray-400">Content creator resources</p>
+                    </Link>
+
+                    {/* Lore & Worldbuilding */}
+                    <Link 
+                      to="/directory/dept/lore-worldbuilding"
+                      className="bg-black/40 border border-cyan-500/30 rounded-lg p-4 hover:border-cyan-400/50 hover:bg-black/60 transition-all duration-200 group"
+                    >
+                      <div className="text-3xl mb-2">📜</div>
+                      <h3 className="font-bold text-white mb-1 group-hover:text-cyan-300">Lore & Worldbuilding</h3>
+                      <p className="text-xs text-gray-400">Storytelling & narrative</p>
+                    </Link>
+
+                    {/* Security Wing */}
+                    <Link 
+                      to="/directory/dept/security-wing"
+                      className="bg-black/40 border border-cyan-500/30 rounded-lg p-4 hover:border-cyan-400/50 hover:bg-black/60 transition-all duration-200 group"
+                    >
+                      <div className="text-3xl mb-2">🔒</div>
+                      <h3 className="font-bold text-white mb-1 group-hover:text-cyan-300">Security Wing</h3>
+                      <p className="text-xs text-gray-400">Security & privacy tools</p>
+                    </Link>
+
+                    {/* Tech Infrastructure */}
+                    <Link 
+                      to="/directory/dept/tech-infrastructure"
+                      className="bg-black/40 border border-cyan-500/30 rounded-lg p-4 hover:border-cyan-400/50 hover:bg-black/60 transition-all duration-200 group"
+                    >
+                      <div className="text-3xl mb-2">⚡</div>
+                      <h3 className="font-bold text-white mb-1 group-hover:text-cyan-300">Tech Infrastructure</h3>
+                      <p className="text-xs text-gray-400">Dev tools & infrastructure</p>
+                    </Link>
+
+                    {/* Audio & Media */}
+                    <Link 
+                      to="/directory/dept/audio-media"
+                      className="bg-black/40 border border-cyan-500/30 rounded-lg p-4 hover:border-cyan-400/50 hover:bg-black/60 transition-all duration-200 group"
+                    >
+                      <div className="text-3xl mb-2">🎵</div>
+                      <h3 className="font-bold text-white mb-1 group-hover:text-cyan-300">Audio & Media</h3>
+                      <p className="text-xs text-gray-400">Music & media platforms</p>
+                    </Link>
+
+                    {/* Alpha Labs */}
+                    <Link 
+                      to="/directory/dept/alpha-labs"
+                      className="bg-black/40 border border-cyan-500/30 rounded-lg p-4 hover:border-cyan-400/50 hover:bg-black/60 transition-all duration-200 group"
+                    >
+                      <div className="text-3xl mb-2">🧪</div>
+                      <h3 className="font-bold text-white mb-1 group-hover:text-cyan-300">Alpha Labs</h3>
+                      <p className="text-xs text-gray-400">Experimental & cutting-edge</p>
+                    </Link>
+
+                    {/* Artifacts Gallery */}
+                    <Link 
+                      to="/directory/dept/artifacts-gallery"
+                      className="bg-black/40 border border-cyan-500/30 rounded-lg p-4 hover:border-cyan-400/50 hover:bg-black/60 transition-all duration-200 group"
+                    >
+                      <div className="text-3xl mb-2">💎</div>
+                      <h3 className="font-bold text-white mb-1 group-hover:text-cyan-300">Artifacts Gallery</h3>
+                      <p className="text-xs text-gray-400">Rare & collectible domains</p>
+                    </Link>
+
+                    {/* Social Identity */}
+                    <Link 
+                      to="/directory/dept/social-identity"
+                      className="bg-black/40 border border-cyan-500/30 rounded-lg p-4 hover:border-cyan-400/50 hover:bg-black/60 transition-all duration-200 group"
+                    >
+                      <div className="text-3xl mb-2">👤</div>
+                      <h3 className="font-bold text-white mb-1 group-hover:text-cyan-300">Social Identity</h3>
+                      <p className="text-xs text-gray-400">Personal branding domains</p>
+                    </Link>
+
+                    {/* Marketing & Growth */}
+                    <Link 
+                      to="/directory/dept/marketing-growth"
+                      className="bg-black/40 border border-cyan-500/30 rounded-lg p-4 hover:border-cyan-400/50 hover:bg-black/60 transition-all duration-200 group"
+                    >
+                      <div className="text-3xl mb-2">📈</div>
+                      <h3 className="font-bold text-white mb-1 group-hover:text-cyan-300">Marketing & Growth</h3>
+                      <p className="text-xs text-gray-400">Growth & marketing tools</p>
+                    </Link>
+
+                    {/* Cyber Markets */}
+                    <Link 
+                      to="/directory/dept/cyber-markets"
+                      className="bg-black/40 border border-cyan-500/30 rounded-lg p-4 hover:border-cyan-400/50 hover:bg-black/60 transition-all duration-200 group"
+                    >
+                      <div className="text-3xl mb-2">💹</div>
+                      <h3 className="font-bold text-white mb-1 group-hover:text-cyan-300">Cyber Markets</h3>
+                      <p className="text-xs text-gray-400">Trading & DeFi domains</p>
+                    </Link>
+
+                        {/* Wildcard Deals */}
+                        <Link 
+                          to="/directory/dept/wildcard-deals"
+                          className="bg-black/40 border border-cyan-500/30 rounded-lg p-4 hover:border-cyan-400/50 hover:bg-black/60 transition-all duration-200 group"
+                        >
+                          <div className="text-3xl mb-2">🎲</div>
+                          <h3 className="font-bold text-white mb-1 group-hover:text-cyan-300">Wildcard Deals</h3>
+                          <p className="text-xs text-gray-400">Unexpected finds & deals</p>
+                        </Link>
                       </div>
-                    ) : (
-                      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {filterDomainsByArchetype(filterDepartmentDomains(floorData.domains)).map((domain) => (
-                          <div key={domain} className="flex items-center justify-between bg-black/20 p-3 rounded border border-green-500/10">
-                            <Link 
-                              to={`/wiki/${domain.replace('.sol', '')}`}
-                              className="text-cyan-300 transition-colors hover:underline"
-                            >
-                              {domain}
-                            </Link>
-                            <span className="text-xs text-gray-500">→</span>
-                          </div>
-                        ))}
-                      </div>
-                    )}
+                    </div>
+                  )}
+                </div>
+
+                {/* Featured Shops Section */}
+                <div className="max-w-7xl mx-auto mb-12">
+                  <h2 className="text-2xl font-bold text-cyan-400 mb-6 text-center">⭐ Featured Shops</h2>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <Link 
+                      to="/wiki/jpegdealer"
+                      className="bg-gradient-to-br from-purple-900/30 to-pink-900/30 border border-purple-500/30 rounded-lg p-6 hover:border-purple-400/50 hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-200"
+                    >
+                      <div className="text-4xl mb-3">🖼️</div>
+                      <h3 className="text-xl font-bold text-white mb-2">jpegdealer.sol</h3>
+                      <p className="text-gray-300 text-sm">Your NFT Plug - The JPEG game runs deep</p>
+                    </Link>
+
+                    <Link 
+                      to="/wiki/jumpsetradio"
+                      className="bg-gradient-to-br from-cyan-900/30 to-blue-900/30 border border-cyan-500/30 rounded-lg p-6 hover:border-cyan-400/50 hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-200"
+                    >
+                      <div className="text-4xl mb-3">📻</div>
+                      <h3 className="text-xl font-bold text-white mb-2">jumpsetradio.sol</h3>
+                      <p className="text-gray-300 text-sm">Music & media platform</p>
+                    </Link>
+
+                    <Link 
+                      to="/wiki/commandhub"
+                      className="bg-gradient-to-br from-orange-900/30 to-yellow-900/30 border border-orange-500/30 rounded-lg p-6 hover:border-orange-400/50 hover:shadow-lg hover:shadow-orange-500/20 transition-all duration-200"
+                    >
+                      <div className="text-4xl mb-3">⚡</div>
+                      <h3 className="text-xl font-bold text-white mb-2">commandhub.sol</h3>
+                      <p className="text-gray-300 text-sm">AI dashboard + infrastructure ready</p>
+                    </Link>
                   </div>
-                ))}
-              </div>
-            </div>
+                </div>
 
-            {/* Navigation */}
-            <div className="text-center mt-12">
-              <Link
-                to="/domains"
-                className="neon-green neon-green-hover py-3 px-6 rounded-lg font-semibold transition-all duration-200 inline-block"
-              >
-                Browse All Domains
-              </Link>
-            </div>
+                {/* Quick Navigation Zone */}
+                <div className="max-w-4xl mx-auto mb-12">
+                  <h2 className="text-2xl font-bold text-cyan-400 mb-6 text-center">🗺️ Quick Navigation</h2>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    <Link
+                      to="/parking-garage"
+                      className="bg-black/40 border border-gray-600 rounded-lg p-4 text-center hover:border-red-500/50 hover:bg-black/60 transition-all duration-200"
+                    >
+                      <div className="text-2xl mb-2">🅿️</div>
+                      <div className="text-sm font-semibold text-white">Parking Garage</div>
+                    </Link>
+                    <Link
+                      to="/scav-rack"
+                      className="bg-black/40 border border-gray-600 rounded-lg p-4 text-center hover:border-red-500/50 hover:bg-black/60 transition-all duration-200"
+                    >
+                      <div className="text-2xl mb-2">🎒</div>
+                      <div className="text-sm font-semibold text-white">Scav Rack</div>
+                    </Link>
+                    <Link
+                      to="/blueprint-suites"
+                      className="bg-black/40 border border-gray-600 rounded-lg p-4 text-center hover:border-orange-500/50 hover:bg-black/60 transition-all duration-200"
+                    >
+                      <div className="text-2xl mb-2">🧪</div>
+                      <div className="text-sm font-semibold text-white">Blueprint Suites</div>
+                    </Link>
+                    <Link
+                      to="/rooftop-lounge"
+                      className="bg-black/40 border border-gray-600 rounded-lg p-4 text-center hover:border-purple-500/50 hover:bg-black/60 transition-all duration-200"
+                    >
+                      <div className="text-2xl mb-2">🌆</div>
+                      <div className="text-sm font-semibold text-white">Rooftop Lounge</div>
+                    </Link>
+                    <Link
+                      to="/wiki-directory"
+                      className="bg-black/40 border border-gray-600 rounded-lg p-4 text-center hover:border-cyan-500/50 hover:bg-black/60 transition-all duration-200"
+                    >
+                      <div className="text-2xl mb-2">📚</div>
+                      <div className="text-sm font-semibold text-white">Wiki Directory</div>
+                    </Link>
+                    <Link
+                      to="/insights"
+                      className="bg-black/40 border border-gray-600 rounded-lg p-4 text-center hover:border-cyan-500/50 hover:bg-black/60 transition-all duration-200"
+                    >
+                      <div className="text-2xl mb-2">📝</div>
+                      <div className="text-sm font-semibold text-white">Insights</div>
+                    </Link>
+                  </div>
+                </div>
 
-            {/* See Also Section */}
-            <section className="mt-16 border-t pt-8 text-sm opacity-80 max-w-4xl mx-auto">
-              <h3 className="font-medium mb-3">Explore More</h3>
-              <ul className="space-y-1">
-                <li><a href="/domains" className="text-sky-400 hover:underline">Domains</a></li>
-                <li><a href="/lore" className="text-sky-400 hover:underline">Lore</a></li>
-                <li><a href="/wiki/fudscience" className="text-sky-400 hover:underline">FUD Science</a></li>
-              </ul>
-            </section>
+                {/* Mall Stats */}
+                <div className="max-w-4xl mx-auto mb-12 text-center">
+                  <div className="bg-black/40 border border-gray-700 rounded-lg p-6">
+                    <h3 className="text-lg font-bold text-cyan-400 mb-4">📊 Mall Stats</h3>
+                    <p className="text-gray-300">
+                      78 active domains, 32 wiki entries, 4 mythics, 12 new arrivals
+                    </p>
+                  </div>
+                </div>
               </>
             )}
           </>

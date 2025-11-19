@@ -6,15 +6,29 @@ interface BlogLayoutProps {
   children: React.ReactNode;
   post?: BlogPost;
   showSidebar?: boolean;
+  backgroundImage?: string;
 }
 
 const BlogLayout: React.FC<BlogLayoutProps> = ({ 
   children, 
   post, 
-  showSidebar = false 
+  showSidebar = false,
+  backgroundImage
 }) => {
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div 
+      className="min-h-screen bg-black text-white relative"
+      style={backgroundImage ? {
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      } : {}}
+    >
+      {backgroundImage && (
+        <div className="absolute inset-0 bg-black/60 backdrop-blur-sm z-0" />
+      )}
+      <div className="relative z-10">
       {/* Header */}
       <header className="border-b border-gray-800 bg-black/40 backdrop-blur-sm py-4 px-4">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
@@ -162,6 +176,7 @@ const BlogLayout: React.FC<BlogLayoutProps> = ({
             </aside>
           )}
         </div>
+      </div>
       </div>
     </div>
   );

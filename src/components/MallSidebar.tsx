@@ -9,17 +9,16 @@ import { getAllTierLore } from '../data/tierLore';
 
 const links = [
   { name: 'Mall Map', href: '/directory', icon: '🗺️' },
-  { name: 'Marketplace', href: '/marketplace', icon: '🛍️' },
   { name: 'Scav Rack', href: '/scavrack', icon: '🎒' },
   { name: 'Vaulted Domains', href: '/vault', icon: '🔒' },
   { name: 'Guide', href: '/guide', icon: '📖' },
   { name: 'Wiki', href: '/wiki-directory', icon: '📚' },
   { name: 'Insights', href: '/insights', icon: '📝' },
-  { name: 'Tools', href: '/tools', icon: '🛠️' },
+  { name: 'Blueprint Suites', href: '/blueprint-suites', icon: '🛠️' },
   { name: 'Retail Tickets', href: '/retail-tickets', icon: '🎟️' },
   { name: 'Merch Waitlist', href: '/merch-waitlist', icon: '🧥' },
   { name: 'Pricing', href: '#pricing', icon: '💰', isModal: true },
-  { name: 'Tiers', href: '/tiers', icon: '🧱' },
+  { name: 'Tiers', href: '#tiers', icon: '🧱', isModal: true },
 ];
 
 const triggerResponses = [
@@ -264,7 +263,11 @@ ${wallet} just acquired ${randomDomain} for ${randomPrice}
                   <button
                     key={link.name}
                     onClick={() => {
-                      setShowPricingModal(true);
+                      if (link.name === 'Pricing') {
+                        setShowPricingModal(true);
+                      } else if (link.name === 'Tiers') {
+                        setShowTiersModal(true);
+                      }
                       setOpen(false);
                     }}
                     className="block w-full text-left px-4 py-2 bg-gray-800/50 rounded hover:bg-cyan-700/50 transition-colors text-sm border border-gray-700 hover:border-cyan-600"

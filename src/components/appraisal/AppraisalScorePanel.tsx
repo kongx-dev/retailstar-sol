@@ -134,3 +134,4 @@ export const AppraisalScorePanel: React.FC<AppraisalScorePanelProps> = ({ breakd
   );
 };
 
+
